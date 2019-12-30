@@ -1,0 +1,377 @@
+print('indra'):- it will print indra and move the cursor to next line.
+
+print('indra', end=''):- it will print indra and cursor will remain at the same line.
+
+list**
+list is mutable.
+list of element is also mutable.
+list is mutable means can insert and remove element.
+support indexing
+insertion order is preserve
+remove(element) works on element.
+pop(index) works on index,if not given index position removes last element.
+pop retuen removed element.
+we can perform list comprehension.
+
+
+tuple**
+tuple is immutable.
+tuple supports mutable and immutable element.
+tuple([], ())
+support indexing
+insertion order is preserve
+x = 10,20  type is tuple.
+x = (10,) type is typle.
+x = tuple(10) type is tuple.
+tuple has only index() and count() method.
+
+
+set**
+set is mutable.
+element of set is immutable.
+set is mutable means has add(),remove(),discard(),pop() method.
+does not support indexing(can use while loop as it works on index base).
+insertion order is not preserve.
+remove(element) if element not present in set raise error.
+discard(elemet) if element not present in set does not raise error.
+pop() takes no argument,default remove 1st element.
+we can perform set comprehension.
+
+dict**
+we can perform dict comprehension.
+key must be unique, value can be duplicate
+
+
+Function**
+
+def add(parameter1,parameter2)
+	when we create a function the object is created and the address of it is assign to
+	the variable with function name.
+y = add
+print (y) It will print the address of object method add().
+add(argument1,argument2)/y(argument1,argument2)  call the function.
+
+3 type of parameter
+1.)default:-
+	default paramter should be always last one.
+	keyword argument should be always last one.
+keyword
+2.)non-default
+3.)artibetry:-
+	*a:- it means tuple
+	def add(a,*b):
+		add(10,20,30,40)
+		output:-(10)
+			(20,30,40)
+	**a:- it means dictionary
+	def add(**b):
+		add(a=10,b=20,c=30,d=40)
+		output:-{'a'=10,'b':20,'c':30,'d':40}
+
+
+return**
+
+bydefault the return is none.
+Always write the return in function because tha function can be use in aonther function as it will
+return a business logic.
+
+def add(a,b):
+	c = a+b
+	print (c)
+add(10,20)
+y = add(10,20) // output will be None
+the above function can not be reuse as it will only display addition of 2 values.
+
+def add(a,b):
+	c = a+b
+	return c
+add(10,20)
+the above function can be reuse as it will return addition of 2 values
+
+**global variable :- memory is  allocated only onces.variable is define with the keyword global.
+
+**recursion function :-the function which is called itself.
+
+**nested function :-function inside the function.
+	def outer():
+		pass
+		def inner():
+			pass //the inner function is treated as local function like local variable.
+
+**lambda :- Lambda is also known as anonymous function,menas the function does not has any name.
+lambda parameter:expression
+y = lambda x: x*x
+lambda function is use when we want to pass a function as parameter to another function.
+
+**filter :- It is use when we want to filter the record.
+filter(function, iterable)
+iterable means list,tuple,set and dict object
+Example:-
+	my_list = [1,2,3,4,5]	
+	y = filter(lambda x: x%2==0, my_list)
+
+** import
+every python file is treated as a module.
+
+**import math
+when we import python file, object is created with the name of that file.
+you can now acces all the variable and function as object.varaible, object.function
+Example:- x = math.pi
+	  x = math.sqrt(4) 
+
+**import math as m
+here we are making the use of alias means the math object will refers as "m"
+now you have to access all variable and functions using alias "m", if you try to access
+using math will raise error.
+Example:- x = m.pi
+	  x = m.sqrt(4)
+
+
+**from math import pi,sqrt
+you can directly access the variable and fuction which are in the import statement.
+Example:- x = pi
+	  x = sqrt(4)
+
+
+**from sale import *
+you can directly access all variable's and function's.
+Example:- x = pi
+	  x = sqrt(4)
+
+*File
+load():- when the data is load in file.
+loads:- data is of string type,use when data load in file.
+
+dump():-when data is sent/store in db.
+dumps:- when data in string format is send to db.
+
+
+**static variable(common data)
+variable are define inside the class and outside the function.
+memory is allocated only once.
+static variable can be access with calssname or refernece variable containing the object.
+value of static vairable can be modify by other function, than remaining function will get modified value.
+
+**non static variable(separate data for every object)
+variable declare with "self.variablename" are non static variable.
+memeory will be allocated to every object.
+variable can be access with "self.variablename".
+data which is separate to every object need to declare with non static.
+
+**constructor and method.
+constructor are define as def __init__(self):
+constructor are called automatically once,when the object is created.
+for non static variable we make the use of constructor.
+
+In method we have to call the method with reference variable.
+
+**local variable
+variable define inside the method
+memory is allocated when the method is executed.
+once the method execution is finished local variable memeory is deleted.
+
+**within class:
+within class the static variable can be access with classname or with self.
+within class method can be access with self(self consist the object of class).
+
+**outside class:
+outside class the static variable can be access with calssname or reference variable
+outside class the method can be access with reference varaible
+
+**Inheritance**
+class x:
+class y(x):
+	here class y has extend class x,
+	so all the property of class x will be treated as the property of class y,
+	class x is super class.
+	class y is sub class.
+	every super class by default extends the object class.
+	print (y.__bases__) o/p:- (class '__main__.x')
+	print (x.__bases__)o/p:- (class 'object')
+
+1)single level
+class x:
+	--------
+	here class x extends class object.
+
+2)multi level
+class x:
+	------------
+class y(x):
+	-----------
+class z(y):
+	----------
+
+3)Hierachical inheritance.
+class x:
+	--------
+class y(x):
+	--------
+class z(x):
+	--------
+
+4)multiple inheritance
+class x:
+	-------
+class y:
+	-------
+class z(x,y):
+	------
+
+5)cyclic inheritance(python does not support cyclic inheritance)
+class x(z):
+	------
+class y(x):
+	------
+class z(y):
+	-----
+
+6)hybrid(mix of all inheritance is known as hybrid)
+
+
+***polymorphism
+poly means many, morphism means forms, means many form.
+performing the same operation with many logic,like deposite operation.
+deposit operation such as cash,checkm,DD.
+polymorphism can be perform with overloadding and over-ridding technices.
+
+*overloading
+mulitiple method having same name but different arguments.
+python recoginized only the last method(same method name).
+
+*overriding
+for overriding we must have inheritance.
+same method name in different class.
+
+**Abstraction
+abstraction is nothing but the technice use to hide the property of class from outside.
+double underscore is use to hide any variable or method eg:- __a , __add()
+variable or method with double underscore can not be access from outside the class.
+
+**Garbage Collection
+removing the un-used or un-reference object from thr memory is known as garbage collection.
+__del__(self): this method is used to delete the un reference object.This method run automatically once the reference count become zero.
+
+
+**Regular Expression(import re (re is the module available in python	)) or regex
+A regular expression is a special sequence of characters that helps you match or find other strings or sets of strings, using a specialized syntax held in a pattern. Regular expressions are widely used in UNIX world. The module re provides full support for Perl-like regular expressions in Python.
+*re.compile():-this is used to check the pattern whether it is valid or not.
+example:- regex = re.complie(r"\d{10}")
+**search():- this method is used to check whether the given pattern is available in given string or not
+**findall()
+**finditer():- it will give the position(.start(), .end()) 
+
+**Thread (import threading)
+threads are use to run multiple task/function calls at the same time.
+Example:- 
+import threading
+class X(threading.Thread):
+	def run(self): // run() method is define in Thread class
+		_______
+x1 = X()
+x1.start() // when start() method is called on X class than it will execute run() method
+*join():- this method is used to pause 1 thread in between and excute other thread,once the execution of that thread is over than only the execution of other thread will start.
+*synchronize:-concept of avoiding multiple thread to access same function/same thread at a time.
+to implement synchronize we use class Lock.(use in ticket booking)
+lc = threading.Lock()
+lc.acquire() :- lock class consist the method acquire()// this method acquire the thread.
+lc.release():- lock class consist the method release()// this method release the thread.
+implement synchronize technice only when needed because it degrates the performance.
+
+**Thread Life Cycle
+new-->start-->ready-->running-->wait-->ready-->running-->dead
+
+
+**Coonection
+for oracle 'import cx_oracle' module is use
+import psycopg2
+conobj = psycopg2.connect(
+		dbname="odoo_10_demo",
+		user="postgres",
+		password='admin', 
+		host="localhost",
+		port="5432"
+		)
+print ("connected to postgres")
+print(conobj)
+cur = conobj.cursor()
+print ("Cursor object")
+print (cur)
+cur.execute("select * from account_account")
+rows = cur.fetchmany(2)
+for row in rows:	
+	print ("AAAAAAAAAAAAAAAAAAAAAAA",row)
+cur.close()
+con.close
+
+NOte:- commit() and rollback() are provided by connection object like con.commit, con.rollback 
+
+
+*********************   Private   *********************
+
+Filename:- a.py
+
+	x = 10
+	_y = 5				# by using _ we make it private.
+
+	def hello():
+		print ("hello")
+	def _bye():			# by using _ we make it private.
+		print ("Bye")
+
+
+Filename:- b.py
+
+	from a import *  # * means we import all (var, def, class)
+
+	print (x)	# o/p  10
+	print (_y)	# o/p  Error, _y is define as a private varaible and we have also not import it personally by it name
+	def _bye()	# o/p  Error, _bye() is define a private and we have also not import it personally by it name
+
+
+Filename:- c.py
+
+	from a import _x, _bye
+
+	print (x)	# o/p  10
+	print (_y)	# o/p  5     _y variable begin private but we have also import it personally by its name.
+	def _bye()	# o/p  "Bye" _bye() begin private but we have also import it personally by its name.
+
+
+
+*********************** underscore **********************
+
+_ takes the last executed value.
+we use _ when we do not want to make use of that variable.
+
+Eg:- 1+5+6     # o/p 12		# _  o/p 12
+
+Eg:- x,_ = (1,2)   # o/p x = 1,  _ = 2
+
+
+*********************  Double UnderScore  *****************
+
+We use __ in the scenario of inheterance.
+suppose we have a method name same in child class as well as in parent class, 
+so there is confusion on calling that method,so we use __ because calling style of __ method is bit little diff.
+we call it like "objectRef._ClassName.MethodName"
+
+class A
+	def _single_method():
+		pass
+
+	def __double_method():
+		print ("A")
+
+a = A()				# make an object of class A.
+a._single_method()		# we call the  method.
+a._A__double_method 		# we call it objectRef._ClassName.MethodName		# o/p is A
+
+
+Class B(A)
+	def __double_method():
+		print ("B")
+
+b = B()
+b._A__double_method()		# o/p is A
+b._B__double_method()		# o/p is B

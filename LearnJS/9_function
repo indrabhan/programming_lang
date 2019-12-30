@@ -1,0 +1,115 @@
+function:-
+	functions are define using the function keyword
+	Syntax:- function functionName(parameter1, parameter1, parameter2, parameter3){}
+	
+	functions are called with the function name
+	syntax:- functionName(value1, value2, value3)
+
+*****************************Standard Function ***********************************
+
+function addNumer(p1, p2){
+	var sum = p1+p2;
+	return sum
+	}
+
+var result = addNumber(10, 20, 30, 40);	// Note:- js ignore other value whereas in python it will raise error
+document.write(result);			// output:-30;
+
+
+
+
+function addNumer(p1, p2){
+	var sum = p1+p2;
+	document.write(sum);	// output:- 30
+	}
+
+var result = addNumber(10, 20, 30, 40);
+document.write(result);			// output:-'undefined',in result variable return value will be and this function does not return 						   anything.;
+					// same works in python, python will give 'None'
+
+
+**What happens when you do not specify values for the function parameter when calling the function?
+  ans:- The parameters that are missing values are set to undifined.		// output will ne NaN
+										// In python it will raise error
+
+**What happens when you specify too many parameters values when calling the function?
+  ans:- The extra parameter values are ignored.
+	Example:- var result = addNumbers(10, 20, 30, 40);		// still the output will be same.
+									// In python it will raise error
+
+
+
+
+*****************Function Hoisting ******************
+
+var result = addNumber(10, 20);		// In js all the functions are places at the top automatically and that is called as function hoisting.
+					// In Python it will raise error.
+document.write(result);	
+		
+function addNumer(p1, p2){
+	var sum = p1+p2;
+	return sum
+	}
+
+
+
+********************* Function Expresssion *********************
+
+var add = function addNumber(p1, p2){  		// we assign the function to other variable and this line is function expression.
+	var sum = p1+p2;
+	return sum
+	}
+
+var result = add(10, 20)			// here add variable will be treated as function and not addNumber, if you call the function 								with addNumber it will give error.
+						// here function hoisting will not work, it work only for standard function.
+						
+				
+
+
+var factorial = function computeFactorial(number)
+	{
+		if (number<=1)
+		{
+			return 1;
+		{
+	return number * computeFactorial(number - 1); // computeFactorial()/function expression is available within the function and not 								 outside the function.
+	}
+
+var result = factorial(5);
+alert(result)
+
+
+********************* Anonymous Function and Function Expresssion***********************
+Anonymous Function:- A function without the name is called as anonymous function
+	Exampel:-
+		function without name,is assign to a variable and than that variable is treated as function when calling.
+			
+			var add = function(firstNumber, secondNumber){
+				   return firstNumber + secondNumber;
+				  }
+			var result = add(10,20)
+			document.write(result)		// o/p:- 30
+
+	
+	Example2:-
+		function with name,is assign to a variable and than that variable is treated as function when calling.
+
+		var add = function addNumber(firstNumber, secondNumber){
+				return firstNumber + secondNumber;
+			}
+		var result = add(10,30);
+		document.write(result)
+
+Note:- In Standard way of defining function, we can called the function before Defining,because JavaScript will automatically takes that 	   function to the upper level of code.But if a function is assign to a variable than we cannot called it before Defining.
+
+
+
+*******************Self Invoking Function/immediately invoked function *************
+The function which execute itself.
+	Example:-
+		var add = (function addNumbers(firstNumber, secondNumber){
+			sum = firstNumber + secondNumber;
+			return sum
+		})(20,20);
+		document.write(add)
+			

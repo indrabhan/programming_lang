@@ -1,0 +1,293 @@
+JavaScript and HTML DOM:
+
+1.)JavaScript Objects
+2.)Browser Objects
+3.)Core DOM Objects
+4.)HTML DOM Objetcs
+
+
+1.)JavaScript Objects:-
+	Array object :- collection of similar(primitive) data type, ArrayObject has "length" property.
+	Boolean object
+	Date object
+	Math object
+	String object
+	Number object
+	RegExp object
+
+2.)Browser Objects:-
+	Window object
+	Screen object
+	Navigator object
+	History object
+	Location object
+
+
+3.)Core DOM Object:-
+	DOM Node
+	DOM NodeList
+
+Boolean Object:- 
+	Example:-
+		<!DOCTYPE html>
+		<html>
+		<head>
+		<script type="text/javascript">
+			var bool_obj = new Boolean()		// declare Boolean object
+
+			var bool_val1 = new Boolean();		// default value of boolean is false
+			document.write("The value of boolean object is: "+ bool_val1 + "<br/>")	// o/p false
+
+			var bool_val2 = new Boolean(1);
+			document.write("The value of boolean object is: "+ bool_val2 + "<br/>")	// o/p true
+
+			var bool_val3 = new Boolean("indra");
+			document.write("The value of boolean object is: "+ bool_val3 + "<br/>")	// o/p true
+
+			var bool_val4 = new Boolean(0);
+			document.write("The value of boolean object is: "+ bool_val4 + "<br/>")	// o/p false
+
+			var bool_val5 = new Boolean(null);
+			document.write("The value of boolean object is: "+ bool_val5 + "<br/>")	// o/p false
+
+			var bool_val6 = new Boolean(NaN);
+			document.write("The value of boolean object is: "+ bool_val6 + "<br/>")	// o/p false
+		</script>
+		</head>
+		</html>
+
+Date Object:- Followings are the methods of Date Object
+		1.)getDate()	-Day of month(0-30)
+		2.)getDay()	-day of week
+		3.)getMonth()
+		4.)getFullYear()
+		5.)getTime()	-Number of milliseconds
+		6.)getHours()
+		7.)getMinutes()
+		8.)getSeconds()
+
+	Example:-
+		<!DOCTYPE HTML>
+		<head>
+		<script>
+
+		var dt = new Date();
+		document.write(dt + "<br/>")					// o/p:- Fri Apr 19 2019 14:43:43 GMT+0530 (IST)
+
+		document.write("Date: "+ dt.getDate()+ "<br/>");		// o/p:- 19
+		document.write("Day: "+ dt.getDay()+ "<br/>");			// o/p:- 5(monday=1)
+	
+		document.write("year: "+ dt.getFullYear()+ "<br/>");		// o/p:- 2019
+		document.write("time: "+ dt.getTime()+ "<br/>");		
+		document.write("hours: "+ dt.getHours()+ "<br/>");		// o/p:- 14
+		document.write("Minutes: "+ dt.getMinutes()+ "<br/>");		// o/p:- 43
+
+		//January=0
+		document.write("Month: "+ dt.getMonth()+"<br/>");		// o/p:- 3
+
+		// we have to add 1 in month to get required result
+		document.write("Month: "+ dt.getMonth()+ 1 +"<br/>");		// o/p:- 31
+
+		//In above code we add 1 but it concat the string instead of increasing
+		//so to get the required result we have do it by declaring variable
+		var mm = dt.getMonth() + 1;
+		document.write("Month: "+ mm)
+
+		</script>
+		</head>
+
+
+StringObject:- String indexes are zero-based. The first character is in postion 0, the second in 1, and so on 
+	Syntax:- 
+		var str = new String("string");
+			OR
+		var txt = "string";
+
+String Properties:-
+
+	constructor:-  Return the string constructor function.
+	length:-       Return the length of string.
+	prototype:-    Allows you to add properties and methods to an object.
+
+String Object Method:-
+	1.)charAt():- The charAt() returns the character at the specified index in a string.
+		      The index of first character is 0, the second character is 1, and so...
+		      Example:-
+				var str = "Indrabhan Vijay Bhamare";
+				document.write("The CharAt() of string: "+str.charAt(7)+ "<br/>");		// o/p:- a
+
+
+	2.)match():- In sentance where ever the string matches it return that matched string, else null
+		     Example:-
+				var str = "Indrabhan Vijay Bhamare";
+				document.write("The match() of string: "+str.match("rabhan")+ "<br/>");		// o/p:- rabhan
+				document.write("The match() of string: "+str.match("Indras")+ "<br/>");		// o/p:- null
+				document.write("The match() of string: "+str.match("indra")+ "<br/>");		// o/p:- null
+
+
+	3.)endsWith():- determine whether a string ends with the characters of a specified string.
+			return true if string endswith the specified character, else false.
+			Example:-
+				var str = "Indrabhan Vijay Bhamare";
+				document.write("The endsWith() of string: "+str.endsWith("re") + "<br/>");	// o/p:- true
+				document.write("The endsWith() of string: "+str.endsWith("re ")+ "<br/>");	// o/p:- false (space is there)
+
+
+	4.)repeat:- we can repeat a particular string for n times.
+		    str.repeat(2)		# here we will repeat a particular string for 2 times
+
+		    Example:-
+				var str = "Indrabhan Vijay Bhamare";
+				document.write("The repeat() of string: "+str.repeat(2) + "<br/>");		// o/p:- Indrabhan Vijay 															 BhamareIndrabhan Vijay Bhamare
+
+	5.)concat()= str1.concat(str2, str3 .... strn)
+		   Example:-
+			var str1 = "Indrabhan";
+			var str2 = "Vijay";
+			var str3 = "Bhamare";
+			document.write(str1.concat(" ", str2, " ", str3))		// o/p:- Indrabhan Vijay Bhamare
+
+
+	6.)toUpperCase() = str1.toUpperCase()
+	7.)toLowerCase() = str1.toLowerCase()
+
+	8.)length = This property gives the number of characters in string. 
+			Example:-str.length
+				 var str = "Indrabhan Vijay Bhamare";
+				 document.write("The length of string is: "+str.length + "<br/>");		// o/p:- 23
+
+	
+	9.)trim() = This method removes whitespaces from both end.
+		  	var str1 = " AB ";
+		  	var str2 = " CD ";
+		  	alert(str1.trim() + str2.trim())							// o/p:- ABCD
+
+	10.)replace():- This method is use to replace a specified string or reqular expression
+			
+			Example1:- It replaces only the 1st word "blue" of str.
+
+					var str = "A Blue bottle with a blue liquid is on blue table."
+					var c = str.replace('blue', "red")
+					alert(c)
+			
+					// o/p:- A Blue bottle with a red liquid is on blue table.
+
+
+			Example2:- regular expression with global.
+				   In global replace,bydefault is case sensitive. 
+				   It replaces matched string in entire sentance.
+
+				   var str = "A Blue bottle with a blue liquid is on blue table."
+				   var c = str.replace(/blue/g, 'red')
+	           		   document.write(c)
+			
+				   // o/p:- A Blue bottle with a red liquid is on red table.
+
+
+			Example3:- regular expression with global.but case sensitive.
+
+				   var str = "A Blue bottle with a blue liquid is on blue table."
+				   var c = str.replace(/blue/gi, 'red')
+				   document.write(c)
+
+				   // o/p:- A red bottle with a red liquid is on red table.
+	
+
+	11.)substring():-This method is use to extract a sub string from the entire string.
+			 It takes 2 parameter start,end.
+			 start parameter is required where the end parameter is optional.
+			 It end parameter not specified than the output will contain entire string.
+			 substr() and slice() are almost same.Only 1 diff in slice(),Unlike substring(), slice() will not swap
+			 The last character is not include in result.
+
+			Example:-
+				var str = "JavaScript";
+				document.write(str.substring(0, 4) + "<br/>");			// o/p:-Java
+				document.write(str.substr(0, 4) + "<br/>")			// o/p:-Java
+				document.write(str.slice(0,4))			 		// o/p:-Java
+	
+		If the value of start parameter is greater than the value if end parametr,than
+		the start will be use as end and the end will be use as start.
+			Example:-
+				var str = "JavaScript";
+				document.write(str.substring(4, 0))				// o/p:- Java
+
+		Unlike substring(), slice() will not swap
+			Example:-
+				var str = "JavaScript";
+				document.write(str.substring(4, 0))				// o/p:- ------
+
+			
+
+	12.)indexOf():-This method returns the First occurance of a specified value in a string
+		       If specified value is not present then -1 is return.
+		       		Example:-
+					var str = "JavaScript";
+					document.write(str.indexOf('a'))			// o/p:-  1 (1st occurance)
+					document.write(str.indexOf('S'))			// o/p:-  4
+					document.write(str.indexOf('s'))			// o/p:- -1 (small "s" char is not present)
+					document.write(str.indexOf('Sc'))			// o/p:-  4 (1st occurance of "S" char)
+
+
+				Example:-
+					var email = "indrabhan.bhamare@gmail.com"
+					var emailPart = email.substring(0, email.indexOf('@'))
+					var domainPart = email.substring(email.indexOf('@') + 1)
+					document.write("The email part is: "+emailPart + "<br/>")	// o/p:- indrabhan.bhamare
+					document.write("The Domian part is: "+domainPart)		// o/p:- gmail.com
+
+				Example:-
+   					var arrayElement = ["Sam",'Mark', 'Tim', 'Sam']
+					document.write(arrayElement.indexOf("Tim"))			// o/p:- 2
+
+	13.)lastIndexOF():- This method returns the Last occurance of a specified value in a string
+		            If specified value is not present then -1 is return.
+
+	14.)includes():-
+			syntax:- string,includes(searchvalue, start)
+				 searchvalue:	Required. The string to search for
+				 start:		Optional.Default 0. At which position to start the search
+
+			Example:-
+				var str = "Hello world, welcome to the universe.";
+				var n = str.includes("world");			// o/p:- true
+
+			Example2:-
+				var str = "Hello world, welcome to the universe.";
+				var n = str.includes("world", 12);			// o/p:- false
+
+String Object style:- all the html formating tags are available in the form of methods in js
+
+	Example:-
+		<head>
+		<script type="text/javascript">
+			var str = "Indrabhan Vijay Bhamare";
+			document.write(str.bold() + "<br/>")
+			document.write(str.italics() + "<br/>")
+			document.write(str.big())
+		</script>
+		</head>
+
+
+Math Object:- Math
+	Example:-
+		<head>
+		<script type="text/javascript">
+			var x = -12.12
+			document.write(Math.PI + "<br/>")				//  3.141592653589793
+			document.write(x + "<br/>")					//  -12.12
+			document.write(Math.abs(x) + "<br/>")				//  12.12
+			document.write(Math.round(x) + "<br/>")				//  12
+			document.write(Math.pow(2,3))					//  pow=power of, 2^3
+		</script>
+		</head>
+
+
+Number Object:- The Number Object is an object wrapper for primitive numeric value.
+		Number object are created with new keyword as "new Number()"
+
+		Syntax:-
+			Number.MAX_VALUE
+			Number.MIN_VALUE
+
+		

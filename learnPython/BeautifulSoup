@@ -1,0 +1,95 @@
+Beautiful Soup is a Python library for pulling data out of HTML and XML files.
+
+
+soup = BeautifulSoup(data, 'html.parser')    ---- creates soup object.
+
+
+
+find()
+Signature: find(name, attrs, recursive, string, **kwargs)
+
+The find_all() method scans the entire document looking for results, but sometimes you only want to find one result. If you know a document only has one <body> tag, it’s a waste of time to scan the entire document looking for more. Rather than passing in limit=1 every time you call find_all, you can use the find() method. These two lines of code are nearly equivalent:
+
+soup.find_all('title', limit=1)
+# [<title>The Dormouse's story</title>]
+
+soup.find('title')
+# <title>The Dormouse's story</title>
+
+
+* To get text/string of tag
+
+	Syntax:- soup.tag_name			Example:- soup.title
+	Syntax:- soup.tag_name.text		Example:- soup.title.text
+	Syntax:- soup.tag_name.string		Example:- soup.title.string
+
+* To get the name of tag
+	
+	Syntax:- soup.tag_name.name		Example:- soup.title.name
+
+* To get the parent
+
+	syntax:- soup.tag_name.parent.name	Example:- soup.title.parent.name
+
+
+Example
+
+
+		import requests
+		from bs4 import BeautifulSoup
+
+		source = requests.get('http://www.coreyms.com').text
+		soup  = BeautifulSoup(source, 'lxml')
+		article = soup.find('article')			
+		try:										#here class is a special tag so we use "class_".
+			vid_src = article.find('iframe', class_="youtube-player")['src']	# ['tag_name']:- consider it as dict and to get 													         the value of it.Here we will 															 get the value of tag "src".
+
+											Example:-
+											find('iframe', class_="youtube-player")['src']
+												
+			vid_id = vid_src.split('/')[4].split('?')[0]			   						
+
+			yt_link = "https://www.youtube.com/watch?v=" + vid_id
+
+		except Exception as e:
+			yt_link = None
+
+		print (yt_link)
+
+
+NOTE:- to get the link of video we use video id, in above example v=video_id
+
+
+
+*get method
+
+	nav = soup.nav
+	for url in nav.find_all('a'):
+		url.get('href')
+
+
+
+
+
+
+
+
+
+
+****************	pandas	     ******************
+install pandas for python3
+cmd:- pip3 install pandas 
+
+pandas:- data manipulation and analysis
+	 it offers data structures and operations for manipulating numerical tables and time series
+	 Read HTML tables into a ``list`` of ``DataFrame`` objects.
+
+	Example:-
+		
+		import pandas as pd	
+		dfs = pd.read_html('https://www.pythonprogramming.net/parsememcparseface/',header=0) # will return all tables into the list
+												     # header=0 use to make the columns headers
+		for df in dfs:
+			print df
+				or
+			print df.head()						    # use head() method if header=0 is not used.

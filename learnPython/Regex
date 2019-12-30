@@ -1,0 +1,189 @@
+Regular Expression :- A regular expression is a special sequence of characters that helps you match or find other strings or sets of strings.
+		      The module "re" provides full support for Perl-like regular expressions in Python.
+
+		      Regex can be used to check valid data format not valid data.
+
+1.)* :- It matches zero or more occurences of preceding characters.
+	Eg:- ab*c (the preceding character is b, means b can occure zero/multiple times in between a and c)
+	o/p:- ac
+	      abbc
+	      abc
+	      abbbbbbbc
+
+2.)+ :- It matches one or more occurences of preceding character.
+	Eg:-  ab+c
+	o/p:- ac	# error
+	      abc
+	      abbc
+	      abbbbc
+
+3.)? :- It matches zero or one occurences of preceding character.
+	Eg:-  ab?c
+	o/p:- ac
+	      abc
+	      abbc	# error
+
+4.). :- It matches any single character.
+	Eg:-  a.c
+	o/p:- abc
+	      a5c
+	      a$c
+	      a c (sapce is also consider as single character)    
+	      adbc	# error.
+
+5.)[]:- It matches any single character in the given list.
+	Eg:-  b[aeiou]d
+	o/p:- bad
+	      bed
+	      bid
+	      b8d	# error
+	      bpd	# error
+
+6.)[^]:- It matches any single character other than in the given list.
+	 Eg:-  b[^aeiou]d
+	 o/p:- bad	# error
+	       bed      # error
+	       bpd
+	       b8d
+
+7.)[-]:- It matches any single character in the given range.
+	 Eg:- x[a-e]y 
+	 o/p  xay
+	      xdy
+	      xey
+	      xfy	# error
+	      xpy	# error
+	
+	Eg:- [0-9] any single digit.
+	     [a-z] any lowercase alpha
+	     [A-A] any uppercase alpha
+	     [a-zA-Z] any one alpha
+	     [a-zA-Z0-9]  any one alphanumeric.
+
+8.)(|):- matches any one string in the list.
+	 Eg:-  (java|hadoop|python)
+	 o/p:- java
+	       python
+	       Datascience	# error	
+
+9.){m}:- it matches exact occerance of preceding string.
+	 Eg:-  ab{3}c	# (means in between a and c, b character should repeat 3 times.)
+	 o/p:- abbc	# error
+	       abbbc
+	       abbbbbbc		# error	
+
+10.){m,n}:- it matches min m occuerance and max n occuerance
+	 Eg:-  ab{3,5}c
+	 o/p:- abbc	# error
+	       abbbc	
+	       abbbbbc	
+
+11.){m,}:- it matches min m occuerance and max no limit.
+	Eg:-   ab{3,}c
+	o/p:-  abbc	# error
+	       abbbc
+	       abbbbbbbbbbbc
+
+12.)^:- start of the line.
+	Eg:- ^perl 	# (means line must start with perl)
+	Eg:- ^[abc]	# ([]means any single character, here line must start with any charatcter i.e a,b and c)
+	Eg:- ^[^abc]    # (means line must not start with the character given in the list.)
+
+13.)$:- end of the line
+	Eg:- perl$	#(means line should end with perl)
+	Eg:- [0-9]$	#(means line should end with any single digit 0-9)
+
+14.)\d or [0-9]:- any single digit.
+		Eg:- [0-9][0-9][0-9][0-9]	#(means any single digit between 0-9 repeated four times)
+		     [0-9]{4}			# same as above.
+		     \d{4}			# same as above.
+		     \d\d\d\d			# same as above.
+
+15.)\D or [^0-9]:- any single non digit.
+
+16.)\w or [a-zA-z0-9]:- any alphanumeric.
+
+17.)\W or [^a-zA-Z0-9]:- any non aplhanumeric, means special chaeacter
+
+18.)\s :- means any space
+	  '' single space.
+	  '\t' tab space.
+	  '\n' new line space.	
+
+
+
+Example_1:- findall()
+	import re
+	
+	string = "June 24, August 9, Dec 10, Feb"	
+	pattern_regex = r"[a-zA-Z]+ \d+"
+
+	matches = re.findall(pattern_regex, string)		# matches will be iterable object
+	for match in matches:
+		print match			# o/p :- June 24 
+							 August 9 
+							 Dec 10
+
+
+Example_2:- finditer():- use to get the index position
+	import re
+	
+	string = "June 24, August 9, Dec 10, Feb"	
+	pattern_regex = r"[a-zA-Z]+ \d+"
+
+	matches = re.finditer(pattern_regex, string)		# matches will be iterable object
+	for match in matches:
+		print match.start(), match.end()		# o/p :- 0 7 
+							 		 9 17 
+							 		 19 25
+
+
+Example_3:- compile():- check whether pattern is valid or not (means pattern has followed all the re standards or not)
+		      after compling the pattern, the pattern is stored into a object and that object provides the methods to perform the 			      operations.
+	  search():- it will search for the occuerance of pattern only one time. 
+
+
+	 import re
+
+	 string = "Hello World is the easiest world"
+	 regex = re.compile(r"\w+ World")		# complie is use to check wether pattern is valid or not.
+
+	 result = regex.search(string)			# if it find the match pattern than object will contain data else empty object.
+	 if result:					
+		result.start(), result.end()		# starting and  ending index.
+						        o/p:- 0 11 (Hello World)
+
+
+							if the regex = re.compile(r"\w+ world")
+							here it is lowercase "w" so the output will be different
+							o/p:- 19 32 (easiest world)
+
+
+Example_4:- check mobile_no format
+
+	import re
+
+	regex = re.compile(r"\d{10}")
+	while True:			# we have use while loop because we will keep asking for input till user gives the valid input 
+		mo = input('Enter the mobile no ')	# return type of input is string.
+		if len(mo) == 10:
+			print (mo)
+			result = regex.search(mo)	# it will search for 10 digit no.
+			if result:
+				print ('valid no',result)
+				break
+		else:
+			print ('invalid no')
+
+
+Example:- check valid email format
+
+	  import re
+
+	  regex = r"[a-zA-Z0-9]+[@]{1}[a-z]+"
+	  email = input("Enter the mail idi:-")
+	  valid = re.findall(regex,email)
+	  if valid[0] == email:
+		print ("Email is as per to standards")
+	  else:
+		print("Not Valid")

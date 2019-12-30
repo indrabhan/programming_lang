@@ -1,0 +1,239 @@
+Operator
+python		JS
+and		&&
+
+1.)if :- use this statement to execute some code only if a specified condition is true
+
+2.)if else :- use this statement to execute some code only if the condition is true and other code if the condition is false.
+
+3.)if else if :- use this statement to select one of many blocks of code to be executed.
+
+4.)switch :- use this statement to select one of many blocks of code to be executed.switch case statement are alternative ways of
+	     executing statements selectively based on certain condition.
+
+
+1.)if:-
+	syntax:-
+		if (condition)
+			{
+			True statements
+			}
+	
+	Example:
+		<!doctype html>
+		<head>
+		<script>
+		var x = prompt("Enter the number", "10");
+		if (x > 10)
+		{
+			alert("user enter the number is: " + x);
+		}
+		</script
+		</head>
+
+
+
+
+2.)if else
+	syntax:
+		if (condition)
+			{ True statements }
+			
+		else
+			{ False statement }
+			
+
+	Example:-
+		<!doctype html>
+		<head>
+		<script>
+		var x = prompt("Enter the number", "10");
+		if (x > 10)
+		{
+			alert("user enter the number is: " + x);
+		}
+		else
+		{
+			alert('user enter number is less than 10: ' + x)
+		}
+		</script
+		</head>
+
+3.)if elseif else:
+	syntax:-
+		if(condition)
+		    { statement }
+		else if(condition)
+		    {statement}
+		else if(condition)
+		    {statement}
+		else
+		    {statement}
+
+	Example:
+		<!doctype html>
+		<head>
+		<script>
+		var x = prompt("Enter the number", "10");
+		if (x > 10)
+		{
+			alert("Entered no is Bigger");
+		}
+		else if(x < 10)
+		{
+			alert('Entered no is Smaller')
+		}
+		else if(x == 10)
+		{
+			alert("Entered no is 10")
+		}
+		else
+		{
+			alert("Invalid Input")
+		}
+		</script
+		</head>
+		
+
+4.)switch:- if elseif else statement can be replaced by switch statement
+	syntax:-
+		switch(var n)
+		{
+		case 1:
+			execute code block 1
+			break;
+		case 2:
+			execute code block 2
+			break;
+		default:
+			code to be executed if var n is different from case1 and case2
+		}
+
+	What happens if there is no break in switch statement:-
+		If there is no break statement the execution falls automatically to next case until a
+		break statement is encountered or end of the program is reached.
+
+	Example:-
+		<!doctype html>
+		<head>
+		<script type="text/javascript">
+		var course = prompt("Enter the course name", "HTML5")
+
+		switch(course){
+			case 'HTML5':
+				document.write("Selected course is: " + course);
+				break;
+			case 'JS':
+				document.write("Selected course is: " + course);
+				break;
+			case 'AJS':
+				document.write("Selected course is: "+ course);
+				break;
+			default:
+				document.write("Sorry Selected course is not available: " + course);
+				break;
+			      }
+		</script>
+		</head>
+
+
+	Combine switch cases
+	Example2:- Combine switch cases
+		<head>
+		<script type="text/javascript">
+			var userInput = Number(prompt("Enter the number", "1");)		// Number is use for convertion
+
+			switch(userInput){
+				case 1:
+				case 2:
+				case 3:
+				alert("The number is: "+ userInput);
+				break;
+
+				default:
+				alert("The number is not between 1-3");
+				break;
+			}
+		</script>
+		</head>
+
+
+5.)Ternary Operator:-
+	Ternary operator can be used as short cuts of if-else statement
+
+	Syntax:-
+		Boolean Expression ? Statement to execute if true : Statement to execute if flase
+
+	If - Else Example
+
+		Example1:- if-else
+			<head>
+			<script type="text/javascript">
+				var number = Number(prompt("Enter the number", "1"));
+				var message = "";
+				if (number % 2 == 0){
+					message = "Your number is even"
+				}
+				else{
+					message = "Your number is odd"
+				}
+				alert(message)
+			</script>
+			</head>
+
+
+		Example2:- single statement in ternary operator
+			<head>
+				<script type="text/javascript">
+				var number = Number(prompt("Enter the number", "1"));
+				var message = number % 2 ==0 ? "Your number is even" : "Your number is odd"
+				alert(message)
+				</script>
+			</head>
+
+	
+		Example3:-Multiple statements in ternary operator are separated by comma in round brackets
+			<head>
+			<script type="text/javascript">
+				var number = Number(prompt("Enter the number"));
+				number % 2 == 0 ? (alert("Enter number is: "+ number),alert("The number is even"))
+								: (alert("Enter number is: "+ number),alert("The number is odd"));
+			</script>
+			</head>
+
+
+
+	If - Else if - Else:-
+
+		Example:-
+			<head>
+			<script type="text/javascript">
+				var month = Number(prompt("Enter month number"));
+				var message = "";
+				if (month == 1){
+					message = "Jan";
+				}
+				else if(month == 2){
+					message = "Feb";
+				}
+				else if(month == 3){
+					message = "March"
+				}
+				else{
+					message = "Unknown Month"
+				}
+				alert(message)
+			</script>
+			</head>
+			
+
+		Example2:- if elseif else in ternary operator
+			<head>
+			<script type="text/javascript">
+				var userInput = Number(prompt("Enter the number"));
+				var msg = userInput == 1 ? "January" : userInput == 2 ? "Feburary" : userInput == 3 ? "March" : "Unknown Month"
+
+				alert(msg)
+			</script>
+			</head>
+

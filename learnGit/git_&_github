@@ -1,0 +1,112 @@
+Github:- It is actually a name of company which allow you to host your central repo on remote server where you store you data.
+
+git:- It is a version control tool, using it you store your data into git hub.
+
+git is distributed version control system.
+
+Distributed :- here you have all the file on local machine also.so net connection is not required always.
+		If central server crashes than also you will have backup on local machine.
+		Eg:-git
+
+Central:- here all you data is store on central, you dont have copy of it on local
+	  so it require net connection all the time.
+	  If central server crashes thanyou dont have backup on local machine.
+	  Eg:- SVN (subversion)
+
+
+why to use:-
+	because it store data into central repo and on local machine also(local copy) i.e on user system.
+
+
+
+1.)install git.(git is tool/software/package/library)
+2.)create repo on github account.
+3.)create folder in local-->In terminal go till the path of local folder and enter command
+	"git init"
+	you can see .git folder is created.
+4.)now we want to make the remote folder as origin.
+	so on same terminal where we were before enter below command
+	**comand:- git remote add origin "<link of remote folder>"
+	go to remote folder on github and click on dropwdown of "Clone or Downlaod" button and copy paste the http link.
+ 
+5.)git pull origin master  
+
+
+**********************************************************
+
+first you have to add your files into index with the command "git add file path",this add the files into index.
+
+"git status" with this command you can see which are the files are in index and are ready to commit.
+means if you have made changes in file are have not added it, so this command will help you.
+After adding the files it will help that which are the files remaining to commit.
+
+
+git add file1, file2, file3 (will add only given file)
+git commit -m "message for the given file added"
+
+git add -A (will add all the files)
+git commit -a -m "add message" (will commit all files)
+
+git log (log of commented files)
+
+***********************************branch************************
+branch is mostly used when you are developing other functionality and now you dont want it to be included in main branch,you will merge it later.
+sub branch will have all the files/folder of master branch and will also have files/folder created by itself.
+ so you will create sub branch in remote server not on local machine.
+In local machine you will create files and folder noramlly and will just commit that folder or file in subbranch. 
+
+
+git branch subBranchName (in terminal you should be in main branch, It will create sub branch and it will contain all the code of main branch)
+
+git checkout branchName (now you will be in that branch which you specified after checkout keyword)
+
+git checkout master (here usig master keyword you will be in main branch)
+
+git merge subBranchName (in terminal you should be in main branch)
+	After merge if you made changes in sub file/folder and commit it in sub branch only, than the newly changes will not be available in 		main branch.
+	once you add the file/folder in sub branch, after that add and commit it in only subbranch,untill you merge subbranch in main branch
+	that file/folder will not be available in main branch.
+	After merging the subbranch and again you made changes in subbranch file/folder you add it and commit it in subranch, but if you have 
+	not again merge it in main branch than that changes will not be reflected in main branch.
+	Inshort any changes you made and add/commit in subbranch and not merge it in main branch than that changes will not atke effect in main
+	branch.
+	For merging the subBranch you have to be in main barnch, In terminal go in main branch "git checkout master" and than trigger the 		command to merger subbranch in main barnch "git merger subBranchName"
+
+
+
+**********rebase**********
+rebase is similaar to merger, but in rebase you have to do double work, so we prefer to merge command only
+
+in subbranch
+	cmd:- git rebase master
+
+in master branch
+	cmd git rebase subBranchName
+
+Triggering command at 2 level will complete the work of merge command, so we prfer merge command.
+
+
+******************************
+AS our is public anyone can read tha data but we want only known user to push data in our project,
+so will add ssh key in the setting of github account
+1.)Generate ssh key
+	cmd:- ssh-keygen (copy the ssh key and paste it in the setting)
+
+2.)In master terminal trigger below command
+	cmd:- ssh -T git@github.com
+
+
+************************************
+on GitHub in branch you can see only master branch but if you want to create subBranch than create it from terminal
+cmd:- git push origin sampleSubBranch
+This will create subbranch and will contain all the files of main branch, and on GitHub you can see the name of subBranch in Branch menu.
+
+cmd:-git push origin master
+
+
+*************************revert changes**********************
+
+1.)git log :- from this command you will get the commit number of all the commits you made, so just copy 1st 8 letter of the commit which you 		      want to revert back. 
+
+2.)git checkout commitNO/revisionNo fileName:- this command you revert you changes to previous.
+

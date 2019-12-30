@@ -1,0 +1,438 @@
+Assigning event handlers in JavaScript using the following methods
+
+1.)addEventListener:- We can call multiple event handler on the same event and all the event handler will be executed
+		      but if we do the same in DOM object than only the last event handler wins.
+		      Note:- The order in which this event handler will be executed is not define.
+			     Do not work only in IE 8 and earlier version
+
+	syntax:- element.addEventListener("event", handler_method, phase)
+			 event :- name of event, it should be in string
+			 handler:- event handler
+			 phase:- optional(if false than event bubbling occurs, if true than event capturing occurs)
+
+			Bubbling works from innermost to outermost
+			capturing works from outermost to innermoust
+
+	Example:-
+		<head>
+			<input type="button" id="btn" value="Click Me"/>
+			<script type="text/javascript">
+
+			btn.addEventListener("mouseover", changeColorMouseOver);	// Note:- observe event name is without "on"
+			btn.addEventListener("mouseout", changeColorMouseOut)		// Note:- handler name is without parenthesis.
+
+			function changeColorMouseOver(){
+				this.style.background='red';
+				this.style.color='yellow';
+			}
+
+			function changeColorMouseOut(){
+				this.style.background='black';
+				this.style.color='white';
+			}
+			</script>
+		</head>
+
+	Example:-assign multiple event handler on same event.Note:- The order in which this event handler will be executed is not define.
+		<head>
+			<input type="button" id="btn" value="Click Me"/>
+			<script type="text/javascript">
+			btn.addEventListener("click", handler1);
+			btn.addEventListener("click", handler2);
+			function handler1(){
+				alert("handler 1")
+			}
+
+			function handler2(){
+				alert("handler 2")
+			}
+			</script>
+		</head>
+
+2.)removeEventListener:-
+	syntax:- element.remove.EventListener(event, handler_method, phase)
+			 event :- name of event, it should be in string
+			 handler:- event handler
+			 phase:- optional
+
+		Note:-   Do not work only in IE 8 and earlier version
+
+	Example:-
+		<head>
+			<input type="button" id="btn" value="Click Me"/>
+			<br/>
+			<input type="button" id="removebtn" value="Remove Events" onclick="removeEventHandlers()">
+			<script type="text/javascript">
+
+			btn.addEventListener("mouseover", changeColorMouseOver);
+			btn.addEventListener("mouseout", changeColorMouseOut);
+
+			function changeColorMouseOver(){
+				this.style.background='red';
+				this.style.color='yellow';
+			}
+
+			function changeColorMouseOut(){
+				this.style.background='black';
+				this.style.color='white';
+			}
+
+			function removeEventHandlers(){
+				btn.removeEventListener('mouseover', changeColorMouseOver)
+				btn.removeEventListener("mouseout", changeColorMouseOut)
+			}
+			</script>
+		</head>
+
+3.)attachEvent:- works only in IE 8 and earlier version
+		 Syntax:-
+			element.attachEvent("on"+event, handler)
+
+
+4.)detachEvent:- works in only IE 8 and earlier version
+		 Syntax:-
+			element.detachEvent("on"+event, handler)
+
+
+
+**Note:- In some browser addEventListener works and in some attachEvent works but we want both methods to be executed in all browser, so we 		 have to find a solution and that solution is known as cross browser solution
+
+	Example:-
+		<head>
+			<input type="button" id="btn" value="Click Me"/>
+			<script type="text/javascript">
+
+			if (btn.addEventListener){
+				btn.addEventListener("click", handler1);
+			}
+			else{
+				btn.attachEvent("onclick", handler1);
+			}
+
+			function handler1(){
+				alert("handler 1")
+			}
+			</script>
+		</head>
+
+
+
+**Event Object:-
+	Whenever an event (like click, mouseover, mouseout etc) occurs, the relevant data about that event is placed into event object.
+	When the event occurs the associated event handler is called so at the same time the event object is also passed to the event handler.
+
+	Example:-
+		<head>
+			<input type="button" id="btn" value="Click Me" onclick="eventDetails(event)"/>
+			<script type="text/javascript">
+			function eventDetails(event){
+				document.write("Event Type :" + event.type + "<br/>");		// o/p:- click
+				document.write("x position: "+ event.clientX + "<br/>");	// x cordinates of mouse pointer
+				document.write("y position: "+ event.clientY + "<br/>");
+				document.write("target: " + event.target.type + "<br/>");	// o/p:-button
+				document.write("tag Name: " + event.target.tagName)		// o/p:-INPUT
+			}
+			</script>
+		</head>
+
+
+
+**Event Bubbling:- Nested event(bydefault the events get bubbled.)
+		 Event bubbling process starts with the element that triggered the event
+		 and then bubbles upto the containing elements in the hierarchy.
+
+		 If we have event to child and parent, then if we only clicked on child the child and as well as parent event will be called.
+		 If we have event to parent, then if we click on child the parent event will be called(This is bubbling it will keep on 		 calling event till it reaches to it parent event).
+
+
+	Example1:-
+		<head>
+			<style type="text/css">
+				.styleClass{
+					display: table-cell;
+					border: 1px solid black;
+					padding: 20px;
+					text-align: center;
+				}
+			</style>
+		</head>
+		<body>
+			<div class="styleClass" onclick="alert('Div Element')">Div Element
+				<span class="styleClass" onclick="alert('Span Element')">Span Element
+					<input type="button" value="Click Me" onclick="alert('Button')" />
+				</span>
+			</div>
+		</body>
+		   
+	Example2:
+		<head>
+			<style type="text/css">
+				.styleClass{
+					display: table-cell;
+					border: 1px solid black;
+					padding: 20px;
+					text-align: center;
+				}
+			</style>
+		</head>
+		<body>
+			<div class="styleClass" onclick="alert('Event handler of Div Element')">Div Element
+				<span class="styleClass">Span Element
+					<input type="button" value="Click Me"/>
+				</span>e
+			</div>
+		</body>
+
+**When the events get bubbled, the keyword "this" references the current element to which the event is bubbled.
+  In the example below we are using this keyword to references the div element and the change to is border color.
+  When you click the innermost <div> element all the 3 <div> elements border get changed due to bubbling.
+
+	Example:-
+		<head>
+			<style type="text/css">
+			.styleClass{
+				display: table-cell;
+				text-align: center;
+				border:5px solid black;
+				padding:20px;
+			}
+			</style>
+		</head>
+		<body>
+			<div id="div1" class="styleClass">Div 1
+				<div id="div2" class="styleClass">Div 2
+					<div id="div3" class="styleClass">Div 3</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+			var divelement = document.getElementsByTagName('div')
+
+			for(i=0; i<divelement.length; i++){
+				divelement[i].onclick = function (){
+					this.style.borderColor='red';
+					alert(this.getAttribute('id'))
+				}
+			}
+			</script>
+		</body>
+
+Stop bubbling:-If you dont want the event to bubbled up, you can stop it.
+	       IE- 8 and earlier versions:- event.cancelBubble = true
+               IE -9 and later version and all other browser:- event.stopPropagation()	
+	
+	Example:-
+		<head>
+			<style type="text/css">
+			.styleClass{
+				display: table-cell;
+				text-align: center;
+				border:5px solid black;
+				padding:20px;
+			}
+			</style>
+		</head>
+		<body>
+			<div id="div1" class="styleClass">Div 1
+				<div id="div2" class="styleClass">Div 2
+					<div id="div3" class="styleClass">Div 3</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+			var divelement = document.getElementsByTagName('div')
+
+			for(i=0; i<divelement.length; i++){
+				divelement[i].onclick = function (event){
+					event = event || window.event			//window.event works for IE8 and earlier version
+					if(event.stopPropagation){			// cross browsering
+						event.stopPropagation()
+					}
+					else{
+						event.cancelBubble = true;
+					}
+					this.style.borderColor='red';
+					alert(this.getAttribute('id'))
+				}
+			}
+			</script>
+		</body>
+
+
+**ImageThumbnail:-
+	Example:-
+			<head>
+			<style type="text/css">
+			.imgStyle{
+				height:100px;
+				width:100px;
+				border:3px solid grey;
+			}
+			</style>
+		</head>
+		<body>
+			<img src="/home/indracanossian/Desktop/LearnJS/Pictures/indra.jpeg" id="mainimg"
+			height="540px" width="540px" style="border: 3px solid grey"/>
+			<br/>
+
+			<div id="myDiv" onclick="displayImage(event)"> <!-- bubbling -->
+				<img src="/home/indracanossian/Desktop/LearnJS/Pictures/indra.jpeg" class="imgStyle"/>
+				<img src="/home/indracanossian/Desktop/LearnJS/Pictures/1.jpg" class="imgStyle"/>
+				<img src="/home/indracanossian/Desktop/LearnJS/Pictures/2.jpg" class="imgStyle"/>
+				<img src="/home/indracanossian/Desktop/LearnJS/Pictures/3.jpg" class="imgStyle"/>
+				<img src="/home/indracanossian/Desktop/LearnJS/Pictures/4.jpg" class="imgStyle"/>
+			</div>
+
+			<script type="text/javascript">
+
+			var images = document.getElementById('myDiv').getElementsByTagName('img')
+
+			for(i=0; i<images.length; i++){
+				images[i].onmouseover = function(){
+					this.style.cursor = 'hande';
+					this.style.borderColor = 'red';
+				}
+
+				images[i].onmouseout = function(){
+					this.style.cursor = 'pointer';
+					this.style.borderColor = 'grey';
+				}
+			}
+
+			function displayImage(event){
+				event = event || window.event
+				var targetElement = event.target || event.srcElement;
+				// target return the element name
+				// event.target return HTMLImageElemet,so
+				// targetElement.src == targetElement.getAttribute('src')
+				// but event.srcElement might get some different object so not using directly targetElement.src
+				if (targetElement.tagName == 'IMG')	
+				// when we click in between 2 imgae the src attribute use to get null value so to get the expected output we 					   have use if loop.
+				// tagName returns in capital word so IMG insted of img
+				{
+				document.getElementById("mainimg").src = targetElement.getAttribute('src')
+				}
+			}
+			</script>
+		</body>
+
+
+**eventcapturing:- works from outermost to innermost.
+		   The last parameter phase of addEventListener determine the bubbling or eventcapturing,
+		   If the phase is set to false than it is event bubbling.
+		   If the pahse is set to true than it is ecebt capturing.
+
+Example:- phase parametr set to true of addEventListener() i.e event capturing
+	
+	<head>
+	<style type="text/css">
+		.divStyle{
+			display: table-cell;
+			border: 3px solid black;
+			padding: 20px;
+			text-align: center
+		}
+	</style>
+	</head>
+	<body>
+	<div id="div1" class="divStyle">Div 1
+		<div id="div2" class="divStyle">Div 2
+			<div id="div3" class="divStyle">Div 3</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var divCollection = document.getElementsByTagName('div');
+		for (i=0; i<divCollection.length; i++){
+			divCollection[i].addEventListener("click",handler, true)
+		}
+		function handler(){
+			alert(this.id)
+		}
+	</script>
+	</body>
+
+	Output:- click on div3 and the output will be div1, div2, div3
+
+
+Note:-If you want both event bubbling and event capturing than write the same code twice once with "false" value and other with "true" value.
+	
+Example:-
+		<head>
+		<style type="text/css">
+			.divStyle{
+				display: table-cell;
+				border: 3px solid black;
+				padding: 20px;
+				text-align: center
+			}
+		</style>
+		</head>
+		<body>
+			<div id="div1" class="divStyle">Div 1
+				<div id="div2" class="divStyle">Div 2
+					<div id="div3" class="divStyle">Div 3</div>
+				</div>
+			</div>
+
+			<script type="text/javascript">
+				var divCollection = document.getElementsByTagName('div');
+				for (i=0; i<divCollection.length; i++){
+					divCollection[i].addEventListener("click",handler, false)
+					divCollection[i].addEventListener("click",handler, true)
+				}
+				function handler(event){
+					alert(this.id)
+				}
+			</script>
+		</body>
+
+
+
+**Preventinh Browsers default action:-
+	When you click on a link the page navigates to the specified link.
+	When you right click on the web page the browser displays the contextmenu.
+
+	By 2 ways we can achieve this,the simplies ways is return false.The other way is by using event object
+
+	IE8 and earlier version:
+		event.returnValue = false;
+
+	IE9 & later version and all other browsers:
+		event.preventDefault();
+
+Example1:- disable the contextmenu
+	
+		<head>
+		</head>
+		<body oncontextmenu="return false">
+			<h1>On this page the right click is disable</h1>
+		</body>
+
+
+Example2:- using event object disable contextmenu
+
+	<head>
+	</head>
+	<body>
+	<h1>Right click is disable</h1>
+	<script type="text/javascript">
+		document.oncontextmenu = preventDefaultAction;
+
+		function preventDefaultAction(event){
+			event = event || window.event
+			if (event.preventDefault){
+				event.preventDefault()
+			}
+			else{
+				event.returnValue = false;
+			}	
+		}
+	</script>
+	</body>
+
+
+Example3:disable the link.
+	<head>
+	</head>
+	<body>
+	<a href="https://www.google.com" onclick="return false"/><h3>Google</h3></a>
+	</body>

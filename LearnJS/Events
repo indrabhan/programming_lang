@@ -1,0 +1,449 @@
+All event list is available on :-https://developer.mozilla.org/en-US/docs/Web/Events
+
+Events in JavaScript:-
+	An event is the signal from the browser that something has happened.
+	Example:- 1.)When user clicks on HTML element, click event occurs.
+		  2.)When a user moves the mouse over a HTML element,mouseover event occurs.
+	The Function that executes in response to an event is called event Handler.
+
+	In JavaScript there are several ways to associate an evenet handler to the event.
+	1.) Using the attribute of HTML tag.
+	2.) Using DOM Object Property.
+	3.) Using special methods.
+	
+
+
+
+	Some of the most common event types and event names:
+
+		1.)mouse events (MouseEvent): mousedown, mouseup, click, dblclick, mousemove, mouseover, mousewheel, mouseout, contextmenu
+		2.)touch events (TouchEvent): touchstart, touchmove, touchend, touchcancel
+		3.)keyboard events (KeyboardEvent): keydown, keypress, keyup
+		4.)form events: focus, blur, change, submit
+		5.)window events: scroll, resize, hashchange, load, unload
+
+		Note:- Touch events are only triggered on touch-enabled devices like smartphones and touch-screen laptops.
+
+
+		abourt:- Occurs when user cancels loading of an image
+		click:-  Occurs when user click on link or form element
+		focus:-  Occurs when input focus is given to element
+		load:-   Occurs when page is loaded into Navigator
+		mouseout:- Occurs when the user move the pointer off
+		mouseover:- Occurs when the user moves the pointer over.
+		
+		mousedown:- Occurs when the mouse button is press over an element.
+		mouseup:- Occurs when the nouse button is release over an element.
+
+		click:- Occurs when the mouse button is clicked.
+			mousedown, mouseup, click event occurs in sequence.
+
+		dblclick:- Occurs when the mouse button is double click.
+			  mousedown, mouseup, click,
+			  mousedown, mouseup, click & dblclick events occur in sequence.
+
+		contextmenu:- Occurs when the mouse right button is clicked.
+			      mousedown, mouseup & contextmenu events occurs in sequence.
+
+		reset:-  When the user clears a form using reset button
+		submit:- when the form is submited
+		select:- when the user selects the form element
+		unload:- when user leaves the page
+
+	Example:-
+		<head>
+		</head>
+		<body>
+			<input type="button" value="Single, Double, Right Click"
+			onmousedown="getEventsChecked()" onmouseup="getEventsChecked()"
+		 	onclick="getEventsChecked()" ondblclick="getEventsChecked()"
+			oncontextmenu="getEventsChecked()" 
+			/>
+		<input type="button" value="Clear" onclick="clearValues()"/>
+		<br/><br/><br/>
+		<textarea id="textArea" cols="20" rows="10"></textarea>
+
+		<script type="text/javascript">
+		function getEventsChecked(event){
+			event  = event || window.event;
+			document.getElementById("textArea").value += event.type + "\n";
+		}
+
+		function clearValues(){
+			document.getElementById("textArea").value = "";
+		}
+		</script>>
+	</body>
+
+
+**onClick:- Occurs when user click on element
+	Syntax:- In HTML
+		<element onclick="SomeJavaScriptCode">
+
+		In JS
+		object.onclick="SomeJavaScriptCode"
+
+
+	document.getElementById("Id name").innerHTML=Date();
+	
+	document:- object
+	getElementById("Id name"):- method
+	innerHTML:- property
+	Date():- function
+
+	Example:-
+		<!doctype html>
+		<head>
+		<script type="text/javascript">
+		function MySysDate()
+		{
+			document.getElementById("sys_id").innerHTML=Date();
+		}
+		</script>
+		</head>
+		<body>
+		<p id="sys_id">My System date is</p>
+		<button onclick="MySysDate()">Sys Date</button>		# onclick (single click)
+		//<button ondbl-click="MySysDate()">Sys Date</button> 	# ondblclick (double click)
+		</body>
+
+		Note:- On the web page you will see the string "My System date is" and the button named "Sys Date"
+		       when you will click on that button the string will be replaced with the current datetime.
+
+
+**onload:- occurs after completely loading the object.
+	 once a web page has completely loaded all content(image, script files, CSS files) the onload() method is called.
+	 It is often used within the <body> element.
+
+	syntax:- In HTML
+		 <element onload="SomeJavaScriptCode">
+	
+		 In JS
+		 object.onload="SomeJavaScriptCode"
+
+	Example1:-
+		<!doctype html>
+		<head>
+		<script type="text/javascript">
+		function PageLoad()
+		{
+			alert("Page Loaded Successfully");
+		}
+		</script>
+		</head>
+		<body onload="PageLoad()">
+		<p>Refersh the page</p>
+		<p>Page is loaded</p>
+		</body>
+
+
+	Example2:- When the image is loaded the onload() will be called.If the image is not found than the content of "alt" is
+		   displayed in the in image box
+	
+		<!doctype html>
+		<head>
+		<script type="text/javascript">
+		function ImageLoad()
+		{
+			alert("Page Loaded Successfully");
+		}
+		</script>
+		</head>
+		<body>
+		<p>This is my first web page</p>
+		<img src="indra.jpeg" width="200px" height="200px"onload="ImageLoad()" alt="SorryResourceNotFound">
+		</body>
+
+
+**onerror:- This event trigger when the resources is not found or some error occurs due to any prblm.
+	  When any error occurs than onerror() is called
+
+	Example:- Here we have use it on loading of image, if image on found than onerror() will be triggered.
+
+		<!doctype html>
+		<head>
+		<script type="text/javascript">
+		function ImageLoad()
+		{
+			alert("Page Loaded Successfully");
+		}
+		function ImageNotFound()
+		{
+			alert("Sorry we are unable to find the image")
+		}
+		</script>
+		</head>
+		<body>
+		<p>This is my first web page</p>
+		<img src="idra.jpeg" width="200px" height="200px" onload="ImageLoad()" alt="SorryResourceNotFound" onerror="ImageNotFound()">
+		</body>
+
+
+**window.onerror:- In general we use try/catch statement to catch errors in JavaScript.
+      		 If an error is raised by a statement that is not inside a try catch block,the window.onerror event is fired.
+
+		 Assign a function to window.onerror that you want to execute when an error is raise.
+		 The function that is associated as an event handler for the onerror event has 3 parameter.
+		 parameters:- msg, url, line
+		
+		 Example:-
+			<head>
+				<script type="text/javascript">	
+				window.onerror = function(msg, url, line){
+					alert("Message: " + msg + "\n" + 
+						  "URL: " + url + "\n" + 
+						  "line: " + line);
+					return true;	//In older version of Internet Explorer error msg used to display at thr bottom of 								  window to surpraise those msg we use true.
+				}
+				nonExistingFunction();
+	
+				</script>
+			</head>
+
+
+**onmousemove:- This event occurs when the mouse pointer is moving while it is over an element.
+
+	      Example:-
+			<head>
+			<script type="text/javascript">
+			function MouseMove()
+			{
+				alert("Mouse move event")
+			}
+			</script>
+			</head>
+			<body>
+				<p onmousemove="MouseMove()">This is Mouse Move Event</p>
+			</body>
+
+
+**onmouseover:- This event occurs when the mouse pointer is over the element.
+
+	Example:-
+		<head>
+		<script type="text/javascript">
+		function MouseOver()
+		{
+			alert("Mouse over event")
+		}
+		</script>
+		</head>
+		<body>
+			<p onmouseover="MouseOver()">This is Mouse Over Event</p>
+		</body>
+
+
+
+**onmouseout:- when the mouse pointer is goes over the element and come back from that element, when coming back at that time this event is 		     triggered.
+
+	Example:-
+		<head>
+		<script type="text/javascript">
+		function MouseOut()
+		{
+			alert("Mouse out event")
+		}
+		</script>
+		</head>
+		<body>
+			<p onmouseout="MouseOut()">This is Mouse Out Event</p>
+		</body>
+
+
+Example:-mouseover and mouseout
+	<head>
+	<input type="button" id="btn" value="Click Me" onmouseover="changeBackgroundOnMouseOver(this)" onmouseout="changeOnMouseOut()"/>
+	<script type="text/javascript">
+
+	function changeBackgroundOnMouseOver(x){
+		x.style.background='green';
+		x.style.color='yellow';
+	}
+	function changeOnMouseOut(){
+		var control = document.getElementById("btn")
+		control.style.background='black';
+		control.style.color='white';
+	}
+	</script>
+</head>
+
+this keyword:- Current Object Reference, "this" keyword in JS is refer as like self in Python.
+
+
+**onkeyup:- This event is trigger when any key is pressed
+	Example:-
+		<head>
+		<label>First Name</label>
+		<input type="text" onkeyup="onKeyUp(this)"/>
+		<br/>
+		<label>Last Name</label>
+		<input type="text" onkeyup="onKeyUp(this)"/>
+		<script type="text/javascript">
+			function onKeyUp(x){
+				if (x.value == ""){
+					x.style.background = 'red';
+				}
+				else{
+					x.style.background = 'green'
+				}
+			}
+		</script>
+		</head>
+
+**onfocus:- focus the element
+**onblur:- opposite of onfocus event, onblur executes when you leave the element/object.
+
+	Example:-
+		<!doctype html>
+		<head>
+		<script type="text/javascript">
+			function OnFocus(x)
+			{
+				x.style.background="red"
+			}
+			function OnBlur(x)
+			{
+				x.style.background="white"
+			}
+		</script>
+		</head>
+		<body>
+		<form>
+		<label>Enter UserName</label><br/>
+		<input type="text" id="fname" onfocus="OnFocus(this)" onblur="OnBlur(this)"><br/>
+		<label>Enter Password</label><br/>
+		<input type="password" id="pwd"> 
+		</form>
+		</body>
+	
+	Note:- When the cursor will go to the text box of fname it will appear in red color(onfocus event trigger)
+	       When the cursor leaves the text box of fname it will become white in color (onblur event trigger)
+
+	
+	Example2:-
+		<!doctype html>
+		<head>
+		<script type="text/javascript">
+			function OnFocus()
+			{
+				var x = document.getElementById("fname");
+				x.value.toLowerCase();
+			}
+			function OnBlur()
+			{
+				var x = document.getElementById("fname");
+				x.value = x.value.toUpperCase();
+			}
+		</script>
+		</head>
+		<body>
+		<form>
+		<label>Enter UserName</label><br/>
+		<input type="text" id="fname" onfocus="OnFocus()" onblur="OnBlur()"><br/>
+		<label>Enter Password</label><br/>
+		<input type="password" id="pwd"> 
+		</form>
+		</body>
+
+
+DOM Object:-
+	DOM stands for Document Object Model. When a browser loads a web page,the 
+	browser creates a Document Object Model of that page. 
+
+	
+
+
+	Eample1:- We have make the use of DOM, instead of html attribute.
+		<head>
+		<label>First Name</label>
+		<input type="text" id="fn"/>
+		<br/>
+		<label>Last Name</label>
+		<input type="text" id="ln"|/>
+		<script type="text/javascript">
+			window.document.getElementById("fn").onkeyup = requiredField;		// code same as below line of code.
+			document.getElementById("ln").onkeyup = requiredField;
+
+			function requiredField(){
+				if (this.value == ""){
+					this.style.background = 'red';
+				}
+				else{
+					this.style.background = 'green'
+				}
+			}
+		</script>
+		</head>
+
+	Example2:- Here in DOM we have make the use of anonymous function.
+		<head>
+		<label>First Name</label>
+		<input type="text" id="fn"/>
+		<br/>
+		<label>Last Name</label>
+		<input type="text" id="ln"|/>
+		<script type="text/javascript">
+			document.getElementById("fn").onkeyup = function (){
+				if (this.value == ""){
+					this.style.background = 'red';
+				}
+				else{
+					this.style.background = 'green'
+				}
+			}
+			document.getElementById("ln").onkeyup = function (){
+				if (this.value == ""){
+					this.style.background = 'red';
+				}
+				else{
+					this.style.background = 'green'
+				}
+			}
+		</script>
+		</head>
+
+
+**If the event handler is assigned using both i.e an HTMl attribute and DOM Object property
+the handler that is assigned using the DOM Object property overrides the one assigned using HTML attribute.
+	Example:-overrides
+		<head>
+		<label>First Name</label>
+		<input type="text" id="fn" onkeyup="handler1()"/>
+		<script type="text/javascript">
+			document.getElementById("fn").onkeyup = handler2;
+
+			function handler1(){
+				alert("Using HTML Attribute")
+				}
+			function handler2(){
+				alert("Using DOM Object Attribute")
+				}
+	
+		</script>
+		</head>
+
+		Output:- Using DOM Object Attribute
+
+
+**Using DOM attribute we can assign only one event handler method to given event.
+The handler that is assign last wins.
+
+	Example:-
+		<head>
+		<label>First Name</label>
+		<input type="text" id="fn"/>
+		<script type="text/javascript">
+			document.getElementById("fn").onkeyup = handler1;	// Note:- event handler method without parenthesis.
+			document.getElementById("fn").onkeyup = handler2;	// Note:- event handler method without parenthesis.
+
+			function handler1(){
+				alert("handler 1")
+				}
+			function handler2(){
+				alert("handler 2")
+				}
+		</script>
+		</head>
+
+		Output:- handler 2
+

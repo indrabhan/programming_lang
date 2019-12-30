@@ -1,0 +1,232 @@
+Decorators:- A decorator is a function that takes another fucntion as an input and extend the behaviour of latter function
+	     without explicitly modifying it.means without changing the single line of code of input function.
+
+
+*args = tuples
+**kwargs = dict
+
+Example:-
+	authorized_user = {'indra': '2391',
+		   'sagar': '2992',
+		   'amit': '2193'}
+
+	def auth(func):						# this is the decorator function
+		print "6 auth"		
+		def wrapper(*args, **kwargs):				# we must write another func inside decorator func with the parameter.
+									  beacuse it has to return new func with some extra behaviour.
+ 								        # no.parameter = parameter of func on which we are going to use 									  decorator or parameter of actual func.
+									# here we have use *args and **kwargs or we can use parameter of the 										  calling function.
+								          
+			print "inner"
+			if args[0] in authorized_user.keys():
+				if args[1] == authorized_user[args[0]]:
+					return func(*args, **kwargs)
+			print "Not Authorized"
+			return "Not Authorized"
+		return wrapper						# return wrapper()
+
+	@auth
+	def get_blogs(username, password):
+		print "print blogs"
+		return "blogs"
+
+	@auth
+	def get_comments(username, password):
+		print "print comments"
+		return "comments"
+
+	get_blogs('indra', '231')			# 1st it will go to auth() as we have use @auth
+							# 2nd it will to wrapper()
+							# wrapper() will return the func, so it will go to return func,here return func is
+							  get_bolgs
+							# now get_bolgs() will execute.
+
+
+
+************************** Parameterized decorators ******************************
+parameterized decorators are called when we pass the parameter with the decorator
+eg:- @prettify(symbol)
+
+for para deco we have to loop another function layer.
+1st layer para of func will be the paramter you will use when using decorator, 		@prettify(symbol).
+2nd layer para will be "func", 			def decorator(func)
+3rd layer para will be of calling function, 	def wrapper(*args)
+
+
+eg:-  def prettify(symbol):			# parameter can be any
+	def decorator(func):			# parameter must be "func".
+	    def wrapper(parameter):	
+		-----
+		-----
+	    return wrapper
+	return decorator
+
+
+Example:-
+	def prettify(symbol):
+		def decorator(func):
+			def wrapper(*args):
+				print symbol * len(args[0])
+				func(*args)
+				print symbol * len(args[0])
+			return wrapper
+		return decorator
+
+	@prettify('*')
+	def name(name):
+		print name
+	
+	@prettify('-')
+	def city(city):
+		print city
+
+	name('Indra')
+	print
+	city('Dhule')
+
+
+
+
+******************************** @property Decorator  ***************************bulit-in property
+
+property decorator has "setter" and "deleter"
+
+@property:-
+@property decorator will provide some extra features to function and make it act like class attribute/variable
+means you can acces that fucntion as a class attribute/variable.
+
+In short call the function like we call the attribute/variable.
+
+
+scenario:-  when "com" variable value depends on the combined value of 2 or 3 variable.
+	    so when i will change the value of one variable it will not change the "com" variable value.
+	    so to get the effect of  change i will make "com" variable as function. and will access that func like variable.
+	    we mostly used this decoratpr when the code is already developed.
+
+Example:-
+
+	class Student:
+	def __init__(self, name, marks):
+		self.name = name
+		self.marks = marks
+
+	@property				# property decorator
+	def gotmarks(self):
+		return self.name + ' obtained '  + self.marks + ' marks'
+
+	st = Student('indra', '99')
+	print st.name
+	print st.marks
+	print st.gotmarks			# accessing the function like a variable.
+
+
+	st.name = "Bittu"
+	print st.name
+	print st.gotmarks			# accessing the function like a variable.
+
+
+
+
+Example:-
+	class Game:
+	def __init__(self):
+		self.wins = 0
+		self.looses = 0
+
+	def won_level(self):
+		self.wins +=1
+
+	def lost_level(self):
+		self.looses +=1
+
+	@property
+	def score(self):
+		return self.wins - self.looses
+
+	g = Game()
+
+	print g.wins	# o/p:-0
+	g.won_level()	
+	print g.wins	# o/p:-1
+
+
+	# print g.looses	# o/p:-0
+	# g.lost_level()
+	# print g.looses	# o/p:-1
+
+	print "score ",g.score	# o/p:- 1-1=0   # we called function score() as a variable.
+
+
+
+
+		*******************	Setter	    *******************
+
+
+When we use @property decorator,means we access the function like avariable, what happen we we assign the value to that varaible
+it raise error, so resolve this error we make the use of setter decorator
+
+Example:-
+	class Employee:
+	def __init__(self,first, last):
+		self.first = first
+		self.last = last
+
+	@property
+	def email(self):
+		return self.first + "." + self.last + "@gmail.com"
+
+				 # setter
+				  we use the name of property,here name of @property is email so we use @email.setter.
+				  Than we have to write the function having the same func name of @property.here it is email(),
+				  so we use def email(). 
+
+	@email.setter				
+	def email(self, value_of_e_email):	  # "value_of_e_email" variable will get the value assign to "e.email".
+		a,b = value_of_e_email.split(' ')
+		self.first = a
+		self.last = b
+
+	e = Employee('indrabhan', 'bhamare')
+	e.email = "bittu patil"			# email has an "@property" decorator.If we want to assign value we have to use setter deco.
+						# the value "bittu patil" will be given to the variable "value_of_e_email" of setter deco.
+
+	print (e.first)
+	print (e.last)
+	print (e.email)
+
+
+
+		*******************	deleter	    *******************
+suppose we want to delete the fullname of employee so we want ti run some kind of clean code.
+insted of setter we will use deleter
+
+
+
+
+	********************* @staticmethod *********************
+
+@staticmethod :- we use this deco on method,when we do not make the use of self parameter.
+		 As this method is a static method we can we it with class name or object ref of class name
+
+
+Example:-
+	class Employee:
+	def __init__(self,first, last):
+		self.first = first
+		self.last = last
+
+	def emp_name(self):
+		fullname = self.first + self.last
+		print ('Employee name is ' + fullname)
+
+	@staticmethod
+	def notice(msg):			# here no self is use. see the diff between emp_name() and notice() method.
+		print ("Notice of the day" + msg)
+
+
+	e = Employee('indrabhan', 'bhamare')
+	e.emp_name()
+	e.notice("Be on time to Office")	# call with object ref of class.
+	Employee.notice('Be in time')		# call with class name.
+
+

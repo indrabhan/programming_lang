@@ -1,0 +1,17 @@
+**user define exception
+1)define user define exception class.
+2)raise those exception explicitly.
+3)handle those exception,if you dont handle the exception progrm will terminate abnormally
+
+
+class classname(Exception):
+	pass
+--------------------------
+raise userdefine classname
+
+-------------------------
+try:
+	-----------
+	-----------
+except(userdefine classname):
+	print the message

@@ -1,0 +1,249 @@
+Functions:- In JavaScript function are defind with the keyword "function",
+	    The main use of function is code reuseability.
+
+Please look into self invoking function.
+
+return:- The return statement is used to specify the value that is returned from the function.so,functions that 
+	 are going to return a value must use the return statement.
+	 A JS function have an optional return statement. 
+	
+	Syntax:-
+		function functionName(prameter1, prameter2,...,prameter_n)
+		{
+		function statement
+		}
+
+	Example:-
+		<head>
+			<script type="text/javascript">
+			function addNumbers(firstNumber, secondNumber){
+				var sum = firstNumber + secondNumber;
+				return sum;
+			}
+
+			var result = addNumbers(10, 20);
+			document.write(result);
+			</script>
+		</head> 
+
+**What happens when you do not specify values for the function parameter when calling the function?
+  ans:- The parameters that are missing values are set to undifined.
+
+**What happens when you specify too many parameters values when calling the function?
+  ans:- The extra parameter values are ignored.
+	Example:- var result = addNumbers(10, 20, 30, 40);		//still the output will be same.
+
+Anonymous Function:- A function without the name is called as anonymous function
+	Exampel:-function without name,is assign to a variable and than that variable is treated as function when calling.
+		<head>
+		<script>
+		var add = function(firstNumber, secondNumber){
+			   return firstNumber + secondNumber;
+			  }
+		var result = add(10,20)
+		document.write(result)		// o/p:- 30
+
+	
+	Example2:-function with name,is assign to a variable and than that variable is treated as function when calling.
+
+		var add = function addNumber(firstNumber, secondNumber){
+				return firstNumber + secondNumber;
+			}
+		var result = add(10,30);
+		document.write(result)
+
+Note:- In Standard way of defining function, we can called the function before Defining,because JavaScript will automatically takes that 	   function to the upper level of code.But if a function is assign to a variable than we cannot called it before Defining.
+
+
+***SelfInvoking Function/immediately invoked function:- The function which execute itself.
+	Example:-
+		<head>
+			<script type="text/javascript">
+			var add = (function addNumbers(firstNumber, secondNumber){
+				sum = firstNumber + secondNumber;
+				return sum
+			})(20,20);
+			document.write(add)
+			</script>
+		</head>
+
+
+Local Variable:- variable declared within the fucntion is known as local variable.
+		 scope is within the function.
+		 local variable ends as the function is closed 
+
+Global Vraiable:- variable declared outside the fucntion is known as global variable.
+		  scope is in whole script.
+		  global variable ends as the web page is closed.
+
+	If you assign a value to a variable that has been not declared,It will automactically become a global variable,	
+	even if it is present inside a function.
+
+		Example:-
+			<head>
+			<script type="text/javascript">
+			function sample(){
+				greeting = "Hello World"	// here we have not use the var keyword so it become global variale
+				document.write(greeting)
+			}
+	
+			sample()				// o/p:- Hello World
+			document.write(greeting)		// o/p:- Hello World Note:- we have access the variable outside the function.
+			</script>
+		</head>
+
+
+Closures in JavaScript:- A closures is a inner function that has access to outer functions variable in addition
+			 to its own variables, global variables and outer function parameters
+
+	Example:-Acces to its own variable and also outerFunction's varaible and parameter.
+
+		<script type="text/javascript">
+			function outerFunction(firstNumber, secondNumber){
+				var outerVariable = "Result is: "
+				function innerFunction(){
+					var innerVaraible = outerVariable + (firstNumber + secondNumber);
+					document.write(innerVaraible)
+				}
+				innerFunction()					// outerFunction must call innerFunction.
+			}
+			outerFunction(10,30)
+		</script>
+
+
+	Example2:-
+		<head>
+			<script type="text/javascript">
+			function outerFunction(firstNumber, secondNumber){
+				var outerVariable = "Result is: "
+				function innerFunction(){
+					return innerVaraible = outerVariable + (firstNumber + secondNumber);
+				}
+				return innerFunction		// Note we removed the parentheses,so it will return innerFunction defination.
+			}
+			// here var result will receive the innerFunction defination
+			var result = outerFunction(30,20)();	// Pass another pair of parentheses so it will call innerFunction
+			document.write(result);
+			</script>
+		</head>
+
+
+arguments Object:- arguments object is present in the inside body of function.arguments object has an length property
+		   It is not an array, but we can convert it in array object.
+		   Eg:- var argArray = Array.prototype.slice.call(arguments)
+					OR
+			var argArray = [].slice.call(arguments)
+
+	Example1:-
+		<script type="text/javascript">
+			function argumentsObject(){
+				document.write("Argument length: " + arguments.length + "<br/>")
+				for(i=0; i<arguments.length; i++){
+						document.write("Arguments is: " + arguments[i] + "<br/>")
+				}
+				document.write("<br/>")
+				document.write("<br/>")
+			}
+			argumentsObject();
+			argumentsObject(10);
+			argumentsObject(10,20);
+			argumentsObject(10,20,30);
+		</script>
+
+	Example2:-converting arguments Object into Array Object and use sort() of Array Object.
+		<script type="text/javascript">
+			function argumentsObject(){
+				var argArray = Array.prototype.slice.call(arguments)
+				alert(argArray.sort())
+			}
+			argumentsObject(70,20);
+			argumentsObject(70,20,30);
+		</script>
+
+
+Recursive Function:- function that call itself is called as recursive function.
+
+		Example1:- factorial(5*4*3*2*1)
+			<head>
+				<script type="text/javascript">
+				function factorial(n){
+					var result = n;
+					for(i=0; i<n; i++){
+						result = result * (n-1);
+						n-=1;					
+					}
+					document.write(result)
+				}
+				factorial(5)
+				</script>
+			</head>
+
+
+		Example2:-recursive function.
+			<head>
+				<script type="text/javascript">
+				function factorial(n){
+					if(n == 0 || n == 1){
+						return 1
+					}
+					return n * facrorial(n-1)
+				}
+				factorial(5)
+				</script>
+			</head>
+
+		
+
+	
+
+bgColor property:- using this property we can change the background color of web page
+		   This property is used in body only.
+		   Syntax:- document.bgColor="color name or color code"
+		   Example:-document.bgColor="blue"
+
+	Example:-
+		<head>
+		<body>
+		<script>
+			document.bgColor="orange"
+		</script>
+		</body>
+		</head>
+
+
+Example:-
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Indra</title>
+		<script type="text/javascript">
+		function add()
+		{
+			var a = prompt("Enter 1st number")
+			if (a == ""){
+				alert("1st number cannot be empty")
+				return		# If error occur it will return instead of going to var c , same applies to all return statement
+			}
+			if (isNaN(a)){
+				alert("Please enter integer value in 1st number");
+				return
+			}
+
+			var b = prompt("Enter 2nd number")
+			if (b == ""){
+				alert("2nd number cannot be empty")
+				return
+			}
+			if (isNaN(b)){
+				alert("Please enter integer value in 2nd number");
+				return
+			}
+			var c = parseFloat(a)+parseFloat(b);
+			alert(c);
+		}
+		</script>
+	</head>
+	<body>
+	<button onclick="add()">Addition</button>
+	</body>
+	</html> 

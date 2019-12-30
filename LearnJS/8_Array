@@ -1,0 +1,58 @@
+************filter****************
+
+filter() :- using filter method we can remove duplicate
+	    The filter() method create new array and populates that array with all the elements
+	    that meet the condition specified in callback function.
+	
+	    Syntax:-array.filter(callbackFunction[,thisArg]);
+		    callbackFunction:- Required.Function that gets called for each element of the array.
+				       If the function return true,the element is kept otherwise filtered.
+		    thisArg:-	Optional.An object to which the this keyword can be refer in the
+				callbackFunction.
+
+	The filter() method calls the callbackFunction one time for each element in the array.If the
+	callbackFunction return false for all the elements of the array,the length of new array will
+	be returned is 0.
+
+	callbackFunction Syntax:-
+		function callbackFunction(value, index, array)
+		value:- The value of element in the array
+		index:- The index position in the array
+		array:- The source array object that contains the element.
+
+
+	Example1:-
+		var myArray = [1,2,3,4,5,6,7,8,9,10];
+		function callBackFunction(value, index, array){
+			if (value % 2 == 0){
+				return true
+			}
+			else{
+				return false;
+			}
+		}
+		var filterArray = myArray.filter(callBackFunction)
+		document.write(filterArray)
+
+   	Example2:-
+		var myArray = [1,2,3,4,5,6,7,8,9,10];
+		function callBackFunction(value, index, array){
+			return value % 2 == 0
+		}
+		var filterArray = myArray.filter(callBackFunction)
+		document.write(filterArray)
+	
+					Example3:-using anonymous function
+						var myArray = [1,2,3,4,5,6,7,8,9,10];
+						var filterArray = myArray.filter(function (value, index, array){return value % 2 == 0})
+						document.write(filterArray)
+
+					Example4:- Remove Duplicates
+							<head>
+							<script type="text/javascript">
+								var arrayList = ["sam", "mark", "tin", "sam", "mark"];
+								var newArrayList = arrayList.filter(function (value, index, array){return 														array.indexOf(value) == index});
+								document.write(newArrayList);
+							</script>
+							</head>
+

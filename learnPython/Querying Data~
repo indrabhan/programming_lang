@@ -1,0 +1,50 @@
+Note that the SQL language is case insensitive. It means thatSELECT or select has the same effect.
+
+1)Select – shows you how to query data from a single table.
+2)Order By – guides you how to sort the result set returned from a query.
+3)Select Distinct  – provides you a clause that removes duplicate rows in the result set.
+
+
+1)SELECT:-
+syntax:- select column1, column2 form table_name;
+	 If you retrieve data from multiple columns, you use a comma to separate two columns.
+
+syntax:- select * from table_name;
+	 In case you want to query data from all columns, you can use an asterisk (*) as the shorthand.
+
+Notice:- that we have added a semicolon (;) at the end of the SELECT statement. The semicolon is not a part of the SQL statement. It is only for PostgreSQL to specify the end of an SQL statement.
+
+Notice:- It is not the good practice to use (*)asterisk in select statement.
+Imagine if you have big table with many columns, the select statement with (*)asterisk will retrieve all data from entire columns,which may not be necessary.As the result, your application will be slow and less scalable.
+
+**Count the Number of rows present in tabl
+syntax:- select count(*) from table_name
+
+
+
+2)ORDER BY:- use for sorting the data.
+	     when you query data from a table,PostgreSQL returns the rows in oreder they were inserted.
+	     In order to sort the record, you make the use of order by clause in the select statement.
+	     by default data is sorted in ascending order.
+
+syntax:- select column_1, column_2, column_3 form table_name order by column_1 asc;
+         select column_1, column_2, column_3 form table_name order by column_1 desc;
+
+Notice:- multiple columns can be use after order by caluse.
+	 If you want to sort the table by the cloumn_1 in the ascending order first, and then sort the sorted result set by the column_2 	  in descending order, you use the following statement: 
+	 syntax:- select column_1, column_2 from table_name order by column_1 asc, cloumn_2 desc;
+	 note:- result can be observe if you have same value in column_1 for multiple rows
+
+Notice:- that the SQL standard only allows you to sort rows based on the columns that appear in the SELECTclause. However, PostgreSQL allows you to sort rows based on the columns that even does not appear in the selection list.
+
+It is good practice to follow SQL Standard to make your code portable and adapt to the changes that may potentially happen in the next release of PostgreSQL.
+
+
+3)SELECT DISTINCT:- This clause is use to remove duplicate rows from a result set returned by a query.
+		    The DISTINCT clause keeps one row from each group of duplicates. 
+		    The DISTINCTclause can be used on one or more columns of a table.
+
+syntax:- select distinct column_1 form table_name
+
+If you specify multiple columns, the DISTINCT clause will evaluate the duplicate based on the combination of values of these columns.
+syntax:- select distinct column_1, column_2 from table_name;

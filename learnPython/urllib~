@@ -1,0 +1,179 @@
+url = "https://en.wikipedia.org/wiki/url?key=value&life=24#history"
+	
+	Protocol: 	http, https, ftp, ...
+	Host: 		en.wikipedia.org       
+	Port : 		port no is followed by host after the colon(:), if port is excilipty determine it from protocol
+			http=80, https=443
+	Path: 		wiki/url
+	Querystring:- 	text after the ? mark is called querystring, it holds the collection of key value pair separated by am percent(&)
+		      	key=value&life=24
+	Fragment:- 	lastly after the # tag is called fragment used to jump to next page
+
+**urllib package consist of 5 module:-
+	request:-	open url
+	response:-	used internally, used by request module, you will not work with it directly
+	error		request exceptions
+	parse		useful url function (breaking url into meaningful piece)
+	robotparser	robots.txt files
+
+
+	resp = request.urlopen('https://www.youtube.com')
+	type(res)		#<class 'http.client.HTTPResponse'>
+	resp.code		# output if 200 means good
+	resp.length		# size of response in byte
+	resp.peek()		# used to look small part of response rather than full. the data can be in bytes, at starting of resp u can see 				  'b'
+	data = resp.read()	# if you see type(data) it is in bytes, you can decode it using [data.decode('utf-8')]
+				  if you try to read respond second time if displays b'', because once you read the response python closed the 					  connection.
+	data = data.decode('utf-8')
+
+	** Note:-Every time you send the data you have to encode it and when you pull it from server you must decode it so it will not be in 			byte form it will be in html
+	
+
+
+	HTTP Status Code
+
+		200: OK
+		400: Bad Request
+		403: Forbidden
+		404: Not Found
+
+urllib:- by this module it allows you to access internet, means any work related with net you can do with the help of this module.
+
+Python 2
+	import urllib/urllib2
+
+Python 3
+	urllib.request.urlopen(url, data=None, [timeout, ]*, cafile=None, capath=None, cadefault=False, context=None)
+	urllib.request.urlretrieve(url,filename, reporthook, data)
+  class urllib.request.Request(url, data=None, headers={}, origin_req_host=None, unverifiable=False, method=None
+
+	import urllib.request
+	
+		** urllib.request.urlopen(url, data=None, [timeout, ]*, cafile=None, capath=None, cadefault=False, context=None)
+
+				Open the URL url, which can be either a string or a Request object.
+				data must be an object specifying additional data to be sent to the server, or None if no such data is needed.
+
+		**If you wish to retrieve a resource via URL and store it in a temporary location, you can do so via the urlretrieve() function:
+		urlretrieve():- 
+				Syntax:-
+					urllib.request.urlretrieve(url,filename, reporthook, data)
+				
+				
+					import urllib.request
+					local_filename, headers = urllib.request.urlretrieve('http://python.org/')
+					html = open(local_filename)
+
+			Note :- if 2nd parameter i.e filename is given so it will create the file and locate that file in the directory you are 				working.
+				if 2nd parameter i.e filename is not given so it will create the file and locate in the 'temp' directory.
+
+		Note that urllib.request makes use of the same Request interface to handle all URL schemes. For example, you can make an FTP 			request like so:
+
+			req = urllib.request.Request('ftp://example.com/')
+
+		In the case of HTTP, there are two extra things that Request objects allow you to do: 
+			i.)First, you can pass data to be sent to the server. 
+			ii.)Second, you can pass extra information (“metadata”) about the data or the about request itself, to the server - 				    this information is sent as HTTP “headers”. Let’s look at each of these in turn.
+
+
+	 		DATA:-
+				i.)Sometimes you want to send data to a URL
+				ii.)Data needs to be encoded in a standard way, and then passed to the Request object as the data argument. The 				    encoding is done using a function from the urllib.parse library.
+				iii.)Example:-
+						import urllib.request
+						import urlib.parse
+
+						url = 'http://www.someserver.com/cgi-bin/register.cgi'
+						values = {
+							  'name': 'Michael Foord',
+							  'location': 'Northampton',
+							  'language': 'Python'
+							}
+						data = urllib.parse.urlencode(values)
+						data = data.encode('ascii')		# data should be bytes
+								OR
+						data = data.encode('utf-8')		# data should be bytes
+						req = urllib.request.Request(url, data) #
+						respose = urllib.request.urlopen(req)
+						x = response.read()			# return type is bytes
+							or
+						x = response.text			# return type is string
+
+			HEADERS:- In short telling who are you whether browser, os , processor, etc
+
+				
+				The way a browser identifies itself is through the User-Agent header. 
+				When you create a Request object you can pass a dictionary of headers in. 
+				The following example makes the same request as above, but identifies itself as a version of Internet Explorer.
+
+				import urllib.parse
+				import urllib.request
+
+				url = 'http://www.someserver.com/cgi-bin/register.cgi'
+				user_agent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)'
+				values = {'name' : 'Michael Foord',
+					  'location' : 'Northampton',
+					  'language' : 'Python' }
+				headers = { 'User-Agent' : user_agent }
+
+				data = urllib.parse.urlencode(values)
+				data = data.encode('ascii')
+				req = urllib.request.Request(url, data, headers)
+				with urllib.request.urlopen(req) as response:
+				   the_page = response.read()
+
+
+		
+		HTTP Protocol:-
+  			whenever we make request on web and wait for the answer,the work of sending request on web and bringing back the 				response to client is done by HTTP Protocol
+
+				     req
+			web browse -------> web server ---
+						         |         ----------This work is done by HTTP Protocol
+			web browser <-------web server ---
+				      resp
+			
+			Example:- when we make a request, say login on fb then http call new request and we are loged in.
+				  You click on any function say you clicked on homepage, now you are already logged in still
+				  the http will make new request.Means it make new request every time i.e the http is 'Stateless'.
+				  To make http 'statefull',Cookies and Sessions come into picture.
+				  Making http statefull means http will not make new request when you are already loged in.
+				  
+		Session Objects:-
+
+			i.)The Session object allows you to persist certain parameters across requests. It also persists cookies across all 				   requests made from the Session instance. 
+			ii.)So if you’re making several requests to the same host, the underlying TCP connection will be reused, which can 				    result in a significant performance increase.
+			iii.)A Session object has all the methods of the main Requests API.
+
+  		Cookies and SeSsion explain:-
+			i.)Session creates id and store it on webserver, it assign the same session id to cookies.
+			ii.)Cookies are store on web browser that is on local machine/client side with session id assigned by session.
+			    in short we can say cookies works as an identity  
+			Example:-
+				when we login to any shopping website we usually look for the products we are in needed.
+				so at that time session is created with one id and it store the same id on webserver and at the same time it 
+				stores that session id on local machine into cookies.
+				in short we can say that cookies contain the info of products which we are searching with the session id
+				created by session.
+				
+				so next time when we come back to same website it search the session id available in cookies and if the seesion 				id in cookies matches with session id in webserver then the products which we had search last time\ 					will be shown to ous as recommended products.
+
+		Request and Response Objects
+			Whenever a call is made to requests.get() and friends, you are doing two major things. First, you are constructing a 				Request object which will be sent off to a server to request or query some resource. Second, a Response object is 				generated once Requests gets a response back from the server. The Response object contains all of the information 				returned by the server and also contains the Request object you created originally.
+
+
+		import requests:- to work with session we have a library "requests"
+
+		Example:-
+			When you get the 403 Forbidden error then provide headers info, because headers tell that we are a browser and not the 				BOT(robot) user.
+
+
+
+			import reqests
+			
+			session_obj = requests.session()		--returns session object, <class 'requests.sessions.Session'>
+			resp = session_obj.get(url, headers, cookies)
+			print (resp.text)
+
+		Note:- when you login to any web,what happen behind when you click on login button.
+		       http POST request is involve in which you pass some data and that data is used to authenticate, what all we need to do 		               is just track what are all specification is involved in that request like what data is going in that request, which url 			       is being hit,throught inspect element.

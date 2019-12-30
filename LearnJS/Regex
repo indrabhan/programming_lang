@@ -1,0 +1,185 @@
+Regex:- A regular expression is a sequence of special character that forms the search pattern.
+
+	Note:- regular expressions are writen in between forward slash
+
+Regular expression can be used with the following string methods.
+1.)string.match(RegExp)
+	Example:-
+		<body>
+			<script type="text/javascript">
+			var regexString = "Tom contact number is 9876543210.His age is 35.Mark contact number is  9870123456.His age is 45."
+
+			document.write(regexString.match(/\d/) + "<br/>")		// o/p:-9
+			document.write(regexString.match(/\d+/) + "<br/>")		// o/p:-9876543210 ("+" means 1 or more repeatation of 														     preceeding character)
+			document.write(regexString.match(/\d+/g) + "<br/>")	// O/p:-9876543210,35,9870123456,45 ("g" Global search i.e in 															      entire string.)
+			</script>
+		</body>
+
+	Example2:-
+		<body>
+			<script type="text/javascript">
+			var regexString = "Tom contact number is 9876543210. tom age is 35. TOM lives in canada."
+				document.write(regexString.match(/tom/g) + "<br/>")	     // o/p :-tom
+				document.write(regexString.match(/tom/gi) + "<br/>")	     // o/p :-Tom,tom,TOM (global with case-insensitive)
+				document.write(regexString.match(/ToM/) + "<br/>")	     // o/p:- null
+			</script>
+		</body>
+
+
+2.)string.replace(RegExp, replacement_value)
+	Example:-
+		<body>
+			<script type="text/javascript">
+			var regexString = "Tom contact number is 9876543210. His age is 35. Mark contact number is  9870123456. His age is 45."
+			 document.write(regexString.replace(/\d+/g, "XXX"))
+			</script>
+		</body>
+		
+		Output:- Tom contact number is XXX. His age is XXX. Mark contact number is XXX. His age is XXX.
+
+
+3.)string.split(separator, limit, unknown)
+	Example:-
+		<body>
+			<script type="text/javascript">
+			var regexString = "Tom contact number is 9876543210. His age is 35. Mark contact number is  9870123456. His age is 45."
+			document.write(regexString.split(/\d+/g) + "<br/>")
+			document.write(regexString.split("."))
+			</script>
+		</body>
+
+	Output:-Tom contact number is ,. His age is ,. Mark contact number is ,. His age is ,.
+		Tom contact number is 9876543210, His age is 35, Mark contact number is 9870123456, His age is 45,
+
+
+4.)string.search(RegExp):- Returns the matched strings index position, If string not found returns -1.
+	Example:-
+		<body>
+			<script type="text/javascript">
+			var regexString = "Tom contact number is 9876543210. His age is 35. Mark contact number is  9870123456. His age is 45."
+			document.write(regexString.search("contact") + "<br/>")		// o/p:- 4
+			document.write(regexString.search(/\d+/g))			// o/p:- 22
+			</script>
+		</body>
+
+
+Modifier can be used with regular expressions to specify the kind of search.
+
+g:-Global Search.
+i:-Case-insensitive search.
+m:-Multi-line search.
+
+	Example:-
+		<head></head>
+		<body>
+			<input type="text" id="textBox" style="width:200px"/>
+			<br/><br/>
+			<input type="button" value="Process String" onclick="extractNumber()" style="width:200px" />
+			<br/><br/>
+			<textarea id="textArea" cols="23" rows="5"></textarea>
+
+			<script type="text/javascript">
+			function extractNumber(){
+				document.getElementById('textArea').value = "";
+				var inputString = document.getElementById('textBox').value;
+				result = inputString.match(/\d+/g)	// here g is for global=entire string/whole string
+				if (result){
+					for (i=0; i<result.length; i++){
+						document.getElementById('textArea').value += result[i] + '\n';
+					}
+				}
+			}
+			</script>
+		</body>
+
+
+
+***There are two ways to create Regular Expression.
+
+1.)Using regular expression literal
+	var regex = /\d+/g'
+
+2.)Using Constructor function of the RegExp object.
+	var regex = new RegExp("\\d+", "g")		Note:- if we use single slash it will be treated as string, so we add double slash
+
+
+Note:- From performance perspective use literal way of regular expression if you know that your regular expression is not going to change .
+
+	Example:-
+		<body>
+			<script type="text/javascript">
+			var regexString = "Tom contact number is 9876543210. tom age is 35. TOM lives in canada."
+			var regexLiteral = /\d+/g;				// Literal
+			document.write(regexString.replace(regexLiteral, 'xxx') + "<br/>")
+
+			var regexObject = new RegExp("\\d+", "g");		//Object
+			document.write(regexString.replace(regexObject, 'xxx'))
+			</script>
+		</body>
+
+
+Commonly used RegExp object properties.
+	global:- 	Return true if the global modifier(g) is set, otherwise false.
+	ignoreCase:- 	Return true if the case-insensitive modifier(i) is set, otherwise false.
+	multiline:-	Return true if the multiline modifier(m) is set, otherwise false.
+	source:-	Returns the text of the reeegular expression.
+	
+	Example:-
+		<body>
+			<script type="text/javascript">
+			var regexObject = new RegExp("\\d+", "gim");
+			document.write(regexObject.global + "<br/>")				// o/p:- true
+			document.write(regexObject.ignoreCase + "<br/>")			// o/p:- true
+			document.write(regexObject.multiline + "<br/>")				// o/p:- true
+			document.write(regexObject.source)					// o/p:- \d+
+			</script>
+		</body>
+
+
+Methods of RegExp Object
+
+1.)exec():- 	Test for a match in a given string and return the first match found otherwise null. 
+2.)test():- 	Test for a match in a given string and return true & flase.
+3.)toString():-	Retruns the string value of the regular expression.
+
+	Example1:-
+		<body>
+			<script type="text/javascript">
+			var regexString = "Tom contact number is 9876543210. tom age is 35. TOM lives in canada."
+			document.write(regexString.match(/\d+/g) + "<br/>")			// op:- 9876543210,35
+			var regexObject = new RegExp('\\d+', 'g')					
+			document.write(regexObject.exec(regexString) + "<br/>")			// op:- 9876543210
+			document.write(regexObject.test(regexString) + "<br/>")		        // op:- true
+			document.write(regexObject.toString())					// op:- /\d+/g
+			</script>
+		</body>
+
+	Example2:- exec() methods return only 1st matched occurances, but we want all the matched.
+		<body>
+			<script type="text/javascript">
+			var regexString = "Tom contact number is 9876543210. tom age is 35. TOM lives in canada."
+			var regexObject = new RegExp('\\d+', 'g')	
+			var result;				
+			while(result = regexObject.exec(regexString))
+			{
+				document.write(result + "<br/>")
+			}
+			</script>
+		</body>
+
+		Output:- 9876543210
+			 35
+	
+
+**Important Link of Regular Expression.
+
+The page at the following link explains the basics of regular expressions.
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+
+Expresso is one of the free tools available. Here is the link to download.
+http://www.ultrapico.com/ExpressoDownload.htm
+
+Regular Expression Library
+http://regexlib.com
+Category
+

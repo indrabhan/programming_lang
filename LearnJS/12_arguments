@@ -1,0 +1,120 @@
+************Arguments*************
+arguments Object:- arguments object is present inside the body of function.arguments object has an length property
+		   It is not an array, but we can convert it in array object.
+		   Eg:- var argArray = Array.prototype.slice.call(arguments)
+					OR
+			var argArray = [].slice.call(arguments)
+
+	Example1:-
+		<script type="text/javascript">
+			function argumentsObject(){
+				document.write("Argument length: " + arguments.length + "<br/>")
+				for(i=0; i<arguments.length; i++){
+						document.write("Arguments is: " + arguments[i] + "<br/>")
+				}
+				document.write("<br/>")
+				document.write("<br/>")
+			}
+			argumentsObject();
+			argumentsObject(10);
+			argumentsObject(10,20);
+			argumentsObject(10,20,30);
+		</script>
+
+	Example2:-converting arguments Object into Array Object and use sort() of Array Object.
+		<script type="text/javascript">
+			function argumentsObject(){
+				var argArray = Array.prototype.slice.call(arguments)
+				alert(argArray.sort())
+			}
+			argumentsObject(70,20);
+			argumentsObject(70,20,30);
+		</script>
+
+
+Recursive Function:- function that call itself is called as recursive function.
+
+		Example1:- factorial(5*4*3*2*1)
+			<head>
+				<script type="text/javascript">
+				function factorial(n){
+					var result = n;
+					for(i=0; i<n; i++){
+						result = result * (n-1);
+						n-=1;					
+					}
+					document.write(result)
+				}
+				factorial(5)
+				</script>
+			</head>
+
+
+		Example2:-recursive function.
+			<head>
+				<script type="text/javascript">
+				function factorial(n){
+					if(n == 0 || n == 1){
+						return 1
+					}
+					return n * facrorial(n-1)
+				}
+				factorial(5)
+				</script>
+			</head>
+
+		
+
+	
+
+bgColor property:- using this property we can change the background color of web page
+		   This property is used in body only.
+		   Syntax:- document.bgColor="color name or color code"
+		   Example:-document.bgColor="blue"
+
+	Example:-
+		<head>
+		<body>
+		<script>
+			document.bgColor="orange"
+		</script>
+		</body>
+		</head>
+
+
+Example:-
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Indra</title>
+		<script type="text/javascript">
+		function add()
+		{
+			var a = prompt("Enter 1st number")
+			if (a == ""){
+				alert("1st number cannot be empty")
+				return		# If error occur it will return instead of going to var c , same applies to all return 							  statement
+			}
+			if (isNaN(a)){
+				alert("Please enter integer value in 1st number");
+				return
+			}
+
+			var b = prompt("Enter 2nd number")
+			if (b == ""){
+				alert("2nd number cannot be empty")
+				return
+			}
+			if (isNaN(b)){
+				alert("Please enter integer value in 2nd number");
+				return
+			}
+			var c = parseFloat(a)+parseFloat(b);
+			alert(c);
+		}
+		</script>
+	</head>
+	<body>
+	<button onclick="add()">Addition</button>
+	</body>
+	</html> 

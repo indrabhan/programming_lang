@@ -1,0 +1,22 @@
+By default head support script, we can write script in both head and body
+By default body support noscript.
+
+noscript:- Most browsers default setting is javascript, if browser default setting is not javascript than noscript part will execute.
+
+Example:-
+	<!doctype>
+	<head>
+	<script>
+	document.write("Script Section")
+	</script>
+	</head>
+	<body>
+	<noscript>
+	<p>Oops your browser deafault setting is not javascript, please change it </p>
+	</noscript>
+	</body>
+
+
+
+Note run this program in internet explorer.
+

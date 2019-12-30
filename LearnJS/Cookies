@@ -1,0 +1,286 @@
+Why Cookie are needed?
+web application works on HTTP protocol which is stateless procotol.
+This means after the web server has made the client request for the web page,the web
+server will not remember any thing about the client that made the request.
+Their are several ways to remember,the common and easiest way is by using cookies.
+
+
+What are cookie?
+Cookies are small text file that the browser store in visitors computer.
+A cookies are basically a string of name-value pair separated by semi-colon.
+
+
+How does cookie look
+"color=red;expires=Fri, 5 June 2019 01:00:00 UTC;"
+
+The variable expries specifies when the cookies is going to expire.
+By default cookies are deleted when the current browser session ends.
+If you want to store cookie on client computer even after the browser session
+has ended than specify either "expire" or "max-age" attributes.
+
+expires:- supported by IE
+max-age:- supported by other modern browser.
+Note:- So use both expires and max-age;(for cross browser solution.)
+
+Domain Attribute:-Specifies the domain for which the cookies is valid.
+	If you specify the domain as PragimTech.Blog.com that cookie will
+	be valid for that sub-domain.It will not be valid for PragimTech.com.
+
+	If you want cookie to be valid for all sub-domain of PragimTech.com
+	then specify domain=PragimTech.com, So this cookie will be valid for:-
+		PragimTech.com
+		PragimTech.Blog.com
+		PragimTech.Blog.KudVenkat.com
+
+
+Path Attribute:-By default cookies are valid only for the web pages in the directory of the curret web page that stored them.
+Example:-
+	If a cookie is set by:- https://localhost/Home/Page2.html
+	it will be vaikd for:-  https://localhost/Home/SubFolder/Page1.html
+	but not for:-		https://localhost/page3.html
+
+If you want to create a cookie that is valid for accross all your web pages in you website,
+then set the path to the root of your web directory, that is, "/".
+	document.cookie = "path=/"
+
+
+secure Attribute:- Specifies that cookie is secure and is only used over HTTPS protocol
+	which ensures that the cookie is always encrypted when transmitting from client to server.
+	
+
+
+
+How to write cookie
+document.cookie = "color=red;expires=Fri, 5 June 2019 01:00:00 UTC;"
+
+
+How to read cookie
+var cookieString = document.cookie;
+
+Example1:-
+	<head>
+	<script type="text/javascript">
+	window.onload = function(){
+		if (document.cookie){
+			var previousColor = document.cookie.split("=")
+			document.bgColor=previousColor[1]
+			document.getElementById("selectColor").value = previousColor[1]
+		}
+		
+	}
+	function setColorBackground() {
+		var exdays = 30;
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expries = "expries=" + d.toGMTString()
+		var selectedColor = document.getElementById("selectColor").value
+		if (selectedColor != "white")
+		{
+			document.bgColor = selectedColor;
+			document.cookie = "color=" + selectedColor + ";" + expries
+		}
+	}
+	</script>
+	</head>
+	<body>
+	<select id="selectColor" onchange="setColorBackground()">
+		<option value="white">Select Color</option>
+		<option value="red">Red</option>
+		<option value="green">Green</option>
+		<option value="blue">Blue</option>
+	</select>
+	</body>
+
+
+Example2:-
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<script>
+
+	function setCookie(cvalue, exdays){
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expries = "expries" + d.toGMTString()
+		document.cookie = "username=" + cvalue + ";" + expries
+		alert("document.cookie:- "+ document.cookie)
+	}
+
+	function getCookie(){
+		var cookieData = document.cookie.split("=")
+		if (cookieData.length){
+			return cookieData[1];
+		}
+		else{
+			return false;
+		}
+	}
+
+	function checkCookie() {
+	  var user = getCookie();
+	  var user;
+	  if (user != "") {
+	    	alert("Welcome again " + user);
+	  		}
+	  	else {
+	     	user = prompt("Please enter your name:","");
+	     	if (user != "" && user != null) {
+	     	setCookie(user, 30)
+	     	}
+	  	}
+	}
+
+	</script>
+	</head>
+	<body onload="checkCookie()"></body>
+
+	</html>
+
+
+
+
+It is possible to store multiple key value pairs in single cookie?
+No, only one key-value pair can be stored in cookie.
+
+If you want to store two or more key-value pair, you have 2 options.
+Option1:- Create a custome object, serialize the object to a JSON String and store the serialized string in a cookie.
+Option2:- Use different cookie for each key-value pair you want to store.
+
+Example:- Option1- storing multiple name-value pair in cookie.
+        <head>
+	<script type="text/javascript">
+	function SetCookie(){
+		var cookieDataObject = {};		// create Object and have property,like here name, email, gender.
+		cookieDataObject.name = document.getElementById("txtName").value;
+		cookieDataObject.email = document.getElementById("txtEmail").value;
+		cookieDataObject.gender = document.getElementById("txtGender").value;
+
+		var jsonStringData = JSON.stringify(cookieDataObject);		// Convert the object into js String
+		document.cookie = jsonStringData;
+	}
+
+	function getCookie(){
+	
+		var cookieDataObject = JSON.parse(document.cookie)		// get back the object from js String, so that we can acess it value using objects property
+		document.getElementById("txtName").value = cookieDataObject.name;
+		document.getElementById("txtEmail").value = cookieDataObject.email;
+		document.getElementById("txtGender").value = cookieDataObject.gender;
+
+	}
+
+	function clearData(){
+		document.getElementById("txtName").value = "";
+		document.getElementById("txtEmail").value = "";
+		document.getElementById("txtGender").value = "";
+	}
+
+	</script>
+</head>
+<body>
+	<table border="1">
+	<tr>
+		<td>Name</td>
+		<td><input type="text" id="txtName"/></td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td><input type="text" id="txtEmail"/></td>
+	</tr>
+	<tr>
+	<td>Gender</td>
+	<td><input type="text" id="txtGender"/></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="SetCookie" onclick="SetCookie()" />
+			<input type="button" value="GetCookie" onclick="getCookie()" />
+			<input type="button" value="Clear" onclick="clearData()" />
+		</td>
+	</tr>
+	</table>
+</body>
+
+
+Example2:- Option2
+        <head>
+	<script type="text/javascript">
+	function SetCookie(){
+		document.cookie = "name=" + document.getElementById("txtName").value;
+		document.cookie = "email=" + document.getElementById("txtEmail").value;
+		document.cookie = "gender=" + document.getElementById("txtGender").value;
+	}
+
+	function getCookie(){
+		var cookieArray = document.cookie.split("; ")		//split by semi-colon and single space.
+		alert(cookieArray)
+		for(i=0; i<cookieArray.length; i++){
+			var cookieData = cookieArray[i].split("=")
+			alert()
+			if (cookieData[0] == "name"){
+				document.getElementById("txtName").value = cookieData[1]
+			}
+			else if (cookieData[0] == "email"){
+				document.getElementById("txtEmail").value = cookieData[1]
+			}
+			else if (cookieData[0] == "gender"){
+				document.getElementById("txtGender").value = cookieData[1]
+			}
+		}
+	
+	}
+
+	function clearData(){
+		document.getElementById("txtName").value = "";
+		document.getElementById("txtEmail").value = "";
+		document.getElementById("txtGender").value = "";
+	}
+
+	</script>
+</head>
+<body>
+	<table border="1">
+	<tr>
+		<td>Name</td>
+		<td><input type="text" id="txtName"/></td>
+	</tr>
+	<tr>
+		<td>Email</td>
+		<td><input type="text" id="txtEmail"/></td>
+	</tr>
+	<tr>
+	<td>Gender</td>
+	<td><input type="text" id="txtGender"/></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="SetCookie" onclick="SetCookie()" />
+			<input type="button" value="GetCookie" onclick="getCookie()" />
+			<input type="button" value="Clear" onclick="clearData()" />
+		</td>
+	</tr>
+	</table>
+</body>
+
+
+***Update and Delete Cookie:-
+        Updating Cookie:- To update a cookie, set a cookie with same name again.
+        The following code updates the color cookie with New_Color,if a cookie with 
+        name=color exists otherwise it creates new cookie with that name
+        
+        document.cookie = "color=New_Color";
+
+Deleting Cookie:- To delete a cookie, set a cookie with max-age attribute set to negative value.
+        document.cookie = "color=red;max-age=-1";
+
+If you are using a browser that supports expires attribute,then set the expire attribute to a date in past.
+        document.cookie = "color=red;expire=Fri, 23 Aug 1991 04:30:00 UCT;"
+
+Note:-User can also use the browser interface to delete cookie.
+
+
+Cookie limitations : 
+1. What is the maximum allowed cookie size per cookie
+2. How many cookies are allowed per domain
+
+The answers to these questions really depend on the browser you are using. The following website can be used to find out what the limits are
+http://browsercookielimits.squawky.net

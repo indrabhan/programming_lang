@@ -1,0 +1,73 @@
+Local Variable:- variable declared within the fucntion is known as local variable.
+		 scope is within the function.
+		 local variable ends as the function is closed 
+
+Global Vraiable:- variable declared outside the fucntion is known as global variable.
+		  scope is in whole script.
+		  global variable ends as the web page is closed.
+
+	***If you assign a value to a variable that has been not declared,It will automactically become a global variable,	
+	even if it is present inside a function.
+
+		Example:-
+			function sample(){
+				greeting = "Hello World"	// here we have not declare the variable, directly assing the value to it so 									   it become global variable
+				document.write(greeting)
+			}
+	
+			sample()				// o/p:- Hello World
+			document.write(greeting)		// o/p:- Hello World Note:- we have access the variable outside the function.
+
+	
+	Example:-
+		var greeting = "Hello Global";
+		function helloWorld(){
+			  var greeting = 'Hello Local';
+			  greeting += '???';
+			  alert(greeting)		// o/p:- Hello Local??? (Local variable gets modified within the local scope)
+			}
+		helloWorld();
+		greeting += '!!!';
+		alert(greeting)				// o/p:- Hello Global!!! (Gloval variable
+
+
+********************** Variable Hositing ******************
+Just like function hoisting, variable hoisting means variables will go at top position if its global and if its local than it will be at the top within the function.
+Note:- If the variable is local than only the declaration is moved not the value assign to variable
+
+
+	Example:-
+		var greeting = "Hello Global";
+		helloWorld();				// Function hoisting will move the function helloWorld() at the top;
+		function helloWorld(){
+		  alert(greeting)			// o/p:- undefined
+		  var greeting = 'Hello Local';   	// Variable hoisting will only move the variable declaration at the top and not the 
+							   value assign to it.
+		}
+		greeting += '!!!';
+		alert(greeting)				// o/p:- Hello Global!!!
+
+
+		Above function will become like this at runtime
+
+		
+		var greeting = "Hello Global";
+		function helloWorld(){
+		 *** var greeting;			// Variable hoisting moving only the variable declaration.
+		  alert(greeting)			
+		 *** var greeting = 'Hello Local';   	
+		}
+		helloWorld();
+		greeting += '!!!';
+		alert(greeting)
+
+
+*********************Braces do not create scope in js ******************
+
+otherNo is the global variable though it is define inside the braces
+var no=100;
+if (no > 100)
+{
+	var otherNo = no;
+}
+document.write(otherNo)		// Note in python also we can access the value outside the braces.

@@ -1,0 +1,94 @@
+1.)eval():- it only evaluate numeric value
+	 if other than numeric value raises error
+	 sytnatx:- 
+		eval(expression)
+
+	Example:-
+		<!doctype html>
+		<head>
+			<script type="text/javascript">
+			var x = prompt("Enter No: ","5");
+			alert(eval(x));
+			</script>
+		</head>
+
+2.)isFinite():- Numbers are finite(numeric) and non-numbers are infinite(string)
+		If it is number it return true else false.
+
+	Example:-
+		<!doctype html>
+		<head>
+			<script type="text/javascript">
+			var x = prompt("Enter number");
+			alert(isFinite(x))
+			</script>
+		</head>
+
+
+3.)isNaN():- isNan(not a number)
+	     Return true for string
+	     Reurn false for numeric
+
+	Example:-
+		<!doctype html>
+		<head>
+			<script type="text/javascript">
+			var x = prompt("Enter number");
+			alert(isNaN(x))
+			</script>
+		</head>
+
+
+4.)parseInt() and parseFloat():- use to conversion
+
+	Example:-parseInt()
+	
+		var x = "100";
+		var z = 400;
+		var z = x+y		# o/p:- 100400
+
+		var x = "100";
+		var z = 400;
+		var z = parseInt(x)+y	# o/p:- 500
+
+		var x = "indra";
+		var z = 400;
+		var z = x+y		# o/p:- NaN
+
+		var x = "100";
+		var z = "400";
+		var z = x-y		# o/p:- -300
+					# Note:- Here prblm is only with "+" operator, because + act has concatination and as addition operator
+	
+		var x = "10";
+		var z = "4";
+		var z = x*y		# o/p:- 40
+	
+
+	Example:-parseFloat()
+	
+		var x = "10.30";
+		var y = 4.5;
+		var z =  x+y;		# o/p:- 10.304.5
+
+	
+		var x = "10.30";
+		var y = 4.5;
+		var z =  parseFloat(x)+y;		# o/p:- 14.8
+
+
+taking value from keyboard is bydefault in string format.
+
+	Example:-
+		var x = prompt("Enter 1st number");		# i/p:- 100
+		var y = prompt("Enter 2nd number");		# i/p:- 400
+		var z =  x+y;			
+		document.write(z);				# o/p:- 100400
+
+
+
+	Example:-
+		var x = prompt("Enter 1st number");		# i/p:- 100
+		var y = prompt("Enter 2nd number");		# i/p:- 400
+		var z =  parseInt(x) + parseInt(y);			
+		document.write(z);				# o/p:- 500

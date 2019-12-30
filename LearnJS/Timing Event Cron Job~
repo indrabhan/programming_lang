@@ -1,0 +1,73 @@
+In JavaScript a piece of code can be executed at specified time of interval.
+
+1.)setInterval(func, delay):- Executes a specified function,repeatedly at specified time interval.
+			      called repeatedly.
+		 	      This method takes two parameters
+			      func:- function you want to call.
+			      delay:- delay parameter specified the time in milliseconds.
+
+
+2.)setTimeout(func, delay):- Executes the specified function, after waiting a specified number of miliseconds.
+			     Called once after the specified delay.
+
+
+3.)clearInterval(intervalID):- Canceles the repeated execution of the method that was
+			       set up using setInterval() method.
+			       intervalID is the identifier of the repeated action you want to cancel.
+			       This ID is return by setInterval() method.
+
+4.)clearTimeout(intervalID):- works same as clearInterval(intervalID)
+
+
+
+
+Example:-
+	<head>
+	<p id="ct">Current Time</p>
+	<input type="button" value="ClickStart" onclick="start()"/>
+	<input type="button" value="ClickStop" onclick="stop()"/>
+		<script type="text/javascript">
+			var intervalID;
+			function getCurrentTime(){
+				document.getElementById("ct").innerHTML = new Date();
+			}
+
+			function start(){
+				intervalID = setInterval(getCurrentTime, 1000)
+			}
+
+			function stop(){
+				clearInterval(intervalID)
+			}
+		</script>
+	</head>
+
+
+Example:-getAttribute() and setAttribute()
+	<head>
+	<img src="/home/indracanossian/Desktop/LearnJS/Pictures/1.jpg" id="image" style="height:200px;width:200px" alt="ImageNotFound"/>
+	<input type="button" value="StartSlideShow" onclick="start()"/>
+	<input type="button" value="StopSlideShow" onclick="stop()"/>
+	<script type="text/javascript">
+
+	function start(){
+		intervalID = setInterval(slideShow, 700)
+	}
+
+	function stop(){
+		clearInterval(intervalID)
+	}
+
+	function slideShow(){
+		imageSrc = document.getElementById("image").getAttribute("src");
+		// alert(imageSrc)
+		currentImage = imageSrc.substring(imageSrc.lastIndexOf("/") + 1,imageSrc.lastIndexOf("."));
+		if (currentImage == 4){
+			currentImage = 0;
+		}
+		newImage = "/home/indracanossian/Desktop/LearnJS/Pictures/" + (Number(currentImage) + 1) + ".jpg";
+		document.getElementById("image").setAttribute("src", newImage)
+	}
+
+	</script>
+</head>

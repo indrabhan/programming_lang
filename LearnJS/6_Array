@@ -1,0 +1,27 @@
+ArrayObject:- Array element starts at zero index
+
+	      length property, reverse() method
+	      push() method is just like append() method of python, it appends the element at the end of list/array.
+		     push() takes multiple element whereas pythons append() takes only 1 element
+		     	Example:-
+				var arrayElement = [1,2,3,4];
+				arrayElement.push(5,6,7);
+				document.write(arrayElement)		// o/p:- 1,2,3,4,5,6,7
+
+	      unshift() :- this method adds the element at the start position of list/array.
+			Example:-
+				var arrayElement = [1,2,3,4];
+				arrayElement.unshift(0,1);
+				document.write(arrayElement)		// o/p:- 0,1,1,2,3,4
+
+	      pop() method is just like pop() method of python, pop() takes index position if index not given than removes last element of 			    list/array and returns that element.
+			Example:-
+				var arrayElement = [1,2,3,4];
+				arrayElement.pop()			// o/p:- 4
+				document.write(arrayElement)		// o/p:- 1,2,3
+
+	      shift() method removes the first element of list/array.
+			Example:-
+				var arrayElement = [1,2,3,4];
+				arrayElement.shift()			// o/p:- 1
+				document.write(arrayElement)		// o/p:- 2,3,4

@@ -1,0 +1,254 @@
+// single line comment
+/* multi line comment */
+
+
+// Local Variable
+<script type="text/javascript">
+function a(){
+	var x =10;
+}
+</script>
+
+<script type="text/javascript">
+if(10>13){
+var a = 11;
+document.write(a);
+}
+</script>
+
+// Global variable
+<script type="text/javascript">
+var data=200;
+function a(){
+	documnet.writeln(data);
+}
+function b(){
+	document.write(data);
+}
+
+a(); // calling javascript function
+b();
+
+</script>
+
+
+// global variable within function (To declare JavaScript global variables inside function, you need to use window object)
+
+<script type="text/javascript">
+function a(){
+	window.value = 10; // declaring global variable by window object
+	document.writeln(window.value);
+}
+function b(){
+	documnet.write(window.value); // accessing global variable from other function
+}
+</script>
+
+// Global variable
+
+<script type="text/javascript">
+var a = 10;
+function a(){
+	document.writeln(window.a);
+}
+<script>
+
+
+// IF Statement
+
+var a = 20;
+if (a>10){
+	document.write('A is greater');
+}
+
+// IF Else Statement
+
+var a = 20:
+if (a>10){
+	document.write('A is greater');
+}
+else{
+	document.write('A is smaller');
+}
+
+// IF Else IF Statement
+
+var a = 20;
+if (a==10){
+	
+}
+else if(a == 15){
+	
+}
+else if(a == 18){
+	
+}
+else{
+	document.write('A is greater the 18')
+}
+
+######### javacript Loop ###########
+
+**for loop:- The JavaScript for loop iterates the elements for the fixed number of times. It should be used if number of iteration is known. The syntax of for loop is given below.
+ 
+for(initialization; condition; increment)
+{
+	
+}
+
+<script>
+for(i=1; i<=5; i++)
+{
+	document.write(i + "<br/>");
+}
+</script>
+
+**while loop:- The JavaScript while loop iterates the elements for the infinite number of times. It should be used if number of iteration is not known. The syntax of while loop is given below.
+
+while(condition)
+{
+	
+}
+
+var i = 11
+while(i<=15)
+{
+	document.write(i + "<br/>");
+	i++;
+}
+
+**do-while loop:- The JavaScript do while loop iterates the elements for the infinite number of times like while loop. But, code is executed at least once whether condition is true or false. The syntax of do while loop is given below.
+
+do{  
+    code to be executed  
+}while (condition);
+
+var i = 21;
+do{
+	documnet.write(i + "<br/>");
+	i++;
+}while(i<=25);
+
+**for-in loop:- The JavaScript for in loop is used to iterate the properties of an object. We will discuss about it later.
+
+
+########## JS Function ############
+
+function FunctionName(arg1,arg2......argN)
+{
+	//code to be executed
+}
+JavaScript Functions can have 0 or more arguments.
+
+**Function with no argument
+<script>
+function msg(){
+	document.write("Hello");
+}
+</script>
+<inpute type="button" onclick="msg()" value="Click"/>
+
+**Function with argument
+<script>
+function getcube(number){
+	document.write(4*4*4);
+}
+</script>
+<inpute type="button" onclick="getcube(4)" value="Click"/>
+
+**Function with Return Value
+<script>
+function msg(){
+	return "hello Indra"
+}
+</script>
+<inpute type="button" onclick="msg()" value="Click"
+
+
+########### JavaScript Objects:- JS object can be created by 3 ways
+
+**By object literal
+
+syntax:- object={'propoerty1': value1, 'property2': value2}
+
+<script>
+emp = {id:102, name:"indra", age:26}
+document.write(emp.id + " "+emp.name+" "+emp.age);
+</script>
+
+**By creating instance of Object
+
+syntax:- var objectname = new Object();
+
+<script>
+var emp = new Object();
+emp.id = 101;
+emp.name = "indra";
+emp.age = 26;
+document.write(emp.id+emp.name+emp.age);
+</script>
+
+**By using an Object constructor
+
+Here, you need to create function with arguments. Each argument value can be assigned in the current object by using this keyword.
+
+The this keyword refers to the current object.
+
+<script>
+function emp(id, name,age){
+	this.id;
+	this.name;
+	this.age;
+}
+e = new emp(102, 'indra', 26)
+document.write(e.id+" "+e.name+" "+e.age);
+</script>
+
+########### javascript Array
+
+JavaScript array is an object that represents a collection of similar type of elements.
+
+There are 3 ways to construct array in JavaScript
+
+**By array literal
+The syntax of creating array using array literal is given below:
+var arrayname = [value1, value2,....valueN];
+As you can see, values are contained inside [ ] and separated by , (comma).
+
+example
+var emp=["a","b", "c"]:
+for (i=0;i<emp.length;i++)
+{
+	document.write(emp[i] + <br/>)
+}
+
+
+**JavaScript Array directly (new keyword)
+The syntax of creating array directly is given below:
+var arrayname = new Array();
+Here, new keyword is used to create instance of array.
+
+<script>
+var i;
+var emp = new Array();
+emp[0] = "a";
+emp[1] = "b";
+emp[2] = "c";
+
+for(i=0;i<emp.length;i++)
+{
+	document.write(emp[i] + <br/>)
+}
+</script>
+
+**JavaScript array constructor (new keyword)
+
+Here, you need to create instance of array by passing arguments in constructor so that we don't have to provide value explicitly.
+
+<script>
+var emp = new Array("a", "b", "c");
+for(i=0;i<emp.length;i++)
+{
+	document.write(emp[i] + <br/>)
+}
+</script>

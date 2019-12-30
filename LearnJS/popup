@@ -1,0 +1,109 @@
+window.open(url,name, features,replace):-
+	Note:- All the parameters of window.open is optional
+
+	url:	url of the page to open
+		If url is not specified,a new window with about:blank is opened
+
+	name:	_blank:- url is loaded into the new window, (Default Value)
+		_self:-	 url replaces the current page.
+		_parent:-url is loaded into the parent frame.
+		_top:- 	 url replaces any framesets that may be loaded.
+		Name:- 	 name of the window.
+
+
+	features:	Must be comma-separated list.Some browser does not support all features.
+			menubar(yes/no):-    Shows or hide the browsers menu.
+			toolbar(yes/no):-    Shows or hide the navigation bar.
+			location(yes/no):-   Shows or hide the address fields.
+			status(yes/no):-     Shows or hide the status bar.
+			resizeable(yes/no):- whether the window is resizeable or not.		// dont work in chrome
+			scrollbars(yes/no):- whether or not to display scrollbars.		// dont work in chrome
+			top(pixels):-	     The top position of window.
+			left(pixels):-	     The left position of window.
+			height(pixels):-     The height of new window.
+			width(pixels):-	     The width of new window.
+
+	replace:	Specifies whether the url creates the new entry or replace the current entry in the browser history.
+			works only if the url is loaded into the same window.
+		
+			true:-	url replaces the current document in the history list.
+			false:- url creates a new entry in the browser history.
+
+	Example1:-	<body>
+				<input type="button" value="Click" onclick="window.open()"/>
+			</body>
+
+	Example2:- 	<body>
+				<input type="button" value="Click" onclick="window.open('https://google.com', '_blank', 				'height=200,width=200')"/>
+			</body>
+	
+	Example3:-	
+			<body>
+			<input type="button" value="Open" onclick="openpop()"/>
+			<input type="button" value="Close" onclick="closepopup()" />
+			<script type="text/javascript">
+				var popup;
+				function openpop(){
+					popup = window.open("https://google.com", "_blank", "height=400, width=400, top=500, left=500")
+				}
+				function closepopup(){
+					popup.close()
+				}
+			</script>
+			</body>
+	
+
+JS provides 3 type of popup boxes
+1.)alert
+2.)confirm
+3.)prompt
+
+
+1.)alert :- warning mesages. alert is method inside window object so we can also write window.alert()
+	    escape sequeneces to display multiple line in alert message.
+		a) \n :- Insert new line
+		b) \t :- Insert a tab
+		c) \r :- Carriage return
+		d) \b :- Backspace
+		e) \f :- Form feed
+		f) \' :- Single quote
+		g) \" :- Double quote
+		h) \\ :- Backslash
+	 
+	Example:- 
+		<!doctype html>
+		<body>
+		<script>
+		document.write("Welcome to JavaScript</br>");
+		alert("Please enter password");
+		window.alert("alert from window object");	
+		</script>
+		</body>
+
+
+2.)confirm:- for true or false, yes or no
+
+	Example:-
+		<!doctype html>
+		<body>
+		<script>
+		document.write("Welcome to JavaScript</br>");
+		var c = confirm("Are you sure you want to proceed?");
+		window.alert(c)			// var c will get value true/false and you can see that value in alert popup.
+		</script>
+		</body>
+
+
+3.)prompt:- taking the value from user.
+	
+	Example:-
+		<!doctype html>
+		<body>
+		<script>
+		document.write("Welcome to JavaScript</br>");
+		var c = prompt("Enter your name", "default value is indra");
+		alert(c)
+		</script>
+		</body>
+
+	Note if you click cancel than it take null value.

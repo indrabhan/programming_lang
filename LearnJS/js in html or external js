@@ -1,0 +1,20 @@
+In live approach we write two different file i.e .js and .html, as you know js file is not executable compare to html
+we call .js file in .html file
+
+
+Example:- we have a.js file containg only js code and not html
+
+	file name:- sample.js
+	
+	file code:- document.write("<h1> Welcome to JavaScript World</h1")
+
+
+Example:- we will call .js file in out .html file
+
+	file name:- basic_prgm.html
+	
+	file code:-<!doctype html>
+		   <head>
+		   <script src="sample.js"></script>
+		   </head>
+		    

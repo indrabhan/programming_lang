@@ -1,0 +1,116 @@
+*IE8 and earlier use event.button
+
+Property		code	Button
+			1	Left
+event.button		4	Middle
+			2	Right
+
+
+*IE9 and latest version and all other browser uses event.which
+
+Property		code	Button
+			1	Left
+event.which		2	Middle
+			3	Right
+
+
+Example:-
+	<head>
+	</head>
+	<body>
+		<input type="button" value="Click" onmouseup="clickedKey()"/>
+		<input type="button" value="Clear" onclick="clearValue()"/>
+		<br/><br/>
+		<textarea id="ta" cols="20" rows="4"></textarea>
+
+		<script type="text/javascript">
+		document.oncontextmenu = function (){
+			event = event || window.event
+			if (event.preventDefault){
+			event.preventDefault()
+			}
+			else{
+				event.returnValue = false;
+			}
+		}
+	
+		function clickedKey(event){
+			event = event || window.event
+
+			if (event.which){
+				document.getElementById('ta').value = "event.which code: " + event.which + "\n"; 
+			}
+			else{
+				document.getElementById('ta').value += "event.button code: " + event.button; 
+			}
+		}
+
+		function clearValue(){
+			document.getElementById('ta').value = "";
+		}
+		</script>
+	</body>
+
+
+Example2: switch case in switch(value/variable than contain value)
+	<head>
+	</head>
+	<body>
+	<input type="button" value="Click" onmouseup="clickedKey()"/>
+	
+	<script type="text/javascript">
+	var clickedButton;
+
+	document.oncontextmenu = function (){
+		event = event || window.event;
+		if (event.preventDefault)
+		{
+			event.preventDefault();
+		}
+		else{
+			event.returnValue = false;
+		}
+	}
+
+	function clickedKey(event){
+		event = event || window.event;
+
+		if (event.which){
+			switch(event.which){
+				case 1:
+				clickedButton = "Left button Clicked";
+				break;
+
+				case 2:
+				clickedButton = "Middle button Clicked";
+				break;
+
+				case 3:
+				clickedButton = "Right button Clicked";
+				break;
+
+				default:
+				clickedButton = "Invalid button Clicked";
+				break;
+			}
+		}
+		else{
+			switch(event.button){
+				case 1:
+				clickedButton = "Left button Clicked";
+				break;
+
+				case 4:
+				clickedButton = "Middle button Clicked";
+				break;
+
+				case 2:
+				clickedButton = "Right button Clicked";
+				break;
+			}
+		}
+		alert(clickedButton)
+	}
+
+	</script>
+</body>

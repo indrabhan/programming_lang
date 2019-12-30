@@ -1,0 +1,67 @@
+closures in JavaScript:- A closures is a inner function that has access to outer function variables, its parameters and
+			 global variable in addition to its own variables.(same in python)
+
+	Example:-Acces to its own variable and also outerFunction's varaible and parameter.
+
+		
+		function outerFunction(firstNumber, secondNumber){
+			var outerVariable = "Result is: "
+			function innerFunction(){
+				var innerVaraible = outerVariable + (firstNumber + secondNumber);
+				document.write(innerVaraible)
+			}
+			return innerFunction();				// outerFunction must call innerFunction.
+		}
+		outerFunction(10,30)
+		
+
+
+	Example2:-
+		
+		function outerFunction(firstNumber, secondNumber){
+			var outerVariable = "Result is: "
+			function innerFunction(){
+				return innerVaraible = outerVariable + (firstNumber + secondNumber);
+			}
+			return innerFunction;		// Note we removed the parentheses,so it will return innerFunction defination.
+		}
+		var result = outerFunction(30,20);
+		document.write(result);
+
+		
+	Example:-
+		
+		function outerFunction(firstNumber, secondNumber){
+			var outerVariable = "Result is: "
+			function innerFunction(){
+				return innerVaraible = outerVariable + (firstNumber + secondNumber);
+			}
+			return innerFunction;
+		}
+		var result = outerFunction(30,20)();	// Pass another pair of parentheses so it will call innerFunction
+		document.write(result);
+			
+
+************************
+	Anonymous outer function is called once and than inner function execute multiple time
+	
+	Example:-
+		<!DOCTYPE html>
+		<html>
+		<head>
+		  <script type="text/javascript">
+		   
+		   var incr = (function(){
+		     var count = 0;
+		      alert('iiiiiiii'+ count)
+		     return function(){
+		       return ++count
+		     }
+		   })()
+		  </script>
+		  <input type="button" value="ClickMe" onclick="alert(incr())"/>
+		<body>
+
+		</body>
+		</html>
+

@@ -1,0 +1,20 @@
+1.)while loop:
+	syntax:-while(condition){
+			statement;
+			increment statement;			
+		 }
+
+
+break:-
+	It is use to terminate the loop
+
+continue:-
+	Its is use to skip particular iteration and also skip the statements below the continue keyword.
+
+
+
+2.)do while loop:
+	do{
+		statement;
+		increment statement;	
+	}while(condition);

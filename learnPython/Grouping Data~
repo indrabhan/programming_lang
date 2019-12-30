@@ -1,0 +1,70 @@
+************** Grouping Data **************
+
+1)Group By – divides rows into groups and applies an aggregate function on each.
+2)Having – applies the condition for groups.
+
+
+
+*****1)Group By – divides rows into groups and applies an aggregate function on each.
+
+Introduction to PostgreSQL GROUP BY clause.
+
+The GROUP BY clause divides the rows returned from the SELECT statement into groups. For each group, you can apply an aggregate function e.g., SUM to calculate the sum of items or COUNT to get the number of items in the groups.
+
+Hint:- Group by clause is widely used on columns having repeated values.
+
+The following statement illustrates the syntax of the GROUP BY clause:
+
+--syntax:- SELECT column_1,column_2, aggregate_function(column_3)
+	   FROM tbl_name
+	   GROUP BY column_1, column_2;
+
+Note:-	The GROUP BY clause must appear right after the FROM or WHERE clause.
+	Followed by the GROUP BY clause is one column or a list of comma-separated columns. 
+	You can also put an expression in the GROUP BY clause.
+
+--query:- select customer_id,                     here you will get the customer id and count of repeated customer id
+	  count(customer_id) as Customer Id Count   
+	  from customer
+	  group by customer_id
+
+--query:- select customer_id,
+	  count(*) as Customer Id Count           here you will get the customer id and count of repeated customer id 
+	  from customer
+	  group by customer_id
+
+
+
+*****2)Having – applies the condition for groups.
+
+Introduction to PostgreSQL HAVING clause
+
+We often use the HAVING clause in conjunction with the GROUP BY clause,
+to filter group rows that do not satisfy a specified condition.
+
+**Difference between HAVING and WHERE clause
+The HAVING clause sets the condition for group rows created by the GROUP BY clause after the GROUP BY clause.
+The WHERE clause sets the condition for individual rows before GROUP BY clause applies.
+
+In short:- HAVING clause is used to apply filter/condition on the result set of GROUP BY clause.
+	   WHERE clause is used to apply filter/condition before the GROUP BY clause.
+
+--query:-  SELECT customer_id , sum(amount), count(customer_id) customer_count
+	   FROM payment
+           GROUP BY customer_id
+           HAVING sum(amount)>100 and count(customer_id) > 20
+           ORDER BY sum(amount)
+
+--query:- SELECT designame, SUM(salary),MAX(salary),MIN(salary),AVG(salary)
+	  FROM employee
+          WHERE deptno=15
+          GROUP BY designame
+          HAVING AVG(salary)>7000
+          ORDER BY SUM(salary);
+
+Note:- aggregate function are not allowed in WHERE clause.
+
+Note:-	WHERE
+	GROUP BY
+	HAVING
+	ORDER BY

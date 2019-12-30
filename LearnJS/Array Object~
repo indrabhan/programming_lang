@@ -1,0 +1,307 @@
+ArrayObject:- Array element starts at zero index
+
+	      length property, reverse() method
+	      push() method is just like append() method of python, it appends the element at the end of list/array.
+		     push() takes multiple element whereas pythons append() takes only 1 element
+		     	Example:-
+				var arrayElement = [1,2,3,4];
+				arrayElement.push(5,6,7);
+				document.write(arrayElement)		// o/p:- 1,2,3,4,5,6,7
+
+	      unshift() :- this method adds the element at the start position of list/array.
+			Example:-
+				var arrayElement = [1,2,3,4];
+				arrayElement.unshift(0,1);
+				document.write(arrayElement)		// o/p:- 0,1,1,2,3,4
+
+	      pop() method is just like pop() method of python, pop() takes index position if index not given than removes last element of 			    list/array and returns that element.
+			Example:-
+				var arrayElement = [1,2,3,4];
+				arrayElement.pop()			// o/p:- 4
+				document.write(arrayElement)		// o/p:- 1,2,3
+
+	      shift() method removes the first element of list/array.
+			Example:-
+				var arrayElement = [1,2,3,4];
+				arrayElement.shift()			// o/p:- 1
+				document.write(arrayElement)		// o/p:- 2,3,4
+
+	     includes():-
+			syntax:- arrayList,includes(searchvalue, start)
+				 searchvalue:	Required. The element to search for
+				 start:		Optional.Default 0. At which position to start the search
+
+			Example:-
+				var arrayElement = ["Sam",'Mark', 'Tim', 'Sam']
+				document.write(arrayElement.includes("Sam"))			// o/p:- true
+
+
+	     Mutators Method:-Some methods modify the array objects while some not.The methods
+			 that modify the array object are called as mutator methods.
+
+			non-mutator methods:
+				contains, indexOf, LastIndexOf
+		
+			mutators methods:
+				push, unshift, pop, shift, reverse, sort, splice
+
+				sort():- Bydefault the sort() method sorts the value by converting them into string
+					 and than compare those those string.(bydefault it sorts in asscending order)
+				         This works well for strings but not for numbers.
+
+					 Note:- It works on ascci value.Ascii value(0=47, A=65, a=97)
+
+					Example:-
+						var sortElement = ["ravi", "indra", "bhushan", "sagar", "amit"]
+						sortElement.sort()
+						document.write(sortElement)		// o/p:- amit,bhushan,indra,ravi,sagar
+					//Note:- output differ if some elements are in uppercase.
+
+					Example2:-
+						var sortElement = [1,10,2,20,5,15,70]
+						sortElement1.sort(function(a,b){return a-b})
+						document.write(sortElement)		// o/p :-1,2,5,10,15,20,70
+
+					Example3:-
+						var sortElement = [1,10,2,20,5,15,70]
+						sortElement1.sort(function(a,b){return a-b}).reverse()
+								or
+						sortElement1.sort(function(a,b){return b-a})
+						document.write(sortElement)		// o/p :-70,20,15,10,5,2,1
+
+
+	      		
+				splice():-Add or remove elements from array.
+					Syntax:- array.splice(index,deleteCount, item1,....itemx)
+					
+						index:- 	Required.Specifies at what position to add or remove items.
+						deleteCount:-	Required.The number of items to be removed.
+							      	If set zero,no item will be removed.
+						item1...itemx:-	Optiona.The new item(s)to be added.
+
+
+					Example1:-Add Element
+						var spliceElement = [1,5,6,7]
+						spliceElement.splice(1,0,2,3,4)		// 1=index, 0=deleteCount, 2,3,4=elements to be added.
+						document.write(spliceElement)		// o/p:- 1,2,3,4,5,6,7
+
+
+					Example2:-Delete Element
+						var spliceElement = [1,5,6,7]
+						spliceElement.splice(1,2)
+						document.write(spliceElement)		// o/p:-1,7
+
+
+				filter() :- using filter method we can remove duplicate
+					    The filter() method create new array and populates that array with all the elements
+					    that meet the condition specified in callback function.
+					
+					    Syntax:-array.filter(callbackFunction[,thisArg]);
+						    callbackFunction:- Required.Function that gets called for each element of the array.
+								       If the function return true,the element is kept otherwise filtered.
+						    thisArg:-	Optional.An object to which the this keyword can be refer in the
+								callbackFunction.
+
+					The filter() method calls the callbackFunction one time for each element in the array.If the
+					callbackFunction return false for all the elements of the array,the length of new array will
+					be returned is 0.
+
+					callbackFunction Syntax:-
+						function callbackFunction(value, index, array)
+						value:- The value of element in the array
+						index:- The index position in the array
+						array:- The source array object that contains the element.
+
+
+					Example1:-
+						var myArray = [1,2,3,4,5,6,7,8,9,10];
+						function callBackFunction(value, index, array){
+							if (value % 2 == 0){
+								return true
+							}
+							else{
+								return false;
+							}
+						}
+						var filterArray = myArray.filter(callBackFunction)
+						document.write(filterArray)
+
+				   	Example2:-
+						var myArray = [1,2,3,4,5,6,7,8,9,10];
+						function callBackFunction(value, index, array){
+							return value % 2 == 0
+						}
+						var filterArray = myArray.filter(callBackFunction)
+						document.write(filterArray)
+					
+					Example3:-using anonymous function
+						var myArray = [1,2,3,4,5,6,7,8,9,10];
+						var filterArray = myArray.filter(function (value, index, array){return value % 2 == 0})
+						document.write(filterArray)
+
+					Example4:- Remove Duplicates
+							<head>
+							<script type="text/javascript">
+								var arrayList = ["sam", "mark", "tin", "sam", "mark"];
+								var newArrayList = arrayList.filter(function (value, index, array){return 														array.indexOf(value) == index});
+								document.write(newArrayList);
+							</script>
+							</head>
+
+
+	Example:-
+		
+		<head>
+		<script>
+			var array_object = new Array(10);			// declare Array Object
+			document.write("The length property of Array Object " + array_object.length + "<br/>")		// o/p:- 10
+
+			var a = ["html", "js", "python", "postgresql", "css", 123, 132.65, true]	// primitive data type
+			document.write("The length property of Array Object " + a.length + "<br/>")	// o/p:- 8
+			document.write("The length property of Array Object: " + a.reverse() + "<br/>")	// reverse() method
+
+			var b = []
+			b[0] = 'indra';
+			b[1] = 28;
+			document.write("The length property of Array Object: "+ b.length)
+		</script>
+		</head>
+		
+		Note:- In new Array(10), if we pass only 1 element than that will be treated as an length of that array
+		       If we pass more than 1 element than that will be treated as an elements of any arrays
+
+
+2 Dimensional Array:-
+
+		Example1:-
+			<head>
+			<script type="text/javascript">
+				var arrayElement = new Array(3);
+				for(i = 0; i < 3; i++){
+					arrayElement[i] = new Array(3);
+				}
+
+				arrayElement[0][0] = 1;
+				arrayElement[0][1] = 2;
+				arrayElement[0][2] = 3;
+
+				arrayElement[1][0] = 4;
+				arrayElement[1][1] = 5;
+				arrayElement[1][2] = 6;
+
+				arrayElement[2][0] = 7;
+				arrayElement[2][1] = 8;
+				arrayElement[2][2] = 9;
+
+				for(i = 0; i < 3; i++){
+					for(j = 0; j < 3; j++){
+						document.write(arrayElement[i][j] + '&emsp;');
+					}
+					document.write("<br/>")
+				}
+			</script>
+			</head>
+
+		
+		Example2:- 3*3 and addition of both array
+			<head>
+			<script type="text/javascript">
+				var start = 1;
+				var arrayElement = new Array(3);
+				for (i=0; i<3; i++){
+					arrayElement[i] = new Array(3)
+				}
+
+				for(i=0; i<3; i++){
+					for(j=0; j<3; j++){
+						arrayElement[i][j] = start;
+						start = start + 1;
+					}
+				}
+
+				for(i=0; i<3; i++){
+					for(j=0; j<3; j++){
+						document.write(arrayElement[i][j] + "&emsp;");
+					}
+					document.write("<br/>");
+				}
+
+				document.write("<br/>")
+				document.write("<br/>")
+				document.write("&emsp;+")
+				document.write("<br/>")
+				document.write("<br/>")
+
+				var arrayElement1 = new Array(3)
+				for (i=0; i<3; i++){
+					arrayElement1[i] = new Array(3);
+				}
+
+				for(i=0; i<3; i++){
+					for(j=0; j<3; j++){
+						start = start - 1;
+						arrayElement1[i][j] = start;
+					}
+				}
+
+				for(i=0; i<3; i++){
+					for(j=0; j<3; j++){
+			
+						document.write(arrayElement1[i][j] + "&emsp;");
+					}
+					document.write("<br/>")
+				}
+
+				document.write("<br/>")
+				document.write("<br/>")
+				document.write("&emsp;=")
+				document.write("<br/>")
+				document.write("<br/>")
+
+				var arrayElement2 = new Array(3)
+				for (i=0; i<3; i++){
+					arrayElement2[i] = new Array(3);
+				}
+
+				for(i=0; i<3; i++){
+					for(j=0; j<3; j++){
+						arrayElement2[i][j] = arrayElement[i][j] + arrayElement1[i][j]
+					}
+				}
+
+				for(i=0; i<3; i++){
+					for(j=0; j<3; j++){
+			
+						document.write(arrayElement2[i][j] + "&emsp;");
+					}
+					document.write("<br/>")
+				}
+
+			</script>
+			</head>
+
+
+		Example3:- 3*5
+			<head>
+				<script type="text/javascript">
+				var start = 100;
+				var arrayElement = new Array(3);
+				for (i=0; i<3; i++){
+					arrayElement[i] = new Array(5);
+				}
+
+				for(i=0; i<3; i++){
+					for(j=0; j<5; j++){
+						arrayElement[i][j] = start;
+						start = start + 1;
+					}
+				}
+
+				for(i=0; i<3; i++){
+					for(j=0; j<5; j++){
+						document.write(arrayElement[i][j] + "&emsp;");
+					}
+					document.write("<br/>")
+				}
+				</script>
+			</head>

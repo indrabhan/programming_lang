@@ -1,0 +1,73 @@
+**user define exception
+1)define user define exception class.
+2)raise those exception explicitly.
+3)handle those exception,if you dont handle the exception progrm will terminate abnormally
+
+
+class classname(Exception):
+	pass
+--------------------------
+raise userdefine classname
+
+-------------------------
+try:
+	-----------
+	-----------
+except(userdefine classname):
+	print the message
+
+
+
+Example:-
+	try:
+	  print(x)
+	except NameError:			// Note you can pass exception class
+	  print("Variable x is not defined")
+	except:					// Note it will handle any error, you can even pass n number of exception
+	  print("Something else went wrong")
+
+
+In Python, users can define such exceptions by creating a new class. This exception class has to be derived, either directly or indirectly, from Exception class.
+
+When we are developing a large Python program, it is a good practice to place all the user-defined exceptions that our program raises in a separate file. Many standard modules do this. They define their exceptions separately as exceptions.py or errors.py (generally but not always)
+
+Example:- syntax
+	try:
+	   statement 1
+	   statement 1
+	   if condition:
+		raise userdefine classname
+	except userdefine classname :
+
+
+Example:-
+	# define Python user-defined exceptions
+	class Error(Exception):
+	   """Base class for other exceptions"""
+	   pass
+	class ValueTooSmallError(Error):
+	   """Raised when the input value is too small"""
+	   pass
+	class ValueTooLargeError(Error):
+	   """Raised when the input value is too large"""
+	   pass
+	# our main program
+	# user guesses a number until he/she gets it right
+	# you need to guess this number
+	number = 10
+	while True:
+	   try:
+	       i_num = int(input("Enter a number: "))
+	       if i_num < number:
+		   raise ValueTooSmallError
+	       elif i_num > number:
+		   raise ValueTooLargeError
+	       break
+	   except ValueTooSmallError:
+	       print("This value is too small, try again!")
+	       print()
+	   except ValueTooLargeError:
+	       print("This value is too large, try again!")
+	       print()
+	print("Congratulations! You guessed it correctly.")
+

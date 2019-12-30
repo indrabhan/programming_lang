@@ -1,0 +1,31 @@
+The window.location property returns a Location Object That can be used to get information about the current page.
+This propert can also be used to redirect to new page
+
+Example:-
+	<head>
+	<script type="text/javascript">
+		window.location = "https://www.google.com/"
+	</script>
+	</head>
+
+
+window.location property is espically usefully if you have 2 site.
+1.)JS user.
+2.)another without JS user.
+
+
+Property:-
+	window.location.href :- Return the URL of current page.
+	window.location.hostname :- Return domain name.
+	window.location.protocol :- Return protocol(http or https)
+	window.location.pathname :- Return the path of current page.
+
+Example:-
+	<head>
+	<script type="text/javascript">
+		document.write("window.location.href:- " + window.location.href + "<br/>")
+		document.write("window.location.hostname:- " + window.location.hostname + "<br/>")
+		document.write("window.location.protocol:- " + window.location.protocol + "<br/>")	
+		document.write("window.location.pathname:- " + window.location.pathname)
+	</script>
+	</head>

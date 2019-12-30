@@ -1,0 +1,136 @@
+Event Object:-
+	Whenever an event (like click, mouseover, mouseout etc) occurs, the relevant data about that event is placed into event object.
+	When the event occurs the associated event handler is called so at the same time the event object is also passed to the event handler.
+
+	Example:-
+		<head>
+			<input type="button" id="btn" value="Click Me" onclick="eventDetails(event)"/>
+			<script type="text/javascript">
+			function eventDetails(event){
+				document.write("Event Type :" + event.type + "<br/>");		// o/p:- click
+				document.write("x position: "+ event.clientX + "<br/>");	// x cordinates of mouse pointer
+				document.write("y position: "+ event.clientY + "<br/>");
+				document.write("target: " + event.target.type + "<br/>");	// o/p:-button
+				document.write("tag Name: " + event.target.tagName)		// o/p:-INPUT
+			}
+			</script>
+		</head>
+
+Event Bubbling:- Nested event(bydefault the events get bubbled.)
+		 Event bubbling process starts with the element that triggered the event
+		 and then bubbles upto the containing elements in the hierarchy.
+
+		 If we have event to child and parent, then if we only clicked on child the child and as well as parent event will be called.
+		 If we have event to parent, then if we click on child the parent event will be called(This is bubbling it will keep on 		 calling event till it reaches to it parent event).
+
+
+	Example1:-
+		<head>
+			<style type="text/css">
+				.styleClass{
+					display: table-cell;
+					border: 1px solid black;
+					padding: 20px;
+					text-align: center;
+				}
+			</style>
+		</head>
+		<body>
+			<div class="styleClass" onclick="alert('Div Element')">Div Element
+				<span class="styleClass" onclick="alert('Span Element')">Span Element
+					<input type="button" value="Click Me" onclick="alert('Button')" />
+				</span>
+			</div>
+		</body>
+		   
+	Example2:
+		<head>
+			<style type="text/css">
+				.styleClass{
+					display: table-cell;
+					border: 1px solid black;
+					padding: 20px;
+					text-align: center;
+				}
+			</style>
+		</head>
+		<body>
+			<div class="styleClass" onclick="alert('Event handler of Div Element')">Div Element
+				<span class="styleClass">Span Element
+					<input type="button" value="Click Me"/>
+				</span>e
+			</div>
+		</body>
+
+**When the events get bubbled, the keyword "this" references the current element to which the event is bubbled.
+  In the example below we are using this keyword to references the div element and the change to is border color.
+  When you click the innermost <div> element all the 3 <div> elements border get changed due to bubbling.
+
+	Example:-
+		<head>
+			<style type="text/css">
+			.styleClass{
+				display: table-cell;
+				text-align: center;
+				border:5px solid black;
+				padding:20px;
+			}
+			</style>
+		</head>
+		<body>
+			<div id="div1" class="styleClass">Div 1
+				<div id="div2" class="styleClass">Div 2
+					<div id="div3" class="styleClass">Div 3</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+			var divelement = document.getElementsByTagName('div')
+
+			for(i=0; i<divelement.length; i++){
+				divelement[i].onclick = function (){
+					this.style.borderColor='red';
+					alert(this.getAttribute('id'))
+				}
+			}
+			</script>
+		</body>
+
+Stop bubbling:-If you dont want the event to bubbled up, you can stop it.
+	       IE- 8 and earlier versions:- event.cancelBubble = true
+               IE -9 and later version and all other browser:- event.stopPropagation()	
+	
+	Example:-
+		<head>
+			<style type="text/css">
+			.styleClass{
+				display: table-cell;
+				text-align: center;
+				border:5px solid black;
+				padding:20px;
+			}
+			</style>
+		</head>
+		<body>
+			<div id="div1" class="styleClass">Div 1
+				<div id="div2" class="styleClass">Div 2
+					<div id="div3" class="styleClass">Div 3</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+			var divelement = document.getElementsByTagName('div')
+
+			for(i=0; i<divelement.length; i++){
+				divelement[i].onclick = function (event){
+					event = event || window.event			//window.event works for IE8 and earlier version
+					if(event.stopPropagation){			// cross browsering
+						event.stopPropagation()
+					}
+					else{
+						event.cancelBubble = true;
+					}
+					this.style.borderColor='red';
+					alert(this.getAttribute('id'))
+				}
+			}
+			</script>
+		</body>

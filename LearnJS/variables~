@@ -1,0 +1,69 @@
+We can varaible like: 
+	var a = 10;		# here you can reassign the value to variable "a"
+	const b = 10		# here you can not reassign the value, It if fixed value.
+	let x = 10		# Block scope
+
+Example:-
+        {					{
+	  let x = 10				  varx = 10
+	}					}
+
+	// x can be used here			// x can be used here
+
+
+In js their are 2 type of datatype and variables are declared with var keywords
+
+1.)Primitive.
+2.)Non-Primitive.
+
+In primitive their are 5 types
+	number		# in js integer and float both are same.
+	string
+	boolean
+	undefined
+	null
+
+In Non-primitive their is only 1 types
+	object (popularly know as reference data type, because we are using new keyword)
+
+
+Example:-
+	<!doctype>
+	<head>
+	<script type="text/javascript">
+		var my_numberx = 10;
+		document.write("value of my_numberx: "+ my_numberx + "<br>");		# o/p 10
+
+		var my_numbery = 10.30;
+		document.write("value of my_numbery: "+ my_numbery + "<br>");		# o/p 10.3
+
+		var my_string = "Indra";
+		document.write("value of my_string: "+ my_string+"<br/>");		# o/p Indra
+
+		var my_undefined;
+		document.write("value of my_undefined: "+ my_undefined + "<br/>");	# o/p undefined
+
+		var my_null = null;
+		document.write("value of my_null is: "+ my_null + '<br/>');		# o/p null
+
+		var my_boolean = true;
+		document.write("value of my_boolean:" + my_boolean + "<br/>";		# o/p true
+		document.write("value of my_boolean:" + (100>101));			# o/p false
+	</script>
+	</head>
+
+
+
+Dynamic change the type of varaiable like python in Js also available
+	Example:-
+		<head>
+		<script type="text/javascript">
+			var test = 10;
+			alert("The value of test is: "+ test+ "and the type is: "+typeof(test));
+			test = "indra"
+			alert("The value of a is: "+test + "and the type is: "+typeof(test));
+		</script>
+		</head>
+	
+		output:- 10 number
+			 indra string

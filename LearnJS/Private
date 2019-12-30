@@ -1,0 +1,68 @@
+Public:-
+	Public variable declare using "this" keyword.
+	Public methods are created using Prototype property of the constructor function.
+	Public variable and methods can be access outside the function(constructor).
+	Public methods can call Privileged methods but not private methods.
+
+Private:-
+	Private variable are declare using "var" keyword.
+	nested function are the private function.
+	Private variable and methods can not be access outside the function.
+
+
+Privileged Function:-
+	Privileged methods are created using "this" keyword.
+	Privileged methods can access private variable and methods.
+	Like public methods, privileged methods are also available outside the constructor function.
+
+on the fly:-We can create and assign the value to a variable outside the function and that variable is treated as public variable.
+
+Example:-
+	<head>
+	<body>
+		<script type="text/javascript">
+		function Employee(firstName, lastName){
+			//Public Fields :- In JS we create public fields using "this" keyword.
+
+			this.fname = firstName;
+			this.lname = lastName;
+
+			//Private Fields :- In JS we create private fields using "var" keyword.
+			// this field will available inside this Employee function only and not outside
+
+			var privateFullName;
+
+			//Private Function
+			// function privateGetFullName(){}
+			// In this way also we can create private function that is nested function
+
+			var privateGetFullName = function(){
+				privateFullName = firstName + " " + lastName;
+				return privateFullName;
+			}
+
+			//Privilege Function
+			this.privilegedGetFullName = function(){
+				return privateGetFullName();
+			}
+
+			//Public Function
+			Employee.prototype.publicGetFullName = function(){
+				return this.privilegedGetFullName()
+			};
+		}
+
+		var emp = new Employee("Indrabhan", "Bhamare");
+		document.write(emp.privilegedGetFullName() + "<br/>");		// At the time of calling privilege function we dont use this 											   keyword.
+		document.write(emp.publicGetFullName());			// At the time of calling public function we dont use 											   prototype name, only use function name.
+		
+		document.write(emp.privateFullName + "<br/>")			// o/p undefined
+
+		emp.privateFullName = "Bittu";					// on the fly we are creating and assigning value to a variable 										   and this variable is treated as public, Here no need to get 											   confuse just the names are same as that the name of private 											   variable.
+
+		document.write(emp.privateFullName + "<br/>")			// Public variable created on fly.
+		</script>
+	</body>
+	</head>
+
+

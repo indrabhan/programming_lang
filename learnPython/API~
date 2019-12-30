@@ -1,0 +1,51 @@
+API:- Application Programming Interface.
+
+APIs allow applications to communicate with one another.  An API is not a database. It is an access point to an app that can access a database.
+
+Example:- If I want to book a flight ticket.I will go one website and can check the available seat in different AirLines.
+	  How this is possible that through one website i can check the availability of seat in different AirLines.
+	  This is possible through API.
+	  That one website is communicate with all AirLine through API.
+
+
+
+	  When I recharge the jio no, I do not go to jio website and recharge my no
+	  rather i go to third party i.e Paytm and do recharge my no.
+	  so here Paytym does communicate with jio and does recharge for me.
+	  means Paytm communicate with jio through API.
+
+
+	  In my website you have to sign up first to login.
+	  Google has the sign-in form and it uses all the authenticate rules to authenticate the user (means it has written that code)
+          so if i do not want to write the authenticate code and still want the user to login throught all the autnentication process,
+	  so i make the use of the code written by google through API. 
+
+	  API Keys:- If i make the use of third party api, so it sometime provide me with api key(unique)
+		     using that third party api key it can track my activity that i am not miss-using that api.
+
+
+
+web services means SOAP services
+web API means REST API/ RESTFULL services
+Restfull services are by restfull services architecture
+
+soap - Simple Object Access Protocol
+soap returns only xml
+soap is not lightweight, rest is lightweight
+
+rest is architectural style and soap is just a protocol
+
+what is serialization?
+	Converting object into strings
+	can be serialize into any encoding format popular onces are xml, json
+
+
+
+GET - get the resource.
+PUT - update the resource.
+POSt - create the resource.
+DELETE - delete the resource.
+PATCH - to partically update the data at a resource.
+
+
+video 14 over 15 start

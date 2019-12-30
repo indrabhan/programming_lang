@@ -1,0 +1,227 @@
+In JS there are 2 different kind of loops
+
+1.)for:- loops through a block of code a specified number of times.
+2.)while:- loops through a block of code still the specified condition is true.
+
+
+1.)for:-
+	for(expr1; expr2 ; expr3)		// Note all the 3 expression in for loop are optional
+		expr1:- initialization expression.
+		expr2:- codition expression
+		expr3:- modification expression
+
+	syntax:- 
+		for(intialization; condition; iteration satement)
+		{
+			statement
+			statement
+		}
+	Example:-
+		<html>
+		<head>
+			<script type="text/javascript">
+			var a = new Array(1,2,3,4)
+			for(i=0; i<a.length; i++)
+			{
+			document.write(a[i] + "<br/>")
+
+			}
+			</script>
+		</head>
+		</html>
+
+	Example1:-
+		<!doctype>
+		<head>
+		<script type="text/javascript">
+
+			for(i=1; i<=6; i++)
+				{
+					document.write("<h"+ i + ">" + "This is Heading" + "</h" + i + ">")
+				}
+		</script>
+		</head>		
+
+	Example2:-
+		<!doctype>
+		<head>
+		<script type="text/javascript">
+
+			for(i=1; i<=3; i++)
+			{
+				document.write("<h"+ i + ">" + "This is Heading" + "</h" + i + ">" + i)
+			}
+			document.write("<h"+ i + ">" + "This is Heading" + "</h" + i + ">" + i)
+
+		</script>
+		</head>
+	
+		Note here it for loop will run 3 time and than 4th time the last statement will execute.
+		     when the loop is false the value is available outside the loop
+
+	Example3:-
+		<!doctype>
+		<head>
+		<script type="text/javascript">
+			for(i=1; i<=3; i++)
+				{
+					document.write("The value is: "+ i + "</br>")
+				}
+				document.write("The value is: "+ i + "</br>")
+				document.write("The value is: "+ i + "</br>")
+		</script>
+		</head>
+
+		# Output :- After the loop breaks the value is still available outside the loop.
+				The value is: 1
+				The value is: 2
+				The value is: 3
+				The value is: 4
+				The value is: 4
+
+
+	******* Break Statement
+			break means terminate the loop
+		
+		Example:-
+			<head>
+			<script type="text/javascript">
+			for(i=1; i<=10; i++)
+			{
+				if (i == 5)
+				{
+					break
+				}
+				document.write("The value is: " + i + "<br/>")
+			}
+			</script>
+			</head>
+
+			Output :- when condition is satisfied loop while terminate
+				The value is: 1
+				The value is: 2
+				The value is: 3
+				The value is: 4
+
+
+	******** Continue Statement
+			 continue statement will skip that iteration
+
+		Example:-
+			<head>
+			<script type="text/javascript">
+			for(i=1; i<=10; i++)
+			{
+				if (i == 5)
+				{
+					continue
+				}
+				document.write("The value is: " + i + "<br/>")
+			}
+			</script>
+			</head>
+
+		Output:- here you can see it has skip the 5th iteration and keep on continuing
+			The value is: 1
+			The value is: 2
+			The value is: 3
+			The value is: 4
+			The value is: 6
+			The value is: 7
+			The value is: 8
+			The value is: 9
+			The value is: 10
+
+
+continue video after 06:30
+
+
+
+While:- In While loop, the condition is first tested and then the block of code is executed if the test result is true.
+	it executes till the condition is true.
+
+	Syntax-
+		while(condition)
+		{
+			statement
+			statement
+		   increamnet statement		
+		}
+
+	Example1:- 
+		<head>
+		<script type="text/javascript">
+			var i = 1;
+			while(i < 10)
+			{
+				document.write("The value is: "+ i + "<br/>");
+				i++;
+			}
+		</script>
+		</head>
+
+
+	Example2:-
+		<head>
+		<script type="text/javascript">
+			var userInput = Number(prompt("Enter the Number",0));
+			var number = 0;
+			while (number <= userInput) {
+				if (number %2 ==0){
+					document.write(number+ "<br/>");
+				}
+				number++;
+				if (number > 100){
+					break
+				}
+			}
+		</script>
+		</head>
+
+
+do while:- In do-while , the block of code is executed at least once, even though the condition given is false.
+
+	syntax:-
+		do
+		{
+		statement
+		increment statement
+		}
+		while(condition)
+
+	Example:-
+		<head>
+		<script type="text/javascript">
+		var i = 0;
+			do
+			{
+				document.write("value is: "+ i + "<br/>");
+				i++
+			}
+			while(i<10)
+		</script>
+		</head>
+
+	Example:-print even number and ask user to continue or not,if continue than again print even number.
+
+		<head>
+		<script type="text/javascript">
+		var userChoice;
+		do{
+			var userNumber = Number(prompt("Enter the number"));
+			var number = 0;
+			while(number <= userNumber){
+				document.write("even number: "+ number + "<br/>");
+				number = number + 2;
+			}
+			do{
+				userChoice = confirm("Do you want to continue");
+				var y_n
+				if (userChoice){
+					y_n = false
+				}
+			}while(y_n)
+		}while(userChoice)
+		</script>
+		</head>
+

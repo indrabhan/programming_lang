@@ -1,0 +1,65 @@
+String:-
+
+1.)
+	'+' and 'concat()' are use for string concatination
+	In concat() method we can pass n number of string with comma separated.
+
+
+2.)
+	'welcome to \'javascript\' Training'; 		use backslash('\') know as escape character
+	"welcome to 'javascript' Training";
+	
+3.)
+	convert string to upper/lower case:-
+		str1.toUpperCase();
+		str1.toLowercase();
+
+4.)
+	Length property:
+		You can directly get length from string or store string in some variable and than use it.
+		var str1 = 'Indra';
+		alert(str1.length);
+			OR
+		alert(Indra.length);	
+
+5.)
+	trim():- use to remove white space from both end.
+	var str1 = " ABC ";
+	var result = str1.trim();
+
+6.)
+	replace(a, b):- searches for the given string or regular expression and than replace it with the replacement value.
+			It return the new string, doesnt change the origin one.
+			It replaces the first occurances.
+	var str1 = "Hello javascript";
+	var result = str1.replace('javascript', 'world');		o/p:- Hello world
+
+	
+	case-sensitive global replacement:-
+		forward slashes(//) are use for regular expression, Here 'g' stands for global
+		var str1 = 'A Blue bottle with blue liquid is on blue table';
+		var result = str1.replace(/blue/g, 'green);		o/p:- A Blue bottle with green liquid is on green table;
+
+	case-Insensitive global replacement:-
+		forward slashes(//) are use for regular expression, Here 'g' stands for global and 'i' for insensitive
+		var str1 = A Blue bottle with blue liquid is on blue table;
+		var result = str1.replace(/blue/gi, 'green);		o/p:- A green bottle with green liquid is on green table;
+
+
+7.)
+	substring(start, end), substr(start, count), slice(start, end) :- 
+		this 3 meyhods are indentically same.
+		the last parameter in all 3 methods are optional.
+		the string indexing start from zero position.
+		
+	In substring if 1st parameter is greater than last parameter than it will get swap means last parameter will become 1st.
+
+8.)
+	indexOf('character'):- returns the first occurance index position of given character.
+				If the given character is not present than return -1.
+
+	lastIndexOf('character'):- returns the first occurance index position of given character.
+				If the given character is not present than return -1.
+					
+
+		

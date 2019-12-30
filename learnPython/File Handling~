@@ -1,0 +1,151 @@
+1.)Open the file.
+2.)Specify the Mode of operation
+3.)Close the file.
+
+
+**File Mode
+
+i.) r :- Open file for reading(default)
+
+ii.) w :- Open file fot writing.Creates new file if it does not exists.
+	  if file and data exists then it will delete old data and write the new data.
+
+iii.)x :- open file for exclusive creation.If the file already exists, the operation fails.
+	  use only when you want to create file using python.
+
+iv.)a :- Open for appending at the end of the file without truncating it means without deleting the existing data,It will add new data at the	
+	 end of file, Creates new file if not availabe.
+
+v.)t :- Open in text mode(default)
+
+vi.)b :- Open in binary mode. It is not like 0 and 1
+	 Suppose we want to create python object and store it into file,we cannot store python object into the file directly.
+	 we need to convert python object into binary format.In such situation we use it.
+
+vii.)+ :- Open a file for updating(reading and writing)
+
+
+Example:- 'myfile.txt' file is created in system
+	  Using the open('file_name','file_mode') method we will open the file.
+
+		--Syntax:-
+			Open('file_name', 'file_mode')
+
+				f = open('myfile.txt')
+				     or
+		   		f = open('myfile.txt', 'rt')               read(r) and text(t) mode are default
+
+		   Here file object is stored in 'f' variable.file object provides read(), write(), update(), close(), tell() methods.
+
+	read():- It will read data from beginning till end of file in the form of single string format.
+
+	readlines():- It will read as 1st line, 2nd line, 3rd line ...etc, every line is taken as a separate line instead of taking
+		      entire data as a single string.All the string will be store in one single list object.
+
+	write():-it will write the data to file.
+		 Example:-	f = open('myfile.txt', 'w')      Specify the write mode,by default it takes 'r' mode.
+				f.write('any_data')              It will write the data to a file,if file already as some data
+								 than it will  remove the old data and write the new data.
+
+				To write in a file which already has data then open the file in append mode.It will write the data at the end 					of file.
+					Example:-
+						f = open('myfile', 'a')
+						f.write('any_data')
+
+	tell():- this method is used to know the cursor position in the file.
+
+	seek():- it will move the file pointer/cursor to another location without reading the data.
+		 Example:- f = open('myfile.txt')
+			   print (f.tell())     ----- it will point the cursor,so right now the cursor will be at zero position.
+			   print(f.seek(7))     ------it will move the cursor from 0 to 7th position.Means till 7th position data will not be 							      read.in short skip.
+			   print (f.read())     ------ it will start reading the data from 7th positin as we have ue the seek() method.
+
+
+
+	Example :- create the python object and store it in file.Python object can be any list, set, tuple, dict, user define class
+	Note:- Bydefault the python object is not recognized by the file.
+	       so convert python object in file supported format,this process is technically called as pickling or serialization.
+	       for this purpose we have a pickle module.
+
+		import pickle
+		data = [['indra', 28, 'dhule'], ['sagar',27, 'pune'], ['prashant', 30, 'solapur']]     ---list python object
+		x = open('myfile.txt', 'wb')     ---- we have to write the data so 'w' mode and the python object in not in text format 
+						      so we have to open it in 'b' mode.
+						
+						---After opening the file in binary format and store the binary format data into file,
+						  so we have a function called dump() present inside the pickle
+		pickle.dump(data, x)            ---binary data will store into the file.here x refers the file.
+		x.close()
+
+						---As binary data is not readable by human so we have to again convert it by using load() method
+						   provided by pickle.Inshort we have to convert the binary format into python supported format.
+
+
+		import pickle
+		x = open('myfile.txt', 'rb')    --- rb mode because we will read binary format data
+		s = pickle.load(x)
+		x.close
+
+
+
+	JSON File:- to read the data from a json file we have module called json
+		    import json
+			
+		    json.load(f):- 	Load json data from file
+					(or file like object)
+		
+		    json.loads(s):-     Load json data from string,thats why there is 's' after load keyword
+
+		    json.dump(j,f):-    write json data/object to file
+					(or file like object)
+
+		    json.dumps(j):-     output json object as string
+
+		   You use json.loads() if your json data arrives in string format
+			Example:-
+				value = "
+					{'title': 
+						'Tron':'Legacy', 
+						'composer': 'Draft Punk', 
+						'budget': 10000000, 
+						'actors': null,
+						'won_oscar':false }
+					"
+				
+
+
+	Example:-
+		import json
+		json_file = open('F:/data/movie_1.txt', 'r', encoding='utf-8')
+		movie = json.load(json_file)                     -- we use load() because json data was not in string format
+		json.dumps(movie, ensure_ascii=False)		 -- we use dumps() because we want to send json data in string format as
+					        		    mostly web has data in this form only
+		json_file.close()
+
+	When we load json into python it uses following conversion
+
+	JSON	      |		Python
+    ------------------|-----------	
+	object	      |		dict
+	array	      |		list
+	string	      |		str
+	number(int)   |		int
+	number(real)  |		float
+	true 	      |		True
+	false	      |		False
+	null	      |		None
+
+
+	Example:-
+		import json
+		with open('states.json') as f
+		data = json.load(f)
+		for state in states:
+			del['area_codes']
+
+		with open('new_states.json', 'w') as f
+			json.dump(data, f, indent=2)     --here we dump the data available in 'data' variable into the file which we open in 								   'f' variable. indent=2 is use to separate the clear form
+
+
+		here we have states.json file,then we open and load it
+		here we create new file named new_states.json to dump the data.

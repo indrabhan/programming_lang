@@ -1,0 +1,52 @@
+*Object:- the object is the instance of a class.
+	 through that object we can access the attribute and methods of a class.
+
+	Example:-
+		class Employee:
+			emp_id = 10;
+			name = "indra"
+
+			def display(self):			# self refers as a current object
+				print "emp_id",self.emp_id
+				print "name",self.name
+		emp = Employee()	     		 	# create the object of class Employee.
+		emp.display()				        # The process of creating an object can be called as instantiation.
+
+
+*Polymorphism :- Polymorphism contains two words "poly" and "morphs". Poly means many and Morphs means form, shape. 
+		 By polymorphism, we understand that one task can be performed in different ways.
+
+		Example:- Deposite
+			  we can have Cash deposite, Demand Darft deposite, Check deposite
+
+
+*Encapsulation:-  restricting the access to some of the object's components. In encapsulation, code and data are wrapped together within a 			 single unit from being modified by accident.
+
+
+*Data Abstraction:- Data abstraction and encapsulation both are often used as synonyms. Both are nearly synonym because data abstraction is 			   achieved through encapsulation.
+		
+		***Abstraction is used to hide internal details and show only functionalities.
+		   Abstracting something means to give names to things so that the name captures the core of what a function or a whole program 		   does.
+
+	Example:-  In python, we can also perform data hiding by adding the double underscore (___) as a prefix to the attribute which is to be 		   hidden. After this, the attribute will not be visible outside of the class through the object.
+
+
+		   class Student:
+			"This is sample Student class"
+			__count = 0
+			def __init__(self):
+				Student.__count += 1
+		
+			def display(self):
+				print "count of ",Student.__count
+
+		  stud_obj1 = Student()
+		  stud_obj2 = Student()
+
+		  try:
+			print stud_obj1.__count		# o/p Student instance has no attribute '__count'
+			print Student.__count		# o/p class Student has no attribute '__count'
+		  finally:
+			stud_obj1.display()		# o/p count of 2
+
+	

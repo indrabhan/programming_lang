@@ -1,0 +1,52 @@
+CSV stands for Comma Separated Values
+
+To read from csv file or write into csv file, we have a module name "csv"
+
+Functions:-
+	reader(), writer(), DictReader(), DictWriter(), writerow(), next()
+
+	Example:- reader()
+		  Here we have a csv file named as "names.csv"
+
+		 import csv
+		 with open('names.csv', 'r') as csv_file:
+			csv_reader = csv.reader(csv_file)
+			next(csv_reader)			# It will skip the first row.
+			for line in csv_reader:
+				print line
+
+		 OUTPUT:- The o/p will contain the remaining data in list format.
+			
+                 Note :- To skip the header from o/p we use "next()"
+
+
+
+	Example:- reader() and writer()
+
+		import csv
+
+		with open("names.csv", 'r') as csv_file:
+			csv_reader = csv.reader(csv_file)
+	
+			with open('new_names.csv', 'w') as new_file:
+				csv_writer = csv.writer(new_file, delimiter="-")
+
+				for line in csv_reader:
+				csv_writer.writerow(line)	# writerow() is use to write the data row by row.
+
+
+
+	Example:- DictReader() and DictWriter()
+
+		import csv
+
+		with open('names.csv', 'r') as csv_file:
+			csv_reader = csv.DictReader(csv_file, delimiter="\t")
+	
+			with open('new_dict_names.csv', 'w') as new_file:
+				fieldnames = ['first_name', 'last_name', 'email']		     # names of header in csv file.
+				csv_writer = csv.DictWriter(new_file, fieldnames = fieldnames)       # DictWrite takes 3 arguments.
+				csv_writer.writeheader()					     # o/p contain the headers
+	
+				for line in csv_reader:
+					csv_writer.writerow(line)

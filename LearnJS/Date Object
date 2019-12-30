@@ -1,0 +1,55 @@
+To create a date object in JavaScript we use Date() constructor
+
+Example:- Write current Date and Time to web page.If Date() constructor used without any arguments it returns the current date and time.
+	  document.write(new Date());
+
+Creating Date with arguments:-
+	In 2 ways we can create.
+		var dateOfBirth = new Date("August 23, 1991 04:30:00")
+
+	Another way:-
+		Syntax:- var dateOfBirth = new Date(year, month, day, hours, minutes, seconds, milliseconds)
+		Example:-var dateOfBirth = new Date(1991, 07, 23, 04, 30, 00, 00)
+		Note:- In JavaScript months start with zero(means january=0)
+
+Date Object:- Followings are the methods of Date Object
+		1.)getDate()		// (1-31)
+		2.)getDay()		// (1:Monday - 7:Sunday)
+		3.)getMonth()		// (0-11)
+		4.)getFullYear()	// (all four digits)
+		5.)getTime()	-Number of milliseconds
+		6.)getHours()		// (0-23)
+		7.)getMinutes()		// (0-59)
+		8.)getSeconds()		// (0-999)
+
+	Example:-
+		<!DOCTYPE HTML>
+		<head>
+		<script>
+
+		var dt = new Date();
+		document.write(dt + "<br/>")					// o/p:- Fri Apr 19 2019 14:43:43 GMT+0530 (IST)
+
+		document.write("Date: "+ dt.getDate()+ "<br/>");		// o/p:- 19
+		document.write("Day: "+ dt.getDay()+ "<br/>");			// o/p:- 5(monday=1)
+	
+		document.write("year: "+ dt.getFullYear()+ "<br/>");		// o/p:- 2019
+		document.write("time: "+ dt.getTime()+ "<br/>");		
+		document.write("hours: "+ dt.getHours()+ "<br/>");		// o/p:- 14
+		document.write("Minutes: "+ dt.getMinutes()+ "<br/>");		// o/p:- 43
+
+		//January=0
+		document.write("Month: "+ dt.getMonth()+"<br/>");		// o/p:- 3
+
+		// we have to add 1 in month to get required result
+		document.write("Month: "+ dt.getMonth()+ 1 +"<br/>");		// o/p:- 31
+
+		//In above code we add 1 but it concat the string instead of increasing
+		//so to get the required result we have do it by declaring variable
+		var mm = dt.getMonth() + 1;
+		document.write("Month: "+ mm)
+
+		</script>
+		</head>
+
+

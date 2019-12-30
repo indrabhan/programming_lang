@@ -1,0 +1,12 @@
+local variable are define inside the method,memory gets allocated when method starts execution and memory gets deallocated when method stops execution.
+
+global variable are decalred with the "global" keyword.
+
+
+Example:-
+	variable1 = 'indra'
+	def sample():
+		print variable1		// o/p:-'indra'
+	print variable1			// o/p:-'indra'
+	sample()	
+	print variable1			// o/p:-'indra'

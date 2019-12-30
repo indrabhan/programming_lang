@@ -1,0 +1,17 @@
+**Oracle:- when we install oracle database s/w by default one instance/database is created.
+1)First install oracle database software.
+	expression edition:- 10g/11g/12c (12c is cluster)
+	enterprise edition:- 10g/11g/12c
+
+2)Python :- to connect using python install cx_oracle module.
+	    cx_oracle moduleis use for connection.
+	    pip install cx_oracle
+
+3)Require:-
+	db username.
+	db password.
+	db servicename/instance/database name.
+	db port no.
+	ip address of db s/w install.
+
+4)User:-Admin user and Normal user are there.

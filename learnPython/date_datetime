@@ -1,0 +1,154 @@
+To work with date and datetime we have a module name "datetime".
+
+This module has following classes in it:
+	1.)date		(we only work with year, month and day)
+	2.)time 	(we only work with hour time second and millisecond)	
+	3.)datetime	(we work with both date and time.)	
+	4.)timedelta
+	5.)tzinfo
+
+	d = datetime.date(2019, 4, 15) 		# It will work fine, If we provide leading zero to date or month than it will raise error.
+	print d				
+
+	d = datetime.date(2019, 04, 15)		# Error (leading zero)
+	print d
+
+
+To get the current date we have following function provided by date class.
+
+	Eg:- d = module_name.class_name.function
+		
+	     import datetime
+	     d = datetime.date.today()
+	     print d				# o/p datetime.date(2019, 4, 15)
+
+	
+	To grab the current year, month, day we do in following way.
+	Eg:- d = datetime.date.today()
+	     d.year			# o/p 2019
+	     d.month			# o/p 4
+	     d.day			# o/p 15
+	
+	To grab the weekday.(As on 2019/04/15 is monday)
+	Eg:- d = datetime.date.today()
+	     d.weekday()		# o/p 0 (monday=0 and sunday=6)
+	     d.isoweekday()		# o/p 1 (monday=1 and sunday=7)
+
+
+Time:- time, we work with hour, minute, second, milliseconds
+	
+	Eg:- import datetime
+	     t = datetime.time(9, 30, 45, 1000)
+	     print t					# o/p datetime.time(9, 30, 45, 1000)
+
+	To grab hour, time, second and milisecons
+	
+	     print t.hour				# o/p 9
+	     print t.minute				# o/p 30
+	     print t.second				# o/p 45
+
+
+TimeDelta:- tiemdelta is the differenece between two date, we can add or sub two dates.
+
+	Eg:- import datetime
+	     tday = datetime.date.today()		# o/p datetime.date(2019, 4, 15) 
+	     tdelta = datetime.timedelta(days=7)	# o/p datetime.timedelta(7)
+
+	     a = tday + tdelta				# o/p datetime.date(2019, 4, 22)
+	     b = tdelta - tday				# o/p datetime.date(2019, 4, 8) (always sub from bigger- lower value)
+
+	 If we add or sub date and timedelta the output will be date object.
+	 	date object = date+ timedelta
+
+	If we add or sub date and date the output will be timedelta object.
+	 	timedelta object  = date+ date
+
+
+Datetime:- datetime, we work with both date and time, here we can work with timezone.
+	
+	Eg:- import datetime
+	     dt  = datetime.datetime(2019, 4, 15, 9, 30, 45, 1000)
+	     print dt					# o/p datetime.datetime(2019, 4, 15, 9, 30, 45, 1000)
+
+	To grab date and time from datetime object,we have date() and time() function.
+	
+	     print dt.date()				# o/p datetime.date(2019, 4, 15)		
+	     print dt.time()				# o/p datetime.date(9, 30, 45, 1000)
+	     print dt.year				# o/p 2019
+	     print dt.month				# o/p 4
+	     print dt.day				# o/p 15
+	     print dt.hour				# o/p 9
+	     print dt.minute				# o/p 30
+	     print dt.second				# o/p 45
+
+
+	With datetime we can also work with timedelta.	
+
+	Eg:- import datetime	
+	     dt  = datetime.datetime(2019, 4, 15, 9, 30, 45, 1000)
+	     tdelta = datetime.timedelta(days=7)
+	     a = dt + tdelta				        # o/p datetime.datetime(2019, 4, 22, 9, 30, 45, 1000)
+
+	     tdelta = datetime.timedelta(hours=12)
+	     a = dt + tdelta				        # o/p datetime.datetime(2019, 4, 22, 21, 30, 45, 1000)
+
+	Eg:-
+	    import datetime
+	    today = datetime.datetime.today()		# return current local time with timezone equals to None
+	    print today    				# o/p datetime.datetime(2019, 4, 15, 13, 8, 21, 149616)
+
+	    now = datetime.datetime.now()	       # gives option to pass tz, if tz is empty than its equal to today() function
+	    print now				       # o/p datetime.datetime(2019, 4, 15, 13, 8, 21, 606294)
+
+
+	Python has recommended "pytz" module to work with timezone.(import pytz)
+
+	Example:-timezone aware datetime, UTC = Universal Time Coordinated
+
+		import datetime
+		import pytz
+
+		utc_time = datetime.datetime.now(tz=pytz.UTC)
+		print utc_time				# o/p 2019-04-15 08:59:25.117683+00:00 (here +00:00 is the utc offset)
+
+	Now we will convert it into India timezone i.e Asia/Calcutta timezone
+
+		my_timezone = utc_time.astimezone(pytz.timezone('Asia/Calcutta'))
+		# o/p 2019-04-15 14:43:02.122171+05:30 (here we can see +05:30 which is Indian Standard Time.)
+
+	Another simple way in just single step is as follows.
+
+		my_timezone = datetime.datetime.now(tz=pytz.timezone('Asia/Calcutta'))
+		# o/p It will produce the same output as above.
+		
+							      
+Convert date to different format
+
+	**strftime('format')
+
+		datetime.datetime can be convert to any format using strftime
+		no need to remember foramt look into python doc.
+		
+		Eg:
+		    my_timezone = datetime.datetime.now(tz=pytz.timezone('Asia/Calcutta'))
+		    formatim = my_timezone.strftime('%B %d,%Y')					# o/p April 15,2019, return string type
+
+Convert string date to datetime.datetime object
+
+	**strptime(string_date, format_type_of_string_date)
+
+		Eg:
+		   dt = datetime.datetime.strptime(formatim, '%B %d,%Y')
+		   print dt									# o/p 2019-04-15 00:00:00
+												      return datetime.datetime
+
+# strftime :- Datetime to string (use to format date)
+# strptime :- String to Datetime
+
+
+Date in between the text
+	
+	Eg:
+	   tday = datetime.datetime.now()
+           msg = "Current date is {:%B %d, %Y}"
+           print msg.format(tday)		 # o/p Current date is April 15, 2019

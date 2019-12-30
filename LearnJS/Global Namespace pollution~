@@ -1,0 +1,117 @@
+OverLoading is not their in JS.
+Global object is the window object.
+
+Note:-If two or more js file have the same method name than depending on which file is loaded last, that file method will override the previous 	loaded method.
+
+Example:- create two JS file with the same function name but with different parameters and the one html file.
+
+FileName1:- TeamA.js
+Code:-function customer(firstName, lastName){
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.getFullName = function(){
+	return this.firstName + " " + this.lastName
+	}
+}
+
+
+FileName2:- TeamB.js
+Code:-function customer(firstName, middleName, lastName){
+	this.firstName = firstName;
+	this.middleName = middleName;
+	this.lastName = lastName;
+	this.getFullName = function(){
+	return this.firstName + " " + this.middleName + " " + this.lastName
+	}
+}
+
+
+FileName3:- globalnamespace.html
+Code:-<html>
+	<head>
+		<script type="text/javascript" src="TeamA.js"></script>			// sequence matters
+		<script type="text/javascript" src="TeamB.js"></script>			// sequence matters
+	</head>
+	<body>
+	<div id="myDiv"></div>
+	<script type="text/javascript">
+		document.getElementById("myDiv").innerHTML = new customer("Indrabhan", "Bhamare").getFullName()
+	</script>
+	</body>
+
+	output:- Indrabhan Bhamare undefined	(If you change the js file sequence output will be different)
+	Note:- TeamA.js loads first and than TeamB.js, both having same function name so the last wins.
+	       In the console type window.customer, you will be able know which function has runned the last.
+
+
+***Solution For Global Namespace
+
+Note:- In console "keys(window)" we can see ob is the part of it
+       window.ob.TeamA/TeamB	(you can see both teams)
+       window.ob.TeamA.customer (you can see the defination of customer function)
+
+
+FileName:- TeamA.js
+Code:-	
+	// Suppose two teams working in js project for OfficeBeacon(ob)
+	//IF  ob Object is available used that else create and empty Object.
+
+	var ob = ob || {};
+	//than access the file object from the ob object if available, If not create empty object.
+
+	ob.TeamA = ob.TeamA || {}
+	//own the to be the function to be the part of ob.TeamA
+
+	ob.TeamA.customer = function (firstName, lastName){
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.getFullName = function(){
+		return this.firstName + " " + this.lastName
+		}
+		return this			//return the instance of customer object
+	}
+
+
+FileName:-TeamB.js
+Code:-	
+	// Suppose two teams working in js project for OfficeBeacon(ob)
+	//IF  ob Object is available used that else create and empty Object.
+
+	var ob = ob || {};
+	//than access the file object from the ob object if available, If not create empty object.
+
+	ob.TeamB = ob.TeamB || {}
+	//own the to be the function to be the part of ob.TeamB
+
+	ob.TeamB.customer = function (firstName, middleName, lastName){
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.getFullName = function(){
+		return this.firstName + " " + this.middleName + " " + this.lastName
+		}
+		return this				//return the instance of customer object
+	}
+
+
+FileName3:-globalnamespace.html
+Code:-
+	<html>
+	<head>
+		<script type="text/javascript" src="TeamA.js"></script>
+		<script type="text/javascript" src="TeamB.js"></script>
+	</head>
+	<body>
+	<script type="text/javascript">
+	//TeamA's customer take 2 arguments
+	//TeamB's customer take 3 arguments
+
+	document.write(ob.TeamA.customer("Indrabhan", "Bhamare").getFullName());
+	document.write("<br/><br/>")
+
+	//you can also acces with window object as window is the global object
+	document.write(window.ob.TeamB.customer("Indrabhan", "Vijay", "Bhamare").getFullName());
+
+	</script>
+	</body>
+

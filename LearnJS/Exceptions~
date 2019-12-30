@@ -1,0 +1,75 @@
+/* try, catch, finally */
+
+Error handling is mostly used when handling data from other source or user input.
+It is run time error not parse(syntax) error.
+
+It can handle only runtime error and not the syntax error.
+
+try{} :- try statement allows you to test the block of code. If error occurs in try block, it will not execute the remaining statement of try 		 block, it will directly go to the catch block. 
+catch{} :- catch statement allows you to handle the error.all statement will be executed.Any statement after catch block will also execute.
+throw{} :- throw statement allows to create custom error.
+finall{} :- allows to to execute the code after try regardless the result of try and catch.Mostly the finally block is used to release the 		    resources. Eg:-closing of file. colsing db connection.
+
+Note:- A try block should be followed by a catch block or finally block or both.
+       try/catch/finally can catch exceptions but not syntax error.
+
+	Example:-
+		<!doctype html>
+		<head>
+		<script type="text/javascript">
+			try{
+				var x = prompt("Enter number");
+				alert(eval(x));
+				alert("Congrats")
+			}
+			catch(err)					// err:- can be any name, It is exception object
+			{
+				alert("Error has occured "+err)
+				//Exception object property:- message,stack, description
+			}
+			// finally block is guaranted to execue irrespective
+			// whether there is exception or noot
+			finally
+			{
+				alert("Finally Block will execute regardless the result of try catch")
+			}
+			alert("You have reached at end")
+		</script>
+		</head>
+
+
+throw{} :- use to throw custom error
+
+	Example:-
+		<!doctype html>
+		<head>
+		<script type="text/javascript">
+			function divide()
+			{
+				var numerator = prompt("Enter the value for numerator");
+				var denominator = prompt("Enter the value for denominator");
+				try
+				{
+					if (denominator == 0)
+					{
+						throw{
+							error: "Divide by zero",
+							message: "Denominator cannot be zero"
+						}
+					}
+					else{
+						document.write("Result is: " + (numerator/denominator))
+					}
+				}catch(e)
+				{
+					document.write("Error: "+e.error + "<br/>")
+					document.write("Message: "+e.message)
+				}
+			}
+			divide();
+		</script>
+		</head>
+
+Note:-In general we use try/catch statement to catch errors in JavaScript.
+      If an error is raised by a statement that is not inside a try catch block,the window.onerror event is fired.
+      We can use onerror evenet in html also.

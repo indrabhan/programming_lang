@@ -1,0 +1,157 @@
+JavaScript is case sensitive.
+	means alert and Alert both are different
+
+Client Side Script:- The script running within the browser is called client side script
+Eg:-Live Script
+    java Script
+    jQuery (JS library)
+    AnguarJS (Framework)
+    Ember JS (Framework)
+
+Server Side Script:- The script running within the web server is called as server seide scripting.
+Eg:-ASP	---> IIS(Internet Information Services)
+    JSP ---> Tomcat
+    PHP ---> Apache
+    W3C ---> Jigsaw server
+
+Syntax:
+	<script type="text/javascript" language="javascript">
+	statements;
+	statements;
+	statements;
+	</script
+
+	OR
+
+	<script>		# this is html i.eit can be in lower or upper
+	statements		# without semicolon is also OK.
+	statements;		# actually this is js i.e case sensitive
+	statements;
+	</script>	
+
+
+Example:-Below code will be saved with .html or .htm extension and not with .js extension
+	 because .js file never contain any tag(<head><script>..etc) related things.
+	 .js file contains only javascript here it is document.write("Welcome to JS");
+
+	<!doctype html>
+	<head>
+	<script>
+	document.write("Welcome to JS");		# "document" is object and "write is method".semicolon not compulsory
+	document.write("Welocme to Indra's World")	
+	</script>
+	</html>
+
+	Output:- Welcome to JSWelocme to Indra's World		# here their is no space between 2 sentance.
+								  to bring space between 2 sentance see below program.
+
+
+Example2:- Space between 2 sentance
+
+	<script>
+	document.writeln("Welcome to JS")			# here we have use writeln() func. ln provide space between 2 sentance or 2 line
+	document.write("Welocme to Indra's World")
+	</script>
+	
+	Output:- Welcome to JS Welocme to Indra's World		# here we have use writeln(), to print in new line see below program.
+
+
+Example3:- print second sentance in new line.
+
+	<script>
+	document.writeln("Welcome to JS<br/>")			# if we want to use html tags(<br/>) than we have use it inside.
+	document.write("Welocme to Indra's World")
+	</script>
+
+	Output:- Welcome to JS
+		 Welocme to Indra's World
+
+
+
+*window.document.write		// window represent web browser	their is no much difference between both
+*document.write			// document represent web page	their is no much difference between both
+
+
+// Single Line Comments
+/* Multi Line comments */
+
+Semicolon(;) is optional but for best practice use semicolon
+	Example:- 
+		document.writeln("Welcome to JS<br/>")		# here it will work fine without semicolon as we have define both sentence on
+		document.writeln("Welocme to Indra's World")		  new line
+
+	Example2:
+		document.writeln("Welcome to JS<br/>")document.writeln("Welocme to Indra's World")
+	
+		# here it will not work, will raise error because js will not be able to recognized the end of sentance.
+
+	Example3:
+		document.writeln("Welcome to JS<br/>");document.writeln("Welocme to Indra's World")
+
+		# here it will work fine because we have given semicolon between 2 sentance,so js knows end between 2 sentance. 
+	
+Note:- In head part we prefer to write logic.
+       In body paty we write something we can see as output
+
+
+typeof:- typeof is used to check the data type of variable
+	 var a = 10;
+	 console.log(typeof a);
+	 alert(typeof a);
+
+
+Where to place script element?
+
+	Example1:- script elemet place in body tag
+	
+		<head>
+		</head>
+		<body>
+		<form>
+			<input type="text" id="bt"/>
+		</form>
+		<script type="text/javascript">
+			document.getElementById('bt').style.backgroundColor="red"
+		</script>
+		</body>
+
+	Note:- Here the inside the text box coclor will be read
+
+
+	Example2:- script elemet place in head tag
+	
+		<head>
+		<script type="text/javascript">
+			document.getElementById('bt').style.backgroundColor="red"
+		</script>
+		</head>
+		<body>
+		<form>
+			<input type="text" id="bt"/>
+		</form>
+		</body>
+
+	Note:- Here we did not get output as above example1
+	       You can see the error in inspect element.
+
+		Why the js code did not work in this case as excepted.
+			---because js code is present before the text box control,by the time jscode is executed the textbox is not loaded.
+
+
+How script loads in web page:
+
+	1.)The browser start parsing the HTML( load html code)
+	2.)When the parse encounters a <script>tag that references an external JavaScriptFile.The parser stop parsing the HTML and browser 		   makes request to download the script file.Until the download is complete, the parser is blocked from parsing the rest of the HTML 		   page.
+	3.)When the download is complete, thats when the parser will resume the parse the rest of HTML.
+	4.)According to HTTP/1.1 only two JavaScript file will downloaded simultaneously.If you have 10 file than 1st two will download and 		   next two and so on.
+
+Note:- In general, the suggested practice is to place the <script> tag just before the closing <body> tag,so it does not block the HTML parser.
+
+
+JavaScript Minification:- It means reduce the size of javascript file, it removes the comments white space from the file.
+			  File after minifaction is hard to debug, but we use such file on production server.
+			  It reduces the time by the browser to download the javascript file.
+			  browser send http request for every js file to be downloaded.
+			  Their are tools available for minification.
+
+OverLoading is not their in JS.	

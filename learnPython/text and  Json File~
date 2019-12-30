@@ -1,0 +1,198 @@
+1.)Open the file.
+2.)Specify the Mode of operation
+3.)Close the file.
+
+
+**File Mode
+
+i.) r :- Open file for reading(default)
+
+ii.) w :- Open file fot writing.Creates new file if it does not exists.
+	  if file and data exists then it will delete old data and write the new data.
+
+iii.)x :- open file for exclusive creation.If the file already exists, the operation fails.
+	  use only when you want to create file using python.
+
+iv.)a :- Open for appending at the end of the file without truncating it means without deleting the existing data,It will add new data at the	
+	 end of file, Creates new file if not availabe.
+
+v.)t :- Open in text mode(default)
+
+vi.)b :- Open in binary mode. It is not like 0 and 1
+	 Suppose we want to create python object and store it into file,we cannot store python object into the file directly.
+	 we need to convert python object into binary format.In such situation we use it.
+
+vii.)+ :- Open a file for updating(reading and writing)
+
+
+Example:- 'myfile.txt' file is created in system
+	  Using the open('file_name','file_mode') method we will open the file.
+
+		--Syntax:-
+			Open('file_name', 'file_mode')
+
+				f = open('myfile.txt')
+				     or
+		   		f = open('myfile.txt', 'rt')               read(r) and text(t) mode are default
+
+		   Here file object is stored in 'f' variable.file object provides read(), write(), update(), close(), tell() methods.
+
+	read():- It will read data from beginning till end of file in the form of single string format.
+
+	readlines():- It will read as 1st line, 2nd line, 3rd line ...etc, every line is taken as a separate line instead of taking
+		      entire data as a single string.All the string will be store in one single list object.
+
+	write():-it will write the data to file.
+		 Example:-	f = open('myfile.txt', 'w')      Specify the write mode,by default it takes 'r' mode.
+				f.write('any_data')              It will write the data to a file,if file already as some data
+								 than it will  remove the old data and write the new data.
+
+				To write in a file which already has data then open the file in append mode.It will write the data at the end 					of file.
+					Example:-
+						f = open('myfile', 'a')
+						f.write('any_data')
+
+	tell():- this method is used to know the cursor position in the file.
+
+	seek():- it will move the file pointer/cursor to another location without reading the data.
+		 Example:- f = open('myfile.txt')
+			   print (f.tell())     ----- it will point the cursor,so right now the cursor will be at zero position.
+			   print(f.seek(7))     ------it will move the cursor from 0 to 7th position.Means till 7th position data will not be 							      read.in short skip.
+			   print (f.read())     ------ it will start reading the data from 7th positin as we have ue the seek() method.
+
+
+
+	Pickle:-“Pickling” is the process whereby a Python object hierarchy is converted into a byte stream, and “unpickling” is the inverse 			operation, whereby a byte stream is converted back into an object hierarchy.
+
+	Example :- create the python object and store it in file.Python object can be any list, set, tuple, dict, user define class
+	Note:- Bydefault the python object is not recognized by the file.
+	       so convert python object in file supported format,this process is technically called as pickling or serialization.
+	       for this purpose we have a pickle module.
+
+		import pickle
+		data = [['indra', 28, 'dhule'], ['sagar',27, 'pune'], ['prashant', 30, 'solapur']]     ---list python object
+		x = open('myfile.txt', 'wb')     ---- we have to write the data so 'w' mode and the python object in not in text format 
+						      so we have to open it in 'b' mode.
+						
+						---After opening the file in binary format and store the binary format data into file,
+						  so we have a function called dump() present inside the pickle
+		pickle.dump(data, x)            ---binary data will store into the file.here x refers the file.
+		x.close()
+
+						---As binary data is not readable by human so we have to again convert it by using load() method
+						   provided by pickle.Inshort we have to convert the binary format into python supported format.
+
+
+		import pickle
+		x = open('myfile.txt', 'rb')    --- rb mode because we will read binary format data
+		s = pickle.load(x)
+		x.close
+
+
+
+
+
+			********************* JSON  ***********************
+		
+		     WE USE JSON MODULE TO CONVERT JSON DATA INTO PYTHON OBJECT.
+		     JSON COVERT DATA INTO DICT FORMAT SO WE CAN PERFORM DICT OPPERATIONS
+
+
+
+	JSON File:- to read the data from a json file we have module called json
+		    import json
+			
+		    json.load(f):- 	Load json data and convert it into python object, i.e convert into type dict.
+					Load file into python object.
+					(or file like object)
+		
+		    json.loads(s):-     Load string json data and convert it into python object, i.e convert into type dict 
+
+		    json.dump(j,f):-    dump python object to json data. we use dump when we want to dump json data into file.
+					(or file like object)
+
+		    json.dumps(j):-     dump python object to json string data
+
+		    You use json.loads() if the type of json data is string, we use loads()
+			Example:-
+				value = "
+					{'title': 
+						'Tron':'Legacy', 
+						'composer': 'Draft Punk', 
+						'budget': 10000000, 
+						'actors': null,
+						'won_oscar':false }
+					"
+
+
+	When we load json into python it uses following conversion
+
+	JSON	      |		Python
+    ------------------|-----------	
+	object	      |		dict
+	array	      |		list
+	string	      |		str
+	number(int)   |		int
+	number(real)  |		float
+	true 	      |		True
+	false	      |		False
+	null	      |		None
+
+
+
+	Example:-
+		import requests
+		import json
+		req = requests.get("https://www.quandl.com/api/v3/datasets/BSE/SPBSB2IP.json?api_key=UyzFTyxj_c_Hr6hS2ePR").text
+		    		# Here by using ".text" the type of data received in "req" variable is string so we will use loads() method
+
+		req_data = json.loads(req)
+				# load json string data into python object.
+				# Here loads() will convert json string data into dictionary type.
+
+		data = json.dumps(req_data)
+				# dump the python object into json string.
+				# Here dumps() method will convert the python object into json string.
+				  dumping data into string varaiable,means we are storing the data into a varaible.
+
+			or
+
+		data = json.dump(data, open('new_data.json', 'w'), indent=4)
+				# dump the python object into json.
+				# dumping the data into the file so we used dump() instesd of dumps() method.
+				# indent=4 (1 tab )we make the data into more readable look format.
+
+		
+	Note:- json.dump() method is used to load the data into file.
+	       
+	       json.dumps() method will not load data into file.Mostly we use this method when we send data to web server.
+
+
+
+SCOPES
+
+https://www.googleapis.com/auth/drive	See, edit, create, and delete all of your Google Drive files
+https://www.googleapis.com/auth/drive.appdata	View and manage its own configuration data in your Google Drive
+https://www.googleapis.com/auth/drive.file	View and manage Google Drive files and folders that you have opened or created with this app
+https://www.googleapis.com/auth/drive.metadata	View and manage metadata of files in your Google Drive
+https://www.googleapis.com/auth/drive.metadata.readonly	View metadata for files in your Google Drive
+https://www.googleapis.com/auth/drive.photos.readonly	View the photos, videos and albums in your Google Photos
+https://www.googleapis.com/auth/drive.readonly	See and download all your Google Drive files
+https://www.googleapis.com/auth/drive.scripts	Modify your Google Apps Script scripts' behavior
+
+
+https://www.googleapis.com/auth/drive.file
+
+
+
+api_key = "AIzaSyBiJa3MDDK9VPWrNRmTnnihL--JuUc0Xho"
+client_ID = "736935649670-mai5md19chl3osn8jblvrb7j2fh0f321.apps.googleusercontent.com"
+client_secret = "61jfBYMbvOiR-R6FtVHWqoBK"
+redirect_url = "http://localhost:8080"
+
+
+books_service = build('books', 'v1', developerKey=api_key)
+
+
+
+
