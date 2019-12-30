@@ -1,0 +1,179 @@
+1.)Block Structure
+2.)Variable
+3.)Constant
+4.)Raising errors and reporting messages
+
+
+1.)BLOCK STRUCTURE:- PL/pgSQL is a block-structured language, therefore, a PL/pgSQL function or stored procedure is organized into blocks.
+	--syntax :-
+		[ <<label>> ]
+		[ DECLARE
+		    declarations ]
+		BEGIN
+		    statements;
+		 ...
+		END [ label ];
+
+		i.) Each block has two sections: declaration and body. The declaration section is optional while the body section is required. 			    The block is ended with a semicolon (;) after the END keyword.
+
+		ii.)A block may have an optional label located at the beginning and at the end. You use the block label in case you want to 			    specify it in the EXIT statement of the block body or if you want to qualify the names of variables declared in the block.
+
+		iii.)The declaration section is where you declare all variables used within the body section. Each statement in the declaration 		     section is terminated with a semicolon (;).
+
+		iv.)The body section is where you place the code. Each statement in the body section is also terminated with a semicolon (;).
+	--Example:-
+
+		DO $$ 
+		<<first_block>>
+		DECLARE
+		  counter integer := 0;
+		BEGIN 
+		   counter := counter + 1;
+		   RAISE NOTICE 'The current value of counter is %', counter;
+		END first_block $$;
+
+		Notice that the DO statement does not belong to the block. It is used to execute an anonymous block. PostgreSQL introduced the 				DO statement since version 9.0.
+
+
+	What is the double dollar ($$)?
+		The double dollar ($$) is a substitution of a single quote (‘).  When you develop a PL/pgSQL block, a function, or a stored 			procedure, you have to pass its body in the form of a string literal. In addition, you have to escape all single quote (‘) in 			the body as follows:
+
+			DO
+			'<<first_block>>
+			DECLARE
+			  counter integer := 0;
+			BEGIN 
+			    counter := counter + 1;
+			    RAISE NOTICE ''The current value of counter is %'', counter;
+			END first_block';
+
+
+	PL/pgSQL Subblock:-
+
+		i.)PL/pgSQL allows you to place a block inside the body of another block. This block nested inside another block is called 			   subblock.
+		ii.)The block that contains the subblock is referred to as an outer block.
+		iii.)The subblocks are used for grouping statements so that a large block can be divided into smaller and more logical 			     subblocks.
+		iv.)The variables in the subblock can have the names as the ones in the outer block, even though it is not a good practice.
+		v.)When you declare a variable within subblock with the same name as the one in the outer block, the variable in the outer 			   block is hidden in the subblock. In case you want to access a variable in the outer block, you use block label to qualify 			   its name as shown in the following example:
+
+			DO $$ 
+			<<outer_block>>
+			DECLARE
+			  counter integer := 0;
+			BEGIN 
+			   counter := counter + 1;
+			   RAISE NOTICE 'The current value of counter is %', counter;
+			 
+			   DECLARE 
+			       counter integer := 0;
+			   BEGIN 
+			       counter := counter + 10;
+			       RAISE NOTICE 'The current value of counter in the subblock is %', counter;
+			       RAISE NOTICE 'The current value of counter in the outer block is %', outer_block.counter;
+			   END;
+			 
+			   RAISE NOTICE 'The current value of counter in the outer block is %', counter;
+			   
+			END outer_block $$;
+
+
+		i.)First, we declared a variable named counter in the outer_block.
+		ii.)Next, in the subblock, we also declared a variable with the same name.
+		iii.)Then, before entering into the subblock, the value of the counter is one. In the subblock, we increased the value of the 			     counter to ten and print it out. Notice that the change only affects the counter variable in the subblock.
+		iv.)After that, we referred to the counter variable in the outer block using the block label to qualify its name 			    outer_block.counter.
+		v.)Finally, we printed out the value of the counter variable in the outer block, its value remains intact.
+
+
+*********************************************************************************************************************************************
+
+2.) VARIABLE:- A PL/pgSQL variable is a meaningful name for a memory location. A variable holds a value that can be changed through the block 		       or function. A variable is always associated with a particular data type.
+
+		--syntax:- variable_name data_type [:= expression];
+
+		The data type can be any valid PostgreSQL data type such as INTEGER, NUMERIC, VARCHAR and CHAR.
+
+
+	Copying data types
+
+		PostgreSQL enables you to define a variable with a data type that references to the data type of a column of a table or the 			data type of another variable:
+
+		--Syntax:-
+			variable_name table_name.column_name%TYPE;
+			variable_name variable%TYPE;
+
+
+		For example, you can define a variable named city_name with the same data type as name the name column of the city table as 			follows:
+			city_name city.name%TYPE := 'San Francisco';
+
+
+		By using copying type feature, you receive the following advantages:
+
+			i.)First, you don’t need to care about the data type of the column. You declare a variable to just hold the values of 				   that column in a query.
+			ii.)Second, when the data type of the column changes, you don’t need to change the variable declaration in the function 			    to adapt to the new changes.
+			iii.)Third, you can refer the type of variables to data type of function arguments to create polymorphic functions 				     since the type of internal variables can change from one call to the next.
+
+
+	Assigning aliases to variables:-
+		--syntax:-
+			new_name ALIAS FOR old_name;
+
+
+************************************************************************************************************************************************
+
+3.)Constant:- unlike variables, the values of constants cannot be changed once they are initialized.
+	
+	--syntax:- 
+		constant_name CONSTANT data_type := expression;
+
+	Example:-
+		VAT CONSTANT NUMERIC := 0.1;
+
+
+************************************************************************************************************************************************
+
+4.)Raising errors and reporting messages:– shows you how to report messages and raise errors using RAISE statement.
+	
+	To raise a message, you use the RAISE statement as follows:
+		--Syntax
+			RAISE level format;
+
+		Following are the Level:- DEBUG, LOG, INFO, WARNING, NOTICE, EXCEPTION.
+
+		If you don’t specify the level, by default, the RAISE statement will use EXCEPTION level that raises an error and stops the 			current transaction. We will discuss the RAISE EXCEPTION later in the next section.
+
+		The format is a string that specifies the message. The format uses percentage ( %) placeholders that will be substituted by the 		next arguments. The number of placeholders must match the number of arguments, otherwise, PostgreSQL will report the following 			error message:
+			[Err] ERROR:  too many parameters specified for RAISE
+
+		Example:-
+			RAISE INFO 'information message %', now() ;
+		
+		Notice that not all messages are reported back to client, only INFO, WARNING, and NOTICE level messages are reported to the 				client. This is controlled by the client_min_messages and log_min_messages configuration parameters.
+
+
+	PL/pgSQL raising errors
+
+		To raise errors, you use the EXCEPTION level after the RAISE statement. Note that RAISE statement uses EXCEPTION level by 			default.
+
+		Besides raising an error, you can add more detailed information using the following clause with the RAISE statement:
+			--Syntax:-
+				USING option = expression
+
+			The option can be:
+
+				MESSAGE: to set error message text.
+				HINT: to provide the hint message so that the root cause of the error is easier to be discovered.
+				DETAIL:  to give detailed information about the error.
+				ERRCODE: to identify the error code, which can be either by condition name or directly five-character SQLSTATE 						code. Please refer to the table of error codes and condition names.
+
+			Example:-
+				DO $$ 
+				DECLARE
+				 email varchar(255) := 'info@postgresqltutorial.com';
+				BEGIN 
+				  -- check email for duplicate
+				  -- ...
+				  -- report duplicate email
+				  RAISE EXCEPTION 'Duplicate email: %', email 
+				 USING HINT = 'Check the email again';
+				END $$;
+

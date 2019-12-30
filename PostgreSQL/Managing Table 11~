@@ -1,0 +1,1049 @@
+******************* Managing tables ********************
+
+In this section, we start exploring the PostgreSQL data types and showing you how to use the CREATE TABLE statement to create a new table. We will also cover some additional features, such as modifying table structure and deleting tables. In addition, you will learn an efficient way to delete all rows from a table by using the TRUNCATE statement.
+
+1.) Data types – covers the most commonly used PostgreSQL data types.
+2.) Create table – guides you how to create a new table in the database.
+3.) Select Into & Create table as– shows you how to create a new table from the result set of a query.
+4.) Auto-increment column with SERIAL – uses SERIAL to add an auto-increment column to a table.
+5.) Alter table – changes structure of an existing table.
+6.) Rename table – change the name of the table to a new one.
+7.) Rename database – change the name of the database to a new one.
+8.) Add column – shows you how to use add one or more columns to an existing table.
+9.) Drop column – demonstrates how to drop a column of a table.
+10.) Change column data type – shows you how to change the data of a column.
+11.) Rename column – illustrates how to rename one or more column of a table.
+12.) Drop table – removes an existing table and all of its dependent objects.
+13.) Temporary table – shows you how to use the temporary table.
+14.) Truncate table – removes all data in a large table quickly and efficiently.
+
+
+
+
+1.) Data types – in this tutorial, you will learn about PostgreSQL data types including Boolean, character, numeric, temporal, array, json, uuid, and special types.
+
+PostgreSQL supports the following data types:
+
+A.) Boolean:- A Boolean data type can hold one of three possible values: true, false or null. You use boolean or bool keyword to declare a
+	      column with the Boolean data type.
+
+	      When you insert data into a Boolean column, PostgreSQL converts it to a Boolean value e.g., 1, yes, y, t, true are converted to
+	      true, and 0, no, n false, f are converted to false.
+
+	      When you select data from a Boolean column, PostgreSQL converts the value back e.g., t to true, f to false and space to null.
+
+B.)Character
+
+PostgreSQL provides three character data types: CHAR(n), VARCHAR(n), and TEXT
+
+	 CHAR(n) is the fixed-length character with space padded. If you insert a string that is shorter than the length of the column, 	  PostgreSQL pads spaces. If you insert a string that is longer than the length of the column, PostgreSQL will issue an error.
+
+         VARCHAR(n) is the variable-length character string.  With VARCHAR(N),  you can store up to n characters. PostgreSQL does not pad 		  spaces when the stored string is shorter than the length of the column.
+
+        TEXT is the variable-length character string. Theoretically, text data is a character string with unlimited length.
+
+C.)Numeric
+
+PostgreSQL provides two distinct types of numbers:
+
+	I.)Integers:-
+ 		SMALLINT:- (2 bytes)
+
+		INTEGER :- (4 bytes) The INTEGER is the most common choice between integer types because it offers the best balance between
+				     storage size,range, and performance.
+				     Notice:- INT is the synonym of INTEGER.
+
+		BIGINT :- (8 bytes)  In case you want to store the whole numbers that are out of the range of the INTEGER type, you can use the
+				     BIGINT type.
+				     Notice:- Using BIGINT type is not only consuming a lot of storage but also decreasing the performance of
+					      the database, therefore, you should have a good reason to use it.
+	
+		SERIAL:- serial is the same as integer except that PostgreSQL will automatically generate and populate values into the SERIAL
+			 column. This is similar to AUTO_INCREMENT column in MySQL or AUTOINCREMENT column in SQLite.
+
+	II.)floating-point numbers:-
+		float(n):-  is a floating-point number whose precision, at least, n, up to a maximum of 8 bytes.
+
+                real or float8:- is a double-precision (8-byte) floating-point number.
+
+                numeric or numeric(p,s):- is a real number with p digits with s number after the decimal point. The numeric(p,s) is the exact 						number.
+
+D.)Temporal
+	I.)DATE:- 
+
+	Introduction to the PostgreSQL DATE data type
+		a.)To store date values, you use the PostgreSQL DATE data type.
+
+		b.)When storing a date value, PostgreSQL uses the  yyyy-mm-dd format e.g., 2000-12-31. It also uses this format for inserting 			   data into a date column.
+
+		c.)If you create a table that has a DATE column and you want to use the current date as the default value for the column, you
+		   use the CURRENT_DATE after the DEFAULT keyword.
+		   Example:- posting_date DATE NOT NULL DEFAULT CURRENT_DATE
+	
+	PostgreSQL DATE functions
+		a.) NOW() :- NOW() function will return current datetime of database server.
+			     --Query:- SELECT NOW();
+
+		b.)Get the current date :- to get the date part only (without the time part), you use the double colons (::) to cast a DATETIME
+					   value to a DATE value.
+					   --Query:- SELECT NOW()::date;
+
+		                         Another way to get current date is to use the CURRENT_DATE as follows:
+					    --Query:-  SELECT CURRENT_DATE;
+					The result is in the format:  yyyy-mm-dd. However, you can output a date value to various formats.
+	
+	Output a PostgreSQL date value in a specific format:-
+
+		a.)To output a date value in a specific format, you use the TO_CHAR() function. 
+		b.)The TO_CHAR() function accepts two parameters.
+		c.)The first parameter is the value that you want to format, and the second one (string form)is the template that defines the
+                   output format.
+		       Example:- display the current date in dd/mm/yyyy format, you use the following statement:
+			    --Query:- SELECT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy');
+				      SELECT TO_CHAR(CURRENT_DATE, 'dd/mm/yyyy');
+				
+		       Example:- date in the format like Jun 22, 2016
+			   --Query:- SELECT TO_CHAR(NOW()::DATE, 'Mon dd,yyyy')
+			   Note:- if Mon than Mar,
+				     Month than March,
+				     mon than mar
+
+	Get the interval between two dates :-
+		To get the interval between two dates, you use the minus (-) operator.
+		Example:- SELECT first_name, now() - hire_date as No_days
+			  from employee;
+
+	Calculate ages in years, months, and days
+	         To calculate age at the current date in years, months, and days, you use the AGE() function.
+		 	Example:- SELECT employee_id, first_name, last_name,
+				   AGE(birth_date)
+				   FROM employee;
+
+		Output:- employee_id | first_name | last_name |           age
+			-------------+------------+-----------+-------------------------
+			           1 | Shannon    | Freeman   | 36 years 5 mons 22 days
+				   2 | Sheila     | Wells     | 38 years 4 mons 18 days
+          			   3 | Ethel      | Webb      | 41 years 5 mons 22 days
+
+
+		If you pass a date value to the AGE() function, it will subtract that date value from the current date. If you pass two
+		arguments to the AGE() function, it will subtract the second argument from the first argument.
+			Example :- age('2015-01-01',birth_date)
+
+
+	Extract year, quarter, month, week, day from a date value
+
+		To get the year, quarter, month, week, day from a date value, you use the EXTRACT() function. The following
+		statement extracts the birth dates of employee into year, month, and day:
+		Example:-
+			SELECT NOW(),
+			    EXTRACT (YEAR FROM birth_date) AS YEAR,
+			    EXTRACT (MONTH FROM birth_date) AS MONTH,
+			    EXTRACT (DAY FROM birth_date) AS DAY;
+
+			
+			SELECT
+			 employee_id,
+			 first_name,
+			 last_name,
+			 EXTRACT (YEAR FROM birth_date) AS YEAR,
+			 EXTRACT (MONTH FROM birth_date) AS MONTH,
+			 EXTRACT (DAY FROM birth_date) AS DAY
+			FROM
+			 employees;
+
+		Output:-
+			 employee_id | first_name | last_name | year | month | day
+			-------------+------------+-----------+------+-------+-----
+				   1 | Shannon    | Freeman   | 1980 |     1 |   1
+				   2 | Sheila     | Wells     | 1978 |     2 |   5
+				   3 | Ethel      | Webb      | 1975 |     1 |   1
+
+
+
+	II.)TIME:-
+		Introduction to PostgreSQL TIME data type
+
+		PostgreSQL provides the TIME data type that allows you to store the time of day values.
+		--syntax:- column_name TIME(precision);
+	
+		A time value may have a precision up to 6 digits. The precision specifies the number of fractional digits placed in the second
+		field.
+
+		The TIME data type requires 8 bytes and its allowed range is from 00:00:00 to 24:00:00. The following illustrates the common
+		formats of the TIME values:
+			HH:MM             01:02
+			HH:MM:SS          01:02:03
+			HHMMSS		  010203
+
+
+	PostgreSQL TIME example
+
+		We often use the TIME data type for the columns that store the time of day only e.g., the time of an event or a shift. Consider
+		the following example.
+
+		CREATE TABLE shifts (
+		    id serial PRIMARY KEY,
+		    shift_name VARCHAR NOT NULL,
+		    start_at TIME NOT NULL,
+		    end_at TIME NOT NULL
+		);
+		INSERT INTO shifts(shift_name, start_at, end_at)
+		VALUES('Morning', '08:00:00', '12:00:00'),
+		      ('Afternoon', '13:00:00', '17:00:00'),
+		      ('Night', '18:00:00', '22:00:00');
+
+
+       PostgreSQL TIME with time zone type
+
+		Besides the TIME data type, PostgreSQL provides the TIME with time zone data type that allows you to store and manipulate the
+		time of day with time zone.
+
+		The following statement illustrates how to declare a column whose data type is TIME with time zone:
+		 --Syntax:- column TIME with time zone
+
+		The storage size of the TIME with time zone data type is 12 bytes that allow you store a time value with the time zone that
+		ranges from 00:00:00+1459 to 24:00:00-1459.
+
+		The following illustrates the TIME with time zone values:
+			04:05:06 PST
+			04:05:06.789-8
+
+
+      Getting the current time
+		
+		To get the current time with time zone, you use the CURRENT_TIME function as follows:
+			--Query:- SELECT CURRENT_TIME;
+			--output:- 20:35:15.686734+05:30
+	
+		To get the local time, you use the LOCALTIME function:
+			--Query:- SELECT LOCALTIME
+			--output:- 20:40:23.455672
+
+
+       Converting time to a different time zone
+
+	      To convert time to a different time zone, you use the following form:
+		   --Syntax:- [TIME with time zone] AT TIME ZONE time_zone
+		   --Query:- SELECT LOCALTIME AT TIME ZONE 'UTC-7';
+			     SELECT CURRENT_TIME AT TIME ZONE 'UTC-7';
+
+	
+       Extracting hours, minutes, seconds from a time value
+
+	     To extracting hours, minutes, seconds from a time value, you use the EXTRACT function as follows:
+		  --Syntax:- EXTRACT(field FROM time_value);
+
+	     The field can be the hour, minute, second, milliseconds as shown in the following example:
+		--Query		
+			SELECT
+			    LOCALTIME,
+			    EXTRACT (HOUR FROM LOCALTIME) as hour,
+			    EXTRACT (MINUTE FROM LOCALTIME) as minute, 
+			    EXTRACT (SECOND FROM LOCALTIME) as second,
+			    EXTRACT (milliseconds FROM LOCALTIME) as milliseconds; 
+
+
+       Arithmetic operations on time values
+
+		PostgreSQL allows you to apply arithmetic operators such as +, -,  and *  on time values and between time and interval values.
+
+		The following statement returns an interval between two time values:
+
+
+		SELECT time '10:00' - time '02:00';                      SELECT current_time + time '02:00'
+		 
+		 ?column?						 ?column?
+		----------						---------
+		 08:00:00						23:01:51
+
+
+
+
+      III.)TIMESTAMP:-
+		Two type of temporal datatype
+
+		A.)TIMESTAMP:- Store both date and time, it does not have timezone, means when you change database server time zone
+
+				the timestamp value stored in database does not change.
+		B.)TIMESTAMPTZ:- The TIMESTAMPTZ data is the timestamp with time zone.
+				 PostgreSQL stores the timestamptz in UTC value.
+				 ii.)When you insert a value into a timestamptz column, PostgreSQL converts the timestamptz value into a UTC
+				     value and stores the UTC value in the table. 
+				 iii.)When you query timestamptz from the database, PostgreSQL converts the UTC value back to the time value of 				      the timezone set by the database server
+				 
+		It’s important to note that timestamptz value is stored as a UTC value. PostgreSQL does not store any timezone data with the
+		timestamptz value.
+
+		
+		See current time zone:- 
+			--Query:- SHOW TIMEZONE
+
+		Set time zone of database server:
+			--Query:- set timezone = 'America/Los_Angeles';
+
+		--Query:- CREATE TABLE timestamp_demo (ts TIMESTAMP, tstz TIMESTAMPTZ);
+		   It is a generally best practice to use the timestamptz data type to store the timestamp data.
+
+		Get Current Time:-
+			--Query:- SELECT NOW();            It returns date time with time zone
+			--Query:- SELECT CURRENT_TIME;
+			--Query:-SELECT CURRENT_TIMESTAMP;
+		
+			Note that both CURRENT_TIMESTAMP and CURRENT_TIME return the current time with time zone
+
+
+		To get the time of day in the string format, you use the timeofday() function.
+			--Query:- SELECT TIMEOFDAY();
+			--Output:- "Sun Mar 10 19:59:44.275728 2019 IST"
+
+
+***********************************************************************************************************************************************
+
+2.) Create :-create new table
+
+	PostgreSQL column constraints
+
+		The following are the commonly used column constraints in PostgreSQL:
+
+		a.)NOT NULL – the value of the column cannot be NULL.
+
+		b.)UNIQUE – the value of the column must be unique across the whole table. However, the column can have many NULL values
+			    because PostgreSQL treats each NULL value to be unique. 
+			    Notice that SQL standard only allows one NULL value in the column that has the UNIQUE constraint.
+
+			    Example:- email VARCHAR (50) UNIQUE
+
+
+			    
+		c.)PRIMARY KEY – this constraint is the combination of NOT NULL and UNIQUE constraints. 
+				 You can define one column as PRIMARY KEY by using column-level constraint.
+			         In case the primary key contains multiple columns, you must use the table-level constraint.
+
+			Define primary key when creating the table
+				---Syntax:- CREATE TABLE TABLE (
+						 column_1 data_type PRIMARY KEY,
+						 column_2 data_type,
+						 …
+						);
+			In case the primary key consists of two or more columns, you define the primary key constraint as follows:
+				--Syntax:-  CREATE TABLE TABLE (
+						 column_1 data_type,
+						 column_2 data_type,
+						 … 
+							PRIMARY KEY (column_1, column_2)
+						);
+			Default name of primary key constraint
+				--Syntax:- table-name_pkey
+	
+			In case you specify name for primary key constraint:-
+				--Syantax:- CONSTRAINT constraint_name PRIMARY KEY(column_1, column_2,...);
+
+			Define primary key when changing the existing table structure:-
+				--Syantax:- ALTER TABLE table_name ADD PRIMARY KEY (column_1, column_2);
+				--Query:- ALTER TABLE products ADD PRIMARY KEY (product_no);
+	
+			Remove primary key:-
+				--Syantax:- ALTER TABLE table_name DROP CONSTRAINT primary_key_constraint;
+					    Here primary_key_constraint is the name of constraint
+				--Query:- ALTER TABLE products DROP CONSTRAINT products_pkey;
+
+
+
+
+		d.)CHECK – enables to check a condition when you insert or update data. 
+			   For example, the values in the price column of the product table must be positive values.
+
+			   Example:-  CREATE TABLE employees (
+						birth_date DATE CHECK (birth_date > '1900-01-01'),
+				     		salary numeric CHECK(salary > 0)
+								);
+				
+					By default, PostgreSQL gives the CHECK constraint a name using the following pattern:
+						{table}_{column}_check              Example:- employees_salary_check
+
+
+			  if you want to assign CHECK constraint a specific name
+				Example :- column_name data_type CONSTRAINT constraint_name CHECK(salary > 0)
+					   salary numeric CONSTRAINT positive_salary CHECK(salary > 0)
+
+
+			 To add CHECK constraints to existing tables:-
+				Example:- ALTER TABLE table_name ADD CHECK expression;
+					  ALTER TABLE price_list ADD CHECK(price > discount)
+
+			   
+		e.)REFERENCES – You use REFERENCES to define the foreign key constraint.
+				i.) A foreign key is defined in a table that references to the primary key of the other table.
+				ii.) The table that contains the foreign key is called referencing table or child table.
+				iii.) The table to which the foreign key references is called referenced table or parent table.
+				iv.) A table can have multiple foreign keys depending on its relationships with other tables.
+
+			The ON DELETE CASCADE ,ON DELETE SET NULL and ON DELETE RESTRICT are the foreign key property and you set them when you 			are creating the relationship between two tables.
+			
+			FOREIGN KEY define in two way:-
+				
+				Example:- Table 1
+						CREATE TABLE so_headers (
+						     id SERIAL PRIMARY KEY,
+						     customer_id INTEGER,
+						     ship_to VARCHAR (255)
+							);
+				 	  Table 2
+						CREATE TABLE so_items (
+						  item_id INTEGER NOT NULL, 
+						  so_id INTEGER REFERENCES so_header(id),          Note this line
+						  product_id INTEGER,
+						  qty INTEGER,
+						  net_price NUMBER,
+						  PRIMARY KEY (item_id,so_id)
+						);
+
+					 Note:- so_id  column in the so_items table references to the id column of the so_headers table.
+
+						OR
+
+					 Table 3
+						CREATE TABLE so_items (
+						 item_id INTEGER NOT NULL,
+						 so_id INTEGER,
+						 product_id INTEGER,
+						 qty INTEGER,
+						 net_price NUMERIC,
+						 PRIMARY KEY (item_id, so_id),
+						 FOREIGN KEY (so_id) REFERENCES so_headers (id)      Note this line
+						);
+
+		Action for deletion:-		
+
+			ON DELETE RESTRICT :- when data is removed from a parent table, and there is a foreign key associated with child table 						      it gives error, you can not delete the record
+					      --Query:- so_id int4 REFERENCES so_headers(id) ON DELETE RESTRICT,
+			
+			ON DELETE CASCADE:- when data is removed from a parent table, automatically data deleted from child table (foreign key 						    table).
+					    --Query:- so_id int4 REFERENCES so_headers(id) ON DELETE CASCADE,
+
+			On Delete set Null:- when data is removed from a parent table, the foreign key associated cell will be null in a child 						    table.
+
+			No Action :- If we don’t specify RESTRICT or DELETE action, PostgreSQL will use NO ACTION by default. With NO ACTION,
+				     PostgreSQL will raise an error if the referencing rows still exist when the constraint is checked.
+		
+			Notice:- that actions for deleting is also applied for updating. It means you can have ON UPDATE RESTRICT, ON UPDATE
+				CASCADE and ON UPDATE NO ACTION.
+
+		Define a group of columns as a foreign key:-
+			--Syantax:- CREATE TABLE child_table(
+					  c1 INTEGER PRIMARY KEY,
+					  c2 INTEGER,
+					  c3 INTEGER,
+					  FOREIGN KEY (c2, c3) REFERENCES parent_table (p1, p2)
+					);
+
+		Add a foreign key constraint to an existing table
+			--Syantax:- ALTER TABLE child_table
+				    ADD FOREIGN KEY (c1) REFERENCES parent_table (p1);
+
+ 
+
+		One final note when you want to add a foreign key constraint with ON DELETE CASCADE to existing table, you need to do the 			following steps:
+
+			Drop existing foreign key constraint.
+			Add a new foreign key constraint with  ON DELETE CASCADE action.
+
+
+			ALTER TABLE child_table
+			DROP CONSTRAINT constraint_fkey;
+
+
+			ALTER TABLE child_table
+			ADD CONSTRAINT constraint_fk
+			FOREIGN KEY (c1)
+			REFERENCES parent_table(p1)
+			ON DELETE CASCADE;
+
+
+
+	PostgreSQL table constraints
+
+		The table constraints are similar to column constraints except that they are applied to the entire table rather than to an
+		individual column.
+
+		The following are the table constraints:
+
+		a.)UNIQUE (column_list)–  to force the value stored in the columns listed inside the parentheses to be unique.
+		
+		b.)PRIMARY KEY(column_list) – to define the primary key that consists of multiple columns.
+
+		c.)CHECK (condition) – to check a condition when inserting or updating data.
+
+		d.)REFERENCES– to constrain the value stored in the column that must exist in a column in another table.
+
+
+**********************************************************************************************************************************************
+
+
+
+3.) Select Into & Create table as– shows you how to create a new table from the result set of a query.
+	
+	I.)SELECT INTO:-
+
+		Introduction to PostgreSQL SELECT INTO statement:-
+			i.)The PostgreSQL SELECT INTO statement allows you to create a new table and inserts data returned by a query.
+			ii.)The new table columns have name and data types associated with the output columns of the SELECT clause.
+			iii.)Unlike the SELECT statement, the SELECT INTO statement does not return data to the client.
+
+
+		The following illustrates the syntax of the PostgreSQL SELECT INTO statement:
+		--Query:-
+			SELECT
+			    column_list 
+			INTO [ TEMPORARY | TEMP | UNLOGGED ] [ TABLE ] new_table_name
+			FROM
+			    table_name
+			WHERE
+			    condition;
+
+
+		To create a new table with the structure and data derived from a result set, you specify the new table name in the INTO clause.
+
+		The TEMP or TEMPORARY keyword is optional; it allows you to create a temporary table instead.
+
+		The UNLOGGED keyword if available will make the new table as an unlogged table.
+
+		The WHERE clause allows you to specify the data from the original tables that should be inserted into the new table. Besides 			the WHERE clause, you can use other clauses in the SELECT statement for the SELECT INTO statement such as INNER JOIN, LEFT 			JOIN, GROUP BY, and HAVING.
+
+		Note that you cannot use the SELECT INTO statement in PL/pgSQL or ECPG because they interpret the INTO clause differently. In 			this case, you can use the CREATE TABLE AS statement which provides more functionality than the SELECT INTO statement.
+
+		
+		The following statement creates a new table named film_r that contains all films with the rating R and rental duration 5 days 			from the film table.
+		--Syantax:-
+			SELECT
+			    film_id,
+			    title,
+			    rental_rate
+			INTO TABLE film_r				INTO TEMP film_r :- It will create temporarily table		
+			FROM
+			    film
+			WHERE
+			    rating = 'R'
+			AND rental_duration = 5
+			ORDER BY
+			    title;
+		
+		To verify the table creation, you can query data from the film_r table:
+		--Query:-  select * from film_r
+
+
+      II.)CREATE TABLE AS:-
+
+		Introduction to the PostgreSQL CREATE TABLE statement
+
+			The CREATE TABLE AS statement creates a new table and fills it with the data returned by a query. 
+			--Syntax:-
+				CREATE TABLE new_table_name
+				AS query;
+
+			In this syntax:
+				i.)First, specify the new table name after the CREATE TABLE clause.
+				ii.)Second, provide a query whose result set is added to the new table after the AS keyword.
+
+			The TEMPORARY or TEMP keyword allows you to to create a temporary table:
+			--Syntax:-
+				CREATE TEMP TABLE new_table_name 
+				AS query;
+
+			If you want the table columns to have different names, you can specify the new table columns after the new table name:
+			--Syntax:-
+				CREATE TABLE new_table_name ( column_name_list)
+				AS query;
+
+			In case you want to avoid an error by creating a new table that already exists, you can use the IF NOT EXISTS option as 			follows:
+				--Syntax:-
+					CREATE TABLE IF NOT EXISTS new_table_name
+					AS query;
+			
+			We will use the film and film_category table from the sample database for the demonstration.
+			--Query_1 :-
+				CREATE TABLE action_film 
+				AS
+				SELECT
+				    film_id,
+				    title,
+				    release_year,
+				    length,
+				    rating
+				FROM
+				    film
+				INNER JOIN film_category USING (film_id)
+				WHERE
+				    category_id = 1 ;
+
+			To verify the table creation, you can query data from the action_film table:
+			--Query:-
+				Select * from action_film
+
+
+			If the SELECT clause contains expressions, it is a good practice to override the columns, for example:
+			--Query_2 :-
+				CREATE TABLE IF NOT EXISTS film_rating (rating, film_count) 
+				AS 
+				SELECT
+				    rating,
+				    COUNT (film_id)
+				FROM
+				    film
+				GROUP BY
+    				    rating;
+
+			Note that the CREATE TABLE AS statement is similar to the SELECT INTO statement, but the CREATE TABLE AS statement is 				preferred because it is not confused with other uses of the SELECT INTO syntax in PL/pgSQL. In addition, the CREATE 				TABLE AS statement provides a superset of functionality offered by the SELECT INTO statement.
+
+*********************************************************************************************************************************************
+
+
+4.) Auto-increment column with SERIAL – uses SERIAL to add an auto-increment column to a table.
+
+	Introduction to the PostgreSQL SERIAL pseudo-type
+
+		In PostgreSQL, a sequence is a special kind of database object that generates a sequence of integers. A sequence is often used 			as a primary key column. The concept of the sequence in PostgreSQL is similar to the AUTO_INCREMENT concept in MySQL.
+		--Syntax:- 
+			CREATE TABLE table_name( id SERIAL );
+			    
+		By assigning the SERIAL pseudo-type to the id column, PostgreSQL will perform the following:
+	
+			i.)Creates a sequence object and set the next value generated by the sequence as the default value for the column.
+			ii.)Adds the NOT NULL constraint to the column because a sequence always generates an integer, which is a non-null 				    value.
+			iii.)Assigns the owner of the sequence to the id column; as a result, the sequence object is deleted when the id column 			     or table is dropped
+
+		Behind the scenes:-
+			CREATE SEQUENCE table_name_id_seq;
+ 
+			CREATE TABLE table_name (
+			    id integer NOT NULL DEFAULT nextval('table_name_id_seq')
+			);
+			 
+			ALTER SEQUENCE table_name_id_seq
+			OWNED BY table_name.id;
+
+
+		Name		Storage Size		Range
+
+		SMALLSERIAL	2 bytes			1 to 32,767
+		SERIAL		4 bytes			1 to 2,147,483,647
+		BIGSERIAL	8 bytes			1 to 922,337,2036,854,775,807
+		
+
+		It is important to note that the SERIAL does not implicitly create an index on the column or make the column as the primary key 		column. However, this can be done easily by specifying the PRIMARY KEY constraint for the SERIAL column.
+
+
+		The sequence generator operation is not transaction-safe. It means that if two concurrent database connections attempt to get 			the next value from a sequence, each client will get a different value. If one of the clients rolls back the transaction, the 			sequence number of that client will be unused, creating a gap in the sequence.
+
+*********************************************************************************************************************************************
+
+5.) Alter table – changes structure of an existing table.
+
+		Introduction to PostgreSQL ALTER TABLE statement
+
+		To change existing table structure, you use PostgreSQL ALTER TABLE statement.
+		The syntax of the ALTER TABLE is as follows:
+			--Syntax:- ALTER TABLE table_name action;
+
+			Actions:- i.) Add a column, drop a column, rename a column, or change a column’s data type.
+				  ii.)Set a default value for the column.
+				  iii.)Add a CHECKconstraint to a column.
+				  iv.)Rename a table.
+		
+		ADD CHECK constraint:-
+				ALTER TABLE table_name ADD CHECK expression;
+
+		To add a constraint:-
+				ALTER TABLE table_name ADD CONSTRAINT constraint_name constraint_definition;
+
+**********************************************************************************************************************************************
+
+6.) Rename table – change the name of the table to a new one.
+
+	Rename Table:-
+		ALTER TABLE table_name RENAME TO new_table_name
+
+		ALTER TABLE IF EXISTS table_name RENAME TO new_table_name;
+
+
+**********************************************************************************************************************************************
+
+7.) Rename database – change the name of the database to a new one.
+
+
+	PostgreSQL rename database steps
+
+	   To rename a PostgreSQL database, you use the following steps:
+
+		i.)Disconnect from the database that you want to rename by connecting to a different database.
+		ii.)Check and terminate all active connections to the database that is being renamed.
+		iii.)Use the ALTER DATABASE statement to rename the database to the new one.
+
+	CREATE DATABASE db;
+	
+	To rename the db database to newdb, you follow these steps:
+		i.)First, disconnect from the database that you want to rename by connecting to another database
+			By connecting to another database, you are automatically disconnected from the database to which you connected.
+		ii.)Next, check the all active connections to the db database by using the following query:
+			--Query:-
+				SELECT
+				    *
+				FROM
+				    pg_stat_activity
+				WHERE
+				    datname = 'db';
+
+			The query returned the following output:
+
+				-[ RECORD 1 ]----+------------------------------
+				datid            | 35918
+				datname          | db
+				pid              | 6904
+				usesysid         | 10
+				usename          | postgres
+				application_name | psql
+				client_addr      | ::1
+				client_hostname  |
+				client_port      | 56412
+				backend_start    | 2017-02-21 08:25:05.083705+07
+				xact_start       |
+				query_start      |
+				state_change     | 2017-02-21 08:25:05.092168+07
+				waiting          | f
+				state            | idle
+				backend_xid      |
+				backend_xmin     |
+				query            |
+
+				As you can see from the output, there is only one connection to the db database.
+
+	You may find that the database, which you want to rename, has many active connections. In this case, you need to inform the respective 		users as well as the application owners before terminating the connections to avoid data loss.
+
+
+	Then, terminate all the connections to the db database using the following statement:
+		--Query:-
+			SELECT
+			    pg_terminate_backend (pid)
+			FROM
+			    pg_stat_activity
+			WHERE
+			    datname = 'db';
+
+
+	After that, rename the db database to newdb using the ALTER DATABASE RENAME TO statement as follows:
+		--Syntax:-
+			ALTER DATABASE database_name RENAME TO new_database_name;
+
+
+	Last but not least, if your database is being used by applications, you should modify the connection strings.
+
+
+**********************************************************************************************************************************************
+
+
+8.) Add column – shows you how to use add one or more columns to an existing table.
+		--Syntax :-
+			     ALTER TABLE table_name ADD COLUMN new_column_name TYPE;  (Single column added)
+						OR
+			     ALTER TABLE table_name
+			     ADD COLUMN new_column_name_1 data_type constraint,	      (Multiple column added)
+			     ADD COLUMN new_column_name_2 data_type constraint,
+
+
+		Add a column with NOT NULL constraint to a table that has data
+
+			Example:-Suppose you want to add the contact_name column to the customers table:
+				--Query
+					ALTER TABLE customers 
+					ADD COLUMN contact_name VARCHAR NOT NULL;
+
+				PostgreSQL issued an error:
+				ERROR:  column "contact_name" contains null values
+	
+			This is because the contact_name column has the NOT NULL constraint. When PostgreSQL added the column, this new column 				takes the NULL value, which violates the NOT NULL constraint.
+
+			To solve this problem…
+
+				i.)First, you need to add the column without the NOT NULL constraint.
+				ii.)Second, update the values for the contact_name column.
+				iii.)Third, set the NOT NULL constraint for the contact_name column.
+					--syntax:-
+						ALTER TABLE customers
+						ALTER COLUMN contact_name SET NOT NULL;
+
+
+				Another way:-
+					i.)First, add the column with not null constraint and with default value.
+						--Query:-
+							ALTER TABLE customers
+							ADD COLUMN contact_name NOT NULL DEFAULT 'foo';
+						It will update all rows with default value.
+					ii.)Drop the default value from column
+						--Query:-
+							ALTER TABLE customers
+							ALTER COLUMN contact_name
+							DROP DEFAULT;
+
+*********************************************************************************************************************************************
+
+9.) Drop column – demonstrates how to drop a column of a table.
+
+	Introduction to PostgreSQL DROP COLUMN clause:-
+		--Syntax:- 
+			ALTER TABLE table_name 
+			DROP COLUMN column_name;
+
+		When you remove a column from a table, PostgreSQL will automatically remove all of its indexes and constraints involving the 			column.
+
+		If the column that you want to remove is used in other database objects such as VIEWS, TRIGGERS, STORED PROCEDURES, etc., you 			cannot drop the column because other objects depend on it.
+
+		In this case, you add the CASCADE option to the DROP COLUMN clause to drop the column and all of its associated objects
+			--Syntax:-
+				ALTER TABLE table_name 
+				DROP COLUMN column_name CASCADE;
+
+		If you remove a non-existing column, PostgreSQL will issue an error. To avoid this, you can add the IF EXISTS option as follows:
+			--Syntax:-
+				ALTER TABLE table_name 
+				DROP COLUMN IF EXISTS column_name;
+		
+		Drop Multiple Columns:-
+			--Syntax:-
+				ALTER TABLE table_name
+				DROP COLUMN column_name_1,
+				DROP COLUMN column_name_2,
+
+		PostgreSQL DROP COLUMN examples:-
+	
+		CREATE TABLE publishers (    		CREATE TABLE categories (			CREATE TABLE books (
+		publisher_id serial PRIMARY KEY,	category_id serial PRIMARY KEY,			book_id serial PRIMARY KEY,
+		name VARCHAR NOT NULL			name VARCHAR NOT NULL				title VARCHAR NOT NULL,
+		);					);						isbn VARCHAR NOT NULL,
+													published_date DATE NOT NULL,
+												    	description VARCHAR,
+												    	category_id INT NOT NULL,
+												    	publisher_id INT NOT NULL,
+												    	FOREIGN KEY (publisher_id) REFERENCES 															publishers (publisher_id),
+												    	FOREIGN KEY (category_id) REFERENCES 															categories (category_id)
+													);
+		In addition, we create a view based on the books and publishers tables as follows:
+			--Query:-  This will create a table book_info
+
+				CREATE VIEW book_info AS SELECT
+				    book_id,
+				    title,
+				    isbn,
+				    published_date,
+				    name
+				FROM
+				    books b
+				INNER JOIN publishers P ON P .publisher_id = b.publisher_id
+				ORDER BY
+				    title;
+
+		--Query:-
+			ALTER TABLE books DROP COLUMN category_id;               # It will drop column category_id from books table
+
+		--Query:-
+			ALTER TABLE books DROP COLUMN publisher_id;              # It will raise an error
+
+				PostgreSQL issued the following error:
+
+				ERROR:  cannot drop table books column publisher_id because other objects depend on it
+				DETAIL:  view book_info depends on table books column publisher_id
+				HINT:  Use DROP ... CASCADE to drop the dependent objects too. 
+
+		It stated that the book_info view is using the column publisher_id of the books table. You need to use the CASCADE option to 			remove both the publisher_id column and book_info view as shown in the following statement:
+			--Query:-
+				ALTER TABLE books DROP COLUMN publisher_id CASCADE;
+
+			NOTICE:- It will drop the table book_info, so use it carefully.
+
+***********************************************************************************************************************************************
+
+10.) Change column data type – shows you how to change the data of a column.
+
+	Change the data types of multiple columns:-
+		--Syntax:-
+			ALTER TABLE table_name
+			ALTER COLUMN column_name_1 TYPE new_data_type,
+			ALTER COLUMN column_name_2 TYPE new_data_type,
+
+	Set or Drop DEFAULT VALUE:-
+		--Syntax:-
+			ALTER TABLE table_name ALTER COLUMN column_name [SET DEFAULT value | DROP DEFAULT]
+
+	To change the NOT NULL constraint:-
+		--Syntax:-
+			ALTER TABLE table_name ALTER COLUMN column_name [SET NOT NULL| DROP NOT NULL]
+	
+	USING EXPRESSION
+		PostgreSQL allows you to convert old column values to the new one while changing the data type of a column by adding a USING 			clause as follows:
+
+			ALTER TABLE table_name
+			ALTER COLUMN column_name TYPE new_data_type USING expression;
+
+		If you omit the USING clause, PostgreSQL will cast old column values to the new one implicitly. 
+		In case the casting is failed,PostgreSQL will issue an error and ask you to provide the USING clause with an expression for 			conversion.
+
+		An expression could be as simple as column_name::new_data_type such as price::numeric or as complex as a custom function.
+
+
+	PostgreSQL change column type examples:-
+		
+		CREATE TABLE assets (
+		    id serial PRIMARY KEY,
+		    name TEXT NOT NULL,
+		    asset_no VARCHAR NOT NULL,
+		    description TEXT,
+		    LOCATION TEXT,
+		    acquired_date DATE NOT NULL
+		);
+
+		INSERT INTO assets (NAME,asset_no,location,acquired_date)
+		VALUES
+		    ('Server','10001','Server room','2017-01-01'),
+		    ('UPS','10002','Server room','2017-12-31')
+
+	To change the data type of the name column to VARCHAR:-
+		--Query:-
+			ALTER TABLE assets 
+			ALTER COLUMN name TYPE VARCHAR,
+			ALTER COLUMN location TYPE VARCHAR,
+
+	To change the data type of the asset_no column to integer, you use the statement below:
+		--Query:-
+			ALTER TABLE assets ALTER COLUMN asset_no TYPE INT;
+			
+			PostgreSQL issued an error and a very useful hint to ask you to specify the USING clause:
+				ERROR:  column "asset_no" cannot be cast automatically to type integer
+				HINT:  You might need to specify "USING asset_no::integer".
+
+			Let’s add the USING clause as recommended:
+				--Query:-
+					ALTER TABLE assets
+				   	ALTER COLUMN asset_no TYPE INT USING asset_no::integer;
+
+**********************************************************************************************************************************************
+
+11.) Rename column – illustrates how to rename one or more column of a table.
+		
+	Introduction to PostgreSQL RENAME COLUMN clause:-
+
+		PostgreSQL RENAME COLUMN clause in the ALTER TABLE statement to rename one or more columns of a table.
+			--Syntax:-
+				ALTER TABLE table_name 
+				RENAME COLUMN column_name TO new_column_name,
+				RENAME COLUMN column_name TO new_column_name
+
+		NOTE :- For some reasons, if you try to rename a non-existing column, PostgreSQL will issue an error. Unfortunately that 				PostgreSQL does not provide the IF EXISTS option for the RENAME CLAUSE
+
+***********************************************************************************************************************************************
+
+12.) Drop table – removes an existing table and all of its dependent objects.
+	
+	PostgreSQL DROP TABLE syntax:-
+		To remove existing table from the database, you use the DROP TABLE statement as shown following:
+		--Syntax:-			
+			DROP TABLE [IF EXISTS] table_name [CASCADE | RESTRICT];
+
+		i.)If you remove a non-existent table, PostgreSQL issues an error. To avoid this situation, you can use the IF EXISTS parameter 		   followed by the DROP TABLE clause.
+
+		ii.)In case the table that you want to remove is used in views, constraints or any other objects, the CASCADE allows you to 			    remove those dependent objects together with the table automatically.
+		     
+		iii.)RESTRICTrefuses to drop table if there is any object depends on it. 
+		     PostgreSQL uses RESTRICT by default.
+
+		iv.)You can put a list of tables after the DROP TABLE to remove multiple tables at once, each table separated by a comma.
+
+	NOTICE that only superuser, schema owner, and table owner have sufficient privilege to remove the table.
+
+	
+	PostgreSQL DROP TABLE examples:-
+		We create new tables named author and page for the next demonstration:
+
+			CREATE TABLE author (
+			 author_id INT NOT NULL PRIMARY KEY,
+			 firstname VARCHAR (50),
+			 lastname VARCHAR (50)
+			);
+			 
+			CREATE TABLE page (
+			 page_id serial PRIMARY KEY,
+			 title VARCHAR (255) NOT NULL,
+			 CONTENT TEXT,
+			 author_id INT NOT NULL,
+			 FOREIGN KEY (author_id) REFERENCES author (author_id)
+			);
+
+		
+		You can remove the authortable by using the following statement:
+			--Query:-
+				DROP TABLE IF EXISTS author
+	
+				[Err] ERROR:  cannot drop table author because other objects depend on it
+				DETAIL:  constraint page_author_id_fkey on table page depends on table author
+				HINT:  Use DROP ... CASCADE to drop the dependent objects too
+
+			Because the constraint on the page table depends on the author table, PostgreSQL issues an error message.
+
+		In this case, you need to remove all dependent objects first before removing the authortable or use CASCADE parameter as 			follows:
+			--Query:-
+				DROP TABLE author CASCADE;
+			 Means it will drop the realtion with page table, relations such as FOREIGN KEY,..,..etc will be DROP)
+
+		PostgreSQL removes the author table as well as the constraint in the page table. In addition, it issues a notice:
+		NOTICE:  drop cascades to constraint page_author_id_fkey on table page
+
+************************************************************************************************************************************************
+
+13.) Temporary table – shows you how to use the temporary table.
+
+	Creating a PostgreSQL temporary table
+
+		i.)A temporary table, as its named implied, is a short-lived table that exists for the duration of a database session.
+		ii.)PostgreSQL automatically drops the temporary tables at the end of a session or a transaction.
+		iii.)--Syntax:-
+				CREATE TEMP TABLE table_name
+		iv.)A temporary table is visible only to the session that creates it. In other words, it remains invisible to other sessions.
+
+	PostgreSQL temporary table name
+		
+		i.)A temporary table can share the same name with a permanent table, even though it is not recommended. 
+		ii.)When you create a temporary table with the same name as a permanent table, you cannot access the permanent table until the 			    temporary table is removed.
+
+	Example:- 
+		--Query:- CREATE TABLE customers(id SERIAL PRIMARY KEY, name VARCHAR NOT NULL);
+		--Query:- CREATE TEMP TABLE customers(customer_id INT);
+
+		Now query the table:
+			--Query:- select * from customers
+
+			Output:- customer_id			 # Temporary table has been accessed
+				 -------------
+				 (0 rows)
+
+***********************************************************************************************************************************************
+
+14.) Truncate table – removes all data in a large table quickly and efficiently.
+		
+		i.)To remove all data from a table, you use the DELETE statement. However, for a large table, it is more efficient to use the  			   TRUNCATE TABLE statement.
+
+		ii.)The  TRUNCATE TABLE statement removes all rows from a table without scanning it. This is the reason why it is faster than 			    the  DELETE statement.
+
+		iii.)In addition, the TRUNCATE TABLE statement reclaims the storage right away so you do not have to perform a subsequent  			    VACUMM operation, which is useful in case of large tables.
+
+		iv.)--Syntax:- TRUNCATE TABLE table_name;
+
+		v.)The PostgreSQL  TRUNCATE TABLE statement allows you to not only remove all data from a table but also reset associated 			   sequence generator by specifying  RESTART IDENTITY option as follows:
+			--Syntax:-
+				TRUNCATE TABLE table_name RESTART IDENTITY;
+
+	Remove all data from multiple tables:-
+		--Syntax:-
+			TRUNCATE TABLE table_name1, table_name2, …
+
+	Remove all data from table that has foreign key references:-
+		--Syntax:-
+			TRUNCATE TABLE table_name CASCADE;

@@ -1,0 +1,59 @@
+pgAdmin III is the GUI application use to interact with PostgreSQL database server.
+**Terminal of PostgreSQL database server. 
+
+syntax:- sudo su super user of PostgreSQL databse server
+cmd:- 1)sudo su postgres;
+       ---> Here postgres is the super user of database PostgreSQL databse server.
+      2)psql
+
+*Version of PostgreSQL
+cmd:- 1) select version();
+
+*Restore tar file into database using pgAdmin III
+
+1)First, launch the pgAdmin tool and connect to the PostgreSQL server.
+
+2)Second, right-click on the Databases and choose New Database.
+	a)Name:- Enter the name of database.
+	b)Owner:- postgres.
+	c)Ok:- Click on Ok Button.
+3)You’ve created the database whose name is sample.
+
+4)Fourth, right click on the sample and choose the Restore… menu item.
+
+5)Fifth, provide the path to database file.
+	a)Format:- select Custom on tar (because we have .tar file)
+	b)Filename:- path of file(including file name)
+	   Example:- /home/indracanossian/Desktop/dvdrental.tar
+	c)Restore Button:- click on restore button
+
+6)Finally, wait for few seconds and click the Done button when the pgAdmin completes restoring the database.
+
+
+******************** Commands ***************************
+
+1.) \d or \dt:- list down the tables name
+
+2.) \du:- list down the database users
+
+3.) \c dbname username :- connection to a new database 
+
+4.) \l:- list of db.
+
+5.) \d table_name:- describe table.
+
+6.) \dn:- list available schema.
+
+7.) \df:- list available functions.
+
+8.) \dv:- list available views.
+
+9.) \g:- execute previous command.
+
+10.) \s:- command history
+
+11.) \timing:- To turn on query execution time, same command will turn off.
+
+12.) \q:- To quit psql.
+
+13.) \e:- Edit command in your own editor.

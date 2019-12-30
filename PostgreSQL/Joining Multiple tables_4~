@@ -1,0 +1,176 @@
+Joins – shows you a brief overview of joins in PostgreSQL.
+PostgreSQL join is used to combine columns from one (self-join) or more tables based on the values of the common columns between the tables. The common columns are typically the primary key columns of the first table and foreign key columns of the second table.
+
+
+1)Inner Join – selects rows from one table that have the corresponding rows in other tables.
+2)Left Join – selects rows from one table that may or may not have the corresponding rows in other tables.
+3)Self-join – joins a table to itself by comparing a table to itself.
+4)Full Outer Join – uses the full join to find a row in a table that does not have a matching row in another table.
+5)Cross Join – produces a Cartesian product of the rows in two or more tables.
+6)Natural Join – joins two or more tables using implicit join condition based on the common column names in the joined tables.
+
+
+
+*****1)INNER JOIN :– selects rows from one table that have the corresponding rows in other tables.
+for inner join 2 table must have the column with same name and same data type.
+inner join with "on" clause and "using" clause.
+
+--syntax:- 	SELECT [* | column_list]
+		FROM table1
+		INNER JOIN table2
+		ON table1.column_name=table2.column.name; 
+		
+
+		SELECT [* | column_list]         here column used in using clause will appear first and only once.
+		FROM table1
+		INNER JOIN table2
+		USING (column.name);
+		
+		
+		SELECT [* | column_list]
+		FROM table1,table2
+		WHERE table1.column_name=table2.column_name;
+
+
+Example:- table customer and rental, have common column customer_id
+
+--query:- select c.first_name, c.last_name, c.customer_id ccust, 
+		 r.return_date, r.customer_id rcust
+	  from customer c
+	  inner join rental r on c.customer_id = r.customer_id
+
+Note:- first_name, last_name and customer_id are column present in customer table, ccust is the alias given to customer_id.
+       return_date and customer_id are column present in rental table, rcust is the alias given to customer_id.
+
+
+*****2)LEFT JOIN :- The PostgreSQL LEFT JOIN joins two tables and fetches rows based on a condition, which is matching in both tables and the unmatched rows will also be available from the table written before the JOIN clause.
+
+--syntax:- 	Select [* | column_list]
+		FROM table1
+		LEFT [ OUTER ] JOIN table2
+		ON table1.column_name=table2.column_name;
+
+		The left join returns a complete set of rows from the left table with the matching rows if available from the right table. If 			there is no match, the right side will have null values.
+
+--syntax:- 	Select [* | column_list]
+		FROM table1
+		LEFT [ OUTER ] JOIN table2
+		ON table1.column_name=table2.column_name
+		where table2.column_name is null;
+
+		To get the only rows from the left table but not in the right table, you use the left join then exclude the rows that you want 			from the right table using the WHERE clause:
+
+Note:-	Basically there is no difference in left join and left outer join. Left outer join also returns same results as left join. In some 	 	database, left join is known as left outer join.
+
+Note:- 	The OUTER keyword is optional.
+
+
+*****3)SELF JOIN:- joins a table to itself by comparing a table to itself.
+
+		   A self-join is a query in which a table is joined to itself. Self-joins are useful for comparing values in a column of rows 			  within the same table.
+
+		To form a self-join, you specify the same table twice with different aliases, set up the comparison, and eliminate cases where 			a value would be equal to itself.
+	
+Note:- Note that you can also use the LEFT JOIN or RIGHT JOIN or INNER JOIN clause.
+
+--syntax:- 	SELECT column_list
+		FROM A a1
+		INNER JOIN A b1 ON join_predicate;
+
+		In this syntax, table A is joined to itself using the INNER JOIN clause. Note that you can also use the LEFT JOIN or RIGHT 			JOIN clause.
+
+--query:- SELECT
+    		e.first_name || ' ' || e.last_name employee,
+    		m .first_name || ' ' || m .last_name manager
+	FROM
+   		employee e
+	INNER JOIN employee m ON m .employee_id = e.manager_id
+	ORDER BY manager;
+
+Note:- m .employee_id = e.manager_id
+
+Above query referenced the employees table twice, one as the employee and another as the manager. It uses table aliases e for the employee and m for the manager.
+
+The join predicate finds employee/manager pair by matching values in the employee_id and manager_id columns.
+
+
+
+
+*****4)RIGHT JOIN:- The right join or right outer join is a reversed version of the left join. It produces a result set that contains all rows 			   from the right table with matching rows from the left table. If there is no match, the left side will contain null values.
+
+		   The PostgreSQL RIGHT JOIN joins two tables and fetches rows based on a condition, which is matching in both the tables and 			   the unmatched rows will also be available from the table written after the JOIN clause.
+
+--syntax:-	Select [* | column_list]
+		FROM table1
+		RIGHT [ OUTER ] JOIN table2
+		ON table1.column_name=table2.column_name;
+
+--syntax:-	Select [* | column_list]
+		FROM table1
+		RIGHT [ OUTER ] JOIN table2
+		ON table1.column_name=table2.column_name;
+		where table1.column_name is null;
+
+Note:- 		The OUTER keyword is optional.
+
+
+
+
+*****5)FULL JOIN :-PostgreSQL FULL OUTER JOIN returns all rows from both the participating tables, extended with nulls if they do not have a 			   match on the opposite table. The FULL OUTER JOIN combines the results of both left and right outer joins and returns all 			   (matched or unmatched) rows from the tables on both sides of the join clause.
+
+
+Syntax:-	Select [* | column_list]
+		FROM table_name1
+		FULL [OUTER] JOIN table_name2 
+		ON table_name1.column_name=table_name2.column_name
+
+Note:-		The OUTER keyword is optional.
+
+
+
+
+*****6)CROSS JOIN:– produces a Cartesian product of the rows in two or more tables.
+		    A CROSS JOIN clause allows you to produce the Cartesian Product of rows in two or more tables.
+		    The CROSS JOIN does not have any matching condition in the join clause, i.e not required common column in both tables 
+
+Example:- 	Suppose we have to perform the CROSS JOIN of two tables T1 and T2. For every row from T1 and T2 i.e., a cartesian product, the 			result set will contain a row that consists of all columns in the T1 table followed by all columns in the T2 table. If T1 has N 		rows, T2 has M rows, the result set will have N x M rows.
+
+--syntax:-  select [* | column list] from t1 cross join t2;
+	
+--syntax:-  select * from t1, t2
+
+
+
+*****7)NATURAL JOIN:- A natural join is a join that creates an implicit join based on the same column names in the joined tables. See the following syntax of PostgreSQL natural join:
+
+**Natural Join: Guidelines
+
+- The associated tables have one or more pairs of identically named columns.
+- The columns must be the same data type.
+- Don’t use ON clause in a natural join.
+
+
+--syntax:- 	SELECT [* | column list] FROM T1
+		NATURAL [INNER, LEFT, RIGHT] JOIN T2;
+
+		The category_id column in the products table is the foreign key that references to the primary key of the categories table. The 		category_id is the common column that we will use to perform the natural join.
+
+--query:- 	SELECT * FROM products
+		NATURAL JOIN categories;		
+
+Note:-		If you do not specify a join explicitly e.g., INNER JOIN, LEFT JOIN, RIGHT JOIN, 
+		PostgreSQL will use the INNER JOIN by default.
+		
+Note:-		If you use the asterisk (*) in the select list, the result will contain the following columns:
+
+		All the common columns, which are the columns in the both tables that have the same name.			
+		Every column in the first and second tables that is not a common column
+
+--query:- 	SELECT * FROM products
+		INNER JOIN categories USING (category_id);
+
+		The convenience of the NATURAL JOIN is that it does not require you to specify the join clause because it uses an implicit join 		clause based on the common column.
+
+Notice:- 	However, you should avoid using the NATURAL JOIN whenever 
+		possible because sometimes it may cause an unexpected result.
+		

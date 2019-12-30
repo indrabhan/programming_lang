@@ -1,0 +1,200 @@
+********************** Conditional expressions & operators ***************************
+
+1.)CASE – shows you how to form conditional queries with the CASE expression.
+2.)COALESCE – returns the first non-null argument. You can use it to substitute NULL by a default value.
+3.)NULLIF – returns NULL if the first argument equals the second one.
+4.)CAST – converts from one data type into another e.g., from a string into an integer, from a string into a date.
+
+
+
+
+1.)CASE – shows you how to form conditional queries with the CASE expression.
+	  The PostgreSQL CASE expression is the same as IF/ELSE statement in other programing languages.
+
+	PostgreSQL provides two forms of the CASE expression.
+		A.)general form of the CASE statement:
+			CASE
+			   WHEN condition_1 THEN result_1
+			   WHEN condition_2 THEN result_2
+			   [WHEN ......]
+			   [ELSE result_n	
+			END
+
+		   i.)In this general form, each condition is an expression that returns a boolean value, either true or false.
+		   ii.)If the condition evaluates to true, it returns the result which follows the condition, and all other CASE branches do 			       not process at all.
+		   iii.)If all conditions evaluate to false, the CASE expression will return the result in the ELSE part.
+		   iv.)If you omit the ELSE clause, the CASE expression will return null.
+
+		   NOTICE that all result expressions must have data types that can be convertible to a single data type e.g., string, numeric, 			  etc
+
+		   EXAMPLE:- Let’s take a look at the film table. Suppose you want to assign a price segment to a film as:
+
+				mass if the rental rate is 0.99
+				economic if the rental rate is 2.99
+				luxury if the rental rate is 4.99
+				And you want to know the number of films that belongs mass, economic or luxury price segment. In this case, you 				can use the CASE expression to construct the query as follows:
+			
+			--Query:-
+				SELECT 
+					SUM(CASE WHEN rental_rate = 0.99 THEN 1 ELSE 0 END) AS "Mass",
+					SUM(CASE WHEN rental_rate = 2.99 THEN 1 ELSE 0 END) AS "Economic,"
+					SUM(CASE WHEN rental_rate = 4.99 THEN 1 ELSE 0 END) AS "Luxury"
+				FROM 
+				   film;
+
+			Output:-  Mass      Economic	Luxury
+				  341		323	336
+
+
+		B.)Simple PostgreSQL CASE expression:-
+			--Syntax:-
+				CASE expression
+				WHEN value_1 THEN
+				 result_1
+				WHEN value_2 THEN
+				 result_2 
+				[WHEN ...]
+				ELSE
+				 result_n
+				END;
+
+		
+			--Query:-
+				SELECT
+					SUM (CASE rental_rate WHEN 0.99 THEN 1 ELSE 0 END) AS 'Mass',
+					SUM (CASE rental_rate WHEN 2.99 THEN 1 ELSE0 END) AS 'Economic',
+					SUM (CASE renatl_rate WHEN 4.99 THEN 1 ELSE 0 END)AS 'Luxury'
+				FROM
+				   film
+
+			Output:-  Mass      Economic	Luxury
+				  341		323	336
+
+*********************************************************************************************************************************************
+
+2.)COALESCE – returns the first non-null argument. You can use it to substitute NULL by a default value.
+	
+	PostgreSQL COALESCE function syntax
+		--syntax:- COALESCE (argument_1, argument_2, …);
+
+		i.)The COALESCE function accepts an unlimited number of arguments. It returns the first argument that is not null. If all 			   arguments are null, the COALESCE function will return null.
+
+		ii.)The COALESCE function evaluates arguments from left to right until it finds the first non-null argument. All the remaining 			    arguments from the first non-null argument are not evaluated.
+
+		iii.)The COALESCE function provides the same functionality as NVL or IFNULL function provided by SQL-standard. MySQL has IFNULL 		     function, while Oracle provides NVL function.
+
+		Example:-
+			select coalesce(1, 2);			output:- 1
+	
+			select coalesce(null, 2, 1)		output:- 2
+
+		We often use the COALESCE function to substitute a default value for null values when we querying the data
+
+
+		Example:-
+			Table items
+				product		price		discount
+				A		1000		10
+				B		1500		20
+				C		800		5
+				D		500		null
+
+			--Query:- select product, (price - discount) as net_price
+				  from items
+
+			--output:- product	net_price
+				 	A	990
+					B	1480
+					C	795
+					D	null
+		
+				If you look at the fourth row, you will notice that the net price of the product D is null which seems not 					correct. 
+				The issue is the discount of the product D is null, therefore when we take the null value to calculate the net 					price, PostgreSQL returns null.
+
+			To get the right price, we need to assume that if the discount is null, it is zero. Then we can use the COALESCE 				function as follows:
+			-Query:-
+			
+				select coalesce(discount, 0) from items;			output:- 0
+
+				select product, price - coalesce(discount, 0)as net_price
+				from items;
+				
+						--output:- 	product		net_price
+								A		990
+								B		1480
+								C		795
+								D		500
+
+				Now the net price of product D is 500 because we use zero instead of null value when we calculated the net 					price.
+
+			
+			Besides using the COALESCE function, you can use the CASE expression to handle the null values in this case. See the 				following query that uses the CASE expression to achieve the same result above.
+
+				--Query:-
+					SELECT
+						 product,
+						 (
+						 price - CASE
+						 WHEN discount IS NULL THEN
+						 0
+						 ELSE
+						 discount
+						 END
+						 ) AS net_price
+						FROM
+						 items;
+
+***********************************************************************************************************************************************
+
+3.)NULLIF – returns NULL if the first argument equals the second one.
+
+	PostgreSQL NULLIF function syntax
+
+	The NULLIF function is one of the most common conditional expressions provided by PostgreSQL. The following illustrates the syntax of 		the NULLIF function:
+		--Syntax:-
+			NULLIF(argument_1,argument_2);
+
+		The NULLIF function returns a null value if argument_1 equals to argument_2, otherwise it returns argument_1.
+
+		Example:-
+			SELECT
+			 NULLIF (1, 1); -- return NULL
+			 
+			SELECT
+			 NULLIF (1, 0); -- return 1
+			 
+			SELECT
+			 NULLIF ('A', 'B'); -- return A
+
+************************************************************************************************************************************************
+
+4.)CAST – converts from one data type into another e.g., from a string into an integer, from a string into a date.
+
+	Introduction to PostgreSQL CAST
+
+		There are many cases that you want to convert one data type into another e.g., the requirements change so that you change the 			data type of a column. PostgreSQL provides the syntax for converting one type into another. The following illustrates the 				Syntax:-
+				CAST ( expression AS type );			expression can be constant, table
+
+		Example:-
+			SELECT CAST('100' AS INT);
+		
+			SELECT CAST('10c' AS INT);		Error:- invalid input syntax for integer: "10C"
+
+			SELECT CAST('1991/08/23' AS DATE);
+
+			SELECT CAST('23-Aug-1991' AS DATE);
+
+
+		
+		PostgreSQL type cast :: specific:-
+		
+			Besides the type CAST syntax, you can use following syntax to convert a type into another:
+				--Syntax:-	
+					expression::type
+
+				--Query:-
+					SELECT '100'::INT;
+		
+					SELECT '1991-23-08'::DATE;
+
+				NOTICE that the cast syntax with :: is PostgreSQL specific and does not conform to SQL.

@@ -1,0 +1,111 @@
+********** Performing set operations **********
+
+1)Union – combines result sets of multiple queries into a single result set.
+2)Intersect – combines the result sets of two or more queries and returns a single result set that has the rows appear in both result sets.
+3)Except – returns the rows in the first query that does not appear in the output of the second query.
+
+
+*****1)Union – combines result sets of multiple queries into a single result set.
+
+The UNION operator combines result sets of two or more SELECT statements into a single result set.
+The following are rules applied to the queries:
+
+a)Both queries must return the same number of columns.
+b)The corresponding columns in the queries must have compatible data types.
+
+
+--syntax:- SELECT column_1, column_2 FROM table_name_1
+	   UNION
+	   SELECT column_1, column_2 FROM table_name_2
+
+
+** UNION operator removes duplicates.
+** UNION ALL does not remove duplicates.
+
+We often use the UNION operator to combine data from similar tables that are not perfectly normalized. 
+Those tables are often found in the reporting or data warehouse system.
+
+Example
+Table_1						Table_2
+sales2007q1					sales2007q2
+
+name  amount					name  amount
+Mike  150000.25					Mike  120000.25
+Jon   132000.75					Jon   142000.75
+Mary  100000					Mary  100000
+
+
+--query:- SELECT * from sales2007q1
+	  UNION
+	  SELECT * from sales2007q2
+
+output:- name  amount
+	 Mike  150000.25
+	 Mike  120000.25
+	 Jon   132000.75
+	 Jon   142000.75
+	 Mary  100000               Here mary is displayed only once because UNION removes duplicates
+
+
+--query:- SELECT * from sales2007q1
+	  UNION ALL
+	  SELECT * from sales2007q2
+
+output:- name  amount
+	 Mike  150000.25
+	 Mike  120000.25
+	 Jon   132000.75
+	 Jon   142000.75
+	 Mary  100000               Here mary is displayed Twice because UNION ALL does not remove duplicates
+	 Mary  100000
+
+***PostgreSQL UNION with ORDER BY example
+
+To sort the combined result returned by the UNION operator, you use the ORDER BY clause. You need to put the ORDER BY clause at the last query as the following statement:
+
+--query:- SELECT * from sales2007q1
+	  UNION
+	  SELECT * from sales2007q2
+	  ORDER BY name asc, amount desc
+
+
+
+*****2)INTERSECT – combines the result sets of two or more queries and 
+returns a single result set that has the rows appear in both result sets i.e it return rows with duplicate values
+
+***To use the INTERSECT operator, the columns that appear in the SELECT statements must follow the rules below:
+
+a)The number of columns and their order in the SELECT clauses must the be the same.
+b)The data types of the columns must be compatible.
+
+--syntax:- SELECT column_list from table_1
+	   INTERSECT
+	   SELECT column_list from table_2
+
+Note:- returns a single result set that has the rows appear in both result sets with same values.
+
+Note:- To sort the result set returned by the INTERSECT operator, 
+       you place the ORDER BY clause at the end of the statement, not at the end of each SELECT statement.
+
+
+
+***3)Except – returns the rows in the first query that does not appear in the output of the second query.
+	      means common row are eliminated and only rows of first query
+
+
+***Introduction to the PostgreSQL EXCEPT operator
+
+Like the UNION and INTERSECT operators, the EXCEPT operator returns rows by comparing the result sets of two or more quires.
+
+The EXCEPT operator returns distinct rows from the first (left) query that are not in the output of the second (right) query. The following illustrates the syntax of the EXCEPT operator.
+
+--syntax:- 	SELECT column_list FROM A
+		WHERE condition_a
+		EXCEPT 
+		SELECT column_list FROM B
+		WHERE condition_b;
+
+**To combine the queries using the EXCEPT operator, you must obey the following rules:
+
+a)The number of columns and their orders must be the same in the two queries.
+b)The data types of the respective columns must be compatible.

@@ -1,0 +1,109 @@
+In this section, you will learn how to insert data into a table with the INSERT statement, modify existing data with the UPDATE statement, and remove data with the DELETE statement. In addition, you learn how to use the upsert statement to merge data.
+
+1.) Insert – inserts data into a table.
+2.) Update – updates existing data in a table.
+3.) Update join – updates values in a table based on values in another table.
+4.) Delete – deletes data in a table.
+5.) Upsert – inserts or update data if the new row already exists in the table.
+
+
+***** 1.) Insert – inserts data into a table.
+
+PostgreSQL INSERT syntax
+--Syntax:- 
+		INSERT INTO table_name(column1, column2, …)
+		VALUES
+		 (value1, value2, …),
+		 (value1, value2, …),
+		 (value1, value2, …);
+
+
+a.) First, you specify the name of the table that you want to insert a new row after the INSERT INTO clause, followed by a comma-separated column list.
+
+b.) Second, you list a comma-separated value list after the VALUES clause. The value list must be in the same order as the columns list specified after the table name.
+
+c.) You just need to add additional comma-separated value lists after the first list, each value in the list is separated by a comma (,).
+
+
+
+**** To insert data that comes from another table, you use the INSERT INTO SELECT statement as follows:
+--syntax
+
+		INSERT INTO table(column1,column2,...)
+		SELECT column1,column2,...
+		FROM another_table
+		WHERE condition;
+
+The WHERE clause is used to filter rows that allow you to insert partial data from the another_table into the table.
+
+
+**PostgreSQL INSERT examples
+
+Let’s create a new table named link for the demonstration.
+
+	CREATE TABLE link (
+	 ID serial PRIMARY KEY,
+	 url VARCHAR (255) NOT NULL,
+	 name VARCHAR (255) NOT NULL,
+	 description VARCHAR (255),
+	 rel VARCHAR (50)
+	);
+
+PostgreSQL insert one-row examples:
+--Query;-
+	INSERT INTO link (url, name)
+	VALUES
+	 ('http://www.postgresqltutorial.com','PostgreSQL Tutorial');
+
+a.) To insert character data, you must enclose it in single quotes (‘) for example 'PostgreSQL Tutorial'. For the numeric data type, you don’t need to do so, just use plain numbers such as 1, 2, 3.
+
+b.) If you omit any column that accepts the NULL value in the INSERT statement, the column will take its default value. In case the default value is not set for the column, the column will take the NULL value.
+
+c.) PostgreSQL provides a value for the serial column automatically so you do not and should not insert a value into the serial column.
+
+d.) If you want to insert a string that contains a single quote character such as O'Reilly Media, you have to use a single quote (‘) escape character as shown in the following query:
+		INSERT INTO link (url, name)
+		VALUES
+		 ('http://www.oreilly.com','O''Reilly Media');
+
+
+**PostgreSQL insert date example
+
+Let’s add a new column named last_update into the link table.
+
+Adding column syntax:- ALTER TABLE table_name ADD column_name datatype
+--Query:- 	       ALTER TABLE link ADD last_update date 
+
+**Set its cloumn (last_update) value to CURRENT_DATE
+--Syntax:-     ALTER TABLE table_name ALTER COLUMN column_name SET DEFAULT CURRENT_DATE
+--Query:-      ALTER TABLE link ALTER COLUMN last_update SETDEFAULT CURRENT_DATE
+
+The following statement inserts a new row with specified date into the link table. The date format is YYYY-MM-DD.
+
+
+
+**PostgreSQL insert data from another table example
+
+a.) First, create another table named link_tmpt hat has the same structure as the link table:
+	--syntax:-  create table table_name (like exists_table_name)
+	--query:-   create table link_tmp (like link);
+
+here link_tmp table will have the same structure like that of table link.
+
+b.) Second, insert rows from the link table whose values of the date column are not NULL:
+	INSERT INTO link_tmp
+	SELECT * from link
+	where last_update IS NOT NULL
+
+here only those rows will be inserted from link table that has a value in the column last_update into table link_tmp 
+
+
+**Get the last insert id
+
+To get the last insert id from the table after inserting a new row, you use the RETURNINGclause in the INSERTstatement. This is a PostgreSQL extension to SQL.
+
+The following statement inserts a new row into the linktable and returns the last insert id:
+
+	INSERT INTO link (url, NAME, last_update)
+	VALUES('http://www.postgresql.org','PostgreSQL',DEFAULT) 
+	RETURNING id;

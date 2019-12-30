@@ -1,0 +1,360 @@
+In this section, you will learn how to insert data into a table with the INSERT statement, modify existing data with the UPDATE statement, and remove data with the DELETE statement. In addition, you learn how to use the upsert statement to merge data.
+
+1.) Insert – inserts data into a table.
+2.) Update – updates existing data in a table.
+3.) Update join – updates values in a table based on values in another table.
+4.) Delete – deletes data in a table.
+5.) Upsert – inserts or update data if the new row already exists in the table.
+
+
+***** 1.) Insert – inserts data into a table.
+
+PostgreSQL INSERT syntax
+--Syntax:- 
+		INSERT INTO table_name(column1, column2, …)
+		VALUES
+		 (value1, value2, …),
+		 (value1, value2, …),
+		 (value1, value2, …);
+
+
+a.) First, you specify the name of the table that you want to insert a new row after the INSERT INTO clause, followed by a comma-separated column list.
+
+b.) Second, you list a comma-separated value list after the VALUES clause. The value list must be in the same order as the columns list specified after the table name.
+
+c.) You just need to add additional comma-separated value lists after the first list, each value in the list is separated by a comma (,).
+
+
+
+**** To insert data that comes from another table, you use the INSERT INTO SELECT statement as follows:
+--syntax
+
+		INSERT INTO table_name(column1,column2,...)
+		SELECT column1,column2,...
+		FROM another_table
+		WHERE condition;
+
+The WHERE clause is used to filter rows that allow you to insert partial data from the another_table into the table.
+
+
+**PostgreSQL INSERT examples
+
+Let’s create a new table named link for the demonstration.
+
+	CREATE TABLE link (
+	 ID serial PRIMARY KEY,
+	 url VARCHAR (255) NOT NULL,
+	 name VARCHAR (255) NOT NULL,
+	 description VARCHAR (255),
+	 rel VARCHAR (50)
+	);
+
+PostgreSQL insert one-row examples:
+--Query;-
+	INSERT INTO link (url, name)
+	VALUES
+	 ('http://www.postgresqltutorial.com','PostgreSQL Tutorial');
+
+a.) To insert character data, you must enclose it in single quotes (‘) for example 'PostgreSQL Tutorial'. For the numeric data type, you don’t need to do so, just use plain numbers such as 1, 2, 3.
+
+b.) If you omit any column that accepts the NULL value in the INSERT statement, the column will take its default value. In case the default value is not set for the column, the column will take the NULL value.
+
+c.) PostgreSQL provides a value for the serial column automatically so you do not and should not insert a value into the serial column.
+
+d.) If you want to insert a string that contains a single quote character such as O'Reilly Media, you have to use a single quote (‘) escape character as shown in the following query:
+		INSERT INTO link (url, name)
+		VALUES
+		 ('http://www.oreilly.com','O''Reilly Media');
+
+
+**PostgreSQL insert date example
+
+Let’s add a new column named last_update into the link table.
+
+Adding column syntax:- ALTER TABLE table_name ADD COLUMN column_name datatype
+--Query:- 	       ALTER TABLE link ADD COLUMN last_update date 
+
+**Set its cloumn (last_update) value to CURRENT_DATE
+--Syntax:-     ALTER TABLE table_name ALTER COLUMN column_name SET DEFAULT CURRENT_DATE
+--Query:-      ALTER TABLE link ALTER COLUMN last_update SET DEFAULT CURRENT_DATE
+
+The following statement inserts a new row with specified date into the link table. The date format is YYYY-MM-DD.
+
+
+
+**PostgreSQL insert data from another table example
+
+a.) First, create another table named link_tmpt hat has the same structure as the link table:
+	--syntax:-  create table table_name (like exists_table_name)
+	--query:-   create table link_tmp (like link);
+
+here link_tmp table will have the same structure like that of table link.
+
+b.) Second, insert rows from the link table whose values of the date column are not NULL:
+	INSERT INTO link_tmp
+	SELECT * from link
+	where last_update IS NOT NULL
+
+here only those rows will be inserted from link table that has a value in the column last_update into table link_tmp 
+
+
+**Get the last insert id
+
+To get the last insert id from the table after inserting a new row, you use the RETURNINGclause in the INSERTstatement. This is a PostgreSQL extension to SQL.
+
+The following statement inserts a new row into the linktable and returns the last insert id:
+
+	INSERT INTO link (url, NAME, last_update)
+	VALUES('http://www.postgresql.org','PostgreSQL',DEFAULT) 
+	RETURNING id;
+
+
+***********************************************************************************************************************************************
+
+
+
+*****2.) Update – updates existing data in a table.
+
+**PostgreSQL UPDATE syntax
+
+1.)To change the values of the columns in a table, you use the UPDATE statement. The following illustrates the syntax of the UPDATE statement:
+--Syntax
+		UPDATE table_name
+		SET column1 = value1,
+		    column2 = value2 ,...
+		WHERE
+		 condition;
+
+a.) First, specify the table name where you want to update the data after UPDATE clause.
+
+b.) Second, list the columns whose values you want to change in the SET clause. If you update values in multiple columns, you use a comma (,) to separate each pair of column and value. The columns that are not on the list retain their original values.
+
+c.) Third, determine which rows you want to update in the condition of the WHERE clause. If you omit the WHERE clause, all the rows in the table are updated.
+
+**********
+
+2.)To change the NULL values of the last_update column to the current date, you use the following statement:
+--Query
+	UPDATE link
+	SET last_update = DEFAULT
+	WHERE
+	 last_update IS NULL;
+
+The WHEREclause only updates the rows whose values in the last_update column is NULL. We used the DEFAULT keyword because the last_update column accepts the current date as the default value.
+
+**********
+
+3.) You can also update data of a column from another column within the same table.
+The following statement copies the values of the name column to the description column of the link table:
+--Query
+
+	UPDATE link
+	SET description = name;
+
+
+***********************************************************************************************************************************************
+
+
+
+3.) Update join – updates values in a table based on values in another table
+
+
+1.)PostgreSQL UPDATE join syntax
+
+Sometimes, you need to update data of a table based on values in another table. In this case, you can use the PostgreSQL UPDATE join syntax as follows:
+--Syntax
+		UPDATE table_name
+		SET table_name.c1 = expresion
+		FROM another_table
+		WHERE table_name.c2 = another_table.c2;
+
+To join to another table in the UPDATE statement, you specify the joined table in the FROM clause and provide the join condition in the WHERE clause. The FROM clause must appear immediately after the SET clause.
+
+This form of the UPDATE statement updates column value c1 in the table A if each row in the table A and B have a matching value in the column c2.
+
+Table:-  product_segment		product
+		id			id
+		segment			name
+		discount		price
+					net_price
+					segment_id
+
+suppose you have to calculate the net price of every product based on the discount of the product segment. To do this, you can apply the UPDATE join statement as follows:
+--Query
+
+		UPDATE product
+		SET net_price = price - price * discount
+		FROM
+		product_segment
+		WHERE
+		product.segment_id = product_segment.id;
+
+This statement joins the product table to the product_segment table. If there is a match in both tables, it gets the discount from the product_segment table, calculates the net price based on the following formula, and updates the net_price column.
+
+
+***********************************************************************************************************************************************
+
+
+
+*****4.) Upsert ((update or insert).):- insert or update data if the row that is being inserted already exists in the table.
+
+1.) Introduction to the PostgreSQL upsert
+
+In relational databases, the term upsert is referred to as a merge. The idea is that when you insert a new row into the table, PostgreSQL will update the row if it already exists, otherwise, PostgreSQL inserts the new row. That is why we call the action is upsert (update or insert).
+
+To use the upsert feature in PostgreSQL, you use the " INSERT ON CONFLICT " statement as follows:
+
+	INSERT INTO table_name(column_list) VALUES(value_list)
+	ON CONFLICT target action;
+
+PostgreSQL added the ON CONFLICT target action clause to the INSERT statement to support the upsert feature
+
+The target can be:
+
+	a.) (column_name) – a column name.
+	b.) ON CONSTRAINT constraint_name – where the constraint name could be a name of the UNIQUE constraint.
+	c.) WHERE predicate – a WHERE clause with a predicate
+
+The action can be:
+
+a.) DO NOTHING – means do nothing if the row already exists in the table.
+b.) DO UPDATE SET column_1 = value_1, .. WHERE condition – update some fields in the table.
+
+
+Notice:- that the ON CONFLICT clause is only available from PostgreSQL 9.5. If you are using an earlier version, you will need a workaround to have the upsert feature.
+
+
+*** PostgreSQL upsert examples
+
+Let create a new table named customers to demonstrate the PostgresQL upsert feature.
+
+
+	CREATE TABLE customers (
+	 customer_id serial PRIMARY KEY,
+	 name VARCHAR UNIQUE,
+	 email VARCHAR NOT NULL,
+	 active bool NOT NULL DEFAULT TRUE
+	);
+
+The customers table consists of four columns: customer_id, name, email, and active. The name column has an associated unique constraint to guarantee that the uniqueness of the customers.
+
+
+#\d customers
+                                     Table "public.customers"
+	   Column    |       Type        |                            Modifiers
+	-------------+-------------------+-----------------------------------------------------------------
+	 customer_id | integer           | not null default nextval('customers_customer_id_seq'::regclass)
+	 name        | character varying |
+	 email       | character varying | not null
+	 active      | boolean           | not null default true
+	Indexes:
+	    "customers_pkey" PRIMARY KEY, btree (customer_id)
+	    "customers_name_key" UNIQUE CONSTRAINT, btree (name)
+
+
+The following INSERT statement inserts some rows into the customers table.
+--Query
+
+	INSERT INTO customers (NAME, email)
+	VALUES
+	 ('IBM', 'contact@ibm.com'),
+	 ('Microsoft','contact@microsoft.com'),
+	 ('Intel','contact@intel.com');
+
+
+Suppose Microsoft changes the contact email from contact@microsoft.com to hotline@microft.com, we can update it using the UPDATE statement. However, to demonstrate the upsert feature, we use the following INSERT ON CONFLICT statement:
+
+
+	INSERT INTO customers (NAME, email)
+	VALUES
+	 ('Microsoft','hotline@microsoft.com')
+	ON CONFLICT ON CONSTRAINT customers_name_key 
+	DO NOTHING;
+
+The statement specified that if the customer name exists in the  customers table, just ignore it (do nothing).
+
+The following statement is equivalent to the above statement but it uses the name column instead of the unique constraint name as the target of the INSERT statement.
+
+	INSERT INTO customers (name, email)
+	VALUES
+	 (
+	 'Microsoft',
+	 'hotline@microsoft.com'
+	 ) 
+	ON CONFLICT (name) 
+	DO NOTHING;
+
+
+
+
+Suppose, you want to concatenate the new email with the old email when inserting a customer that already exists, in this case, you use UPDATE clause as the action of the INSERT statement as follows:
+
+
+	INSERT INTO customers (name, email)
+	VALUES
+	 (
+	 'Microsoft',
+	 'hotline@microsoft.com'
+	 ) 
+	ON CONFLICT (name) 
+	DO
+	 UPDATE
+	   SET email = EXCLUDED.email || ';' || customers.email;
+
+
+	#SELECT * FROM customers;
+	 customer_id |   name    |                    email                    | active
+	-------------+-----------+---------------------------------------------+--------
+		   1 | IBM       | contact@ibm.com                             | t
+		   3 | Intel     | contact@intel.com                           | t
+		   2 | Microsoft | hotline@microsoft.com;contact@microsoft.com | t
+	(3 rows)
+
+
+***********************************************************************************************************************************************
+
+
+*****4.) Delete – deletes data in a table.
+
+
+--Syntax :- 	
+		DELETE FROM table_name
+		WHERE condition;
+
+In this syntax:
+
+a.) First, specify the table from which you want to delete data in the DELETE FROM clause.
+
+b.) Second, specify which rows to delete by using the condition in the WHERE clause. The WHERE clause is optional. However, if you omit it, the DELETE statement will delete all rows in the table.
+
+c.) The DELETE statement returns the number of deleted rows. It may not the same as the number of rows specified by the condition in the WHERE clause because the table may contain a BEFORE DELETE trigger that does something else before deletion. If no row is deleted, the DELETE statement returns zero.
+
+
+2.) In case you want to check the condition that references to one or more columns in another table, you use the USING clause as follows:
+
+	DELETE FROM table
+	USING another_table
+	WHERE table.id = another_table.id AND …
+
+If you do not want to use the USING clause, you can use the subquery as shown in the following statement:
+
+	DELETE FROM table
+	WHERE table.id = (SELECT id FROM another_table);
+
+
+3.) Example we will use link and link_tmp table
+
+	DELETE FROM link
+	WHERE id = 8
+
+
+	DELETE FROM link 
+	USING link_tmp
+	WHERE
+	    link.id = link_tmp.id;
+
+
+4.)To delete all rows in the link_tmp table and return the deleted rows, you use the RETURNING clause in the DELETE statement as follows:
+
+	DELETE FROM link_tmp 
+	RETURNING *;

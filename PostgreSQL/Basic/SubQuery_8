@@ -1,0 +1,392 @@
+********** SubQuery **********
+
+1)Subquery – writes a query nested inside another query.
+2)ANY  – retrieves data by comparing a value with a set of values returned by a subquery.
+3)ALL – query data by comparing a value with a list of values returned by a subquery.
+4)EXISTS  – checks for the existence of rows returned by a subquery.
+
+
+
+*****1)Subquery – writes a query nested inside another query.
+
+** A subquery is a SQL query nested inside a larger query.
+
+a.) In PostgreSQL subquery can be nested inside a SELECT, INSERT, UPDATE, DELETE, SET, or DO statement or inside another subquery.
+b.) A subquery is usually added within the WHERE Clause of another SQL SELECT statement.
+c.) You can use the comparison operators, such as >, <, or =. The comparison operator can also be a multiple-row operator, such as IN, ANY,
+     SOME, or ALL.
+d.) A subquery can be treated as an inner query, which is a SQL query placed as a part of another query called as outer query.
+e.) The inner query executes first before its parent query so that the results of an inner query can be passed to the outer query.
+f.) To construct a subquery, we put the second query in brackets.
+g.) The query inside the brackets is called a subquery or an inner query. The query that contains the subquery is known as an outer query.
+
+
+** PostgreSQL executes the query that contains a subquery in the following sequence:
+
+a.) First, executes the subquery.
+b.) Second, gets the result and passes it to the outer query.
+c.) Third, executes the outer query.
+
+
+** Example:-
+Suppose we want to find the films whose rental rate is higher than the average rental rate. We can do it in two steps:
+
+a.) Find the average rental rate by using the SELECT statement and average function ( AVG).
+b.) Use the result of the first query in the second SELECT statement to find the films that we want.
+
+The following query gets the average rental rate:
+--Query		SELECT
+		 AVG (rental_rate)
+		FROM
+		 film;
+
+Now we can construct the subquery
+--Query		SELECT film_id, title, rental_date
+		  FROM
+	            film
+  		Where rental_rate > (SELECT
+		 			AVG (rental_rate)
+				     FROM
+		 			film);
+
+
+** PostgreSQL subquery with IN operator
+
+A subquery can return zero or more rows. To use this subquery, you use the IN operator in the WHERE clause.
+** Example:
+	 To get films that have the returned date between 2005-05-29 and 2005-05-30, you use the following query:
+
+--Query:- 	SELECT
+		 inventory.film_id
+		FROM
+		 rental
+		INNER JOIN inventory ON inventory.inventory_id = rental.inventory_id
+`		WHERE
+		 rental.return_date BETWEEN '2005-05-29'
+		AND '2005-05-30'
+		ORDER BY film_id
+
+--Output:-     film_id
+		15
+		19
+		45
+		50
+
+It returns multiple rows so we can use this query as a subquery in the WHERE clause of a query as follows:
+--Query:- 	SELECT
+		 film_id,
+		 title
+		FROM
+		 film
+		WHERE
+		 film_id IN (
+		 SELECT
+		 inventory.film_id
+		 FROM
+		 rental
+		 INNER JOIN inventory ON inventory.inventory_id = rental.inventory_id
+		 WHERE
+		 return_date BETWEEN '2005-05-29'
+		 AND '2005-05-30'
+		 );
+
+--Output:- It will contain film_id and title
+
+
+************************************************************************************************************************************************
+
+
+
+*****2)EXISTS:– checks for the existence of rows returned by a subquery.
+
+--Synatx:- EXISTS (subquery)
+
+If the subquery returns at least one row, the result of EXISTS is true,
+In case the subquery returns no row, the result is of EXISTS is false.
+
+Note:- If the subquery returns NULL, the result of EXISTS is true.
+
+--Synatx:- SELECT 
+	    column_1 
+	   FROM 
+	    table_1
+	    WHERE 
+	    EXISTS( SELECT 
+		        1 
+		    FROM 
+		        table_2 
+		    WHERE 
+		        column_2 = table_1.column_1);
+
+
+A) Find customers who have at least one payment whose amount is greater than 11.
+
+The following statement returns customers who have paid at least a rental which is greater than 11:
+
+--Query:-	
+		SELECT first_name,
+		       last_name
+		FROM customer c
+		WHERE EXISTS
+		    (SELECT 1
+		     FROM payment p
+		     WHERE p.customer_id = c.customer_id
+		       AND amount > 11 )
+		ORDER BY first_name,
+			 last_name;
+
+In this example, for each customer in the customer table, the subquery checks the payment table to find if that customer made at least one payment (p.customer_id = c.customer_id) and the amount is greater than 11 ( amount > 11)
+
+
+
+B) NOT EXISTS example
+
+NOT EXISTS is opposite to EXISTS, meaning that if the subquery returns no row, NOT EXISTS returns true. If the subquery returns any rows, NOT EXISTS returns false.
+
+The following example returns customers have not made any payment that greater than 11.
+
+--Query
+		SELECT first_name,
+		       last_name
+		FROM customer c
+		WHERE NOT EXISTS
+		    (SELECT 1
+		     FROM payment p
+		     WHERE p.customer_id = c.customer_id
+		       AND amount > 11 )
+		ORDER BY first_name,
+			 last_name;
+
+
+
+C) EXISTS and NULL
+
+If the subquery returns NULL, EXISTS returns true. See the following example:
+
+--Query
+		SELECT
+		 first_name,
+		 last_name
+		FROM
+		 customer
+		WHERE
+		 EXISTS( SELECT NULL )
+		ORDER BY
+		 first_name,
+		 last_name;
+
+In this example, the subquery returned NULL, therefore, the query returned all rows from the customer table.
+
+
+************************************************************************************************************************************************
+
+
+
+*****3)ANY  – retrieves data by comparing a value with a set of values returned by a subquery.
+
+		SELECT empno, sal
+		FROM   emp
+		WHERE  sal > ANY (2000, 3000, 4000);
+
+		     EMPNO        SAL
+		---------- ----------
+		      7566       2975
+		      7698       2850
+		      7782       2450
+		      7788       3000
+		      7839       5000
+		      7902       3000
+
+		SQL>
+
+		-- Transformed to equivalent statement without ANY.
+
+		SELECT empno, sal
+		FROM   emp
+		WHERE  sal > 2000 OR sal > 3000 OR sal > 4000;
+
+		     EMPNO        SAL
+		---------- ----------
+		      7566       2975
+		      7698       2850
+		      7782       2450
+		      7788       3000
+		      7839       5000
+		      7902       3000
+
+The PostgreSQL ANY operator compares a value to a set of values returned by a subquery. The following illustrates the syntax of  the ANY operator:
+
+--syntax:-      SELECT [* | column_list]
+		  FROM table_name
+		WHERE column_name operator ANY
+	          (SELECT column_name FROM table_name WHERE condition);
+
+In this syntax:
+
+a.) The subquery must return exactly one column.
+b.) The ANY operator must be preceded by one of the following comparison operator =, <=, >, <, > and <>
+c.) The ANY operator returns true if any value of the subquery meets the condition, otherwise, it returns false.
+d.) The ANY and ALL operators are used with a WHERE or HAVING clause.
+
+Note that SOME is a synonym for ANY, meaning that you can substitute SOME for ANY in any SQL statement.
+
+**Products table:- column name:- ProductID	ProductName	SupplierID	CategoryID	Unit	Price
+**OrderDetails table:- column name:- OrderDetailID	OrderID	ProductID	Quantity
+
+
+* Lists the productnames if it finds ANY records in the OrderDetails table that quantity = 10:
+--Query:-      SELECT ProductName
+		FROM Products
+              WHERE ProductID = ANY (SELECT ProductID FROM OrderDetails WHERE Quantity = 10);
+
+It will list down the product name which are sold having quantity = 10
+
+*** ANY vs. IN
+
+*Note:- The = ANY is equivalent to IN operator.
+
+*Note:- that the <> ANY operator is different from NOT IN. The following expression:
+
+x <> ANY (a,b,c) is equivalent to x <> a OR <> b OR x <> c
+
+
+************************************************************************************************************************************************
+
+
+
+
+*****4) ALL – The ALL comparison condition is used to compare a value to a list or subquery
+	The ALL operator returns true if all of the subquery values meet the condition.
+
+Note:- ALL is used with SELECT, WHERE, HAVING statement.
+
+
+		SELECT empno, sal
+		FROM   emp
+		WHERE  sal > ALL (2000, 3000, 4000);
+
+		     EMPNO        SAL
+		---------- ----------
+		      7839       5000
+
+		SQL>
+
+		-- Transformed to equivalent statement without ALL.
+
+		SELECT empno, sal
+		FROM   emp
+		WHERE  sal > 2000 AND sal > 3000 AND sal > 4000;
+
+		     EMPNO        SAL
+		---------- ----------
+		      7839       5000
+
+The following illustrates the syntax of the ALL operator:
+
+--syntax:- comparison_operator ALL (subquery)
+
+--syntax:-      SELECT [* | column_list]
+		  FROM table_name
+		WHERE column_name operator ALL
+	          (SELECT column_name FROM table_name WHERE condition);
+
+
+In this syntax:
+
+a.) The ALL operator must be preceded by a comparison operator such as equal (=), not equal (!=), greater than (>), greater than or equal to (>=), less than (<), and less than or equal to (<=).
+b.) The ALL operator must be followed by a subquery which also must be surrounded by the parentheses.
+With the assumption that the subquery returns some rows, the ALL operator works as follows:
+
+1.) column_name > ALL (subquery) the expression evaluates to true if a value is greater than the biggest value returned by the subquery.
+
+2.) column_name >= ALL (subquery) the expression evaluates to true if a value is greater than or equal to the biggest value returned by the subquery.
+
+3.) column_name < ALL (subquery) the expression evaluates to true if a value is less than the smallest value returned by the subquery.
+
+4.) column_name <= ALL (subquery) the expression evaluates to true if a value is less than or equal to the smallest value returned by the subquery.
+
+5.) column_name = ALL (subquery) the expression evaluates to true if a value is equal to any value returned by the subquery.
+
+6.) column_name != ALL (subquery) the expression evaluates to true if a value is not equal to any value returned by the subquery.
+
+
+
+* The following query returns the average lengths of all films grouped by film rating:
+--Query:-
+		SELECT
+		    ROUND(AVG(length), avg_length
+		FROM
+		    film
+		GROUP BY
+		    rating
+		ORDER BY
+		    avg_length DESC;
+
+
+--output :-   avg_length
+		111
+		112
+		113
+		119
+		120
+
+* To find all films whose lengths are greater than the list of the average lengths above, you use the ALL and greater than operator (>) as follows:
+--Query:- 
+		SELECT
+		    title,
+		    length
+		FROM
+		    film
+		WHERE
+		    length > ALL (
+			    SELECT
+				ROUND(AVG (length),2)
+			    FROM
+				film
+			    GROUP BY
+				rating
+		    )
+		ORDER BY
+		    length;
+
+--output:-	title		length
+          	Arizona		121
+		Boogie		121
+here all the title will have lenth greater than 120 because 120 is the biggest average length.
+
+As you can see clearly from the output, the query return all films whose lengths are greater than the biggest value in the average length list returned by the subquery
+
+
+
+If a subquery returns zero rows, the condition evaluates to TRUE. In the following example, the subquery returns zero rows, which means the whole expression "sal > ALL (zero rows)" evaluates to TRUE, so all rows are displayed.
+
+		-- The following query returns zero rows.
+		SELECT e2.sal FROM emp e2 WHERE e2.deptno = 100;
+
+		no rows selected
+
+		SQL>
+
+		-- Place it in the subquery of an ALL and the 
+		-- condition "sal > ALL (zero rows)" evaluates to TRUE
+		-- so all rows are displayed.
+		SELECT e1.empno, e1.sal
+		FROM   emp e1
+		WHERE  e1.sal > ALL (SELECT e2.sal FROM emp e2 WHERE e2.deptno = 100);
+
+		     EMPNO        SAL
+		---------- ----------
+		      7369        800
+		      7900        950
+		      7876       1100
+		      7521       1250
+		      7654       1250
+		      7934       1300
+		      7844       1500
+		      7499       1600
+		      7782       2450
+		      7698       2850
+		      7566       2975
+		      7788       3000
+		      7902       3000
+		      7839       5000

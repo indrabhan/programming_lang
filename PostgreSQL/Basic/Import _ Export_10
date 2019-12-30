@@ -1,0 +1,77 @@
+1.) Import CSV file into Table – shows you how to import CSV file into a table.
+	
+	--Syntax:-
+		COPY table_name(column_list)
+		FROM 'csv file path' DELIMITER ',' CSV HEADER
+
+	i.) First, you specify the table with column names after the COPY keyword.
+	    The order of the columns must the the same as in the CSV file.
+	    In case the CSV file contains all columns of the table, you don’t have to specify them explicitly
+		--Query:-
+			COPY sample_table
+			FROM 'C:\tmp\sample_data.csv' DELIMITER ',' CSV HEADER;
+	
+	ii.) Second, you put the CSV file path after the FROM keyword. Because CSV file format is used, 
+	     you need to specify DELIMITER as well as CSV keywords.
+	
+	iii.) Third, HEADER keyword indicates that the CSV file contains a header line with column names. 
+	      When importing data, PostgreSQL ignores the first line, which is the header line of the file.
+	
+	NOTICE that the file must be read directly by the PosgreSQL server, not by the client application. Therefore, it must be accessible to 		       the PosgreSQL server machine. Also you can execute COPY statement successfully if you have superusers access.
+
+	
+	Example:-
+		--Query:-
+			COPY persons(first_name,last_name,dob,email) 
+			FROM 'C:\tmp\persons.csv' DELIMITER ',' CSV HEADER;
+
+	
+	Import CSV file into table using pgAdmin III
+	
+		i.) Go to PgAdmin III.
+		ii.)Right click on table name choose the import option.		
+		iii.)Browse the the CSV file, choose format as CSV and click the Columns tab.
+		iv.)After than click on Misc.Options.
+		v.) check the Header checkbox because our CSV file has a header, choose comma (,) as the delimiter, and click Import button.
+		vi.)Finally, when the import process completes, click the Done button.
+
+
+	Note:- to know the delimiter copy data of csv file and paste it in text file, you can see (,) or (;) or any symbol after the value of 			first column.
+
+**********************************************************************************************************************************************
+
+2.)Export PostgreSQL Table to CSV file – shows you how to export tables to a CSV file.
+
+	Export data from table to CSV using COPY statement:-
+	
+		Export all columns:-
+			if you want to export the data of the persons table to a CSV file named persons_db.csv in the C:\tmp folder, you can 				use the following statement:
+			--Query:-
+				COPY persons 
+				TO 'C:\tmp\persons_db.csv' DELIMITER ',' CSV HEADER;
+
+		PostgreSQL exports all data from all columns of the persons table to the persons_db.csv file.
+
+
+		Export few columns:-
+			--Query:- 	
+				COPY persons(first_name,last_name,email) 
+				TO 'C:\tmp\persons_partial_db.csv' DELIMITER ',' CSV HEADER;
+
+	
+		NOTICE:- the CSV file name that you specify in the COPY command must be written directly by the server. It means that the 			       CSV file must reside on the database server machine, not your local machine. The CSV file also needs to be writable by 			       the user that PostgreSQL server runs as.
+
+
+	Export data from table to CSV file using \copy command:-
+
+		In case you have the access to a remote PostgreSQL database server, but you don’t have sufficient privileges to write to a file 		on it, you can use the PostgreSQL built-in command \copy.
+
+		The \copy command basically runs the COPY statement above. However, instead of server writing the CSV file, psql  writes the 			CSV file, transfers data from the server to your local file system.
+
+		To use \copy command, you just need to have sufficient privileges to your local machine. It does not require PostgreSQL 		superuser privileges.
+
+		Example:-if you want to export all data of the persons table into persons_client.csv
+		
+			--Query:-
+				\copy (SELECT * FROM persons) to 'C:\tmp\persons_client.csv' with csv
+
