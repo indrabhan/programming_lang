@@ -133,7 +133,7 @@ Example:- x = pi
 	  x = sqrt(4)
 
 
-**from sale import *
+**from math import *
 you can directly access all variable's and function's.Except private variable and functions.
 Example:- x = pi
 	  x = sqrt(4)

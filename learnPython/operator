@@ -1,0 +1,12 @@
+1.) "/" = divide
+
+2.) "//" = floor Operator/Function
+	1.)If the answer of given values contain the decimal part than it will remove the decimal part.
+		Eg:- 11 // 3 = 3
+
+	2.)If the given values are in decimal and the answer would also contain decimal part than it will return decimal as zero.
+		Eg:-11.97 // 3 = 3.0 
+	
+3.) "**" = raise to power
+
+	Eg:- 10 ** 2 (10 raise to power 2)
