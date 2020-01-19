@@ -37,9 +37,19 @@ discard(elemet) if element not present in set does not raise error.
 pop() takes no argument,default remove 1st element.
 we can perform set comprehension.
 
+set operation
+	1.)intersection:- return the match element of both set.
+	2.)union:- return matched and unmatched elements of both set.	
+	3.)difference:- return unmatched elements of 1st set.
+	4.)symmentric_difference:-
+
 dict**
 we can perform dict comprehension.
 key must be unique, value can be duplicate
+	Example:- 
+		a = {'name': 'Indra', 'age': 23}
+		new = dict(country='India', colrs=['red','green'])	# observe this line.
+		a.update(new)
 
 
 Function**

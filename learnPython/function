@@ -1,0 +1,92 @@
+Eg1:-
+a = "indrabhan bhamare"
+b = lambda x : x.split(" ")	// anonymous function
+print (b(a))
+
+Note:- here we have assign the function to a variable,so that variable will be treated as function.
+
+
+
+Eg:-
+def add(*args):
+	"""This function returns the addition of given numbers"""
+	return sum(args)
+
+a = add(1,2,3,4)
+print (a)
+print (a.__doc__) 	// It will return the doc but that string should be in triple quotes.
+
+
+
+Eg:-
+
+a,b = 2		// wrong
+
+a,b = 2,2      //a=2, b=2
+
+
+Eg:-
+a = "indra"
+
+for seq_no, i in enumerate(a):		enumerate returns the iteration number.
+	print (i, seq_no)
+
+o/p:- i 0
+	n 1
+	d 3
+	r 4
+
+
+*************************Slice
+[start_position : end_position]
+Note:- end_position will always have value end_position - 1
+	if start position is not define than it will start from zero.
+	if end position is not define than it will go till end of string.
+	if the position number is +ve than its counting position starts from zero
+	if the position number is -ve than counting starts from the last char.
+"""
+
+a = "indrabhan bhamare"
+print(a[ : 5])	o/p:-indra   (5-1 = 4 so till 4th position)
+
+
+print(a[ : -5])	o/p:-indrabhan bh (-5-1 = -6 so stop at -6th position )
+
+
+print(a[ :: 3]) o/p:- irh ar (double colon means skip between iteration and keep going on 3rd position number and while skiping counting will 				start from one and not from zero.)
+
+
+*********************************** .format
+age = 20;
+my_age = "I am {0} years old".format(age)
+print (my_age)
+
+
+
+******************************list
+
+b = 2
+a = b
+print (a,b) o/p:- 2,2
+
+a = 3
+print(a,b) o/p:- 3,2
+
+but in list it is different
+
+b = [1,2,3]
+a = []
+a = b
+print (a,b) o/p:- both list will have same element
+
+b.append(4)
+print (a.b) o/p:- both list will have same element
+
+Note:- here a and b refer to same memory address.
+
+print (id(a))
+print (id(b))	both will refer to same memory address
+
+but if you dont want new element to be in other list than use copy() method
+
+c = b.copy() 	// now here c will have different memeory address.
