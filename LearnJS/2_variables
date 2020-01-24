@@ -68,13 +68,13 @@ Example:-
 		output:- 10 number
 			 indra string
 
-+ operator works as addition if numbers are use and if you use string and numbers than it will work as concatination
++ operator works as addition if numbers are use and if you use string and numbers than it will work as concatination.
   string and int concatination is not support in python
 	var a = 10;
 	var b = 20;
 	var c = a+b;		o/p:- 30
 
-	var x = '50';		string and int concatination is not support in python.
+	var x = '50';		** string and int concatination is not support in python.
 	var y = 10;
 	var z = x+y;		o/p:-5010
 

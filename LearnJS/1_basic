@@ -115,7 +115,7 @@ Where to place script element?
 		</script>
 		</body>
 
-	Note:- Here the inside the text box coclor will be read
+	Note:- Here the inside the text box color will be read
 
 
 	Example2:- script elemet place in head tag
@@ -140,7 +140,7 @@ Where to place script element?
 
 How script loads in web page:
 
-	1.)The browser start parsing the HTML( load html code)
+	1.)The browser start parsing the HTML(load html code)
 	2.)When the parse encounters a <script>tag that references an external JavaScriptFile.The parser stop parsing the HTML and browser 		   makes request to download the script file.Until the download is complete, the parser is blocked from parsing the rest of the HTML 		   page.
 	3.)When the download is complete, thats when the parser will resume the parse the rest of HTML.
 	4.)According to HTTP/1.1 only two JavaScript file will downloaded simultaneously.If you have 10 file than 1st two will download and 		   next two and so on.

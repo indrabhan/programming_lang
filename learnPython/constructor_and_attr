@@ -35,12 +35,12 @@ hasattr(obj, name)		It returns true if the object contains some specific attribu
 
 Example:-
 	class Student:
-		def __init__(self, place, id):
-			self.place = place
-			self.id = id
+		def __init__(self, name, age):
+			self.n = name
+			self.g = age
 
-		stud_obj = Student('Dhule', 23)
-		a = getattr(stud_obj, 'place')		# o/p Dhule
+		stud_obj = Student('Indra', 23)
+		a = getattr(stud_obj, 'n')		# o/p Indra
 		
 
 		b = setattr(stud_obj, 'id', 28)		# It will set the attribute id=23 to id=28
