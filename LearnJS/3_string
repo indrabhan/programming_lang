@@ -48,7 +48,7 @@ String:-
 
 7.)
 	substring(start, end), substr(start, count), slice(start, end) :- 
-		this 3 meyhods are indentically same.
+		this 3 methods are indentically same.
 		the last parameter in all 3 methods are optional.
 		the string indexing start from zero position.
 		

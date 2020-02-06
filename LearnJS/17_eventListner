@@ -1,0 +1,120 @@
+Assigning event handlers in JavaScript using the following methods
+
+1.)addEventListener:- We can call multiple event handler on the same event and all the event handler will be executed
+		      but if we do the same in DOM object than only the last event handler wins.
+		      Note:- The order in which this event handler will be executed is not define.
+			     Do not work only in IE 8 and earlier version
+
+	syntax:- element.addEventListener("event", handler_method, phase)
+			 event :- name of event, it should be in string
+			 handler:- event handler/function
+			 phase:- optional(if false than event bubbling occurs, if true than event capturing occurs)
+
+			Bubbling works from innermost to outermost
+			capturing works from outermost to innermoust
+
+	Example:-
+		<head>
+			<input type="button" id="btn" value="Click Me"/>
+			<script type="text/javascript">
+
+			btn.addEventListener("mouseover", changeColorMouseOver);	// Note:- observe event name is without "on"
+			btn.addEventListener("mouseout", changeColorMouseOut)		// Note:- handler name is without parenthesis.
+
+			function changeColorMouseOver(){
+				this.style.background='red';
+				this.style.color='yellow';
+			}
+
+			function changeColorMouseOut(){
+				this.style.background='black';
+				this.style.color='white';
+			}
+			</script>
+		</head>
+
+	Example:-assign multiple event handler on same event.Note:- The order in which this event handler will be executed is not define.
+		<head>
+			<input type="button" id="btn" value="Click Me"/>
+			<script type="text/javascript">
+			btn.addEventListener("click", handler1);
+			btn.addEventListener("click", handler2);
+			function handler1(){
+				alert("handler 1")
+			}
+
+			function handler2(){
+				alert("handler 2")
+			}
+			</script>
+		</head>
+
+2.)removeEventListener:-
+	syntax:- element.removeEventListener(event, handler_method, phase)
+			 event :- name of event, it should be in string
+			 handler:- event handler
+			 phase:- optional
+
+		Note:-   Do not work only in IE 8 and earlier version
+
+	Example:-
+		<head>
+			<input type="button" id="btn" value="Click Me"/>
+			<br/>
+			<input type="button" id="removebtn" value="Remove Events" onclick="removeEventHandlers()">
+			<script type="text/javascript">
+
+			btn.addEventListener("mouseover", changeColorMouseOver);
+			btn.addEventListener("mouseout", changeColorMouseOut);
+
+			function changeColorMouseOver(){
+				this.style.background='red';
+				this.style.color='yellow';
+			}
+
+			function changeColorMouseOut(){
+				this.style.background='black';
+				this.style.color='white';
+			}
+
+			function removeEventHandlers(){
+				btn.removeEventListener('mouseover', changeColorMouseOver)
+				btn.removeEventListener("mouseout", changeColorMouseOut)
+			}
+			</script>
+		</head>
+
+3.)attachEvent:- works only in IE 8 and earlier version
+		 Syntax:-
+			element.attachEvent("on"+event, handler)
+
+
+4.)detachEvent:- works in only IE 8 and earlier version
+		 Syntax:-
+			element.detachEvent("on"+event, handler)
+
+
+
+**Note:- In some browser addEventListener works and in some attachEvent works but we want both methods to be executed in all browser, so we 		 have to find a solution and that solution is known as cross browser solution
+
+	Example:-
+		<head>
+			<input type="button" id="btn" value="Click Me"/>
+			<script type="text/javascript">
+
+			if (btn.addEventListener){
+				btn.addEventListener("click", handler1);
+			}
+			else{
+				btn.attachEvent("onclick", handler1);
+			}
+
+			function handler1(){
+				alert("handler 1")
+			}
+			</script>
+		</head>
+
+
+
+

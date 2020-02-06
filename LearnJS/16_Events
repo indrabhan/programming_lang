@@ -10,9 +10,47 @@ Events in JavaScript:-
 	1.) Using the attribute of HTML tag.
 	2.) Using DOM Object Property.
 	3.) Using special methods.
-	
 
+	Example 1:-
+		<input type="button" value="Click Me" id="btn"
+			onmouseover="this.style.background='red';this.style.color='yellow'"
+			onmouseleave="this.style.background='white';this.style.color='black'" />
 
+		# this refers to current element 
+		<!-- here this keyword ref to button element/this keyword is known as self in python -->
+
+	Example 2:-
+		<input type="button" value="Click Me" id="btn" onmouseover="mouseOver()"
+			onmouseout="mouseOut()" />
+		<script type="text/javascript">
+			function mouseOver(){
+				document.getElementById('btn').style.background = 'red';
+				document.getElementById('btn').style.color = 'yellow';
+			}
+			function mouseOut(){
+				var control = document.getElementById('btn');
+				control.style.background='white';
+				control.style.color='black';
+			}
+		</script>
+
+	Example 3:-
+		<input type="submit" value="Submit" onclick="return submitForm()" /> 		 
+		<script type="text/javascript">
+			function submitForm(){
+				if (confirm('Are you sure you want to submit')){
+					alert('You have selected Ok')
+					return true
+				}
+				else{
+					alert('You have selected cancel')
+					return false
+				}
+			}
+		</script>
+
+	# Note:-here on onclick you have use return and methodName because method will return true or false and if it return true than form 			will be submitted to server.
+		The comfirm keyword is just like odoo to display message and if press ok then it will run its functionality.
 
 	Some of the most common event types and event names:
 
@@ -23,7 +61,6 @@ Events in JavaScript:-
 		5.)window events: scroll, resize, hashchange, load, unload
 
 		Note:- Touch events are only triggered on touch-enabled devices like smartphones and touch-screen laptops.
-
 
 		abourt:- Occurs when user cancels loading of an image
 		click:-  Occurs when user click on link or form element
@@ -346,11 +383,11 @@ this keyword:- Current Object Reference, "this" keyword in JS is refer as like s
 		</body>
 
 
-DOM Object:-
+*******************************************DOM(Document Object Model)************************************************************
+
+2.)DOM Object:-
 	DOM stands for Document Object Model. When a browser loads a web page,the 
 	browser creates a Document Object Model of that page. 
-
-	
 
 
 	Eample1:- We have make the use of DOM, instead of html attribute.
@@ -362,10 +399,10 @@ DOM Object:-
 		<input type="text" id="ln"|/>
 		<script type="text/javascript">
 			window.document.getElementById("fn").onkeyup = requiredField;		// code same as below line of code.
-			document.getElementById("ln").onkeyup = requiredField;
+			document.getElementById("ln").onkeyup = requiredField;			// methods are assigned without ()
 
 			function requiredField(){
-				if (this.value == ""){
+				if (this.value == ""){					// here this keyword refers to 'fn' element/id
 					this.style.background = 'red';
 				}
 				else{

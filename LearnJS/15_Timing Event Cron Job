@@ -1,4 +1,4 @@
-In JavaScript a piece of code can be executed at specified time of interval.
+In JavaScript a piece of code can be executed at specified time of interval.i.e know as cron job in python.
 
 1.)setInterval(func, delay):- Executes a specified function,repeatedly at specified time interval.
 			      called repeatedly.
