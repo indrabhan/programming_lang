@@ -90,3 +90,30 @@ print (id(b))	both will refer to same memory address
 but if you dont want new element to be in other list than use copy() method
 
 c = b.copy() 	// now here c will have different memeory address.
+
+
+
+*******************zip*****************
+
+# The purpose of zip() is to map the similar index of multiple containers 
+# so that they can be used just using as single entity.
+
+name = [ "Manjeet", "Nikhil", "Shambhavi", "Astha" ] 
+roll_no = [ 4, 1, 3, 2 ] 
+marks = [ 40, 50, 60 ]
+
+a = zip(name, roll_no, marks)
+a = list(a)
+print ('_____Zipped_values_________',a)
+
+
+#unzipped
+
+# How to unzip?
+# Unzipping means converting the zipped values back to the individual self as they were. This is done with the help of “*” operator.
+
+name, roll_no, marks = zip(*a)
+
+print ('\n______name______',name)
+print ('\n______roll_no______',roll_no)
+print ('\n______marks______',marks)
