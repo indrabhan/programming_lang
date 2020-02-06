@@ -1,0 +1,49 @@
+**Preventing Browsers default action:-
+	When you click on a link the page navigates to the specified link.
+	When you right click on the web page the browser displays the contextmenu.
+
+	By 2 ways we can achieve this,the simplies ways is return false.The other way is by using event object
+
+	IE8 and earlier version:
+		event.returnValue = false;
+
+	IE9 & later version and all other browsers:
+		event.preventDefault();
+
+Example1:- disable the contextmenu
+	
+		<head>
+		</head>
+		<body oncontextmenu="return false">
+			<h1>On this page the right click is disable</h1>
+		</body>
+
+
+Example2:- using event object disable contextmenu
+
+	<head>
+	</head>
+	<body>
+	<h1>Right click is disable</h1>
+	<script type="text/javascript">
+		document.oncontextmenu = preventDefaultAction;
+
+		function preventDefaultAction(event){
+			event = event || window.event
+			if (event.preventDefault){
+				event.preventDefault()
+			}
+			else{
+				event.returnValue = false;
+			}	
+		}
+	</script>
+	</body>
+
+
+Example3:disable the link.
+	<head>
+	</head>
+	<body>
+	<a href="https://www.google.com" onclick="return false"/><h3>Google</h3></a>
+	</body>
