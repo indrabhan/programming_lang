@@ -1,0 +1,43 @@
+*Constructor:- A constructor is a special type of method (function) which is used to initialize the instance members of the class.
+
+		Constructors can be of two types.
+
+			1.)Parameterized Constructor
+			2.)Non-parameterized Constructor
+
+		In python, the method __init__ simulates the constructor of the class.
+		This method is called when the class is instantiated.(when class object is created.)
+
+	Example:-
+		class Employee:  
+		    def __init__(self,name,id):  	# constructor, it will be called automactically when the class object is created.
+			self.id = id;  
+			self.name = name;  
+		    def display (self):  
+			print("ID: %d \n Name: %s" % (self.id,self.name))  	# %d is used for integer value
+										# %s is used for string value.
+		emp = Employee("John",101)  
+		emp.display()
+
+*Method Overriding:-(for overriding we must have inheritance.) (same method name in different class.)
+		     When the parent class method is defined in the child class with some specific implementation, then the concept is called 			     method overriding.
+
+	Example:-
+		class Animal:  
+		    def speak(self):  
+			print("speaking")
+
+		class Dog(Animal):  
+		    def speak(self):  
+			print("Barking")
+ 
+		d = Dog()
+		d.speak()	# o/p Barking  
+
+*Method Overloading:-
+			mulitiple method having same name but different arguments.
+			python recoginized only the last method(same method name).
+
+			Python does not support overloading because function arguments are not define with the datatype.
+			In other language we define variables with datatype. 
+

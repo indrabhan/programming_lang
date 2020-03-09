@@ -1,0 +1,100 @@
+In JavaScript we dont not have classes.Instead we use functions.
+so their are two ways in which we can create Objects.
+
+1.)Constructor function:- Object define using the constructor lets you to have multiple instance of that object.
+			  This means change made to one instance, will not affect other instance.
+			  In short I can say its like a non-static variables.
+	Example:-
+		<body>
+		<script type="text/javascript">
+			function Employee(firstName, lastName){
+				this.fname = firstName;
+				this.lname = lastName;
+				this.getFullName = function (){
+					return this.fname + " " + this.lname
+				}
+			}
+
+			// Here we created an Object "emp" of function Employee
+			var emp = new Employee("Indra", "Bhamare")
+
+			document.write(emp.fname + "<br/>")
+			document.write(emp.lname + "<br/>")
+			document.write(emp.getFullName() + "<br/>")
+		</script>
+		</body>
+
+
+	Example2:-
+		<body>
+		<script type="text/javascript">
+			var emp = function (){
+				this.fname = "Indrabhan";
+			}
+			var employee = new emp()
+
+			var newEmployee = new emp();
+
+			document.write("Before Change" + "<br/>")
+			document.write("employee firstName: " + employee.fname + "<br/>");			// op:- Indrabhan
+			document.write("newEmp firstName: " + newEmployee.fname + "<br/>");			// op:- Indrabhan
+
+			document.write("<br/><br/>")
+
+			newEmployee.fname = "Bittu"
+			document.write("After Change" + "<br/>")
+			document.write("employee firstName: " + employee.fname + "<br/>");			// op:- Indrabhan
+			document.write("newEmp firstName: " + newEmployee.fname + "<br/>");			// op:- Bittu
+		</script>
+		</body>
+
+2.)Literal notation:- Objects created using literal are singletons.This means when a change is made to the object, 
+		      it affects that object accross the entire script.
+		      In short I can say its like a static variables.
+	Example:-
+		<body>
+		<script type="text/javascript">
+			// Here "emp" is treated as Object
+			var emp = {
+				fname: "Indrabhan",
+				lname: "Bhamare",
+				getFullName: function(){
+					return emp.fname + " " + emp.lname
+				}
+			}
+			document.write(emp.fname + "<br/>")
+			document.write(emp.lname + "<br/>")
+			document.write(emp.getFullName() + "<br/>")
+		</script>
+		</body>
+
+
+	Example2:-
+		<body>
+		<script type="text/javascript">
+			var emp = {
+				fname: "Indrabhan"
+			}
+			var newEmp = emp;
+			document.write("Before Change" + "<br/>")
+			document.write("emp fname: " + emp.fname + "<br/>")				// op:- Indrabhan
+			document.write("newEmp fname: " + newEmp.fname + "<br/>")			// op:- Indrabhan
+
+			document.write("<br/><br/>")
+
+			newEmp.fname = "Bittu"
+
+			document.write("After Change" + "<br/>")
+			document.write("emp fname: " + emp.fname + "<br/>")				// op:- Bittu
+			document.write("newEmp fname: " + newEmp.fname + "<br/>")			// op:- Bittu
+
+		</script>
+		</body>
+
+
+**When to use over the other:-
+	If you need multiple instance of the object use constructor function
+	whereas if you need just one instance of the object then use literal notation.
+
+
+

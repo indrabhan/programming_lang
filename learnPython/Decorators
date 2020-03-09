@@ -1,16 +1,23 @@
-Decorators:- A decorator is a function that takes another fucntion as an input and extend the behaviour of latter function
-	     without explicitly modifying it.means without changing the single line of code of input function.
+Decorators:- A decorator is a function that receives another function as argument. 
+	     The behaviour of the argument function is extended by the
+	     decorator without actually modifying it.
 
+A decorator takes in a function, adds some functionality and returns it.
+Decorators in Python make an extensive use of closures as well.
+
+Functions are objects; they can be referenced to, passed to a variable and returned from other functions as well.
+Functions can be defined inside another function and can also be passed as argument to another function.
+A decorator is a function that receives another function as argument. The behaviour of the argument function is extended by the decorator without actually modifying it.
 
 *args = tuples
 **kwargs = dict
 
 Example:-
 	authorized_user = {'indra': '2391',
-		   'sagar': '2992',
-		   'amit': '2193'}
+			   'sagar': '2992',
+			   'amit': '2193'}
 
-	def auth(func):						# this is the decorator function
+	def auth(func):							# this is the decorator function
 		print "6 auth"		
 		def wrapper(*args, **kwargs):				# we must write another func inside decorator func with the parameter.
 									  beacuse it has to return new func with some extra behaviour.
@@ -41,6 +48,36 @@ Example:-
 							  get_bolgs
 							# now get_bolgs() will execute.
 
+
+Example2:-
+	def star(func):
+	    def inner(*args, **kwargs):
+		print("1" * 30)
+		func(*args, **kwargs)
+		print("2" * 30)
+	    return inner
+
+	def percent(func):
+	    def inner(*args, **kwargs):
+		print("3" * 30)
+		func(*args, **kwargs)
+		print("4" * 30)
+	    return inner
+
+	@star
+	@percent
+	def printer(msg):
+	    print(msg)
+
+	printer("Hello")
+
+
+	o/p:-
+		111111111111111111111111111111
+		333333333333333333333333333333
+		Hello
+		444444444444444444444444444444
+		222222222222222222222222222222
 
 
 ************************** Parameterized decorators ******************************
@@ -86,22 +123,21 @@ Example:-
 
 
 
-
 ******************************** @property Decorator  ***************************bulit-in property
 
 property decorator has "setter" and "deleter"
 
 @property:-
 @property decorator will provide some extra features to function and make it act like class attribute/variable
-means you can acces that fucntion as a class attribute/variable.
+means you can acces that function as a class attribute/variable.
 
 In short call the function like we call the attribute/variable.
 
 
 scenario:-  when "com" variable value depends on the combined value of 2 or 3 variable.
 	    so when i will change the value of one variable it will not change the "com" variable value.
-	    so to get the effect of  change i will make "com" variable as function. and will access that func like variable.
-	    we mostly used this decoratpr when the code is already developed.
+	    so to get the effect of change i will make "com" variable as function. and will access that func like variable.
+	    we mostly used this decorator when the code is already developed.
 
 Example:-
 
@@ -150,9 +186,9 @@ Example:-
 	print g.wins	# o/p:-1
 
 
-	# print g.looses	# o/p:-0
+	# print g.looses	# o/p:- 0
 	# g.lost_level()
-	# print g.looses	# o/p:-1
+	# print g.looses	# o/p:- 1
 
 	print "score ",g.score	# o/p:- 1-1=0   # we called function score() as a variable.
 
@@ -195,9 +231,39 @@ Example:-
 	print (e.email)
 
 
+Example2:-
+	class Geeks: 
+	
+	# using property decorator 
+	# a getter function 
+	@property
+	def age(self): 
+		print "getter method called"
+		return self._age 
+	
+	# a setter function 
+	@age.setter 
+	def age(self, a): 
+		if(a < 18): 
+			raise ValueError("Sorry you age is below eligibility criteria") 
+		print "setter method called"
+		self._age = a 
+
+mark = Geeks() 
+
+mark.age = 20
+
+print(mark.age) 
+
+o/p:-
+	setter method called
+	getter method called
+	20
+
+
 
 		*******************	deleter	    *******************
-suppose we want to delete the fullname of employee so we want ti run some kind of clean code.
+suppose we want to delete the fullname of employee so we want it run some kind of clean code.
 insted of setter we will use deleter
 
 
@@ -206,7 +272,7 @@ insted of setter we will use deleter
 	********************* @staticmethod *********************
 
 @staticmethod :- we use this deco on method,when we do not make the use of self parameter.
-		 As this method is a static method we can we it with class name or object ref of class name
+		 As this method is a static method we can use it with class name or object ref of class name
 
 
 Example:-

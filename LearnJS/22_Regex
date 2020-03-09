@@ -1,13 +1,13 @@
 Regex:- A regular expression is a sequence of special character that forms the search pattern.
 
-	Note:- regular expressions are writen in between forward slash
+	Note:- regular expressions are writen in between forward slash " // "
 
 Regular expression can be used with the following string methods.
 1.)string.match(RegExp)
 	Example:-
 		<body>
 			<script type="text/javascript">
-			var regexString = "Tom contact number is 9876543210.His age is 35.Mark contact number is  9870123456.His age is 45."
+			var regexString = "Tom contact number is 9876543210.His age is 35.Mark contact number is 9870123456.His age is 45."
 
 			document.write(regexString.match(/\d/) + "<br/>")		// o/p:-9
 			document.write(regexString.match(/\d+/) + "<br/>")		// o/p:-9876543210 ("+" means 1 or more repeatation of 														     preceeding character)
@@ -97,7 +97,7 @@ m:-Multi-line search.
 ***There are two ways to create Regular Expression.
 
 1.)Using regular expression literal
-	var regex = /\d+/g'
+	var regex = /\d+/g
 
 2.)Using Constructor function of the RegExp object.
 	var regex = new RegExp("\\d+", "g")		Note:- if we use single slash it will be treated as string, so we add double slash
@@ -154,15 +154,17 @@ Methods of RegExp Object
 			</script>
 		</body>
 
+		Note:- methods can be used on literal ways also or even or direct regexpattern(regexpattern.exec(string))
+
 	Example2:- exec() methods return only 1st matched occurances, but we want all the matched.
 		<body>
 			<script type="text/javascript">
 			var regexString = "Tom contact number is 9876543210. tom age is 35. TOM lives in canada."
 			var regexObject = new RegExp('\\d+', 'g')	
 			var result;				
-			while(result = regexObject.exec(regexString))
+			while(result = regexObject.exec(regexString) != null)
 			{
-				document.write(result + "<br/>")
+				document.write(result[0] + "<br/>")	# because result type will be array
 			}
 			</script>
 		</body>

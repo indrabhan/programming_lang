@@ -1,3 +1,4 @@
+window.close():-
 window.open(url,name, features,replace):-
 	Note:- All the parameters of window.open is optional
 

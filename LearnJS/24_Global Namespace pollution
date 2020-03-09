@@ -1,7 +1,12 @@
-OverLoading is not their in JS.
+OverLoading is not supported in JS/Python.
+	In overloading methods have same name but different number/type of arguments.
+	two methods with same name and different arguments, so in JS the method which is loaded last will be executed.
+
+	Python:-Python does not support method overloading, that is, it is not possible to define more than one method with the same name in a 			class in python. This is because method arguments in python do not have a type. A method accepting one argument can be called 			with an integer value, a string or a double
+
 Global object is the window object.
 
-Note:-If two or more js file have the same method name than depending on which file is loaded last, that file method will override the previous 	loaded method.
+Note:-If two or more js file have the same method name than depending on which file is loaded last, that file method will override the previous loaded method.
 
 Example:- create two JS file with the same function name but with different parameters and the one html file.
 
@@ -40,8 +45,9 @@ Code:-<html>
 	</body>
 
 	output:- Indrabhan Bhamare undefined	(If you change the js file sequence output will be different)
+
 	Note:- TeamA.js loads first and than TeamB.js, both having same function name so the last wins.
-	       In the console type window.customer, you will be able know which function has runned the last.
+	       In the console type window.customer, you will be able know which function has run the last.
 
 
 ***Solution For Global Namespace
@@ -75,13 +81,13 @@ Code:-
 FileName:-TeamB.js
 Code:-	
 	// Suppose two teams working in js project for OfficeBeacon(ob)
-	//IF  ob Object is available used that else create and empty Object.
+	//IF ob Object is available used that else create and empty Object.
 
 	var ob = ob || {};
 	//than access the file object from the ob object if available, If not create empty object.
 
 	ob.TeamB = ob.TeamB || {}
-	//own the to be the function to be the part of ob.TeamB
+	//own the function to be the part of ob.TeamB
 
 	ob.TeamB.customer = function (firstName, middleName, lastName){
 		this.firstName = firstName;

@@ -1,0 +1,70 @@
+*Built-in class attributes:-
+
+Attribute		Description
+
+__dict__		It provides the dictionary containing the information about the class namespace.
+__doc__			It contains a string which has the class documentation
+__name__		It is used to access the class name.
+__module__		It is used to access the module in which, this class is defined.
+__bases__		It contains a tuple including all base classes.
+
+
+
+Example:-
+	class Student:
+		"This is sample Student class"
+		def __init__(self, place, id):
+			self.place = place
+			self.id =id
+
+		stud_obj = Student('Dhule', 23)
+
+		print "__doc__",stud_obj.__doc__		# o/p This is sample Student class
+		print "__dict__",stud_obj.__dict__		# o/p {'place': 'Dhule', 'id': 23}
+		print "__module__",stud_obj.__module__		# o/p __main__
+
+		if __name == "__main__":
+			print "This is main module"		# o/p This is main module.
+
+
+
+*The issubclass(sub,sup) method
+
+The issubclass(sub, sup) method is used to check the relationships between the specified classes. It returns true if the first class is the subclass of the second class, and false otherwise.
+
+Example:-
+	class Calculation1:  
+    		def Summation(self,a,b):  
+       		return a+b;  
+
+	class Calculation2:  
+	    def Multiplication(self,a,b):  
+		return a*b;  
+
+	class Derived(Calculation1,Calculation2):  
+	    def Divide(self,a,b):  
+		return a/b;  
+
+	d = Derived()  
+	print(issubclass(Derived,Calculation2))  	# o/p True
+	print(issubclass(Calculation1,Calculation2))    # o/p False
+
+
+
+*The isinstance (obj, class) method
+
+The isinstance() method is used to check the relationship between the objects and classes. It returns true if the first parameter, i.e., obj is the instance of the second parameter, i.e., class.
+
+Example:-
+	class Student:
+		"This is sample Student class"
+		def __init__(self, place, id):
+			self.place = place
+			self.id = id
+		stud_obj = Student('Dhule', 23)
+
+		print (isinstance(stud_obj, Student))		# True
+
+
+
+

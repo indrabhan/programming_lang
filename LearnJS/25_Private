@@ -1,19 +1,20 @@
+Private:-
+	Private variable are declare using "var" keyword.
+	nested function are the private function.
+	If you assign function to variable declare with var keyword than that function is also a private function
+	Private variable and methods can not be access outside the function.
+
+Privileged Function:-
+	Privileged methods are created using "this" keyword.
+	Privileged methods can access private variable and methods.
+	Like public methods, privileged methods are also available outside the constructor function.
+
 Public:-
 	Public variable declare using "this" keyword.
 	Public methods are created using Prototype property of the constructor function.
 	Public variable and methods can be access outside the function(constructor).
 	Public methods can call Privileged methods but not private methods.
 
-Private:-
-	Private variable are declare using "var" keyword.
-	nested function are the private function.
-	Private variable and methods can not be access outside the function.
-
-
-Privileged Function:-
-	Privileged methods are created using "this" keyword.
-	Privileged methods can access private variable and methods.
-	Like public methods, privileged methods are also available outside the constructor function.
 
 on the fly:-We can create and assign the value to a variable outside the function and that variable is treated as public variable.
 
@@ -58,7 +59,7 @@ Example:-
 		
 		document.write(emp.privateFullName + "<br/>")			// o/p undefined
 
-		emp.privateFullName = "Bittu";					// on the fly we are creating and assigning value to a variable 										   and this variable is treated as public, Here no need to get 											   confuse just the names are same as that the name of private 											   variable.
+		emp.privateFullName = "Bittu";					// on the fly we are creating and assigning value to a 											   variable and this variable is treated as public, Here no 											   need to get confuse just the names are same as that the 											   name of private variable.
 
 		document.write(emp.privateFullName + "<br/>")			// Public variable created on fly.
 		</script>

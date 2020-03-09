@@ -1,0 +1,27 @@
+*Python In-built class functions
+
+The in-built functions defined in the class are described in the following table.
+
+Function			Description
+
+getattr(obj, name, default)	It is used to access the attribute of the object.
+setattr(obj, name, value)	It is used to set a particular value to the specific attribute of an object.
+delattr(obj, name)		It is used to delete a specific attribute.
+hasattr(obj, name)		It returns true if the object contains some specific attribute.
+
+
+Example:-
+	class Student:
+		def __init__(self, name, age):
+			self.n = name
+			self.g = age
+
+		stud_obj = Student('Indra', 23)
+		a = getattr(stud_obj, 'n')		# o/p Indra
+		
+
+		b = setattr(stud_obj, 'id', 28)		# It will set the attribute id=23 to id=28
+		c = getattr(stud_obj, 'id')		# o/p 28
+		
+
+

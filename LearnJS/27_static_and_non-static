@@ -1,0 +1,66 @@
+***Static and non-static:- 
+	non-static / instance:-
+		In python we define non-static variable as "self.vraiable_name", here in JS "this.vraiable_name";
+		Every time you create a instance, memory will be allocated to that variable.
+
+	static:- we can also define static variable using "Class_name.variable", So in JS we define using "Function_name.variable"
+		 memory is allocated only once.
+		 static variable and methods can be also access with class_name, so in JS with function_name.
+
+Example:-instance and static variables.
+	<head>
+	<body>
+	<script type="text/javascript">
+		function Circle(radius){
+			this.Radius = radius;			// instance / non-static variable
+			Circle.PI = 3.41;			// static variable.
+			this.getCircleArea = function(){
+				return Circle.PI * (this.Radius * this.Radius)
+			}account
+		}
+		var c = new Circle(10);
+		alert(c.getCircleArea())
+	</script>
+	</body>
+	</head>
+
+
+Example1:-Non-static method.
+	<head>
+	<body>
+		<script type="text/javascript">
+		function availableShapes(s){
+			this.shape = s;
+			this.count = ++this.count || 1;
+		this.showCount = function(){
+				return this.count;
+			}
+		}
+		var shape1 = new availableShapes("circle")
+		var shape2 = new availableShapes("circle")
+		var shape3 = new availableShapes("circle")
+		var shape4 = new availableShapes("circle")
+		alert(shap42.showCount());				     // o/p :- 1
+		</script>
+	</body>
+	</head>
+
+Example2:- static method
+	<head>
+	<body>
+		<script type="text/javascript">
+		function availableShapes(s){
+			this.shape = s;
+			availableShapes.count = ++availableShapes.count || 1;
+		availableShapes.showCount = function(){
+				return availableShapes.count;
+			}
+		}
+		var shape1 = new availableShapes("circle")
+		var shape2 = new availableShapes("circle")
+		var shape3 = new availableShapes("circle")
+		var shape4 = new availableShapes("circle")
+		alert(availableShapes.showCount());				// o/p:- 4
+		</script>
+	</body>
+	</head>
