@@ -26,9 +26,9 @@
 *Data Abstraction:- Data abstraction and encapsulation both are often used as synonyms. Both are nearly synonym because data abstraction is 			   achieved through encapsulation.
 		
 		***Abstraction is used to hide internal details and show only functionalities.
-		   Abstracting something means to give names to things so that the name captures the core of what a function or a whole program 		   does.
+		   Abstracting something means to give names to things so that the name captures the core of what a function or a whole 		   program does.
 
-	Example:-  In python, we can also perform data hiding by adding the double underscore (___) as a prefix to the attribute which is to be 		   hidden. After this, the attribute will not be visible outside of the class through the object.
+	Example:-  In python, we can also perform data hiding by adding the double underscore (___) as a prefix to the attribute which is to 			be hidden. After this, the attribute will not be visible outside of the class through the object.
 
 
 		   class Student:
@@ -50,3 +50,4 @@
 			stud_obj1.display()		# o/p count of 2
 
 	
+	Note:- we cannot create instance(object) of abstract class
