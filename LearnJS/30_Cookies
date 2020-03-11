@@ -1,0 +1,138 @@
+Why Cookie are needed?
+web application works on HTTP protocol which is stateless procotol.
+This means after the web server has made the client request for the web page,the web
+server will not remember any thing about the client that made the request.
+Their are several ways to remember,the common and easiest way is by using cookies.
+
+
+What are cookie?
+Cookies are small text file that the browser store in visitors computer.
+A cookies are basically a string of name-value pair separated by semi-colon.
+
+
+How does cookie look
+"color=red;expires=Fri, 5 June 2019 01:00:00 UTC;"
+
+The variable expries specifies when the cookies is going to expire.
+By default cookies are deleted when the current browser session ends.
+If you want to store cookie on client computer even after the browser session
+has ended than specify either "expire" or "max-age" attributes.
+
+expires:- supported by IE
+max-age:- supported by other modern browser.
+Note:- So use both expires and max-age;(for cross browser solution.)
+
+Domain Attribute:-Specifies the domain for which the cookies is valid.
+	If you specify the domain as PragimTech.Blog.com that cookie will
+	be valid for that sub-domain.It will not be valid for PragimTech.com.
+
+	If you want cookie to be valid for all sub-domain of PragimTech.com
+	then specify domain=PragimTech.com, So this cookie will be valid for:-
+		PragimTech.com
+		PragimTech.Blog.com
+		PragimTech.Blog.KudVenkat.com
+
+
+Path Attribute:-By default cookies are valid only for the web pages in the directory of the curret web page that stored them.
+Example:-
+	If a cookie is set by:- https://localhost/Home/Page2.html
+	it will be vaikd for:-  https://localhost/Home/SubFolder/Page1.html
+	but not for:-		https://localhost/page3.html
+
+If you want to create a cookie that is valid for accross all your web pages in you website,
+then set the path to the root of your web directory, that is, "/".
+	document.cookie = "path=/"
+
+
+secure Attribute:- Specifies that cookie is secure and is only used over HTTPS protocol
+	which ensures that the cookie is always encrypted when transmitting from client to server.
+	
+
+
+
+How to write cookie
+document.cookie = "color=red;expires=Fri, 5 June 2019 01:00:00 UTC;"
+
+
+How to read cookie
+var cookieString = document.cookie;
+
+Example1:-
+	<head>
+	<script type="text/javascript">
+	window.onload = function(){
+		if (document.cookie){
+			var previousColor = document.cookie.split("=")
+			document.bgColor=previousColor[1]
+			document.getElementById("selectColor").value = previousColor[1]
+		}
+		
+	}
+	function setColorBackground() {
+		var exdays = 30;
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expries = "expries=" + d.toGMTString()
+		var selectedColor = document.getElementById("selectColor").value
+		if (selectedColor != "white")
+		{
+			document.bgColor = selectedColor;
+			document.cookie = "color=" + selectedColor + ";" + expries
+		}
+	}
+	</script>
+	</head>
+	<body>
+	<select id="selectColor" onchange="setColorBackground()">
+		<option value="white">Select Color</option>
+		<option value="red">Red</option>
+		<option value="green">Green</option>
+		<option value="blue">Blue</option>
+	</select>
+	</body>
+
+
+Example2:-
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<script>
+
+	function setCookie(cvalue, exdays){
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+		var expries = "expries" + d.toGMTString()
+		document.cookie = "username=" + cvalue + ";" + expries
+		alert("document.cookie:- "+ document.cookie)
+	}
+
+	function getCookie(){
+		var cookieData = document.cookie.split("=")
+		if (cookieData.length){
+			return cookieData[1];
+		}
+		else{
+			return false;
+		}
+	}
+
+	function checkCookie() {
+	  var user = getCookie();
+	  var user;
+	  if (user != "") {
+	    	alert("Welcome again " + user);
+	  		}
+	  	else {
+	     	user = prompt("Please enter your name:","");
+	     	if (user != "" && user != null) {
+	     	setCookie(user, 30)
+	     	}
+	  	}
+	}
+
+	</script>
+	</head>
+	<body onload="checkCookie()"></body>
+
+	</html>
+
