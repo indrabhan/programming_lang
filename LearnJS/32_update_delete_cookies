@@ -20,3 +20,8 @@ Cookie limitations :
 
 The answers to these questions really depend on the browser you are using. The following website can be used to find out what the limits are
 http://browsercookielimits.squawky.net
+
+
+
+Note:- Their is program/code to check if cookies are enable or disable, because some program requires cookies to be enable
+	Ex:- disable the cookies from browser setting and try to login to gmail you will get error.

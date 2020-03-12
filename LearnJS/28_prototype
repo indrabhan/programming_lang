@@ -13,9 +13,7 @@ function Employee(name)
     {
         return this.name;
     }
-}Using the prototype object to add functions : The following are the advantages of using the prototype object to add functions.
-1. No matter how many objects you create, functions are loaded only once into memory
-2. Allows you to override functions if required.
+}
 
 var e1 = new Employee("Mark");
 var e2 = new Employee("Sara");
@@ -49,7 +47,8 @@ document.write("e1.name = " + e1.getName() + "<br/>");		// It static function an
 document.write("e2.name = " + e2.getName() + "<br/>");
 
 
-Note:- In the following example getName() function is added to the Employee object using the name of the constructor function. This would also result in undefined error.
+Note:- In the following example getName() function is added to the Employee object using the name of the constructor function. This would result in undefined error.
+Static methods are called with functionName.methodName 
 
 
 
