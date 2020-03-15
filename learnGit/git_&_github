@@ -68,7 +68,7 @@ git merge subBranchName (in terminal you should be in main branch)
 	that file/folder will not be available in main branch.
 	After merging the subbranch and again you made changes in subbranch file/folder you add it and commit it in subranch, but if you have 
 	not again merge it in main branch than that changes will not be reflected in main branch.
-	Inshort any changes you made and add/commit in subbranch and not merge it in main branch than that changes will not atke effect in main
+	Inshort any changes you made and add/commit in subbranch and not merge it in main branch than that changes will not take effect in main
 	branch.
 	For merging the subBranch you have to be in main barnch, In terminal go in main branch "git checkout master" and than trigger the 		command to merger subbranch in main barnch "git merger subBranchName"
 

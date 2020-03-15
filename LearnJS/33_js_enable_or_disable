@@ -6,14 +6,14 @@ noscript:- Most browsers default setting is javascript, if browser default setti
 Example:-
 	<!doctype>
 	<head>
-	<script>
-	document.write("Script Section")
-	</script>
+		<script>
+			document.write("Script Section")
+		</script>
 	</head>
 	<body>
-	<noscript>
-	<p>Oops your browser deafault setting is not javascript, please change it </p>
-	</noscript>
+		<noscript>
+			<p>Oops your browser deafault setting is not javascript, please change it </p>
+		</noscript>
 	</body>
 
 

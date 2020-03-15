@@ -32,7 +32,7 @@ Example1:-Non-static method.
 		function availableShapes(s){
 			this.shape = s;
 			this.count = ++this.count || 1;
-		this.showCount = function(){
+			this.showCount = function(){
 				return this.count;
 			}
 		}
@@ -40,7 +40,7 @@ Example1:-Non-static method.
 		var shape2 = new availableShapes("circle")
 		var shape3 = new availableShapes("circle")
 		var shape4 = new availableShapes("circle")
-		alert(shap42.showCount());				     // o/p :- 1
+		alert(shape4.showCount());				     // o/p :- 1
 		</script>
 	</body>
 	</head>
@@ -52,7 +52,7 @@ Example2:- static method
 		function availableShapes(s){
 			this.shape = s;
 			availableShapes.count = ++availableShapes.count || 1;
-		availableShapes.showCount = function(){
+			availableShapes.showCount = function(){
 				return availableShapes.count;
 			}
 		}

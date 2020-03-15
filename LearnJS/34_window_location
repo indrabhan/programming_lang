@@ -5,6 +5,8 @@ Example:-
 	<head>
 	<script type="text/javascript">
 		window.location = "https://www.google.com/"
+				// OR
+		window.location = "/file_path" // will redirect to that file and same you can 								   //see in url when you execute this code
 	</script>
 	</head>
 
@@ -29,3 +31,7 @@ Example:-
 		document.write("window.location.pathname:- " + window.location.pathname)
 	</script>
 	</head>
+
+
+
+Note:- For debugging of js please see video 75

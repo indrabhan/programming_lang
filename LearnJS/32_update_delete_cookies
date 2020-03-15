@@ -1,0 +1,27 @@
+***Update and Delete Cookie:-
+        Updating Cookie:- To update a cookie, set a cookie with same name again.
+        The following code updates the color cookie with New_Color,if a cookie with 
+        name=color exists otherwise it creates new cookie with that name
+        
+        document.cookie = "color=New_Color";
+
+Deleting Cookie:- To delete a cookie, set a cookie with max-age attribute set to negative value.
+        document.cookie = "color=red;max-age=-1";
+
+If you are using a browser that supports expires attribute,then set the expire attribute to a date in past.
+        document.cookie = "color=red;expire=Fri, 23 Aug 1991 04:30:00 UCT;"
+
+Note:-User can also use the browser interface to delete cookie.
+
+
+Cookie limitations : 
+1. What is the maximum allowed cookie size per cookie
+2. How many cookies are allowed per domain
+
+The answers to these questions really depend on the browser you are using. The following website can be used to find out what the limits are
+http://browsercookielimits.squawky.net
+
+
+
+Note:- Their is program/code to check if cookies are enable or disable, because some program requires cookies to be enable
+	Ex:- disable the cookies from browser setting and try to login to gmail you will get error.
