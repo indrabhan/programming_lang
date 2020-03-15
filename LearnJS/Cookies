@@ -36,7 +36,7 @@ Domain Attribute:-Specifies the domain for which the cookies is valid.
 Path Attribute:-By default cookies are valid only for the web pages in the directory of the curret web page that stored them.
 Example:-
 	If a cookie is set by:- https://localhost/Home/Page2.html
-	it will be vaikd for:-  https://localhost/Home/SubFolder/Page1.html
+	it will be vaild for:-  https://localhost/Home/SubFolder/Page1.html
 	but not for:-		https://localhost/page3.html
 
 If you want to create a cookie that is valid for accross all your web pages in you website,
