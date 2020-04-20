@@ -1,0 +1,63 @@
+jquery show hide password
+
+we will discuss how to toggle password visibility using show / hide password checkbox.
+
+Here is what we want to achieve
+1. When Show password checkbox IS NOT CHECKED, the password should be masked.
+2. When Show password checkbox IS CHECKED, the password should be in clear text and visible to the user
+
+
+The following is the HTML and jQuery code
+	<html>
+	<head>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('#cbShowPassword').click(function () {
+		        $('#txtPassword').attr('type', $(this).is(':checked') ? 'text' : 'password');
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    Password :
+	    <input type="password" id="txtPassword" />
+	    <input type="checkbox" id="cbShowPassword" />Show password
+	</body>
+	</html>
+
+The problem with the above approach is that it does not work in IE 8 and earlier versions. This is because with IE8 and earlier versions the type attribute of input elements cannot be changed once set. The following code works in all browsers including IE8 and earlier versions. 
+
+When Show password checkbox is clicked
+1. Retrieve the value the from the password textbox and store it in a variable for later use.
+2. Delete the password input filed. 
+3. If the "Show password" checkbox is CHECKED, then add a new input filed of type text, else add a new input filed of password. In both the cases set the value attribute of the input element = the variable created in Step 1.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#cbShowPassword').click(function(){
+				var pswdField = $('#txtPassword')
+				var pswdVal = pswdField.val();
+				pswdField.remove();
+				if($(this).is(':checked')){
+					$(this).before('<input type="text" id="txtPassword" value="' + pswdVal +'"/>')
+					// note:- id is same, means they have replaced the field
+				}else{
+					$(this).before('<input type="password" id="txtPassword" value="'+ pswdVal +'"/>')
+					// note:- id is same, means they have replaced the field
+				}
+			})
+		})
+	</script>
+</head>
+<body>
+	Password :
+    <input type="password" id="txtPassword" />
+    <input type="checkbox" id="cbShowPassword" />Show password
+</body>
+</html>

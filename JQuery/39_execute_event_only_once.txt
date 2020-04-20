@@ -1,0 +1,93 @@
+jquery execute event only once
+
+how to execute event of an element only once. Let us understand this with an example.
+
+Every time you click the button, you will get the JavaScript alert.
+	$(document).ready(function () {
+	    $('#btn').on('click', function () {
+		alert('Button Clicked');
+	    });
+	});
+
+If you want to execute the click event handler only once, then you will have to explicitly remove the click event handler. The following example removes the click event handler using off() function, after the alert is displayed.
+
+	$(document).ready(function () {
+	    $('#btn').on('click', function () {
+		alert('Button Clicked');
+		$(this).off('click');
+	    });
+	});
+
+jQuery one() function does exactly the same thing. The click event is raised only once. On the first click, JavaScript alert is displayed, but on subsequent clicks nothing happens.
+
+	$(document).ready(function () {
+	    $('#btn').one('click', function () {
+		alert('Button Clicked');
+	    });
+	});
+
+
+The following example binds 3 events(mouseover, mouseout, click) using on() function. If we want all these 3 events to execute only once, then we have to explicitly remove each event after first execution using off() method.
+
+	$(document).ready(function () {
+	    $('#btn').on({
+		mouseover: function () {
+		    $(this).css('background-color', 'yellow');
+		    $(this).off('mouseover');
+		},
+		mouseout: function () {
+		    $(this).css('background-color', 'white');
+		    $(this).off('mouseout');
+		},
+		click: function () {
+		    alert('Button clicked');
+		    $(this).off('click');
+		}
+	    });
+	});
+
+
+The above example can be rewritten using one() function as shown below.
+
+	$(document).ready(function () {
+	    $('#btn').one({
+		mouseover: function () {
+		    $(this).css('background-color', 'yellow');
+		},
+		mouseout: function () {
+		    $(this).css('background-color', 'white');
+		},
+		click: function () {
+		    alert('Button clicked');
+		}
+	    });
+	});
+
+
+one() function executes the handler at most once per element per event type. In the following example, click, mouseover and mouseount events are executed atmost once for each button element.
+
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('input[type="button"]').one({
+		        mouseover: function () {
+		            $(this).css('background-color', 'yellow');
+		        },
+		        mouseout: function () {
+		            $(this).css('background-color', 'white');
+		        },
+		        click: function () {
+		            alert('Button clicked');
+		        }
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <input type="button" value="Click Me" />
+	    <input type="button" value="Click Me" />
+	</body>
+	</html>

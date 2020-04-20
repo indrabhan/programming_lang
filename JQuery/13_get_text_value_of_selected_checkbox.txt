@@ -1,0 +1,52 @@
+we want to display the count of checkboxes checked and their text and values.
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('input[name="skills"]').click(function(){
+				getCheckBox('skills');
+				})
+			
+			$('input[name="places"]').click(function(){
+				getCheckBox('places');
+				})
+
+			var getCheckBox = function(groupName){
+				var result = $('input[name="'+groupName+'"]:checked');
+				var resultString = result.length + 'checked box are check <br/>'
+				result.each(function(){
+					resultString += $(this).val() + " - " +$('label[for="'+$(this).val() +'"]').text()+'<br/>'
+				})
+				$('#div'+groupName).html(resultString)
+			}
+
+			})
+
+			
+	</script>
+</head>
+<body>
+	Skills:
+		<input type="checkbox" name="skills" value="js">
+		<label for="js">JavaScript</label>
+		<input type="checkbox" name="skills" value="jq">
+		<label for="jq">JQuery</label>
+		<input type="checkbox" name="skills" value="cs">
+		<label for="cs">C#</label>
+		<br/><br/>
+	Places:
+		<input type="checkbox" name="places" value="mu">
+		<label for="js">Mumbai</label>
+		<input type="checkbox" name="places" value="dhi">
+		<label for="dhi">Delhi</label>
+		<input type="checkbox" name="places" value="pubj">
+		<label for="pubj">Punjab</label>
+		<br/><br/>
+	<div id="divskills"></div>
+	<br/><br/>
+	<div id="divplaces"></div>
+</body>
+</html>

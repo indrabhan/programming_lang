@@ -1,0 +1,596 @@
+comments:- Just like JS multi-line comment
+Syntax:- /* */
+Example:-/* This is comments */
+
+width: 100% means take white space as much as possible. if we give 50% is takes half of it.
+height: 100% means take white space as much as possible. 
+
+***Inline css
+Example:-
+	<body>
+		<p>This is inline css</p>
+		<p style="color:blue">I am Blue</p>
+		<p style="color:green">I am Green</p>
+		<p style="color:red">I am Red</p>
+	</body>
+
+
+***Internal css
+Example:-
+	<head>
+	<style type="text/css">
+		p{
+			color:red;
+		}
+		h1{
+			background-color: blue;
+		}
+	</style>
+	</head>
+	<body>
+		<h1>This is internal css</h1>
+		<p>I am Blue</p>
+		<p>I am Green</p>
+		<p>I am Red</p>
+	</body>
+
+
+***External css
+css file:-test.css
+	p{
+	color: red;
+}
+h1{
+	background-color: red;
+}
+
+Example:-
+	<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+		<h1>This is internal css</h1>
+		<p>I am Blue</p>
+		<p>I am Green</p>
+		<p>I am Red</p>
+	</body>
+	</html>
+
+
+css file:-test.css
+	.paraClass{
+	color: red;
+}
+h1{
+	background-color: red;
+}
+
+Example:-
+	<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+		<h1>This is internal css</h1>
+		<p class="paraClass">I am Blue</p>
+		<p class="paraClass">I am Green</p>
+		<p class="paraClass">I am Red</p>
+	</body>
+	</html>
+
+
+***Font:- font-weight: here you can have value(bold, normal) or value in between 100-900 
+	  100 = normal
+	  900 = bold
+
+css file1:-
+	p{
+		font-family: Tahoma;
+		font-weight: bold;
+		font-size: 20px;
+		font-style: italic;
+	}
+	h1{
+		font-size: 24px
+	}
+
+css file2:-
+	p{
+		font:bold italic Tahoma;
+	}
+
+
+***Padding:- Every text appears inside the rectangle box.
+	     padding is the white space between the content and the box.
+Example:-
+	<head>
+	<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+	<h1>This is css tutorial,you will learn all the css using to design websites and If you keep on praticing then it will very easy for 		    you to designed any websites</h1>
+
+	<p>By using background-color you will be able to know that every text appears inside the rectangle box</p>
+
+	</body>
+
+css file1:-
+	h1{
+	background-color: yellow;
+
+	padding-top: 30px;
+	padding-right: 70px;
+	padding-bottom: 30px;
+	padding-left: 70px;
+}
+p{
+	background-color: green;
+}
+
+css file2:-another way for padding(top right bottom left)
+	h1{
+		padding: 30px 70px 30px 70px		/*top right bottom left*/
+	}
+
+
+css file3:another way for padding( (top-right)  (bottom-left) )
+	h1{
+		background-color: yellow;
+		padding: 30px 70px		/*(top-bottom) (left-right)*/
+	}
+
+
+***Border:-
+	different border styles:- dotted, dashed, solid, double, groove, ridge, inset, outset.
+
+css file1:-
+	h1{
+		background-color: yellow;
+		padding: 30px 70px;
+
+		border-style: solid;
+		border-width: 5px;
+		border-color: red;
+	}
+
+css file2:-
+	h1{
+		padding: 30px 70px;
+		border-top: solid red 5px;
+		border-bottom: 3px dashed green;
+		border-right: dotted 5px orange;
+		border-left: 1px double black;
+	}
+
+***Margin:- margin is the white space between the element and the browser,means space outside the reatangle box.
+	    body tag itself has margin and padding
+	    remove sapce between two element use body{margin:0px; padding:0px}
+
+css file1:-
+	h1{
+		background-color: yellow;
+		margin: 50px;		/* applied to all sides*/
+	}
+	body{
+		margin: 0px;
+		padding: 0px;
+	}
+
+
+css file2:-
+	h1{
+		background-color: yellow;
+		margin-top: 30px;
+		margin-bottom: 70px;
+		margin-left: 50px;
+		margin-right: 90px;
+	}
+	p{
+		background-color: red
+	}
+
+
+css file3:-
+	h1{
+		background-color: yellow;
+		margin: 30px 70px 90px 50px;	/*top-right-bottom-left*/
+	}
+	p{
+		background-color: red
+	}
+
+css file4:-
+	h1{
+		background-color: yellow;
+		margin: 70px 50px;	/*(top-bottom)(left-right)*/
+	}
+	p{
+		background-color: red
+	}
+	
+
+***div and Span:- You will not be able to see any difference of using div and span element unless you make use of css over them.
+Example:-
+	<head>
+	<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+	<div>This is css <span>tutorial</span>,you will learn all the css using to design websites and If you keep on praticing then it will 		     very easy for you to designed any websites.
+		<div>By using background-color you will be able to know that every text appears inside the rectangle
+		</div>
+	</div>
+	</body>
+
+css file:-
+	div{
+		background-color: yellow;
+		border:10px solid red;
+	}
+	span{
+		color: blue;
+	}
+
+
+***Color:- color can be specify by hexadecimal or by rgb
+
+Example:-rgb(red_value, green_value, blue_value) you can have the value from 0-255
+	(0,0,0)	black
+	(255,255,255)	white
+
+	background-color:rgb(0,0,0)
+
+Example:- Hexadecimal (hexadecimal value is used with prefix "#").you can get it from google.
+	  hexadecimal value contains no(0-9) and alphabet(a-f).
+	  hexadecimal value is of 6 digits.
+
+	  background-color: #00baff
+		
+
+***Background Image:-If the image is small than it will repeat, to stop repeatation we use
+		  
+background-repeat: no-repeat
+background-repeat: repeat-x			Horizontal repeat(x-axis)
+background-repeat: repeat-y		  	Vertical repeat(y-axis)
+background-position: center;		        center,left,right,top,bottom, right top, right center and so on...
+background-attachment: fixed;			The image will not move only the content of web page can scrolled(image fixed in 							background)	  
+
+Note:-Image not to move when we scroll down, so in such case use background element in the body tag.
+
+Example:-
+	div{
+		height:850px;
+		width: 100%;
+		border:3px solid black;
+		background-image: url(images/python.png);
+		/*background-attachment: fixed;*/
+	}
+
+	body{
+		background-attachment: fixed;
+	}
+
+
+class:- For class we use dot(.) in css.
+
+Example:-
+	<head>
+		<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+		<p class='classBlue'>This is paragraph in blue</p>
+		<p class="classRed">This is paragraph in red</p>
+		<p class="classGreen">This is paragraph in green</p>
+	</body>
+
+css file:-
+	.classBlue{
+		background-color: black;
+		color: blue;
+	}
+	.classRed{
+		background-color: black;
+		color: red;
+	}
+	.classGreen{
+		background-color: black;
+		color: green;
+	}
+
+
+Id:- For ID in css we use #
+
+Example:-
+	<head>
+		<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+		<p class='classBlue'>This is paragraph in blue</p>
+		<p class="classRed">This is paragraph in red</p>
+		<p class="classGreen">This is paragraph in green</p>
+	</body>
+
+css file:-
+	#pb{
+		color: blue;
+	}
+	#pr{
+		color: red;
+	}
+	#pg{
+		color: green;
+	}
+
+
+***Child Selector:-
+Example:-
+	<head>
+	<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+	<div class="classRed">
+		<p>This is paragraph is inside the div element</p>
+	</div>
+	<div id="IdGreen">
+		<p>This is paragraph in outside</p>
+	</div>
+	<p>This is paragraph in also outside</p>
+	</body>
+
+css file:-
+	div p{
+		color: red;
+	}
+	p{
+		color: blue;
+	}
+
+css file:-
+	.classRed p{
+		color: red;
+	}
+	#IdGreen p{
+		color: green;
+	}
+	p{
+		color: blue;
+	}
+
+
+***Pseudo Classes:- They are built-in classes
+Example1:-first-letter, first-line
+	<head>
+	<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+		<p>You</p>
+		<p>Live</p>
+		<p>Only</p>
+		<p>Once</p>
+	</body>
+
+css file:-
+	p:first-letter{
+		color: blue;
+		font-weight: bold;
+		font-size: 20px;
+		font-style: italic;
+	}
+
+***Pseudo class with parent and child relation.
+Example:-first-child, last-child
+	<head>
+	<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+	<div id="parent_id">
+		<p>You</p>
+		<p>Live</p>
+		<p>Only</p>
+		<p>Once</p>
+	</div>
+	</body>
+
+css file:-
+	#parent_id p:first-child{
+		color: red;
+		text-decoration: underline;	
+	}
+	#parent_id p:last-child{
+		color: blue;
+		text-decoration: underline;
+	}
+
+css file:-
+	#parent_id p:before{
+		content: "before";
+	}
+	#parent_id p:after{
+		content: "after";
+	}
+
+
+***Pseudo class with nth child
+Example:-
+	<head>
+	<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+	<div id="parent_id">
+		<p>My self Indrabhan Vijay bhamare</p>
+		<p>My self Indrabhan Vijay bhamare</p>
+		<p>My self Indrabhan Vijay bhamare</p>
+		<p>My self Indrabhan Vijay bhamare</p>
+		<p>My self Indrabhan Vijay bhamare</p>
+		<p>My self Indrabhan Vijay bhamare</p>
+		<p>My self Indrabhan Vijay bhamare</p>
+		<p>My self Indrabhan Vijay bhamare</p>
+	</div>
+	</body>
+
+css file:-
+	#parent_id p:nth-child(even){
+		color: brown;
+		background-color: grey;
+	}
+	#parent p:nth-child(odd){
+		color: yellow;
+		background-color: grey;
+	}
+
+css file:-
+	#parent p:nth-child(1){
+		color: brown;
+		background-color: grey;
+	}
+	#parent p:nth-child(2){
+		color: yellow;
+		background-color: grey;
+	}
+
+***Link Styling
+Example:-
+	<head>
+	<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+		<a href="https://in.linkedin.com/">Linkedin</a>
+	</body>
+
+css file:-
+	a{		/*Default*/
+		color: red;
+		text-decoration: none;
+	}
+	a:hover{	/*like mouseover*/
+		color: green;
+		text-decoration: underline;
+	}
+	a:active{	/*like mousedown */
+		color: orange;
+	}
+	a:visited{	/*viste the link and come back to see change*/
+		color: pink;
+	}
+
+
+***Change bullets symbols of under-order list.
+
+list-style-type: circle; 	(repalce circle with decimal(o/p will be 1,2,3,4...).There are many style type available,google it)
+list-style-image: url(image_path)
+line-height: 500%
+
+By default the bullet ponints are outside of the list,If we want to take it in inside than try below code.
+list-style-position: inside;
+
+Example:-
+	<head>
+	<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+	<h2>Menu</h2>
+	<ul>
+		<li>Apple</li>
+		<li>Mango</li>
+		<li>Orange</li>
+		<li>Banana</li>
+	</ul>
+	</body>
+
+css file:-
+	ul{
+		list-style-image: url(images/check-mark.jpg);
+		line-height:500%;
+	}
+
+css file:-
+	ul{
+		list-style-type: circle;
+		list-style-position: inside;	/*Default position is outside*/
+	}
+
+
+***Rounded Corner:- 
+Note:-new in css3 if browser doesnt support than update it.
+
+border-radius: 20px;		/*round the all corner*/
+border-top-right-radius:20px;   /* round particular corner*/
+
+Example:-
+	<head>
+	<link rel="stylesheet" type="text/css" href="test.css">
+	</head>
+	<body>
+	<div>
+		Apple
+	</div>
+	</body>
+
+css file:-
+	div{
+		background-color: orange;
+		width: 20%;
+		text-align: center;
+		padding: 70px 70px;
+		border-top-right-radius: 20px;
+	}
+
+***linear-gradient:-
+background-image:linear-gradient(to top/to bottom, color_value %_of_color_value, n number of color value)
+
+css file:-
+	div{
+		background-color: blue;	/*If linear-gradient wont work than this color will be used*/
+		width: 20%;
+		text-align: center;
+		padding: 70px 70px;
+		background-image: linear-gradient(to top,#1d295e 20%,#909edd 20%,#132368 20%,#38393d);
+				  /* to top :- means rise the color from botto to top.
+				  2nd-value:- specify the color value separated by comma(can specify n number of color).
+				  3rd value:- percentage of that color(optional)*/
+	}
+
+
+***float and clear
+we use this element when we want image sholud be left/right and the content after the image not image and content should be below the image.
+Mostly like newpaper image to left and then the content after the image.
+
+clear:- the content wrapped with the float:left,so to move remove/move down the wrapped content we use float.
+ 
+css file:-
+	img{
+		float: left
+	}
+	p{
+		clear:both;
+	}
+
+Example;- we will make 3 box and they will appear one after the other in horizontal manner.
+
+css file:-
+	#d1{
+		float: left;
+		background-color: red;
+		width:200px;
+		height: 200px;
+		text-align: center;
+		margin: 10px;
+	}
+	#d2{
+		float: left;
+		background-color: blue;
+		width:200px;
+		height: 200px;
+		text-align: center;
+		margin: 10px;
+	}
+	#d3{
+		float: left;
+		background-color: yellow;
+		width:200px;
+		height: 200px;
+		text-align: center;
+		margin: 10px;
+	}
+
+
+

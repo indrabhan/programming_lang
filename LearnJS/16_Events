@@ -70,7 +70,7 @@ Events in JavaScript:-
 		mouseover:- Occurs when the user moves the pointer over.
 		
 		mousedown:- Occurs when the mouse button is press over an element.
-		mouseup:- Occurs when the nouse button is release over an element.
+		mouseup:- Occurs when the mouse button is release over an element.
 
 		click:- Occurs when the mouse button is clicked.
 			mousedown, mouseup, click event occurs in sequence.
@@ -188,7 +188,7 @@ Events in JavaScript:-
 		</head>
 		<body>
 		<p>This is my first web page</p>
-		<img src="indra.jpeg" width="200px" height="200px"onload="ImageLoad()" alt="SorryResourceNotFound">
+		<img src="indra.jpeg" width="200px" height="200px" onload="ImageLoad()" alt="SorryResourceNotFound">
 		</body>
 
 
@@ -219,7 +219,7 @@ Events in JavaScript:-
 **window.onerror:- In general we use try/catch statement to catch errors in JavaScript.
       		 If an error is raised by a statement that is not inside a try catch block,the window.onerror event is fired.
 
-		 Assign a function to window.onerror that you want to execute when an error is raise.
+		 Assign a function to window.onerror that you want to execute when an error is raised.
 		 The function that is associated as an event handler for the onerror event has 3 parameter.
 		 parameters:- msg, url, line
 		
@@ -271,7 +271,7 @@ Events in JavaScript:-
 
 
 
-**onmouseout:- when the mouse pointer is goes over the element and come back from that element, when coming back at that time this event is 		     triggered.
+**onmouseout:- when the mouse pointer leaves the element.
 
 	Example:-
 		<head>

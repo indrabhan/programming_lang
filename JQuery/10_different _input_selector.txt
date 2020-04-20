@@ -1,0 +1,73 @@
+we will discuss the difference between $(input) and $(:input) selectors
+$('input') :- select all input element(tag)
+$(':input') :- select all input element as well as "select selector(here country selector)", "textarea" 
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('input').each(function(){
+				alert($(this).val());
+			})
+		})
+	</script>
+</head>
+<body>
+	First Name : <input type="text" value="Indra"><br/><br/>
+	Last Name : <input type="text" value=""/><br/><br/>
+	Gender : 
+		<input type="radio" name="gender" checked="checked" value="male">Male
+		<input type="radio" name="gender" value="femal">Female
+		<br/><br/>
+	Skills:
+		<input type="checkbox" name="skills" checked="checked" value="js">JavaScript
+		<input type="checkbox" name="skills" checked="checked" value="jquery">JQuery
+		<input type="checkbox" name="skills" value="c#">C#
+		<br/><br/>
+	Country:
+		<select>
+			<option value="india">India</option>
+			<option value="us">US</option>
+			<option value="uk">UK</option>
+		</select>
+		<br/><br/>
+	Summary : 
+		<br/>
+		<textarea rows='5' cols="20">Hello this is sample text area</textarea>
+		<br/><br/>
+	<input type="submit" name="submit" value="sumbit">
+</body>
+</html>
+
+
+Now we want to get the text value from all the textboxes. On this page we have 2 textboxes
+1. First Name
+2. Last Name
+
+jQuery code to get textbox value using $(input)
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		$('input[type="text"]').each(function () {
+		    alert($(this).val());
+		});
+	    });
+	</script>
+
+jQuery code to get textbox value using $(:input)
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		$(':input[type="text"]').each(function () { 
+		    alert($(this).val());
+		});
+	    });
+	</script>
+
+
+Which one is better for performance $('input[type="text"]') or $(':input[type="text"]')
+$('input[type="text"]') is better for performance over $(':input[type="text"]'). 
+
+This is because $(':input[type="text"]') needs to scan all input elements, textarea, select etc, where as $('input[type="text"]') scans only input elements.
+
+So if you want to find elements with an input tag, it is always better to use $('input[type="text"]') over $(':input[type="text"]')
+

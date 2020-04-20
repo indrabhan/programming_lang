@@ -1,0 +1,16 @@
+table{
+	border-collapse: collapse;		/* remove the extra layer of border*/
+}
+td,th{
+	padding: 10px;
+	text-align: center;
+}
+thead{
+	background-color: blue;
+}
+tfoot{
+	background-color: yellow;
+}
+tr:nth-child(2n){			/*(n)Every row, (2n)Every second row*/
+	background-color: grey;
+}

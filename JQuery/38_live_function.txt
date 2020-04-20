@@ -1,0 +1,3 @@
+live, bind, delegate for 3 things now you can use 'on' method/function
+
+live method was used for event bubbling but it is completly removed, so we can acheive its functionality by using 'on' method.

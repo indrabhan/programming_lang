@@ -1,0 +1,39 @@
+jquery ajax method
+
+The other methods that are available in jquery to make ajax requests are load(), get() and post(). We discussed these methods in detail in the previous sessions of jQuery tutorial video series. All these methods are wrapper methods and use ajax() method under the hood. In Visual Studio, if you right click on any of these methods and select "Go To Definition" from the context menu, you can see that these methods call ajax() method.
+
+The wrapper methods are easier to use but they do not provide much flexibility. If you want to have complete control on configuring the ajax request use ajax() method.
+
+Syntax of jquery ajax method
+	$.ajax( [ settings ] )
+
+settings is a JavaScript object that we use to configure the Ajax request. For the list of all available options please check the jquery ajax method documentation
+http://api.jquery.com/jquery.ajax/
+
+Let us now modify the example we worked with in Part 59, to use ajax() method instead of post() method.
+
+	$(document).ready(function () {
+	    var textBoxes = $('input[type="text"]');
+	    textBoxes.focus(function () {
+		var helpDiv = $(this).attr('id');
+
+		$.ajax({
+		    url: 'GetHelpText.aspx',
+		    data: { HelpTextKey: helpDiv },
+		    success: function (response, status, xhr) {
+		        var jQueryXml = $(response);
+		        var textElement = jQueryXml.find("Text");
+		        $('#' + helpDiv + 'HelpDiv').html(textElement.text());
+		    },
+		    dataType: 'xml',
+		    method: 'post'
+		});
+	    });
+
+	    textBoxes.blur(function () {
+		var helpDiv = $(this).attr('id') + 'HelpDiv';
+		$('#' + helpDiv).html('');
+	    });
+
+	});
+

@@ -1,0 +1,51 @@
+<head>
+<link rel="stylesheet" type="text/css" href="test.css">
+</head>
+<body>
+<div class="container">
+	<header>
+		<img src="images/python.png" width="200px" height="200px"/>
+	</header>
+	<nav>
+		<ul>
+			<li><a href="">Home</a></li>
+			<li><a href="">About Us</a></li>
+			<li><a href="">Conatct Us</a></li>
+			<li><a href="">Carrier</a></li>
+		</ul>
+	</nav>
+	<div class="emptyClass"></div>
+	<section class="sectionClass">
+		<article>
+		<header>
+			<h2>Dhule City</h2>
+		</header>
+			<p>
+				The city, with industrial areas, schools, hospitals, supermarkets and residential areas, has communications and transport infrastructures. Dhule is largely emerging as one of the upcoming hubs of textile, edible oil, and power-loom across the state and has gained a strategic advantage for being on the junction of three National Highways viz. NH-3, NH-6, and NH-211 and on most anticipated Manmad - Indore Rail Project. Recently Ministry of Surface Transport has granted conversion of surrounding 4 state highways to National Highway, after which Dhule would be the one amongst very few cities in India being located on convergence of 7 National Highways. Conversion of NH-3 from four lanes to six lanes between Dhule and Nashik with modern facilities is under process.
+			</p><br/>
+			<p>
+				Dhule city is also a part of Delhi Mumbai Industrial Corridor Project, as Node - 17, India's most ambitious infrastructure program, aiming to develop new industrial cities and converging next generation technologies across infrastructure sectors.
+			</p><br/>
+			<p>
+				Dhule is located at 20.9°N 74.78°E.[9] It has an average elevation of 250 metres (787 feet). Dhule lies in the Khandesh region, which forms the northwest corner of the Deccan Plateau.The Dhule district is bordered in the west by the Gujarat State and in the north by Madhya Pradesh along with Nandurbar district, and in the south and east by Nashik district and Jalgaon district respectively. It is situated in a valley of the Tapi River along the banks of the Panzara River.
+			</p>
+		</article>
+		<footer>
+			-- writtenby Indrabhan
+		</footer>
+	</section>
+	<aside class="asideClass">
+		<ul>
+			<li><a href="">Facebook</a></li>
+			<li><a href="">Twitter</a></li>
+			<li><a href="">Instagram</a></li>
+			<li><a href="">Youtube</a></li>
+		</ul>
+	</aside>
+	<footer class="footerClass">
+	<div>
+		&copy; Copywrite own by Indra
+	</div>
+	</footer>
+</div>
+</body>

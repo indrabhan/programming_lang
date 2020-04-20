@@ -1,0 +1,116 @@
+What is JSON
+JSON stands for JavaScript Object Notation. JSON is a lightweight data-interchange format. JSON is an easier-to-use alternative to XML.
+
+Creating a JSON object : Employee data can be stored in a JSON object as shown below.
+
+	var employeeJSON = {
+	    "firstName": "Todd",
+	    "lastName": "Grover",
+	    "gender": "Male",
+	    "salary": 50000
+	};
+
+1. employeeJSON is a JSON object
+2. In the curly braces we include the "name": "value" pairs, separated by commas
+3. The name and value of a property are separated using a colon (:)
+4. You can declare any number of properties
+
+If you want to represent the same data using XML, you may have XML that would look as shown below.
+	<Employee>
+	  <firstName>Todd</firstName>
+	  <lastName>Grover</lastName>
+	  <gender>Male</gender>
+	  <salary>50000</salary>
+	</Employee>
+
+Reading data from the JSON object : To read data from the JSON object, use the property names.
+syntax :- Object.key
+var firstName = employeeJSON.firstName;
+
+Creating and accessing data from a JSON object
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+
+		    // Creating a JSON object
+		    var employeeJSON = {
+		        "firstName": "Todd",
+		        "lastName": "Grover",
+		        "gender": "Male",
+		        "salary": 50000
+		    };
+
+		    // Accessing data from a JSON object
+		    var result = '';
+		    result += 'First Name = ' + employeeJSON.firstName + '<br/>';
+		    result += 'Last Name = ' + employeeJSON.lastName + '<br/>';
+		    result += 'Gender = ' + employeeJSON.gender + '<br/>';
+		    result += 'Salary = ' + employeeJSON.salary + '<br/>';
+
+		    $('#resultDiv').html(result);
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <div id="resultDiv"></div>
+	</body>
+	</html>
+
+
+JSON Arrays : What if you want to store more than one employee data in the JSON object. This is when JSON arrays can be used. A JSON array can contain multiple objects.
+
+To create a JSON array 
+1. Wrap the objects in square brackets
+2. Each object must be separated with a comma
+
+Creating a JSON array (list of dict)
+	var employeesJSON = [
+	{
+	    "firstName": "Todd",
+	    "lastName": "Grover",
+	    "gender": "Male",
+	    "salary": 50000
+	},
+	{
+	    "firstName": "Sara",
+	    "lastName": "Baker",
+	    "gender": "Female",
+	    "salary": 40000
+	}];
+
+Reading from a JSON array : To access the employee objects in the JSON array, use the object's index position.
+
+Retrieves the lastName of first employee object in the JSON array
+var result = employeesJSON[0].lastName;
+
+Retrieves the fistName of second employee object in the JSON array
+var result = employeesJSON[1].firstName;
+
+
+Nested JSON object : You can also store multiple employees in the JSON object by nesting them.
+
+Nested JSON object example (dict of dict): 
+
+	var employeesJSON = {
+	    "Todd": {
+		"firstName": "Todd",
+		"lastName": "Grover",
+		"gender": "Male",
+		"salary": 50000
+	    },
+	    "Sara": {
+		"firstName": "Sara",
+		"lastName": "Baker",
+		"gender": "Female",
+		"salary": 40000
+	    }
+	};
+
+Retrieves the gender of employee Todd
+var result = employeesJSON.Todd.gender;
+
+Retrieves the salary of employee Sara
+var result = employeesJSON.Sara.salary;

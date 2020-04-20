@@ -1,0 +1,136 @@
+jQuery class selectors uses JavaScript's native getElementsByClassName() function if the browser supports it
+
+$('.small') // Selects all elements with class small
+$('.small,.big') // Selects all elements with class small or big
+$('div.small,.big') // Selects div elements with class small and any element with class big
+
+
+Selects all elements with class "small" and sets 5px solid red border
+	<html>
+	<head>
+	    <title></title>
+	    <script src="Scripts/jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('.small').css('border', '5px solid red');
+		});
+	    </script>
+	</head>
+	<body>
+	    <span class="small">
+		Span 1
+	    </span>
+	    <br /><br />
+	    <div class="small">
+		Div 1
+	    </div>
+	    <br />
+	    <span class="big">
+		Span 2
+	    </span>
+	    <p class="big">This is a paragraph</p>
+	</body>
+	</html>
+
+Selects all elements with class "small" or "big" and sets 5px solid red border
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		$('.small, .big').css('border', '5px solid red');
+	    });
+	</script>
+
+Selects all elements with class small that are nested in a an element with id=div2 and sets 5px solid red border
+	<html>
+	<head>
+	    <title></title>
+	    <script src="Scripts/jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('#div2 .small').css('border', '5px solid red');
+		});
+	    </script>
+	</head>
+	<body>
+	    <div id="div1" class="small">
+		DIV 1
+	    </div>
+	    <br />
+	    <div id="div2">
+		Div 2
+		<br />
+		<div class="small">
+		    DIV 3
+		</div>
+		<br />
+		<span class="small">
+		    SPAN
+		</span>
+	    </div>
+	</body>
+	</html>
+
+Selects all elements with class small and sets 5px solid red border. Notice div1 has 2 classes - small and big.
+	<html>
+	<head>
+	    <title></title>
+	    <script src="Scripts/jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('.small').css('border', '5px solid red');
+		});
+	    </script>
+	</head>
+	<body>
+	    <div class="small big">
+		DIV 1
+	    </div>
+	    <br />
+	    <div class="small">
+		DIV 2
+	    </div>
+	</body>
+	</html>
+
+Selects all elements that has both the classes - small and big. 
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		$('.small.big').css('border', '5px solid red');
+	    });
+	</script>
+	
+	Note:-There should be no space between the class names. 
+
+
+If you have a space between the two class names then we are trying to find descendants, i.e. find elements with class big that are descendants of an element with class small.
+	<html>
+	<head>
+	    <title></title>
+	    <script src="Scripts/jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('.small .big').css('border', '5px solid red');
+		});
+	    </script>
+	</head>
+	<body>
+	    <div class="small big">
+		DIV 1
+	    </div>
+	    <br />
+	    <div class="small">
+		DIV 2
+		<div class="big">
+		    DIV 3
+		</div>
+	    </div>
+	</body>
+	</html>
+
+
+Another way to selects all elements that has both the classes - small and big is by using filter method. But this approach is slower because it will first create a list of objects with class "small" and then removes elements that does not have class "big"
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		$('.small').filter('.big').css('border', '5px solid red');
+	    });
+	</script>
+

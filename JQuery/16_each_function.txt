@@ -1,0 +1,39 @@
+jQuery each function is used to iterate over the items in a collection.
+For each item in the collection the anonymous function is called. The index of the element and the element itself are passed to the anonymous function. 
+
+<body style="font-family:Arial">
+    <ul>
+        <li>US</li>
+        <li>India</li>
+        <li>UK</li>
+        <li>Canada</li>
+        <li>Australia</li>
+    </ul>
+</body>
+
+
+$('li').each(function (index, element) {
+    alert(index + ' : ' + $(element).text());
+});
+
+To refer to the current element that we are iterating over you can also use this keyword.
+$('li').each(function (index) {
+    alert(index + ' : ' + $(this).text());
+});
+
+If you don't care about the index and just need the text of the list item, then you can get rid of the index parameter
+$('li').each(function () {
+    alert($(this).text());
+});
+
+How to exit from each function in jQuery : To exit from each function, return false.
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('li').each(function () {
+            if ($(this).text() == 'UK') {
+                return false;
+            }
+            alert($(this).text());
+        });
+    });
+</script>

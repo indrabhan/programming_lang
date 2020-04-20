@@ -1,0 +1,163 @@
+What are jQuery DOM manipulation methods
+jQuery DOM manipulation methods manipulate the DOM in some manner. The complete list of jQuery DOM manipulation methods can be found at the following link.
+	http://api.jquery.com/category/manipulation/
+
+jQuery attr method is used to set or retrieve attribute values of html elements.
+	attr(name, value) :-take 2 argument, the 2nd argument is optional
+
+Retrieves the title attribute value of the first matching element
+$('div').attr('title')
+
+Example : In this example we have 2 DIV elements. Since attr() function retrieves only the attribute value of first matching element, we only get the title attribute value of the first DIV element.
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    alert($('div').attr('title'));
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <div id="div1" title="My DIV1">
+		DIV 1
+	    </div>
+	    <div id="div2" title="My DIV2">
+		DIV 2
+	    </div>
+	</body>
+	</html>
+
+
+To retrieve the title attribute value of all the matching elements, jQuery each() method can be used.
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		$('div').each(function () {
+		    alert($(this).attr('title'));
+		});
+	    });
+	</script>
+
+Sets the title attribute value of all the matching elements to "new div title"
+	$('div').attr('title', 'new div title');
+
+
+Example : If you want to set the same value for the title attribute of all the elements, then there is no need to loop thru each element. All the div elements in this case will have 'new div title' as the title attribute value.
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		// set the same title attribute value for all the DIV elements
+		$('div').attr('title', 'new div title');
+
+		// Retrieve and alert the title attribute value of all DIV elements
+		$('div').each(function () {
+		    alert($(this).attr('title'));
+		});
+	    });
+	</script>
+
+If you want to set a different value for the title attribute, then you may need to loop thru each element.
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		// sets a different title attribute value for each DIV element
+		$('div').each(function (i) {
+		    $(this).attr('title', 'div ' + (i + 1) + ' title');
+		});
+
+
+		// Retrieve and alert the title attribute value of all DIV elements
+		$('div').each(function () {
+		    alert($(this).attr('title'));
+		});
+	    });
+	</script>
+
+
+How to set multiple attribute values : Using a JSON object to set multiple attribute values
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    var config = {
+		        'title': 'New Div Title',
+		        'style': 'border:3px solid red;',
+		        'name': 'My Div'
+		    };
+
+		    $('div').attr(config);
+
+		    var result = '';
+		    $('div').each(function () {
+		        result += 'title = ' + $(this).attr('title') + '<br/>';
+		        result += 'style = ' + $(this).attr('style') + '<br/>';
+			result += 'name = ' + $(this).attr('name') + '<br/><br/>';
+		    });
+
+		    $('#resultSpan').html(result);
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <div id="div1" title="My DIV1">
+		DIV 1
+	    </div>
+	    <br />
+	    <div id="div2" title="My DIV2">
+		DIV 2
+	    </div>
+	    <br />
+	    <span id="resultSpan">
+	    </span>
+	</body>
+	</html>
+
+
+Instead of creating a separate JSON object (config) and then passing it to attr() method, you can create the JSON object inline.
+	$('div').attr({
+	    'title': 'New Div Title',
+	    'style': 'border:3px solid red;',
+	    'name': 'My Div'
+	});
+
+	You can also use method chaining to set multiple attribute values
+	$('div')
+	    .attr('title', 'New Div Title')
+	    .attr('style', 'border:3px solid red;')
+	    .attr('name', 'My Div');
+
+
+How to remove an attribute using jQuery removeAttr() method : The following line of code removes title attribute of all the div elements that have a title attribute.
+$('div[title]').removeAttr('title');
+
+Example : 
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    var result = 'DIV Elements with title attribute = ' + $('div[title]').length + '<br/>';
+		    result += 'Removing title attribute <br/>';
+		    $('div[title]').removeAttr('title');
+		    result += 'DIV Elements with title attribute = ' + $('div[title]').length;
+
+		    $('#resultSpan').html(result);
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <div id="div1" title="My DIV1">
+		DIV 1
+	    </div>
+	    <br />
+	    <div id="div2" title="My DIV2">
+		DIV 2
+	    </div>
+	    <br />
+	    <span id="resultSpan">
+	    </span>
+	</body>
+	</html>
+

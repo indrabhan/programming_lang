@@ -1,0 +1,55 @@
+jQuery preventdefault 
+
+In some situations you may want to prevent these default actions of the browser. For example some of the websites prevent you from right clicking on the page. Disabling right click is annoying users. Many people say they disabled right click for security, because they do not want their content to be copied. But if you disable JavaScript in the browser, you will still be able to right click and copy the content. So you are achieving nothing by disabling right click.  
+
+Having said that, now let us see how to prevent the context menu from appearing when you right click on the web page. We discussed how to achieve this using raw JavaScript in Part 43 of JavaScript Tutori
+
+Let us now discuss, how to achieve this using jQuery
+
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $(this).on('contextmenu', function (e) {
+		        e.preventDefault();
+		        $('#divResult').append('Right click disabled<br/>')
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <h3>
+		Right click disabled on this page. Try
+		to right click and see what happens
+	    </h3>
+	    <div id="divResult"></div>
+	</body>
+	</html>
+
+
+When you click on a link, how to prevent the browser from navigating to the page specified in the link.
+
+	 <html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('#myHyperLink').on('click', function (e) {
+		        e.preventDefault();
+		        $('#divResult').append('Hyperlink default action prevented<br/>')
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <a id="myHyperLink" href="http://pragimtech.com">
+		Clicking on the link will not take you to PragimTech
+	    </a>
+	    <br /><br />
+	    <div id="divResult"></div>
+	</body>
+	</html>
+

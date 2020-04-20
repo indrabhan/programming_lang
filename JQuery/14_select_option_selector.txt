@@ -1,0 +1,70 @@
+To select all checked checkboxes or radio buttons, we use :checked selector. 
+To select all selected options of a select element use :selected selector. 
+
+How to get selected option from single select dropdown in jquery :
+We want to get the selected option text and value
+
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('#selectCountries').change(function () {
+		        var selectedOption = $('#selectCountries option:selected');
+		        $('#divResult').html('Value = ' + selectedOption.val()
+		            + ', Text = ' + selectedOption.text());
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    Country:
+	    <select id="selectCountries">
+		<option selected="selected" value="USA">United States</option>
+		<option value="IND">India</option>
+		<option value="UK">United Kingdom</option>
+		<option value="CA">Canada</option>
+		<option value="AU">Australia</option>
+	    </select>
+	    <br /><br />
+	    <div id="divResult"></div>
+	</body>
+	</html>
+
+
+How to get all selected options from multi-select dropdown in jquery : 
+We want to get all the selected options text and value.
+
+	<html>
+<head>
+    <title></title>
+    <script src="jquery-1.11.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#selectCountries').change(function () {
+                var selectedOptions = $('#selectCountries option:selected');
+                if (selectedOptions.length > 0) {
+                    var resultString = '';
+                    selectedOptions.each(function () {
+                        resultString += 'Value = ' + $(this).val() +
+                            ', Text = ' + $(this).text() + '<br/>';
+                    });
+                    $('#divResult').html(resultString);
+                }
+            });
+        });
+    </script>
+</head>
+<body style="font-family:Arial">
+    <select id="selectCountries" multiple="multiple">
+        <option selected="selected" value="USA">United States</option>
+        <option value="IND">India</option>
+        <option value="UK">United Kingdom</option>
+        <option value="CA">Canada</option>
+        <option value="AU">Australia</option>
+    </select>
+    <br /><br />
+    <div id="divResult"></div>
+</body>
+</html>

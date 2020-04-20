@@ -1,0 +1,91 @@
+Optimise jQuery image gallery
+
+we will discuss how to optimise the image gallery we created(see 43_image_gallery.txt), using the concept of event bubbling. We will also enhance the example, using a dropdownlist for effects and duration. We will also be able to enlarge and shrink the height and width of the main image.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		.imgClass{
+			height: 100px;
+			width: 130px;
+			border: 3px solid grey;
+		}
+	</style>
+	<script src="jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#subImgId').on({
+				mouseover : function(){
+					$(this).css({'cursor':'hand', 'border-color': 'red'})
+				},
+				mouseout : function(){
+					$(this).css({'cursor': 'pointer', 'border-color': 'grey'})
+				},
+				click : function(){
+					var subImgId = $(this).attr('src');
+					// $('#mainImg').attr('src', subImgId);
+					// $('#mainImg').fadeOut(500, function(){
+					// 	$(this).attr('src', subImgId)
+					// }).fadeIn(500);
+					var effect = $('#selectImgEffect').val();
+					var duration = parseInt($('#selectImgDuration').val());
+					var mainImg = $('#mainImg');
+					if(effect == 'Fade'){
+						mainImg.fadeOut(duration, function(){
+							$(this).attr('src', subImgId)
+						}).fadeIn(duration);
+					}else{
+						mainImg.slideUp(duration, function(){
+							$(this).attr('src', subImgId)
+						}).slideDown(duration);
+					}
+				}			
+			},'img')
+
+			var height = parseInt($('#mainImg').attr('height'))
+			var width = parseInt($('#mainImg').attr('width'));
+			var mainImg = $('#mainImg');
+
+			$('#btnEnlarge').click(function(){
+				height+= 100;
+				width+= 100;
+				mainImg.animate({'height': height, 'width':width})
+			})
+			$('#btnShrink').click(function(){
+				height-= 100;
+				width-= 100;
+				mainImg.animate({'height': height, 'width':width})
+			})
+		})
+</script>
+</head>
+<body>
+	Select Effect :
+    <select id="selectImgEffect">
+        <option value="Fade">Fade</option>
+        <option value="Slide">Slide</option>
+    </select>
+    Time in seconds:
+    <select id="selectImgDuration">
+        <option value="0.5">0.5</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <input id="btnEnlarge" type="button" value="Enlarge" />
+    <input id="btnShrink" type="button" value="Shrink" />
+    <br/>
+	<img id="mainImg" src="Pictures/indra.jpeg" height="500" width="540" style="border:3px solid grey"/>
+	<br/>
+	<div id="subImgId">
+		<img src="Pictures/1.jpg" class="imgClass"/>
+		<img src="Pictures/2.jpg" class="imgClass"/>
+		<img src="Pictures/3.jpg" class="imgClass"/>
+		<img src="Pictures/4.jpg" class="imgClass"/>
+	</div>
+</body>
+</html>

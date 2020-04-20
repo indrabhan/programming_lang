@@ -1,0 +1,104 @@
+vjQuery append elements
+
+
+To append elements we have
+append()
+appendTo()
+
+To prepend elements we have
+prepend()
+prependTo()
+
+Since these methods modify DOM, they belong to DOM manipulation category.
+
+jquery append example : The following example appends the specified HTML to all div elements
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('div').append('<b> Tutorial</b>');
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <div id="div1">jQuery</div>
+	    <div id="div2">C#</div>
+	    <div id="div3">ASP.NET</div>
+	</body>
+	</html>
+
+
+jquery appendto example:
+	<script type="text/javascript">
+        $(document).ready(function () {
+            $('<b> Tutorial</b>').appendTo('div');
+        });
+   	 </script>
+
+What is the difference between append and appendTo:-
+Both these methods perform the same task. The only difference is in the syntax. With append method we first specify the target elements and then the content that we want to append, where as we do the opposite with appendTo method.
+
+
+2.)prepend:-
+jquery prepend example : The following example prepends the specified HTML to all div elements
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('div').prepend('<b>Tutorial </b>');
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <div id="div1">jQuery</div>
+	    <div id="div2">C#</div>
+	    <div id="div3">ASP.NET</div>
+	</body>
+	</html>
+
+jquery prependTo example :-
+	<script type="text/javascript">
+        $(document).ready(function () {
+            $('<b>Tutorial </b>').prependTo('div');
+        });
+    	</script>
+
+What is the difference between prepend and prependTo
+Both these methods perform the same task. The only difference is in the syntax. With prepend method we first specify the target elements and then the content that we want to prepend, where as we do the opposite with prependTo method.
+
+
+3.)Append to existing element
+
+jQuery append existing element example : These methods (append, appendTo, prepend, prependTo) can also select an element on the page and insert it into another
+
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('div').append($('#mySpan'));
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <span id="mySpan"> Programming</span>
+	    <div id="div1">jQuery</div>
+	    <div id="div2">C#</div>
+	    <div id="div3">ASP.NET</div>
+	</body>
+	</html>
+
+
+Difference between prepend and append
+prepend method, inserts the specified content to the beginning of each element in the set of matched elements, where as append method inserts the specified content to the end of each element in the set of matched elements.
+
+
+
+append :- add in the last means just above the ending tag.
+
+prepend :- add in the first means just below the starting tag.

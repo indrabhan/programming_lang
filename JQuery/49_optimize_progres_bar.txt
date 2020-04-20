@@ -1,0 +1,40 @@
+optimize jquery progress bar.
+
+
+jQuery animate method documentation
+http://api.jquery.com/animate/
+
+
+At the moment the progress bar always counts from 1. For example
+1. When you select 30%, it starts to count from 1 to 30 which is good.
+2. Now if you select 70%, it starts again from 1 and counts all the way till 70, instead of continuing to count from 30 to 70.
+
+
+$(document).ready(function () {
+    $('#myButton').click(function () {
+        animateProgressBar($('#ddlPercent').val());
+    });
+
+    function animateProgressBar(currentPercentage) {
+        $("#innerDiv").animate({ "width": (currentPercentage * 500) / 100 }, {
+            duration: 3000,
+            step: function (now, fx) {
+                $("#innerDiv").text(Math.ceil((now / 500) * 100) + ' %');
+            }
+        });
+    }
+});
+
+step option of the animate function can be used to define a function that gets called after each step of the animation. This method has 2 parameters - now & tween.
+
+
+now	contains the value being animated
+tween	is a complex object and contains several properties. A few are listed below. For the complete list set a break point and inspect the object
+
+elem	The DOM element being animated
+now	The value the animation is currently at
+end	The value the animation will end at
+
+
+jQuery animate method documentation
+http://api.jquery.com/animate/

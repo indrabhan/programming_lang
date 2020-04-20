@@ -1,0 +1,79 @@
+jQuery to detect which mouse button clicked
+
+With raw JavaScript event object : Depending on the browser, event.button or event.which properties of the event object are used to determine which mouse button is clicked. 
+
+IE 8 & earlier versions use event.button property
+	Left Button 1
+	Middle Button 4
+	Right Button 2
+
+IE 9 & later versions and most other W3C compliant browsers use event.which property
+	Left Button 1
+	Middle Button 2
+	Right Button 3
+
+If you are using raw JavaScript event object, the following is the amount of code that you have to write to detect which mouse button is clicked. This code works in all browsers.
+
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		function whichMouseButtonClicked(event) {
+		    var whichButton;
+		    if (event.which) {
+		        switch (event.which) {
+		            case 1: whichButton = "Left Button Clicked"; break;
+		            case 2: whichButton = "Middle Button Clicked"; break;
+		            case 3: whichButton = "Right Button Clicked"; break;
+		            default: whichButton = "Invalid Button Clicked"; break;
+		        }
+		    }
+		    else {
+		        switch (event.button) {
+		            case 1: whichButton = "Left Button Clicked"; break;
+		            case 4: whichButton = "Middle Button Clicked"; break;
+		            case 2: whichButton = "Right Button Clicked"; break;
+		            default: whichButton = "Invalid Button Clicked"; break;
+		        }
+		    }
+
+		    document.getElementById('divResult').innerHTML = whichButton;
+		}
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <input id="btn" type="button" value="Click Me"
+		   onmouseup="whichMouseButtonClicked(event)" />
+	    <br /><br />
+	    <div id="divResult"></div>
+	</body>
+	</html>
+	
+
+jQuery normalizes which property of the event object so it will work across all browsers. The amount of code you have to write is lot less.
+
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('#btn').mouseup(function (event) {
+		        switch (event.which) {
+		            case 1: whichButton = "Left Button Clicked"; break;
+		            case 2: whichButton = "Middle Button Clicked"; break;
+		            case 3: whichButton = "Right Button Clicked"; break;
+		            default: whichButton = "Invalid Button Clicked"; break;
+		        }
+		        $('#divResult').html(whichButton);
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <input id="btn" type="button" value="Click Me" />
+	    <br /><br />
+	    <div id="divResult"></div>
+	</body>
+	</html>

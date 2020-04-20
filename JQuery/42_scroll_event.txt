@@ -1,0 +1,87 @@
+jQuery scroll event 
+
+
+scroll event is raised when the user scrolls to a different place in the element. It applies to window objects, but also to scrollable frames and elements with the overflow CSS property set to scroll.
+
+In the following example, notice that the div element overflow style is set to scroll. The div element has a scroll bar and as you scroll up and down the div element, the scroll event is raised and handled.
+
+	 <html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('div').scroll(function () {
+		        $('h3').css('display', 'inline').fadeOut(1000);
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <div style="width:300px; height:200px; border:1px solid black; overflow:scroll">
+		PRAGIM Specialty in training arena unlike other training institutions. Training delivered by real time software experts having more than 10 years of experience. Interview questions and real time scenarios discussion on topics covered for the day. Real time projects discussion relating to the possible interview questions. Trainees can attend training and use lab until you get a job. Resume preparation and mock up interviews. 100% placement assistance. 24 hours lab facility. PRAGIM Technologies offers professional real time projects for students in their final semester. Course completion and project completion certificates will also be provided upon successful completion of the course. We have partnered with major multinational companies to place freshers with our clients on their course completion.
+	    </div>
+	    <br />
+	    <h3 style="display:none; color:red">Scroll event handled</h3>
+	</body>
+	</html>
+
+Note:- style="display:none; :- when 1st time it is loaded it not display the content
+
+
+The following example, keeps track of how many times the scroll event is raised.
+
+	 <html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    var count = 0;
+		    $('div').scroll(function () {
+		        $('span').text(count += 1);
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <div style="width:300px; height:200px; border:1px solid black; overflow:scroll">
+		PRAGIM Speciality in training arena unlike other training institutions. Training delivered by real time software experts having more than 10 years of experience. Interview questions and real time scenarios discussion on topics covered for the day. Realtime projects discussion relating to the possible interview questions. Trainees can attend training and use lab untill you get a job. Resume preperation and mock up interviews. 100% placement assistance. 24 hours lab facility. PRAGIM Technologies offers professional real time projects for studetns in their final semester. Course completion and project completion certificates will also be provided upon successful completion of the course. We have partnered with major multinational companies to place freshers with our clients on their course completion.
+	    </div>
+	    <br />
+	    <h3 style="color:red">Scroll event handled <span>0</span> time(s)</h3>
+	</body>
+
+	</html>
+
+
+The following example, keeps track of whether the user scrolled up or down.
+Note :- when the value of scrollTop() method is zero than than it means it is scrolled up. 
+
+	 <html>
+	<head>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    var lastScrollTop = 0;
+		    $('div').scroll(function () {
+		        var currentScrollPosition = $(this).scrollTop();
+		        if (currentScrollPosition > lastScrollTop) {
+		            $('h3').text('You scrolled down');
+		        } else {
+		            $('h3').text('You scrolled up');
+		        }
+		        lastScrollTop = currentScrollPosition;
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <div style="width:300px; height:200px; border:1px solid black; overflow:scroll">
+		PRAGIM Speciality in training arena unlike other training institutions. Training delivered by real time software experts having more than 10 years of experience. Interview questions and real time scenarios discussion on topics covered for the day. Realtime projects discussion relating to the possible interview questions. Trainees can attend training and use lab untill you get a job. Resume preperation and mock up interviews. 100% placement assistance. 24 hours lab facility. PRAGIM Technologies offers professional real time projects for studetns in their final semester. Course completion and project completion certificates will also be provided upon successful completion of the course. We have partnered with major multinational companies to place freshers with our clients on their course completion.
+	    </div>
+	    <br />
+	    <h3 style="display:inline; color:red"></h3>
+	</body>
+	</html>
+

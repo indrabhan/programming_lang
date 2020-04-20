@@ -1,0 +1,36 @@
+jquery ajax get function
+
+1. How to make a GET request using jQuery AJAX get function
+2. Difference between jQuery get and load functions
+
+Syntax 
+	$.get( url [, data ] [, complete ] [, type ] )
+
+
+We discussed how to make AJAX requests using jQuery load() function in Part 53 and Part 54. Let us rewrite the example we worked with in Part 54, using jQuery AJAX get() function.
+
+Please change the following jquery code in HtmlPage1.html
+
+	$('#' + helpDiv + 'HelpDiv').load('GetHelpText.aspx', { HelpTextKey: helpDiv });
+
+AS SHOWN BELOW
+
+	$.get('GetHelpText.aspx', { HelpTextKey: helpDiv }, function (response) {
+	    $('#' + helpDiv + 'HelpDiv').html(response);
+
+	});
+
+What is the difference between jQuery get and load functions
+1. jQuery load function can be used to load only the HTML data from the server, where as jquery get function can be used to load any type of data (xml, json, script, or html).
+
+2. jQuery load function may issue a get or post request depending on whether the data parameter is specified or not. POST method is used if data is provided, otherwise, GET is used. On the other hand jquery get method always issues a GET request.
+
+3. With load function we specify a selector first. The HTML content retrieved from the server is automatically inserted into the DOM elements matched by the selector.
+	$('selector').load('url', 'data');
+
+With get function we do not specify any selector first, instead we will make use of the callback function to insert the data received from the server into the DOM elements.
+	$.get('url', 'data', function (response) {
+	    $('selector').html(response);
+
+	});
+

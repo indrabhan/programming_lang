@@ -1,0 +1,74 @@
+how to select values of checked checkboxes that are in different groups using jQuery.
+so by clicking on the button you will get the result.
+
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<script src="jquery-3.4.1.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#skillbtn').click(function(){
+					getCheckBox('skills');
+				})
+				$('#placebtn').click(function(){
+					getCheckBox('places');
+				})
+				var getCheckBox = function(groupName){
+					var result = $('input[name="'+ groupName+'"]:checked');
+					var resultString = result.length + 'Checked box are selected <br/>'; 
+					result.each(function(){
+						resultString+= $(this).val() + '<br/>'
+					});
+					$('#div' + groupName).html(resultString);
+				}
+			})
+		</script>
+	</head>
+	<body>
+		Skills:
+			<input type="checkbox" name="skills" value="js">JavaScript
+			<input type="checkbox" name="skills" value="jquery">JQuery
+			<input type="checkbox" name="skills" value="c#">C#
+			<br/><br/>
+		Places:
+			<input type="checkbox" name="places" value="Mumbai">Mumbai
+			<input type="checkbox" name="places" value="Delhi">Delhi
+			<input type="checkbox" name="places" value="Punjab">Punjab
+			<br/><br/>
+		<input type="button" id="skillbtn" value="Get Skills">
+		<input type="button" id="placebtn" value="Get places">
+		<div id="divskills"></div>
+		<br/><br/>
+		<div id="divplaces"></div>
+	</body>
+	</html>
+
+
+2.)
+By clicking on the checkbox and not on button.
+
+	<script type="text/javascript">
+        $(document).ready(function () {
+            $('input[name="skills"]').click(function () {
+                getSelectedCheckBoxes('skills');
+            });
+
+            $('input[name="cities"]').click(function () {
+                getSelectedCheckBoxes('cities');
+            });
+
+            var getSelectedCheckBoxes = function (groupName) {
+                var result = $('input[name="' + groupName + '"]:checked');
+                if (result.length > 0) {
+                    var resultString = result.length + " checkboxe(s) checked<br/>";
+                    result.each(function () {
+                        resultString += $(this).val() + "<br/>";
+                    });
+                    $('#div' + groupName).html(resultString);
+                }
+                else {
+                    $('#div' + groupName).html("No checkbox checked");
+                }
+            };
+        });
+    </script>

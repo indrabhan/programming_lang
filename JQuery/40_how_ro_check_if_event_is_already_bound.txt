@@ -1,0 +1,41 @@
+jQuery how to check if event is already bound 
+
+Why is it important to check if an event is already bound
+To prevent attaching event handler multiple times
+
+The following example checks if a click event handler is already bound. If it's not already bound, then a click event handler is attached.
+
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    var jQueryObject = $('#btn');
+		    var rawDOMElement = jQueryObject.get(0);
+		    var eventObject = $._data(rawDOMElement, 'events');
+
+		    if (eventObject != undefined && eventObject.click != undefined) {
+		        alert('Click event exists');
+		    }
+		    else {
+		        $('#btn').on('click', function () {
+		            alert('Button Clicked');
+		        });
+		    }
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <input id="btn" type="button" value="Click Me" />
+	</body>
+	</html>
+
+
+Please note that this only works if you have attached event handlers using jQuery. This will not work if you have attached event handlers using raw JavaScript or element attributes.
+
+Another way to prevent attaching event handlers multiple times is by using jQuery off() and on() methods. The off() method ensures that all existing click event handlers of the button are removed before again adding a new click event handler using on() method.
+
+	$('#btn').off('click').on('click', function () {
+	    alert('Button Clicked');
+	});

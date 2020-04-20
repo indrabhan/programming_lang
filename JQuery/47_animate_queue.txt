@@ -1,0 +1,129 @@
+jquery animation queue
+
+When several calls to animate() method are chained together. By default these calls are placed into a queue to be executed one after the other in series rather than executing all of them simultaneously in parallel. The name of this queue is fx.
+
+Each HTML element has its own queue. With the following code there will be 5 calls to animate method placed in the queue of each div element. This means both div elements (myDiv1 & myDiv2) may start to execute the first call to animate method more or less at the same time. However, from the given queue the queued methods are executed one after the other in series.
+
+To check if the checkbox is checked or not we use is() method
+syntx:-
+	JQueryElement.is(':checked')
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		.myDivClass {
+            width: 150px;
+            padding: 5px;
+            font-size: 18px;
+            border: 1px solid black;
+            opacity: .4;
+            background-color: red;
+            color: white;
+        }
+	</style>
+	<script src="jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#myButton').click(function(){
+				$('#myDiv1')
+					.animate({width: 500}, 1500)
+					.animate({padding: 20}, 1500)
+					.animate({'font-size': 35}, 1500)
+					.animate({ 'border-width': 10 }, 1500)
+                    			.animate({ 'opacity': 1 }, 1500);
+
+               			 $('#myDiv2')
+					.animate({width: 500}, 1500)
+					.animate({padding: 20}, 1500)
+					.animate({'font-size': 35}, 1500)
+					.animate({ 'border-width': 10 }, 1500)
+                    			.animate({ 'opacity': 1 }, 1500);
+			})
+		})
+	</script>
+</head>
+<body>
+	<body style="font-family:Arial">
+    <input type="button" id="myButton" value="Start Animation" />
+    <br /><br />
+    <div id="myDiv1" class="myDivClass">
+        jQuery animations
+    </div>
+    <br />
+    <div id="myDiv2" class="myDivClass">
+        Pragim Tech
+    </div>
+</body>
+</body>
+</html>
+
+
+The following code finds the total number of method calls waiting in the queue. While the first call to animate method is being executed, the other calls are added to the queue and waiting to be executed one after the other in sequence.
+
+	$('#myDiv1')
+	    .animate({ 'width': 500 }, 1500)
+	    .queue(function () {
+		console.log('Queued calls = ' +
+		    $(this).queue('fx').length); 
+		    $(this).dequeue();			// we have dequeue it so further execution starts.
+	    })
+	    .animate({ 'padding': 20 }, 1500)
+	    .animate({ 'font-size': 50 }, 1500)
+	    .animate({ 'border-width': 10 }, 1500)
+	    .animate({ 'opacity': 1 }, 1500)
+	    .queue(function () {
+		console.log('Queued calls = ' +
+		    $(this).queue('fx').length); 
+			$(this).dequeue();		// we have dequeue it so further execution starts.
+	    });
+
+
+To globally disable all animations
+	$.fx.off = true or jQuery.fx.off = true
+
+
+If you want the calls to animate() to be executed simultaneously in parallel, then set queue option to false. Modify the jQuery code as shown below.
+
+	$('#myDiv1')
+	    .animate({ 'width': 500 }, { duration: 1500, queue: false })
+	    .animate({ 'padding': 20 }, { duration: 1500, queue: false })
+	    .animate({ 'font-size': 50 }, { duration: 1500, queue: false })
+	    .animate({ 'border-width': 10 }, { duration: 1500, queue: false })
+	    .animate({ 'opacity': 1 }, { duration: 1500, queue: false });
+
+	$('#myDiv2')
+	    .animate({ 'width': 500 }, { duration: 1500, queue: false })
+	    .animate({ 'padding': 20 }, { duration: 1500, queue: false })
+	    .animate({ 'font-size': 50 }, { duration: 1500, queue: false })
+	    .animate({ 'border-width': 10 }, { duration: 1500, queue: false })
+	    .animate({ 'opacity': 1 }, { duration: 1500, queue: false });
+
+
+There are 2 variations of animate method.We discussed Variation 1 in Part 46
+Variation 1
+	.animate( properties [, duration ] [, easing ] [, complete ] )
+
+Variation 2
+	.animate( properties, options )
+
+An easier way to animate multiple css properties simultaneously in parallel, is to include all those css properties in a single JSON object.
+
+$('#myDiv1')
+    .animate({
+        'width': 500,
+        'padding': 20,
+        'font-size': 50,
+        'border-width': 10,
+        'opacity': 1
+    }, 1500);
+
+$('#myDiv2')
+    .animate({
+        'width': 500,
+        'padding': 20,
+        'font-size': 50,
+        'border-width': 10,
+        'opacity': 1
+    }, 1500);

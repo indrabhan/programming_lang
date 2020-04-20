@@ -1,0 +1,54 @@
+Just like jquery each() method, map() method is also used to iterate over matched elements.
+
+In general, if you want to create an array or concatenated string based on all matched elements in a jQuery selector, it is better to use map() over each() method.
+
+To create an array of list item text values, we could use either map() or each() methods. 
+
+Using each() method
+	$(document).ready(function () {
+	    var result = [];
+
+	    $('li').each(function (index, element) {
+		result.push($(element).text());
+	    });
+
+	    alert(result);
+	});
+
+Using map() method
+	$(document).ready(function () {
+	    alert($('li').map(function (index, element) {
+		return $(element).text();
+	    }).get());					// get() will get them in array
+	});
+
+Note:-
+The Map.get() method in JavaScript is used for returning a specific element among all the elements which are present in a map.
+
+To create a pipe delimited string of all list item text values, we could use either map() or each() methods. The output should be as shown below.
+	US|India|UK|Canada|Australia
+
+Using each() method
+	$(document).ready(function () {
+	    var result = '';
+
+	    $('li').each(function (index, element) {
+		result += $(element).text() + "|";
+	    });
+	    result = result.substr(0, result.length - 1);
+
+	    alert(result);
+	});
+
+Using map() method
+	$(document).ready(function () {
+	    alert($('li').map(function (index, element) {
+		return $(element).text();
+	    }).get().join('|'));
+	});
+
+
+Note:-
+	The join() method returns the array as a string.
+	The elements will be separated by a specified separator. The default separator is comma (,).
+	Note: this method will not change the original array.

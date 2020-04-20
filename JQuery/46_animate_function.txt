@@ -1,0 +1,95 @@
+jquery animate function
+
+
+Syntax of jquery animate function
+	.animate( properties [, duration ] [, easing ] [, complete ] ) 
+
+Animate function has 4 parameters. Only the first parameter (properties) is the required parameter. Rest 3 are optional.
+
+properties :-An object of CSS properties and values.
+duration :-The duration for animation in milliseconds. Default is 400.
+easing :-Easing function to use for the transition. Default is swing. You could also use linear.
+complete :-A function to call once the animation is complete
+
+What is jQuery easing
+Easing is a technique where the speed and/or direction of animation are changed while the animation is in progress. Easing can make the animation start off slow and gradually speed up, start up fast and gradually slow down, and a whole host of other effects. The difference between linear and swing easing is very subtle.
+
+The following page shows all the easings provided by jQuery UI
+https://jqueryui.com/easing
+
+
+The following example animates the div element, while changing the font-size property of the div element from its initial size to 50 pixels over a period of 2000 milli-seconds (2 seconds).
+
+	<html>
+	<head>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('#myButton').click(function () {
+		        $('#myDiv').animate({ 'font-size': '50' }, 2000);
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <input type="button" id="myButton" value="Animate" />
+	    <br /><br />
+	    <div id="myDiv">
+		jQuery animate function
+	    </div>
+	</body>
+	</html>
+
+
+The following example increases the height and width of the image to 500 pixels on mouseover. On mouseout the height and width are reduced to 100 pixels.
+
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#mainImage').on({
+				mouseover : function(){
+					$(this).animate({'height': 500,
+							'width': 500}, 2000)
+				},
+				mouseout : function(){
+					$(this).animate({'height': 100,
+							'width': 100},2000)
+				}
+			})
+		})
+	</script>
+	</head>
+	<body>
+		<img id="mainImage" src="Pictures/indra.jpeg" height="100" width="100" />
+	</body>
+	</html>
+
+
+In the following example, several calls to animate() method are chained together. By default these calls are placed into a queue to be executed one after the other in series rather than executing all of them simultaneously in parallel.
+
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<script src="jquery-3.4.1.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#mainImage').click(function(){
+					$(this).animate({left: 300})
+					    .animate({top: 200})
+					    .animate({left: 10})
+					    .animate({top: 10})
+					   
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<img id="mainImage" src="Pictures/indra.jpeg" height="100" width="100" style="position:absolute"/>
+	</body>
+	</html>
+
+
+Please note: By default, all HTML elements have a static position, and cannot be moved. To modify the position , set the CSS position property of the element to fixed, absolute or relative.

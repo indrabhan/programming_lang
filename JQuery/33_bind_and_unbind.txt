@@ -1,0 +1,80 @@
+Binding event handlers in jquery
+
+One way to bind event handlers to events is by using the jQuery shorthand functions like .click, .mouseover etc. Bind method is another way of doing the same.
+
+The following example binds click event handler to the button - btnClickMe
+	$('#btnClickMe').bind('click', function () {
+	    $('#divResult').html('Button Clicked');
+	});
+
+Binds multiple event handlers to the button - btnClickMe. If required, the event object can also be passed to the event handler method, although it is optional.
+	$('#btnClickMe').bind('click mouseover mouseout', function (event) {
+	    if (event.type == 'click') {
+		$('#divResult').html('Button Clicked at ' + 'X = '
+		    + event.pageX + ' Y = ' + event.pageY);
+	    }
+	    else if (event.type == 'mouseover') {
+		$(this).addClass('ButtonStyle');
+	    }
+	    else {
+		$(this).removeClass('ButtonStyle');
+	    }
+	});
+
+Use the unbind() method to unbind the event handler
+	$('#btnClickMe').unbind('mouseover');
+
+To unbind all the event handlers of an element, use unbind() method without any parameters
+	$('#btnClickMe').unbind();
+
+
+	<html>
+	<head>
+	    <title></title>
+	    <style>
+		.ButtonStyle {
+		    background-color: red;
+		    cursor: pointer;
+		    font-weight: bold;
+		    color: white;
+		}
+	    </style>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('#btnClickMe').bind('click mouseover mouseout', function (event) {
+		        if (event.type == 'click') {
+		            $('#divResult').html('Button Clicked at '
+		                + 'X = ' + event.pageX + ' Y = ' + event.pageY);
+		        }
+		        else if (event.type == 'mouseover') {
+		            $(this).addClass('ButtonStyle');
+		        }
+		        else {
+		            $(this).removeClass('ButtonStyle');
+		        }
+		    });
+
+		    $('#btnEnableMouseOverEffect').click(function () {
+		        $('#btnClickMe').bind('mouseover', function () {
+		            $(this).addClass('ButtonStyle');
+		        });
+		    });
+
+		    $('#btnDisableMouseOverEffect').click(function () {
+		        $('#btnClickMe').unbind('mouseover');
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <input id="btnClickMe" type="button" value="Click Me" />
+	    <input id="btnEnableMouseOverEffect" type="button"
+		   value="Enable Mouse Over Effect" />
+	    <input id="btnDisableMouseOverEffect" type="button"
+		   value="Disable Mouse Over Effect" />
+	    <br /><br />
+	    <div id="divResult"></div>
+	</body>
+	</html>
+

@@ -1,0 +1,42 @@
+jquery make a get request 
+
+jquery make a post request
+
+
+To make a get request we use jquery get function. jQuery load function can be used to make either a get or post request, depending on whether the data parameter is specified or not. POST method is used if data is provided, otherwise, GET is used.
+
+Another method that is available in jQuery to make a post request is post method.
+
+jQuery get function syntax
+$.get( url [, data ] [, success ] [, dataType ] )
+
+
+jQuery post function syntax
+$.post( url [, data ] [, success ] [, dataType ] )
+
+Example:-	
+	$.get('GetHelpText.aspx', { HelpTextKey: helpDiv }, function (response) {
+
+	$.post('GetHelpText.aspx', { HelpTextKey: helpDiv }, function (response) {
+
+
+What is the difference between get and post
+1. GET is designed for getting data from the server. POST is designed for modifying data on the server.
+
+2. Both GET and POST can be used to send data to the server. 
+
+3. When you are sending data with a GET request, the data is appended to the URL as query strings. With POST request the data is included in the message body.
+
+4. There is a limit on how much data can be sent using a GET request due to the limit on the length of the data that can be passed as part of the URL. The size limitations associated with GET are different depending on the client and server software. So, If you're sending large amounts of data, use POST over GET. If it's just a small amount of data then you may use GET.
+
+5. In general, a GET request should have no side-effects, in the sense that it shouldn't modify data. Usually if we are using a GET request to send data to the server, it should be to retrieve an item with an id. For example, GetCustomer.aspx?id=1, will retrieve a customer with id=1.
+
+A lot of people keep asking what is the difference between GET and POST in AJAX
+Whether you make GET and POST request using AJAX or by some other means is irrelevant, the differences are still the same.
+
+
+
+
+Please Note :
+1. Use fiddler to inspect the data that is sent to and received from GetHelpText.aspx
+

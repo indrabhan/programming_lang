@@ -1,0 +1,92 @@
+Let us understand this with an example. Consider the following HTML
+<ul>
+    <li>US</li>
+    <li>India</li>
+    <li>UK</li>
+    <li>Canada</li>
+    <li>Australia</li>
+</ul>
+
+The jQuery code should do the following
+1. Change the color of all the list items to blue
+2. All the list items should slide down (animation)
+3. All the list items should slide up (animation)
+4. Change the title attribute of all the list items to MY TITLE
+
+One way to do this is by using the following jQuery code
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('li').css('color', 'blue');
+		    $('li').slideUp(1000);
+		    $('li').slideDown(1000);
+		    $('li').attr('title', 'MY TITLE');
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <ul>
+		<li>US</li>
+		<li>India</li>
+		<li>UK</li>
+		<li>Canada</li>
+		<li>Australia</li>
+	    </ul>
+	</body>
+	</html>
+
+Instead the jQuery methods can be chained as shown below
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		$('li').css('color', 'blue').slideUp(1000).slideDown(1000).attr('title', 'MY TITLE');
+	    });
+	</script>
+
+How does method chaining work
+1. $('li') returns a jquery collection object that contains all the elements that match the selector
+2. On the collection object css() method is called. This method applies the color to all the elements in the collection and returns the collection again.
+3. On the collection that is returned by the css() method, the slideUp() method is called.
+4. This process continues until we reach the last method in the chain.
+
+When chaining methods like this, the line of code will become quite long and the readability will be lost. To improve the readability of the code you can format chained methods as shown below.
+
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		$('li')
+		    .css('color', 'blue')
+		    .slideUp(1000)
+		    .slideDown(1000)
+		    .attr('title', 'MY TITLE');
+	    });
+	</script>
+
+When will method chaining not work
+Method chaining will not work if a method in the chain does not return an object. In the example below, text() method returns a string that contains the text of all the list items and not an object. Hence the chaining does not work in this case.
+
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		$('li')
+		    .text()
+		    .css('color', 'blue')
+		    .slideUp(1000)
+		    .slideDown(1000)
+		    .attr('title', 'MY TITLE');
+	    });
+	</script>
+
+With the same example, method chaining works, if you use text() method to set the value for the list item. In this case, text() method sets a value for each list item in the jQuery collection object and returns that collection object. Hence the chaining works.
+
+	<script type="text/javascript">
+	    $(document).ready(function () {
+		$('li')
+		    .text('MY VALUE')
+		    .css('color', 'blue')
+		    .slideUp(1000)
+		    .slideDown(1000)
+		    .attr('title', 'MY TITLE');
+	    });
+	</script>
+

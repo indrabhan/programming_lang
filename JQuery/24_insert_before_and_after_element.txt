@@ -1,0 +1,69 @@
+To insert an element before another element
+before
+insertBefore
+
+To insert an element after another element
+after
+inserAfter
+
+Since these methods modify DOM, they belong to DOM manipulation category.
+
+1.)jquery before example
+
+Consider the following HTML
+	<span>Training Courses</span>
+	<div>jQuery</div>
+	<div>C#</div>
+	<div>ASP.NET</div>
+
+The following line of code inserts h3 element before each of the div elements
+	$('div').before('<h3>Programming</h3>');
+
+So the HTML in the DOM would now look as shown below. Notice that h3 element is added before every div element
+	<span>Training Courses</span>
+	<h3>Programming</h3><div>jQuery</div>
+	<h3>Programming</h3><div>C#</div>
+	<h3>Programming</h3><div>ASP.NET</div>
+
+jquery insertbefore example : insertbefore method methods perform the same task as before. The only difference is in the syntax. With before method we first specify the target elements and then the content that we want to insert, where as we do the opposite with insertbefore method.
+	$('<h3>Programming</h3>').insertBefore('div');
+
+
+2.)jquery after example 
+
+Consider the following HTML
+	<span>Training Courses</span>
+	<div>jQuery</div>
+	<div>C#</div>
+	<div>ASP.NET</div>
+
+The following line of code inserts h3 element after each of the div elements
+	$('div').after('<h3>Programming</h3>');
+
+So the HTML in the DOM would now look as shown below. Notice that h3 element is added after every div element
+	<span>Training Courses</span>
+	<div>jQuery</div><h3>Programming</h3>
+	<div>C#</div><h3>Programming</h3>
+	<div>ASP.NET</div><h3>Programming</h3>
+
+jquery insertafter example : insertafter method methods perform the same task as after. The only difference is in the syntax. With after method we first specify the target elements and then the content that we want to insert, where as we do the opposite with insertafter method.
+	$('<h3>Programming</h3>').insertAfter('div');
+
+
+3.)jquery insert existing element before or after another element : 
+These methods (before, insertBefore, after, inserAfter) can also select an existing element on the page and insert it before or after another element.
+
+Consider the following HTML
+	<span>Training Courses</span>
+	<div>jQuery</div><h3>Programming</h3>
+	<div>C#</div><h3>Programming</h3>
+	<div>ASP.NET</div><h3>Programming</h3>
+
+The following line of code inserts span element after each of the div elements
+	$('div').after($('span'));
+
+So the HTML in the DOM would now look as shown below.
+	<div>jQuery</div><span>Training Course</span>
+	<div>C#</div><span>Training Course</span>
+	<div>ASP.NET</div><span>Training Course</span>
+

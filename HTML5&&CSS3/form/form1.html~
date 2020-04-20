@@ -1,0 +1,48 @@
+<head>
+<link rel="stylesheet" type="text/css" href="test.css">
+</head>
+<body>
+<form action="" method="get">
+	<!-- action:- Conatin the file name in which we will stote the form data which user has input -->
+	<fieldset><!-- Creates a broder for the element which are inside in it -->
+	<legend>Personal Info</legend>
+	username: <input type="text" name="username" maxlength="250" value="Username" size="15"/><br/>
+	<!-- name:-throught this name coder will be able to acces the value what user has input.
+	maxlength:-Number of char can be filled in this text box.
+	value:- placeholder.
+	size:- number of char will be visible to user,to see other char user has to move the cursor/scroll. Through this text box size will also vary -->
+	
+	<!-- label tag doest make any visual changes alone unless used with css -->
+	<!-- for attribute contain the value of id attribute of element-->
+	<label for="pwdid">password: </label><input type="password" name="passowrd" id="pwdid" maxlength="25" size="15" /><br/>
+	</fieldset>
+	Food:
+	<select name="food" multiple size="3">
+	<!-- multiple:- use to show multiple option. -->
+	<!-- size="numeric_value" :- that number of options are visible to user. -->
+	<optgroup label="Salty">	<!-- Used to group the options -->
+		<option value="potato_chips">Potato Chips</option>
+		<option value="popcorn" selected="selected">Popcorn</option>
+		<option value="peanuts">Peanuts</option>
+	</optgroup>
+	<optgroup label="Hot">
+		<option value="nachos">Nachos</option>
+		<option value="pizza">Pizza</option>
+	</optgroup>
+	</select><br/>
+	Gender: <!-- For radio we should have same value for name attribute -->
+	Male<input type="radio" name="gender" value="male"/>
+	Female<input type="radio" name="gender" value="female"/><br/>
+	Vehicle:
+	<!-- <here use of label and for is If we click on that string the checkbox will be checked,no need to go till that samll square box> -->
+	<label for="carid">Car</label><input type="checkbox" name="vehicle1" value="car" id="carid"/>
+	<label for="bikeid"> Bike </label> <input type="checkbox" name="vehicle2" value="bike" checked="checked" id="bikeid"/>
+	<label for="scootyid">Scooty</label><input type="checkbox" name="vehicle3" value="scooty" id="scootyid"/><br/>
+	Note<textarea name="textarea" rows="7" cols="18"	></textarea><br/>
+	<!-- <Buttons> -->
+	<input type="button" value="Click me"/><br/>
+	<input type="file"/><br/>
+	<input type="submit" value="Submit"/>
+	<input type="reset" value="Reset"/> 
+</form>
+</body>	

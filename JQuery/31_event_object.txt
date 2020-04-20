@@ -1,0 +1,59 @@
+jQuery event object
+
+
+Whenever an event (like click, mouseover, mouseout etc) occurs, the relevant data about that event is placed into the event object. For example, the event object contains event data like, the X and Y coordinates of the mouse pointer when the event occurred, the HTML element that fired the event, which mouse button is clicked etc.
+
+Obtaining the event object is straightforward. The event object is always passed to the event handler method. Let us understand this with an example. When we click the button, we want to capture the following event data
+	1. Event name
+	2. Mouse X coordinate when the event occured
+	3. Mouse Y coordinate when the event occured
+	4. The control that raised the event
+	5. The HTML tag name that raised the event
+
+Notice that in the example below, we are passing event object to getEventDetails() method. This object is the raw JavaScript event object. The type property gives us the event name that occured. pageX and pageY properties return the X and Y coordinates of the mouse pointer. Target property returns the HTML element that raised the event. Target, pageX and pageY properties are supported by all modern browsers and Internet Explorer 9 and above. The following code will not work in Internet Explorer 8 and earlier versions. In addition to click event, the following example returns mouseover and mouseout event data.
+
+	<html>
+	<head>
+	    <title></title>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('#btn').click(function () {	//click(function (evet) than it will be jQuery object.
+		        getEventDetails(event);		//If event object will js raw obejct
+		    }).mouseover(function () {
+		        getEventDetails(event);
+		    }).mouseout(function () {
+		        getEventDetails(event);
+		    });
+
+		    function getEventDetails(event) {
+		        var eventDetails = "Event = " + event.type +
+		                           "<br/> X = " + event.pageX +
+		                           "<br/>Y = " + event.pageY +
+		                           "<br/>Target Type = " + event.target.type +
+		                           "<br/>Target Tag Name = " + event.target.tagName;
+
+		        $('#divResult').html(eventDetails);
+		    }
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <input id="btn" type="button" value="Click me" /><br /><br />
+	    <div id="divResult"></div>
+	</body>
+	</html>
+
+
+Cross-browser solution : For the above code to work in all browsers including Internet Explorer 8 and earlier versions, modify getEventDetails() function as shown below. Notice that we are converting JavaScript event object to jQuery event object using $.event.fix()
+
+function getEventDetails(event) {
+    var e = $.event.fix(event);		// js raw object will be converted into jQuery object.
+    var eventDetails = "Event = " + e.type +
+                        "<br/> X = " + e.pageX +
+                        "<br/>Y = " + e.pageY +
+                        "<br/>Target Type = " + e.target.type +
+                        "<br/>Target Tag Name = " + e.target.tagName;
+
+    $('#divResult').html(eventDetails);
+}

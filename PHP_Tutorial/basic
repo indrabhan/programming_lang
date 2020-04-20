@@ -1,0 +1,824 @@
+Command to start xampp server:- sudo /opt/lampp/manager-linux.run
+
+Php is server side programming.To run php program we should have server, so we make use of xampp.
+Before executing the php program start the Appache server from xampp.
+ 
+Note:-In xampp,go to htdocs folder and create you custome folder so that yo can save your php code in it.
+
+We can use print/echo to print any statement.but mostly we prefer "echo" in php.
+
+Synatx:-
+File name:- index.php
+	<?php
+		phpinfo()		
+	?>
+
+
+***Concat:- In php contacting of two string is done by using (.)dot operator or by (,)comma.
+
+***Two statement:- If you will have 2 statement than you have to use (;)semi-colon i.e the end of statement.
+	Example:-
+		<?php  
+			/* To diaplay the string on web we can either use echo or print*/		comments
+			echo "I am Indrabhan";
+			echo "I am 28 year old.";
+	
+		?>
+
+	output:- I am Indrabhan I am of 23 years
+
+***Comments:-
+	Single line comments in php is same like in js
+	Example:-	//single line comment
+			# single line comment
+
+	Multi line comment
+	Example:-	/* This is
+			   multi line comment */
+
+
+***Variable:-In php variable is define with prefix "$" and name for it.
+	     Example:-
+			<?php
+				$name = "Indra ";
+				$age = 29;
+
+				echo $name, $age
+			?>
+
+***Data Types:-
+
+	string:- collection of text;
+	integer:- negative or positive number with no decimal;
+	float:- negative or positive number with decimal;
+	boolean:- True/true or False/false;
+	null:- no value, empty value, Different from zero.
+
+
+	Example:-
+		<?php
+
+			$string_value = "Indra ";
+			$integer_value = 29;
+			$float_value = 21.05;
+			$boolean_value_true = true;
+			$boolean_value_false = false;
+			$null_value = null;
+
+			echo "String value is: ",$string_value;
+			echo "<br/> Integer value is: ",$integer_value;
+			echo "<br/> Float value is: ",$float_value;
+			echo "<br/> Boolean value of True is: ",$boolean_value_true;
+			echo "<br/> Boolean value of False is: ",$boolean_value_false;
+			echo "<br/> Null value is: ",$null_value;
+		?>
+
+	Example:-
+		<?php
+			$string_value = "Indra ";
+			$integer_value = 29;
+			echo "I am ",$string_value. " and i am ",$integer_value. " years old";	
+		?>
+
+***Differece between single quote(') and double quote(")
+	Example:-
+		echo "I am ",$string_value." and i am ",$integer_value." years old <br/>";
+		echo "I am $string_value and i am $integer_value years old";
+	
+	Note:- In double quotes php will try to search if it contains any variable, If it found varaible than it will print its value.
+
+	Note:- From performance prespective always use single quote.
+	       If your output string does not contain any variable and you make use of double quote than php will
+	       try search for variable in it, which will unnecessarly increase load.
+
+
+***Math Operator:-For Math always remember BODMAS rule Brackets of Division multipication addtion substraction.
+		  brackets has higher priority means brackets will execute 1st.
+	
+	+, -, *
+	/ :- 8/2 output is 4
+	%(modulo operator):- 8 % 2 output is 0(zero)
+
+	Example:-
+		<?php
+			$add = 3;
+			$add += 1;
+
+			$other_way = 3;
+			$other_way++;		//This will increse the value by 1,For $other_way-- will decrease value by 1
+
+			echo $add."<br/>";	o/p:- 4
+			echo $other_way;	o/p:- 4
+		?>
+
+	Note:- Link for math operator:-https://www.php.net/manual/en/language.operators.precedence.php
+
+
+***identical operator:-
+	== checks if the values of the two operands are equal or not.(assigment)
+	Example:-
+		<?php  
+			$apples = "1";
+			if($apples == 1){
+				echo "Apples are more than 1";
+			}
+		?>
+		Output :- Apples are more than 1
+
+	=== checks the values as well as the type of the two operands.(identical)
+
+	Example:-
+		<?php  
+			$apples = "1";
+			if($apples === 1){
+				echo "Apples are more than 1";
+			}
+		?>
+
+		Output is false(display nothing)
+
+
+***logical operator:- &&(and), ||(or)
+	"&&" AND operator
+	"||" OR operator
+	Example:-
+		<?php  
+			$apples = 5;
+			if($apples > 1 && $apples < 10){
+					echo "Apples are more than 1,but less than 10";
+			}
+		?>
+
+***if else elseif
+	Syntax1:- if(condition){
+			statement;
+			}
+
+
+	Syntax2:- if(condition){
+			statement;
+			}
+		 else{
+			statement;			
+			}
+
+
+	Syntax3:- if(condition){
+			statement;
+			}
+		 elseif(condition){
+			statement;			
+			}
+		 elseif(condition){
+			statement;			
+			}
+		 else{
+			statement
+		     }
+
+***switch statement:-
+	Syntax:-
+		switch(test_value/Variable){
+			case value:
+				//do this
+				break;
+			case value:
+				//do this
+				break;
+			case value:
+				//do this
+				break;
+			default:
+				//do this
+				break;
+		}
+
+	Example:-
+		<?php  
+			$number = 5;
+			switch($number){
+				case 1:
+				echo "Number is 1";
+				break;
+
+				case 2:
+				echo "Number is 2";
+				break;
+
+				case 3:
+				echo "Number is 3";
+				break;
+
+				default:
+				echo "Number not in range 1-3";
+				break; 	//If we do not specify break here its fine as this is the last statement to execute.
+			}
+		?>
+
+
+***for loop
+	Example:-
+		<?php  
+			for($i=0; $i<10; $i++){
+				echo "This is iteration number ",$i."<br/>";
+			}
+		?>
+
+
+***while loop:-
+	Example:-
+		<?php  
+			$a = 1;
+			while($a <= 10){
+				echo "This is iteration of while loop ",$a."<br/>";
+				$a++;	//If we do not specify increament here.The while condition will became infinite and loop while never 						 stop.
+			}
+		?>
+
+
+***do while:-
+	Example:-
+		<?php
+			$i = 0;
+			do{
+				echo "This is iteration number",$i."<br/>";
+				$i++;
+			}
+			while($i<=10)
+		?>
+
+***break:- break will stop the further iterations when it meets the specified condition.
+
+***continue:-will skip that iteration when meet the specified condition,but will not stop the further iterations.
+
+
+***String Function:- Find all the string function on below link
+		     link:- https://www.php.net/manual/en/function.implode.php
+	1.)strlen() :- return the length of string
+		Example:-
+			<?php
+				$a = "indra";
+				echo "Length of $a is ",strlen($a);
+			?>
+
+			Output:- Length of indra is 5
+
+	2.)strpos():- Its string position
+		/* strpos("whole string where you will perform the search operation", 
+			 "search_value", 
+			 "index position from where to start searching"); 
+		*/
+	
+		Example1:-
+			echo strpos("Hey my name is Indra, Whats your name?", "name")
+			Output:- 7
+
+		Example2:-
+			echo strpos("Hey my name is Indra, Whats your name?", "name",10)
+			Output:- 33
+
+		Example3:-
+			<?php
+				$string = 'Hey my name is Indra, Whats your name?';
+				$find = 'name';
+				echo strpos($string, $find, 10);
+			?>
+
+		Example4:-
+			<?php
+				$string = 'Hey my name is Indra, Whats your name?';
+				$find = 'name';
+				$offset = 0;
+				while($string_position = strpos($string, $find, $offset))
+				{
+					echo "value found at ",$string_position." position <br/>";
+					$offset = $string_position + 1;
+				}
+			?>
+			Output:- value found at 7 position 
+				 value found at 33 position
+
+
+	3.)substr:-Its sub string use to find the particular string from the whole string.
+		Syntax:-
+			substr("whole_string", start_index, end_index)
+
+		Example1:-
+			<?php
+				$string = 'Hey my name is Indrabhan but you can call me Indra.';
+				echo substr($string, 15,9)
+			?>
+
+		Example2:-
+			<?php
+				$string = 'Hey my name is Indrabhan but you can call me Indra.';
+				$find = 'Indra';
+				echo substr($string, strpos($string, $find), strlen($find));
+			?>
+
+		Example3:-
+			<?php
+				$string = 'Indra';
+				for($i=0; $i<strlen($string); $i++){
+					echo substr($string, $i, 1)."<br/>";
+				}
+			?>
+
+
+	4.)str_replace(search, replace, subject):-	
+		Example:-
+			<?php
+				$string = 'This is password and password is to keep confidential';	// password is in lowercase
+				echo str_replace('password', '*****', $string);
+			?>
+			Output:-This is ***** and ***** is to keep confidential
+
+		Example2:-
+			<?php
+				$string = 'This is password and Password is to keep confidential';	// password is in lowercase
+				echo str_replace('password', '*****', $string);
+			?>
+			Output:-This is ***** and Password is to keep confidential
+
+
+
+	5.)strtoupper() and strtolower():-
+		Example:-
+			$string = 'This is password and Password is to keep confidential';
+			echo strtolower($string);
+
+
+***Array:-We cannot print all elements of the array.
+	Example:-
+		<?php
+			$list = array('indra', 'bittu');
+			// echo $list;		// error
+			echo $list[0]
+		?>
+	Note:-In php we cannot print all the array at once.
+
+	Example2:-
+		<?php
+			$list[0] = 'indra';
+			$list[1] = 'bittu';
+			echo $list[0]
+		?>
+
+***Modify an array:-
+	<?php
+		$list = array('indra', 'bittu');
+		$list[0] = 'indrabhan';
+		echo $list[0];
+	?>
+	Output:- indrabhan
+
+
+***Delete an array:-to delete an array we use "unset()"
+	Example:-
+		<?php
+			$list = array('indra', 'bittu');
+			unset($list[0]);
+			echo $list[0];		// error
+			echo $list[1]		// o/p:- bittu (The 0th position is deleted but we will be able to acces other element by their 								position)
+		?>
+
+	Note:- we have deleted the 0th position and we print the 0th position so PHP will raise error,but not python.
+	       In Python when the element is deleted it will be replaced by futher elements, so its does not raise error.
+
+
+***count:- count() is used to count the length of an array.
+	Example:-
+		<?php
+			$list = array('indra', 'bittu');
+			echo count($list)
+		?>
+
+***Associative arrays:-In associative array we do not get the value from array by using index position but by using name.
+
+	Example:-
+		<?php
+			$list = array('Ryan'=>150, 'kyle'=>210, 'sean'=>340);
+			echo $list[0]		//error
+			echo $list['Ryan']	// The value inside the brackets are case-sensitive. 
+		?>
+	Output:-150
+
+
+***foreach:- Its work on each element of an array rather than on counter,starter and ender
+	     whereas for loop works on counter, starter and ender.
+	Example:-
+		<?php  
+			$normal_array = array('indra', 'bittu');
+			$associative_array = array('Ryan'=>150, 'kyle'=>210, 'sean'=>340);
+			foreach ($normal_array as $value) {
+				//$value:- holds the value of $normal_array
+				echo $value."<br/>";
+			}
+			echo "<br/><br/>";
+
+			foreach ($associative_array as $key => $value) {
+				echo $key. " ". $value. "<br/>";
+			}
+		?>
+
+***impolde:-implode(convert array into string)/sentance). Inshort its the join() method of python
+	 
+	Example:-
+		<?php  
+			$string = array('Ryan', 'kenyle', 'Mike', 'Sam');
+			echo implode(' ', $string);
+		?>
+
+	Output:- Ryan kenyle Mike Sam
+
+
+***implode:-Opposite of implode.
+	Example:-
+		<?php  
+			$string = "This is Indrabhan Vijay Bhamare";
+			$new_string = explode(' ', $string);
+			echo $new_string[2];			// Output:- Indrabhan
+
+			foreach($new_string as $value) {
+				echo $value."<br/>";
+			}
+		?>
+
+***extract:- used with associative arrya and extract convert the key into variables.
+	Example:-
+		<?php
+			$string = array('name'=>'Indra', 'age'=>28, 'dob'=>'Nandurbar');;
+			extract($string);
+			echo $name.'<br/>';
+			echo $age.'<br/>';
+			echo $dob.'<br/>';
+		?>
+
+
+***sort() and rsort():- rsort:- reverse sort.(Normal array)
+	Example1:-sort()
+		<?php
+			$string = array('Ryan', 'kenyle', 'Indra','Mike', 'Sam');
+			sort($string);
+			foreach ($string as $name) {
+				echo $name.'<br/>';
+			}
+		?>
+	Output:-Indra Mike Ryan Sam kenyle
+
+
+	Example2:-rsort()
+		<?php
+			$string = array('Ryan', 'kenyle', 'Indra','Mike', 'Sam');
+			sort($string);
+			foreach ($string as $name) {
+				echo $name.'<br/>';
+			}
+		?>
+	Output:- kenyle Sam Ryan Mike Indra
+
+
+***ksort():- Its a key sort used with associative array.
+	Example:-
+		<?php
+			$string = array('fruit3'=>'orange','fruit1'=>'banana', 'fruit2'=>'apple');
+			ksort($string);
+			foreach ($string as $key => $value) {
+				echo $key.' '.$value.'<br/>';
+			}
+		?>
+	Output:-fruit1 banana
+		fruit2 apple
+		fruit3 orange
+
+
+***array_slice:- returns new array	
+	Syntax:-
+		array_slice(array_list, start_index, end_index)
+
+	Example:-
+		<?php
+			$string = array('orange','banana', 'apple', 'mango', 'grapes');
+			$new_string = array_slice($string, 2,1);
+			foreach($new_string as $value){
+				echo $value;
+			}
+		?>
+	Output:- apple
+
+
+***array_merge:- merge the two array and return the new array
+	Syntax:- array_merge(array_1, array_2)
+
+	Example:-
+		<?php
+			$fruit1 = array('orange','banana', 'apple', 'mango', 'grapes');
+			$fruit2 = array('pineapple', 'guava');
+			$merged_array  = array_merge($fruit1, $fruit2);
+			foreach ($merged_array as $value) {
+				echo $value.' ';
+			}
+		?>
+
+
+***Function:- Syntax is same like JS.
+	Example:-
+		<?php
+			function display($msg){
+				echo 'Hello '.$msg;
+			}
+			$user = 'Indra';
+	
+			display($user);
+		?>
+
+
+	Example2:- Passing array to an function.
+		<?php
+			$numbers = array(10,20,40,25,5);
+			echo average($numbers);
+			function average($num){
+				$total = 0;
+				foreach ($num as $value) {
+					$total += $value;
+				}
+				return $total / count($num);
+			}
+		?>
+
+***default argument:- While defining the function we pass value to the arguments,If we forget to pass value to the argument when
+		      calling the function,than those value will be used as value to argument which we pass while defining.
+	Note:- default argument should be the last argument of function.
+	
+	Example:-
+		<?php
+			function display($greeting,$name='user'){
+				echo $greeting.' '.$name.'<br/>';
+			}
+			display('Hello');
+			display('Hello', 'Indra');
+		?>
+	Output:- Hello user
+		 Hello Indra
+
+
+***variable:-local variable(inside the function)
+	     global variable(outside the function)
+
+	Example:-
+		<?php
+			$value = 4;			// global variable
+			function scoper(){
+				$value = 800;		// local variable
+				echo $value.'<br/>';
+			}
+			scoper();
+			echo $value;
+		?>
+	Output:- 800
+		 4
+
+
+***Make local variable as a global variable
+
+	Example:-
+		<?php
+			$value = 4;		
+			function scoper(){
+				global $value;		// make the local variable as global by using 'global' keyword.
+				echo $value.'<br/>';
+			}
+			scoper();
+			echo $value;
+		?>
+	Output:- 4
+		 4
+
+
+***include/required:-
+	We use include/required when we want multiple files to be included in single file.
+	
+	The differance between include and required is that when we use required and it fails to find the file than it will kill entire page.
+	but when we use include and it fails to find the file than it will print/execute the remaining code of main file.
+
+	syntax:- <?php include 'file_name.php'?>
+				OR
+		<?php require 'file_name.php'?>
+
+	Example:-
+		file_name:- header.php
+		code:-
+			<h1>This is Header</h1>
+			<p>This Line is from header.php file</p>
+
+		file_name:- index.php
+		code:-
+			<?php
+	
+			?>
+			<!DOCTYPE html>
+			<html>
+			<head>
+				<title></title>
+			</head>
+			<body>
+				<?php include 'header.php'?>			// <?php require 'header.php'?>
+				<p>Below para are from index.php file</p>
+				<p>With the help of 'include' keyword you can call other php file</p>
+				<p>We can even write html code in php file</p>
+			</body>
+			</html>
+
+
+
+******************************* FORM  ************************************
+x = The value of name tag of any HTML element.
+$_GET['x'] :- IF we use get method in form
+$_POST['x'] :- IF we use post method in form
+$_REQUEST['x']:- IF we dont know which method has been used in form
+
+
+file_name:- index.php
+code:-
+	<?php
+	
+	?>
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<form action='handler.php' method='get'>
+			First name:<input type="text" name="fn" />
+			Last name:<input type="text" name="ln" />
+			<input type='submit' value="Submit"/>
+		</form>
+	</body>
+	</html>
+
+file_name:-handler.php	(This file has been declare in above index.php file in the form tag)
+code:-
+	<?php
+		$first_name = $_GET['fn'];
+		$last_name = $_GET['ln'];
+		Your Favourite Food<br/>
+		Punjabi<input type="checkbox" value="Punjabi" name="food[]" />
+		Chineese<input type="checkbox" value='Chineese' name="food[]" />
+		Maharastrain<input type="checkbox" value='Maharastrain' name="food[]" /><br/>
+		//here food[] is array.
+	?>
+
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+	<h2>Welcome you have been directed here because you were filling the form</h2>
+	<?php  
+		echo 'Your name is '.$first_name.' '.$last_name;
+
+		//If you do not make use of array than change the value of name attr for every checkbox.
+		//But if you don not select any item than it will not raise error.
+		//isset() is the function:-check where value is set or not.
+
+		if (isset($_GET['checkbox1'])) {
+			echo $p = $_GET['checkbox1'].'<br/>';
+		}
+		if (isset($_GET['checkbox2'])) {
+			echo $c = $_GET['checkbox2'].'<br/>';
+		}
+		if (isset($_GET['checkbox3'])) {
+			echo $m = $_GET['checkbox3'].'<br/>';
+		}
+
+		//If you want user to check multiple value than make use of array
+		//If you make use of array than the value of name attr for every checkbox is same.
+		//But if you don not select any item than it will raise error.
+		foreach ($_GET['food'] as $key => $value) {
+			echo "Key= ".$key."   "."value= ".$value.'<br/>';
+		}
+	?>
+	</body>
+	</html>
+
+
+
+***empty() :- It checks whether the value is empty or not.
+***is_numeric() :- It checks whether the value is numeric or not.
+
+
+***data persist:- When you enter the data into form while submitting, If you enter wrong data and submit the form than an error is shown that you have to enter right data but at the the same time it also clear all the entered data from the form and you have to enter all data again,
+so to avoid this we use data persist i.e the right enter data will be shown on the form.
+
+Example:-
+	<?php
+	
+	?>
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<form action='handler.php' method="post">
+		<?php
+		if(isset($_POST['fn'])){
+			$fn = $_POST['fn'];
+		}
+		else{
+			$fn = "";
+		}
+			echo "
+				First name:<input type='text' name='fn' value='$fn'/><br/>
+				Last name:<input type='text' name='ln' /><br/>
+				<input type='submit' value='Submit'/>
+		
+
+			";
+	
+		?>
+		</form>
+	</body>
+	</html>
+
+
+***htmlentities ans strip_tags:-This are used when some one type and html tags in the text box that that would be dispalyed in the html tags format but we want that to appear as a normal text,(mostly this happens in the comment section)
+
+Example:-
+	<?php
+	
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<form action='' method="post">
+	<?php
+	if(isset($_POST['fn'])){
+		$fn = $_POST['fn'];
+		echo htmlentities($fn);
+		//echo strip_tags($fn);
+	}
+	else{
+		$fn = "";
+	}
+		echo "
+			First name:<input type='text' name='fn' value='$fn'/><br/>
+			Last name:<input type='text' name='ln' /><br/>
+			<textarea rows='7' cols='25'></textarea><br/>
+
+	
+			";
+	
+		?>
+		</form>
+	</body>
+	</html>
+
+Output :-	
+		htmlentities(string):-
+		enter text:- <ul><li>Apple</li></ul>
+		output:- <ul><li>Apple</li></ul>
+
+		
+		strip_tags(string):-
+		enter text:- <ul><li>Apple</li></ul>
+		outpput:- Apple
+
+
+***filter_var():-check for @ "." and no space in email. Takes 2 parameter
+Example:-
+	<?php
+	
+	?>
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+		<form action='' method="post">
+		<?php
+		if(isset($_POST['email']) && !empty($_POST['email'])){
+			if(filter_var($_POST['email'] , FILTER_VALIDATE_EMAIL)){
+				echo "valid";
+			}
+			else{
+				echo "Not valid";
+			}
+		}
+		else{
+			echo "Please enter email";
+		}
+			echo "
+				Email:<input type='text' name='email'/><br/>
+				<input type='submit' value='Submit'/>
+				";
+		?>
+		</form>
+	</body>
+	</html>

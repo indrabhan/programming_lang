@@ -1,0 +1,72 @@
+jquery load callback function
+
+Syntax
+.load( url [, data ] [, complete ] )
+
+complete parameter is a callback function that is executed when the request completes. The callback function has 3 parameters.
+
+CallbackFunction(response, status, xhr)
+
+In the following example, the anonymous function that is passed as the third parameter to the load function is executed when the AJAX request completes.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var textBoxes  =$('input[type="text"]');
+			textBoxes.focus(function(){
+				var helpDiv = $(this).attr('id') + 'HelpDiv';
+				$('#'+ helpDiv).load('53_help.html #' + helpDiv, function(response, status, xhr){
+                    var statusMessage = 'status : ' + xhr.status + '<br/>'
+                    statusMessage += 'status Text: ' + xhr.statusText + '<br/>'
+                    statusMessage += 'response: ' + response + '<br/>'
+                    statusMessage += 'status : ' + status
+
+                    $('#divStatus').html(statusMessage)
+                })
+			})
+		})
+	</script>
+</head>
+<body>
+	<table>
+        <tr>
+            <td>First Name</td>
+            <td><input id="firstName" type="text" /></td>
+            <td><div id="firstNameHelpDiv"></div></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input id="lastName" type="text" /></td>
+            <td><div id="lastNameHelpDiv"></div></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input id="email" type="text" /></td>
+            <td><div id="emailHelpDiv"></div></td>
+        </tr>
+        <tr>
+            <td>Income</td>
+            <td><input id="income" type="text" /></td>
+            <td><div id="incomeHelpDiv"></div></td>
+        </tr>
+    </table>
+    <br/><br/>
+    <div id="divStatus"></div>
+</body>
+</html>
+
+
+If you want the code in the callback function to execute only if these is an error, you can do so using status parameter as shown below.
+
+	$('#'+ helpDiv).load('53_help.html #' + helpDiv, function(response, status, xhr){
+		if (status == 'error') {
+		    var errorMessage = 'status : ' + xhr.status + '<br/>';
+		    errorMessage += 'status text : ' + xhr.statusText + '<br/>';
+		    errorMessage += 'response : ' + response;
+		    $('#divError').html(errorMessage);
+		}
+	    });

@@ -1,0 +1,71 @@
+on and off methods
+
+If you are using jQuery 1.7 or higher, you should be using on() and off() methods instead of bind() and unbind() methods.
+
+The syntax for using on() and off() methods is very similar to using bind() and unbind() methods.
+
+	<html>
+	<head>
+	    <title></title>
+	    <style>
+		.ButtonStyle {
+		    background-color: red;
+		    cursor: pointer;
+		    font-weight: bold;
+		    color: white;
+		}
+	    </style>
+	    <script src="jquery-1.11.2.js"></script>
+	    <script type="text/javascript">
+		$(document).ready(function () {
+		    $('#btnClickMe').on('click mouseover mouseout', function (event) {
+		        if (event.type == 'click') {
+		            $('#divResult').html('Button Clicked at ' + 'X = '
+		                + event.pageX + ' Y = ' + event.pageY);
+		        }
+		        else if (event.type == 'mouseover') {
+		            $(this).addClass('ButtonStyle');
+		        }
+		        else {
+		            $(this).removeClass('ButtonStyle');
+		        }
+		    });
+
+		    $('#btnEnableMouseOverEffect').click(function () {
+		        $('#btnClickMe').on('mouseover', function () {
+		            $(this).addClass('ButtonStyle');
+		        });
+		    });
+
+		    $('#btnDisableMouseOverEffect').click(function () {
+		        $('#btnClickMe').off('mouseover');
+		    });
+		});
+	    </script>
+	</head>
+	<body style="font-family:Arial">
+	    <input id="btnClickMe" type="button" value="Click Me" />
+	    <input id="btnEnableMouseOverEffect" type="button"
+		   value="Enable Mouse Over Effect" />
+	    <input id="btnDisableMouseOverEffect" type="button"
+		   value="Disable Mouse Over Effect" />
+	    <br /><br />
+	    <div id="divResult"></div>
+	</body>
+	</html>
+
+
+we can even pass a JSON to bind/on method
+
+	$('#btnClickMe').bind({
+	    click: function (event) {
+		$('#divResult').html('Button clicked at X = '
+		    + event.pageX + ' Y = ' + event.pageY);
+	    },
+	    mouseover: function () {
+		$(this).addClass('ButtonStyle');
+	    },
+	    mouseout: function () {
+		$(this).removeClass('ButtonStyle');
+	    }
+	});

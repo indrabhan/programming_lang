@@ -1,0 +1,70 @@
+<p>Dhule is a major city located in the Dhule District in northwestern part of Maharashtra state, India known as West Khandesh. Situated on the banks of Panzara River, Dhule is the regional headquarters of MIDC, RTO, and MTDC.</p>
+/*Get rid of margin and padding*/
+*{						/* star(*) means all element used here*/
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+header,nav,aside,section,article,footer{
+	display: block;
+}
+
+/*Centering website*/
+
+.container{
+	width: 1000px;
+	margin: 0px auto;		/* 0px(top-bottom) and auto(auto adjustment for Left/Right)*/
+	/*border: 2px solid black;*/
+}
+
+.img_float{
+	float: left;
+}
+.top_nav{
+	/*width: 800px*/
+	float: left;
+	/*clear: both;*/
+}
+.empty_div{
+	clear: both
+}
+.top_nav ul li{
+	float: left;
+	padding: 55px 20px;
+	
+}
+.section_class{
+	float: left;
+	width:700px;
+	/* before
+	width: 686px;
+	border: 2px solid red; This increase the width to left and right by 2px
+	margin: 10px;    		This increase the width to left and right by 10px */
+
+	/*better way define width with is original px i.e 700 px and define border, margin and padding 
+	in parent-child way so that will not affect to width=700px. As we define width=700px than 
+	we have to adjust the px if we define padding/margin(u can see we have adjust width="686px")
+	If we do not adjust width and define padding/margin than the other block appears below
+	the above block but we dont want that we want both block to be dispalyed on single line.
+	see web width we have define to 1000px.*/
+}
+.section_class article{
+	/*define here above commented code*/
+	border: 2px solid red;
+	margin: 10px;
+}
+.aside_class{
+	float: left;
+	width: 300px;
+	/* before
+	width: 286px;
+	border: 2px solid yellow;*/
+}
+.aside_class div{
+	border: 2px solid yellow;
+	margin: 0px 0px 10px 0px;
+	padding: 5px;
+}
+.footer_class{
+	clear: both
+}

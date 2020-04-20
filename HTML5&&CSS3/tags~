@@ -1,0 +1,115 @@
+<strong></strong>
+
+<b></b>	:- Blod tag
+
+<em></em> :-	Italic tag
+
+<hr/> :-	Draws the Horizontal line(single tag)
+
+<!--This is comment tag -->
+
+Example:-
+	<body>
+	<p><em>This is</em> <strong>Indrabhan Vijay Bhamare</strong>, as a <b>odoo </b><em>developer</em></p>
+	<hr/>
+	<p>This is second Paragraph</p>
+	</body>
+
+
+***Un-Order list:-Un-Order List has bullet point and <li> means List Item
+
+<ul>
+  <li></li>
+  <li></li>
+</ul>
+
+Example:-
+	<ul> <!--Un-Order List has bullet point-->
+		<li>Apple</li><!--List Item -->
+		<li>Mango</li>
+		<li>Banana</li>
+	</ul>
+
+***Order list:- Order List has serial number means like this 1. Apple 2.Banana 3. Grapes
+
+<ol>
+ <li></li>
+ <li></li>
+</ol>
+
+Example:-
+	 <ol> <!--Order List has serial number means like this 1. Apple 2.Banana 3. Grapes-->
+		<li>Mango</li>
+		<li>Banana</li>
+		<li>Grapes</li>
+	</ol>
+
+	Output:- 
+		1. Mango
+		2. Banana
+		3.Grapes
+
+***Linking to another page
+
+<a href="url/path_of_page">Some Text</a>
+
+Example:-
+	<body>
+		<p>For more info click on <a href="https://www.google.com">Google</a></p>
+	</body>
+
+***Image tag :-It is single tag and has attribute "src", "alt", "width", "height".
+src:- source of image(specify the path of image here.
+alt :- This attribute is use if image not found than, the message you specify in this attribute will be displayed.
+width and height are in pixel.
+
+Example:-
+<img src="indra.jpg" atr="Image not found" width="540" height="540"/>
+
+
+***Folder directory.
+
+HTML5&&CSS3_Folder:
+	Images_Folder -- indra.jpeg
+	test.html
+
+	<img src="Images_Folder/indra.jpeg" alt="Image not Found" width="340" height="340"/>
+
+
+HTML5&&CSS3_Folder:
+	Images_Folder -- indra.jpeg
+	Program_Folder -- test.html
+
+	<img src="../Image_Folder/indra.jpeg" alt="Image not Found" width="340" height="340"/>
+
+	Note:- "../" go back to one folder(here it go back from current folder and than in image folder)
+
+
+**Audio tag.
+	<audio>
+		<source/>
+	<audio/>
+
+controls:- allows you to start, pause, stop forward, backword
+	   if controls not used than you will not be able to perform any of the above operations.
+autoplay:- when the browser loads start playing the audio.
+loop:- when the audio reaches at end, begin it again.
+
+Example:-
+	<body>
+	<audio controls autoplay loop>
+		<source src="Excuse me boss.mp3" type="audio/mp3"/>
+		If bowser does not support audio tag please update browser.
+	</audio>
+
+
+***Video tag. :- same as audio tag. (see type attribute of source. type="video/mp4")
+	Note:- use mp4 videos as they are widely used and supported by browser.
+	Example:-
+		<body>
+		<video width="340" height="340" controls autoplay loop>
+			<source src="SampleVideo.mp4" type="video/mp4"/>
+		</video>
+		</body>
+
+

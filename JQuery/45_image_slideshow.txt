@@ -1,0 +1,77 @@
+jquery image slideshow with thumbnails 
+
+Here we will learn setInterval(), clearInterval(), $.inArray()
+
+sytax:- setInterval(function, delay)
+	this method will execute repeatedly after every dealy
+	python cron job
+	return the intervalId
+
+syntax:- clearInterval(intervalId)
+	this method stops the execution of setIntrval()
+
+
+$.inArray(element, array):- returns the index position of element specified in $.inArray()
+			     indexArray.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		.imgClass{
+			height: 100px;
+			width: 100px;
+			border: 3px solid grey;
+		}
+	</style>
+	<script src="jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var imageUrl = new Array();
+			var intervalId;
+			var btnstart = $('#btnStartSlideShow');
+			var btnstop = $('#btnStopSlideShow');
+
+			$('#subImgId img').each(function(){
+				imageUrl.push($(this).attr('src'));
+			});
+
+			function setImage(){
+				var mianImage = $('#mainImg');
+				var currentImage = mianImage.attr('src');
+				var currentImageIndex = $.inArray(currentImage, imageUrl);
+				if (currentImageIndex == imageUrl.length -1){
+					currentImageIndex = -1;
+				}
+				mianImage.attr('src', imageUrl[currentImageIndex + 1]);
+			}
+			btnstart.click(function(){
+				intervalId = setInterval(setImage, 500);
+				$(this).attr('disabled', 'disabled');
+				btnstop.removeAttr('disabled')
+			})
+			btnstop.click(function(){
+				clearInterval(intervalId);
+				$(this).attr('disabled', 'disabled');
+				btnstart.removeAttr('disabled');
+			}).attr('disabled', 'disabled');
+
+		})
+</script>
+</head>
+<body>
+	<input id="btnStartSlideShow" type="button" value="Start Slideshow" />
+    <input id="btnStopSlideShow" type="button" value="Stop Slideshow" />
+    <br /><br />
+	<img id="mainImg" src="Pictures/indra.jpeg" height="500" width="540" style="border:3px solid grey"/>
+	<br/>
+	<div id="subImgId">
+		<img src="Pictures/indra.jpeg" class="imgClass"/>
+		<img src="Pictures/1.jpg" class="imgClass"/>
+		<img src="Pictures/2.jpg" class="imgClass"/>
+		<img src="Pictures/3.jpg" class="imgClass"/>
+		<img src="Pictures/4.jpg" class="imgClass"/>
+	</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+jquery ajax load
+
+Note:-
+	/home/ind/Documents/JQuery_practice/html_ajax_files
+	for pratice purpose the files are place on above address
+	go in terminal till above path and run the command "python3 -m http.server"
+	select you file.
+	"python3 -m http.server" :-This command create temporary web server for you.
+
+Note:- for security purpose files should be on same server.
+
+we will discuss how to load HTML data from the server using jquery AJAX load function.
+
+What is AJAX
+AJAX stands for Asynchronous JavaScript and XML, and allow parts of the page to be updated without having to reload the entire page. 
+
+Syntax 
+load( url [, data ] [, complete ] )
+
+
+Parameter	Description
+url		Required. URL to which the request is sent
+data		Optional. A JSON object or string that is sent to the server along with the request
+complete	A callback function that is called when the request completes
+	
+
+The following example loads HTML data from the server. When a text box receives focus, the help text associated with that field is loaded from the server and displayed. When the focus is lost the help text disappears.
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var textBoxes  =$('input[type="text"]');
+			textBoxes.focus(function(){
+				var helpDiv = $(this).attr('id') + 'HelpDiv';
+				$('#'+ helpDiv).load('53_help.html #' + helpDiv) // Note: if you not specify helpDiv here than it will 											// showyou  all the content of html
+			})
+		})
+	</script>
+</head>
+<body>
+	<table>
+        <tr>
+            <td>First Name</td>
+            <td><input id="firstName" type="text" /></td>
+            <td><div id="firstNameHelpDiv"></div></td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td><input id="lastName" type="text" /></td>
+            <td><div id="lastNameHelpDiv"></div></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input id="email" type="text" /></td>
+            <td><div id="emailHelpDiv"></div></td>
+        </tr>
+        <tr>
+            <td>Income</td>
+            <td><input id="income" type="text" /></td>
+            <td><div id="incomeHelpDiv"></div></td>
+        </tr>
+    </table>
+</body>
+</html>
+
+
+Note:- $('#'+ helpDiv).load('53_help.html) // will load all html content and show.
+
+	$('#'+ helpDiv).load('53_help.html #' + helpDiv) //  // will load all html content but will only show the specify
+

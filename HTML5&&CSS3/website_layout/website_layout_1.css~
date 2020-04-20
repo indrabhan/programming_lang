@@ -1,0 +1,41 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none
+
+}
+.container{
+	width: 1000px;
+	margin: 0px auto;
+}
+img{
+	float: left
+}
+nav ul li{
+	float: left;
+	margin: 50px 10px 0px 10px;
+}
+.emptyClass{
+	clear: both;
+}
+.sectionClass{
+	float: left;
+	width: 650px;
+	border: 2px solid red;
+	margin: 0px 10px 0px 0px;
+	padding: 10px 10px;
+}
+.asideClass{
+	border: 2px solid blue;
+	width: 250px;
+	float:left;
+	margin: 0px 10px 0px 0px;
+	padding: 10px 10px;
+}
+.footerClass{
+	clear: both;
+	float: left;
+}
+.footerClass{
+	margin: 10px
+}
