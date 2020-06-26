@@ -1,0 +1,18 @@
+return json data from server.
+
+
+$.ajax({
+	url: 'someURL',
+	contentType: 'application/json;charset=utf-8',		// we are saying that we will pass json data to server.
+	data: JSON.stringify({'employeeId': emp}),		// so we have to convert data in to JSON string format
+	method: 'post',
+	datatype: 'json',	// we expect datatype to be return from server.
+	success: function(response){
+				//In reposnse we will receive json data. json data return 'd' property with it.
+			
+			$('#txtName).val(response.d.Name)
+		}
+	error: function(err){
+			alert(err)
+		}
+})

@@ -1,0 +1,86 @@
+Customizing droppable widget
+
+Option/Event		Description
+
+over		This event is triggered when an acceptable draggable is dragged over the droppable
+
+out		This event is triggered when an acceptable draggable is dragged out of the droppable
+
+activate	This event is triggered when an acceptable draggable starts dragging
+
+deactivate	This event is triggered when an acceptable draggable stops dragging
+
+activeClass	The specified class will be applied to the droppable while an acceptable draggable is being dragged
+		(here the 1st activate and later deactivate event tigger)
+
+hoverClass	The specified class will be applied to the droppable while an acceptable draggable is being hovered over the droppable
+		(here the 1st over and later out event tigger)
+
+
+The helper option of draggable widget specifies the element that you want to use as a helper while dragging the draggable. This option supports multiple types - string or function.
+
+String: If set to "clone", then the element will be cloned and the clone will be dragged.
+Function: A function that will return a DOMElement to use while dragging.
+
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#source li').draggable({
+                helper: function () {
+                    return '<b><u>' + $(this).text() + '</b></u>';
+                },
+                revert: 'invalid'
+            });
+
+            $('#divCountries').droppable({
+                accept: 'li[data-value="country"]',
+                over: function (event, ui) {
+                    $(this).addClass('highlight');
+                },
+
+                out: function (event, ui) {
+                   $(this).removeClass('highlight');
+                },
+	
+                //hoverClass: 'highlight', 	// combination of over and out event.
+
+                //activeClass: 'highlight',	// combination of activate and deactivate event.
+
+                activate: function (event, ui) {
+                    $(this).addClass('highlight');
+                },
+                deactivate: function (event, ui) {
+                    $(this).removeClass('highlight');
+                },
+
+                drop: function (event, ui) {
+                    $('#countries').append(ui.draggable);
+                }
+            });
+
+</script>
+<style>
+        .divClass {
+            border: 3px solid black;
+            font-size: 25px;
+            background-color: lightgray;
+            width: 250px;
+            padding: 5px;
+            display: inline-table;
+        }
+
+        li {
+            font-size: 20px;
+        }
+
+        .highlight {
+            background-color: green;
+            color: white;
+            border: 3px solid grey;
+        }
+    </style>
+
+<body>
+	same HTML is used of 94_droppable_widget.txt
+</body
+

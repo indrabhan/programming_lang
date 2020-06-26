@@ -1,0 +1,83 @@
+jQuery class transition animation
+
+
+jQuery UI adds support for animating colors and class transitions. We discussed animating colors in Part 101 of jQuery tutorial. In this video we will discuss animating class transitions.
+
+With the basic jQuery functionality, the following methods will not animate style properties of a css class.
+.addClass()
+.removeClass()
+.toggleClass()
+
+jQuery UI supports animating class transitions. In the example below a reference to jQuery UI is included, hence the class transition animations work while adding and removing classes. If we remove the jQuery UI reference, class transition animations will not work.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+		    var applyClass = true;
+		    $('#btnAnimate').click(function () {
+		        if (applyClass) {
+		            $('#myDiv').addClass('redDiv', 2000);	/* $('#myDiv').addClass('redDiv', 2000) // when not used ui.js file 										then addClass/removeClass/toggleClass method has only one 										parameter.(value)*/
+
+									/* when used ui.js file then addClass/removeClass/toggleClass 										method has only four parameter.(value, speed, easing, callBack)*/
+		        }
+		        else {
+		            $('#myDiv').removeClass('redDiv', 2000);
+		        }
+		        applyClass = !applyClass;
+		    });
+		});
+    </script>
+	<style>
+        .redDiv {
+            background-color: red;
+            color: white;
+            font-size: 25px;
+            border: 5px solid black;
+            padding: 5px;
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+	<div id="myDiv">
+	    At Pragim Technologies, training is delivered by real time software experts
+	    having more than 10 years of experience. Interview questions and real time
+	    scenarios discussion on topics covered for the day. Realtime projects
+	    discussion relating to the possible interview questions. Trainees can attend
+	    training and use lab untill you get a job. Resume preperation and mock up
+	    interviews. 100% placement assistance. 24 hours lab facility.
+	</div>
+    <br />
+    <input type="button" id="btnAnimate" value="Animate" />
+</body>
+</html>
+
+
+
+toggleClass() example : Modify the code in jQuery ready function to use toggleClass() instead of addClass() and removeClass() methods.
+
+	$(document).ready(function () {
+	    $('#btnAnimate').click(function () {
+		$('#myDiv').toggleClass('redDiv', 2000);
+	    });
+	});
+
+
+The following are the common parameters of addClass(), removeClass() and toggleClass() methods.
+
+Parameter		Description
+className		The css class name that you want to add, remove or toggle
+
+speed			animation speed. The value can be a string ('slow', 'normal', or 'fast') or a number of milli-seconds. The default is 				normal i.e 400 milli-seconds. slow and fast are 600 and 200 milli-seconds respectively.
+
+easing			The value is a string the specifies the name of the easing function. Easing functions specify the speed at which an 				animation progresses at different points within the animation
+
+callback		A function to call once the animation is complete
+
+List of all easing functions
+http://api.jqueryui.com/easings

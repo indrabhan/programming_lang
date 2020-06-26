@@ -70,4 +70,5 @@ The following example loads HTML data from the server. When a text box receives 
 Note:- $('#'+ helpDiv).load('53_help.html) // will load all html content and show.
 
 	$('#'+ helpDiv).load('53_help.html #' + helpDiv) //  // will load all html content but will only show the specify
+								the filteration will take at client side and not on server side.
 

@@ -1,0 +1,63 @@
+Here we have make use of async=flase, the reason it.
+
+if we dont use it what happens is that the ajax call is made continously without waiting for the reply from datbase i.e the next line keep on executing so we get empty data.
+so async=false will make it wait till it receives data from the database.(we are making here synchronus request)
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script src="jquery-1.11.2.js"></script>
+    <script src="jquery-ui.js"></script>
+    <link href="jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.displayTooltip').tooltip({
+                content: getTooltip
+            });
+
+            function getTooltip() {
+                var returnValue = '';
+
+                $.ajax({
+                    url: 'TooltipService.asmx/GetTooltip',
+                    method: 'post',
+                    data: { fieldName: $(this).attr('id') },
+                    dataType: 'json',
+                    async: false,			// ********* it will make to wait till it receives response from database *********
+                    success: function (data) {
+                        returnValue = data.TooltipText;
+                    }
+                });
+
+                return returnValue;
+            }
+        });
+    </script>
+</head>
+<body style="font-family: Arial">
+    <form id="form1" runat="server">
+        <table>
+            <tr>
+                <td>First Name</td>
+                <td>
+                    <input id="firstName" class="displayTooltip" title="" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>
+                    <input id="lastName" class="displayTooltip" title="" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td>Department</td>
+                <td>
+                    <input id="department" class="displayTooltip" title="" type="text" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

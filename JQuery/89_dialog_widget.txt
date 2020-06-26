@@ -1,0 +1,56 @@
+jquery dialog widget
+
+1. Place the content inside a div element
+	<div id="dialog">This is jQuery dialog widget example</div>
+
+2. Find the div element and call jQuery UI dialog() function
+	$('#dialog').dialog();
+
+
+There are many jQuery dialog options to customize the dialog widget. Here are some of the most commonly used options.
+
+Option		Description
+
+title		Sets the title of the dialog. You can also use the title attribute of the div element to set the title for the dialog. If both 			are specified title option value overrides the value set using th element title attribute
+
+draggable	Boolean option that determines if the dialog can be draggable by the title bar, bydefault true.
+
+resizable	Boolean option that determines if the dialog is resizable, bydefault true.
+
+closeOnEscape	Boolean option that determines if the dialog can be closed by pressing the Esc key, bydefault true.
+
+modal		Boolean option that determines if the dialog is modal dialog. With modal dialog other items on the page will be disabled and 			cannot be interaced with until the dialog is closed, bydefault false.
+
+autoOpen	Boolean option that determines if the dialog should open automatically upon initialization. If set to false, the dialog will 			stay hidden until the open() method is called, bydefault true.
+
+Example:
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<script src="jquery-3.4.1.js"></script>
+		<script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+		<link href="jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet"/>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#btn').click(function (){
+					$('#dialog').dialog("open")	 // here open is the method of dialog widget.
+				})
+				$('#dialog').dialog({
+					title: 'This is Jquery title',
+					draggable: false,
+					resizable: false,
+					closeOnEscape: false,
+					modal: true,
+					autoOpen: false
+				})
+			})
+		</script>
+	</head>
+	<body>
+		Name<input type="text"><br/><br/>
+		<input type="button" id="btn" value="Open Dialog">
+		<div id="dialog" title="This is tiitle attr">
+			This is Jquery dialog box.
+		</div>
+	</body>
+	</html>

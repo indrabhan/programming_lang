@@ -81,7 +81,7 @@ Selects all elements with class small and sets 5px solid red border. Notice div1
 	    </script>
 	</head>
 	<body>
-	    <div class="small big">
+	    <div class="small big">		(Note: both div will get affected.)
 		DIV 1
 	    </div>
 	    <br />

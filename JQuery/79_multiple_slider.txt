@@ -1,0 +1,46 @@
+we will discuss how to control the height, width and opacity of an image using multiple sliders on the page.
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+	<link href="jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet"/>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#divHeight, #divWidth').slider({
+				min: 100,
+				max: 500,
+				slide: refreshImage
+			})
+
+			$('#divOpacity').slider({
+				min: 0,
+				max: 100,
+				value: 100,		// slider point will be at right side, if 50 than it will be at middle
+				slide: refreshImage
+			})
+
+			function refreshImage(){
+				var height = $('#divHeight').slider('value');	//value :- get the slider position in number
+				var width = $('#divWidth').slider('value');
+				var opacity = $('#divOpacity').slider('value');
+				$('#imgElement').css({
+					height: height,
+					width: width,
+					opacity: opacity/100
+				})
+			}
+		})
+		
+	</script>
+</head>
+<body>
+	<div id="divHeight"></div><br/>
+	<div id="divWidth"></div><br/>
+	<div id="divOpacity"></div><br/>
+	<div id="divDimension"></div><br/>
+	<img src="help.png" id="imgElement" style="height: 100px;width: 100px"/>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+we will discuss jQuery progressbar widget.
+
+
+An element with position: absolute; is positioned relative to the nearest positioned ancestor.
+However if an absolute positioned element has no positioned ancestors, it uses the document body, and moves along with page scrolling.
+so give the position to ancestors as position: relative
+
+Step 1 : Include a div element with an id on the page
+	<div id="progressbar"></div>
+
+Step 2 : Find the div element in the DOM and call progressbar() function 
+	$('#progressbar').progressbar();
+
+
+There are 2 types of progressbars
+	1. Determinate progress bar - Use when the actual status can be accurately calculated.
+
+		To get a determinate progress bar, set the value option of the progressbar() function to an integer value between 0 and the 			max.
+
+		$('#progressbar').progressbar({
+		    value: 65
+		});
+
+	2. Indeterminate progress bar - Use to provide user feedback when the actual status cannot be calculated.
+
+		To get an indeterminate progress bar, set the value option of the progressbar() function to false (boolean)
+
+		$('#progressbar').progressbar({
+		    value : false
+		});
+
+
+Get value for jQuery progressbar from a select element
+
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<script src="jquery-3.4.1.js"></script>
+		<script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+		<link href="jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet"/>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var progressBar = $('#progressbar')
+				progressBar.progressbar()
+				$('#btn').click(function(){
+					progressBar.progressbar({
+						value: parseInt($('#ddlPercentage').val()),
+						change: function(){
+							$('#progressBarSpan').text(progressBar.progressbar('value') + '%')
+						}
+					})
+				})
+			})
+		</script>
+	</head>
+	<body>
+		Select Percentage :
+		<select id="ddlPercentage">
+		    <option value="10">10</option>
+		    <option value="20">20</option>
+		    <option value="30">30</option>
+		    <option value="40">40</option>
+		    <option value="50">50</option>
+		    <option value="60">60</option>
+		    <option value="70">70</option>
+		    <option value="80">80</option>
+		    <option value="90">90</option>
+		    <option value="100">100</option>
+		</select>
+		<input type="button" id="btn" value="Set Value" />
+		<br /><br />
+		<div id="progressbar" style="position: relative;">
+			<span id="progressBarSpan" style="position:absolute; left:50%; top:20%"></span>
+		</div>
+	</body>
+	</html>

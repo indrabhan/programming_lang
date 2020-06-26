@@ -1,0 +1,32 @@
+jQuery tabs widget is a single content area with multiple panels, each associated with a header in a list. 
+This is similar to Accordion widget.
+
+2 simple steps to produce tabs using jQuery
+
+	Step 1 : The following is the HTML
+
+	a) Tabs must be in either an ordered or unordered list
+	b) Each tab "title" must be inside of a list item and wrapped by an anchor element with an href attribute
+	c) Each tab panel may be any valid element but it must have an id which corresponds to the hash in the anchor of the associated tab.
+
+		<div id="tabs" style="width: 400px">
+		    <ul>
+			<li><a href="#tab1">Tab 1</a></li>
+			<li><a href="#tab2">Tab 2</a></li>
+			<li><a href="#tab3">Tab 3</a></li>
+		    </ul>
+		    <div id="tab1">
+			This is Tab 1 Content
+		    </div>
+		    <div id="tab2">
+			This is Tab 2 Content
+		    </div>
+		    <div id="tab3">
+			This is Tab 3 Content
+		    </div>
+		</div>
+
+	Step 2 : Invoke tabs() function on the container div
+
+		$('#tabs').tabs();
+

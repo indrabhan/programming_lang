@@ -19,8 +19,8 @@
 			font-weight: bold;
 		}
 		.italicsClass {
-            font-style: italic;
-        }
+            		font-style: italic;
+        	}
 		.colorClass{
 			color: red;
 		}
@@ -95,7 +95,7 @@
 
 
 
-Example2:-when the cursor is at particular field turn the background to green and when cursor left the fireld than turn the background to normal
+Example2:-when the cursor is at particular field turn the background to green and when cursor left the field than turn the background to normal
 
 <!DOCTYPE html>
 <html>

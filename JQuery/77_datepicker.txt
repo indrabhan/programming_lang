@@ -1,0 +1,59 @@
+The jQuery UI Datepicker is a highly configurable plugin that adds datepicker functionality to your pages.
+
+Note:- you have to download the widget from jquery.com and ref it in you file
+	after download you will 2 file's of widget 1 is js and other is css.
+
+For the complete list of options that are available to customize the datepicker widget
+http://api.jqueryui.com/datepicker
+
+
+Some of the useful options
+Option	Description
+
+appendText	The text to display after date field
+
+showOn		When the datepicker should appear. The datepicker can appear when the field receives focus ("focus"), when a button is clicked 			("button"), or when either event occurs ("both")
+
+buttonText	The text to display on the trigger button
+
+dateFormat	The date format(like dd/mm/yy note:- here it should be only yy to show full year)
+
+showWeek	show week number of the year
+
+numberOfMonths	The number of months to show at once (value must be integer)
+
+changeMonth	Whether the month should be rendered as a dropdown instead of text (value must be true)
+
+changeYear	Whether the year should be rendered as a dropdown instead of text (value must be true)
+
+minDate		The minimum selectable date. When set to null, there is no minimum 
+
+maxDate		The maximum selectable date. When set to null, there is no maximum
+
+
+Example:-
+
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<script src="jquery-3.4.1.js"></script>
+		<script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+		<link href="jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet"/>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#my_date_picker').datepicker({
+					appendText: 'dd/mm/yyyy',
+					showOn: 'both',
+					buttonText: 'Indra',
+					dateFormat: 'dd/mm/yy',
+					numberOfMonths: 3,
+					changeMonth: true,
+					changeYear: true,
+					minDate: new Date(2005, 1, 1),
+					maxDate: new Date(2015, 11, 31)
+				})
+			})
+		</script>
+	</head>
+		Date: <input type="text" id="my_date_picker">
+	</html>

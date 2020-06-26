@@ -1,0 +1,12 @@
+hide/show/toggle
+
+	a.)hide(speed, callbackFunction) :- will hide the selected element
+						speed will be in milisecond(eg:-1000 = 1sec)
+						both parameter are optionals.
+	b.)show(speed, callbackFunction):- will make the element visible
+					both parameter are optionals.
+
+	c.)toggle(speed, callbackFunction) :- will show the element if it is hidden and vice versa.
+					both parameter are optionals.
+
+	Note:- all the parameters are optional.

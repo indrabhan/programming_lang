@@ -1,6 +1,11 @@
 jQuery scroll event 
 
+scroll top event :- when you move the scrollbar the event "scrollTop()" is called and it returns an integer value.when the value 			    of .scrollTop() become zero means you reached at top of page
 
+$(window).height() :-  this is the height of window or browse and the value is fixed.say 1 page height which is visible.
+$(document).height() :- this is the height of document and it value is not fixed as document can have more that 1 page. 
+
+scroll down event:- .scrollTop() == $(document).height() - $(window).height()
 scroll event is raised when the user scrolls to a different place in the element. It applies to window objects, but also to scrollable frames and elements with the overflow CSS property set to scroll.
 
 In the following example, notice that the div element overflow style is set to scroll. The div element has a scroll bar and as you scroll up and down the div element, the scroll event is raised and handled.

@@ -1,0 +1,28 @@
+What is accordion?
+accordion is great for displaying collapsible content panels for presenting information in a limited amount of space.
+
+2 simple steps to produce an accordion using jQuery
+
+	Step 1 : The HTML of the accordion container needs pairs of headers and content panels as shown below
+
+		<div id="accordion" style="width: 400px">
+		    <h3>Header 1</h3>
+		    <div>Content Panel 1</div>
+		    <h3>Header 2</h3>
+		    <div>Content Panel 2</div>
+		    <h3>Header 3</h3>
+		    <div>Content Panel 3</div>
+		</div>
+
+	Step 2 : Invoke accordion() function on the container div
+
+		$('#accordion').accordion();
+
+
+jQuery Accordion Widget Options
+Option		Description
+
+collapsible	By default, atleast one section need to be active. If you want to collapse all the sections, including the one that is active, 			set this option to true.
+
+active		This option can be set to a boolean value or integer. Setting active to false will collapse all panels. This requires the 			collapsible option to be true. An Integer value will make the corresponding panel active. Panels use zero-based index.
+

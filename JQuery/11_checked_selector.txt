@@ -1,4 +1,4 @@
-The :checked selector selects all checked check-boxes or radio buttons. Let us understand this with an example. 
+The :checked selector selects all check-boxes or radio buttons that are marked as checked. Let us understand this with an example. 
 
 Selects all checked radio button elements
 $('input[type="radio"]:checked')

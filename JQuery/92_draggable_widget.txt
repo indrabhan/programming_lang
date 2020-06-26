@@ -1,0 +1,113 @@
+jquery draggable widget
+
+jquery draggable widget allow elements to be moved using the mouse. This widget is in interactions category on the jQuery UI website.
+http://jqueryui.com/draggable.
+
+Consider the following HTML
+
+	<div id="draggableDiv" class="divClass">
+	    Drag me around
+	</div>
+
+
+	.divClass {
+	    height: 200px;
+	    width: 200px;
+	    background-color: red;
+	    color: white;
+	    display: table-cell;
+	    vertical-align: middle;
+	    text-align: center;
+	}
+
+To make the above div element draggable
+	$('#draggableDiv').draggable();
+
+
+Some of the useful options to customize the draggable widget
+
+Option		Description
+
+axis		Constrains dragging to either x or y axis
+
+containment	Constrains dragging to within the bounds of the specified element or region
+
+cursor		The CSS style of the cursor during the drag operation (vaue can be take from css property)
+
+opacity		opacity during the drag operation
+
+revert		Boolean property that specifies if the element should revert to its start position when dragging stops
+
+revertDuration	The duration of the revert animation, in milliseconds
+	
+snap		Specifies whether the element being dragged should snap to other elements. Value can be boolean or a selector. When set to 			true, the element will snap to all other draggable elements. When a selector is specified the element being dragged will snap 			to the element specified by the selector
+
+snapTolerance	The distance in pixels between the element being dragged and the element to which to snap to, at which snapping should occur
+
+cancel		Prevents dragging from starting on specified elements
+
+
+Constrains dragging to within the bounds of the parent element
+	HTML
+		<div id="containerDiv" style="height: 300px; width: 300px; border: 3px solid black">
+		    <div id="draggableDiv" class="divClass">
+			Drag me around
+		    </div>
+		</div>
+
+	jQuery
+		$('#draggableDiv').draggable({
+		    containment : 'parent'
+		});
+
+Changes the cursor style to "move" during the drag operation
+	$('#draggableDiv').draggable({
+	    cursor: 'move'
+	});
+
+Changes the opacity to 0.3 during the drag operation
+	$('#draggableDiv').draggable({
+	    opacity : 0.3
+	});
+
+Reverts the div element to its start position when dragging stops. Revert animation completes in 1000 milli-seconds.
+	$('#draggableDiv').draggable({
+	    revert: true,
+	    revertDuration : 1000
+	});
+
+
+
+The following example 
+1. Snaps the coloured div elements to the div element with thick black border. 
+2. The snapping occurs as soon as the distance between any of the coloured div element and the div element with thick black border is 50 pixels
+3. The cancel option cancels dragging from starting on the div element with thick black border 
+
+HTML
+	<div id="redDiv" class="divClass" style="background-color: red">
+	    Red Div
+	</div>
+
+	<div id="greeDiv" class="divClass" style="background-color: green">
+	    Green Div
+	</div>
+
+	<div id="blueDiv" class="divClass" style="background-color: blue">
+	    Blue Div
+	</div>
+
+	<div id="brownDiv" class="divClass" style="background-color: brown">
+	    Brown Div
+	</div>
+	<br />
+	<br />
+	<div id="snapDiv" style="height: 400px; width: 400px; border: 5px solid black">
+	</div>
+
+
+jQuery
+	$('div').draggable({
+	    snap: '#snapDiv',
+	    snapTolerance: 50,
+	    cancel : '#snapDiv'
+	});

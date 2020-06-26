@@ -1,0 +1,56 @@
+jquery selectmenu widget
+
+
+jQuery selectmenu duplicates and extends the functionality of a native HTML select element to overcome the limitations of the native control.
+
+<select id="selectMenu" style="width: 200px">
+    <option value="1">USA</option>
+    <option value="2" selected="selected">India</option>
+    <option value="3">UK</option>
+    <option value="4">Australia</option>
+    <option value="5">Canada</option>
+</select>
+
+
+To use the jQuery selectmenu widget, call jQuery selectmenu() function on the select element
+	$('#selectMenu').selectmenu();
+
+
+Select element with optgroup elements
+The optgroup element is used to group related options in a drop-down list. In this example, we are grouping cities by country. You can only select the elements of a group but not the group itself.
+means you can not select the USA value.
+
+<select id="selectMenu">
+    <optgroup label="USA">
+        <option value="1">New York</option>
+        <option value="2">Los Angeles</option>
+    </optgroup>
+    <optgroup label="India">
+        <option value="3">New Delhi</option>
+        <option value="4">Bangalore</option>
+    </optgroup>
+</select>
+
+
+Dropdownlist button icon : Button icon is the image that you see on the right handside of the dropdownlist. The default button icon is ui-icon-triangle-1-s.
+You can change button icon using the icons option
+	$('#selectMenu').selectmenu({
+	    icons: { button: 'ui-icon-circle-arrow-s' }
+	});
+
+
+List of all jQuery icons
+http://api.jqueryui.com/theming/icons
+
+To control the width of the selectmenu, use width option. The width is in pixels.
+	$('#selectMenu').selectmenu({
+	    width : 200
+	});
+
+
+How to retrieve the selected item value and label : Use the select event of the selectmenu. This event is raised when an item is selected.
+	$('#selectMenu').selectmenu({
+	    select: function (event, ui) {
+		alert('Label = ' + ui.item.label + ' ' + 'Value = ' + ui.item.value);
+	    }
+	});

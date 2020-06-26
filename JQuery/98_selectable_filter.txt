@@ -1,0 +1,104 @@
+we will discuss jQuery selectable filter option with an example. Along the way we will also discuss destory method.
+
+Here is what we want to be able to do
+
+When "Exclude Weekends" checkbox is checked, we should not be able to select weekends (Sat and Sun)
+When "Exclude Weekends" checkbox is not checked, we should be able to select all days including weekends (Sat and Sun)
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+	<link href="jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet"/>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#selectable').selectable()
+			
+			function selectedRecord(){
+				var result = ''
+				$('.ui-selected').each(function(){
+					result += $(this).text() + '<br/>';
+				})
+				$('#result').html(result)
+			}
+
+			function createSelectableList(filterValue) {
+				$('#selectable').selectable('destroy').selectable({
+						stop: selectedRecord,
+						filter: filterValue
+					})
+					$('#result').empty()
+					var weekends = $('li[data-value="weekend"]')
+					if (filterValue == "*"){
+						weekends.removeClass('excluded')
+					}
+					else
+					{
+						weekends.addClass('excluded')
+					}
+			}
+
+			$('#cbExclude').click(function(){
+				if ($(this).is(':checked')){
+					// $('#selectable').selectable('destroy').selectable({
+					// 	stop: selectedRecord,
+					// 	filter: 'li[data-value="weekday"]' // only select this records.
+					// })
+					// $('li[data-value="weekend"]').addClass('excluded')
+					// $('#result').empty()
+					createSelectableList('li[data-value="weekday"]')
+				}
+				else
+				{
+					// $('#selectable').selectable('destroy').selectable({
+					// 	stop: selectedRecord,
+					// 	filter: '*' // * means all records.
+					// })
+					// $('li[data-value="weekend"]').removeClass('excluded')
+					// $('#result').empty()
+					createSelectableList('*')
+				}
+			})
+		})
+
+	</script>
+	<style type="text/css">
+		li{
+			display: inline-block;
+			border: 1px solid black;
+			padding: 20px;
+			cursor: pointer;
+		}
+
+		.ui-selected{
+			background-color: green;
+			color: white;
+		}
+		.ui-selecting{
+			background-color: grey;
+			color: white;
+		}
+		.excluded {
+            background-color: red;
+            color:white;
+            cursor:default
+        }
+	</style>
+</head>
+<body>
+	Exclude Weekends :
+        <input id="cbExclude" type="checkbox"/>
+	<ul id="selectable">
+        <li data-value="weekday">Mon</li>
+        <li data-value="weekday">Tue</li>
+        <li data-value="weekday">Wed</li>
+        <li data-value="weekday">Thu</li>
+        <li data-value="weekday">Fri</li>
+        <li data-value="weekend">Sat</li>
+        <li data-value="weekend">Sun</li>
+     </ul>
+        You selected : <div id="result"></div>
+</body>
+</html>

@@ -19,7 +19,7 @@ Notice that in the example below, we are passing event object to getEventDetails
 	    <script type="text/javascript">
 		$(document).ready(function () {
 		    $('#btn').click(function () {	//click(function (evet) than it will be jQuery object.
-		        getEventDetails(event);		//If event object will js raw obejct
+		        getEventDetails(event);		//If event object is pass it will be js raw obejct
 		    }).mouseover(function () {
 		        getEventDetails(event);
 		    }).mouseout(function () {

@@ -1,0 +1,24 @@
+xml data return from server
+
+<Employee>
+	<ID>4</ID>
+	<Name>Indra</Name>
+	<Gender>Male</Gender>
+</Employee>
+
+
+$.ajax({
+	url: 'someURL',
+	data: {'employeeId': emp},
+	method: 'post',
+	datatype: 'xml',	// we expect datatype to be return from server.
+	success: function(response){
+				//In reposnse we will receive above xml data.
+			var jqueryXML = $(response);
+			var nameValue = jqueryXML.find('Name').text()	//find method is use here
+			$('#txtName).val(nameVaule)
+		}
+	erroe: function(err){
+			alert(err)
+		}
+})

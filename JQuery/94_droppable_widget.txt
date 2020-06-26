@@ -1,0 +1,70 @@
+jquery droppable widget
+
+1. From the first box, we want to be able to drag and drop countries on to Countries box, and cities on to Cities box
+2. If I try to drop a country on to the City box, or a city on to the Country box, it should not be allowed and the element should revert to it's original position
+
+To achieve this we are going to make use of both draggable and droppable widgets
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+	<link href="jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet"/>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#source li').draggable({
+				helper: 'clone',
+				revert: 'invalid' // its a animate property here we want to revert invalid element
+			})
+
+			$('#divCountries').droppable({
+				accept: 'li[data-value="country"]',
+				drop: function(event, ui){
+					$('#countries').append(ui.draggable) // this draggable is the property of ui which return the element whci we drag
+				}
+			})
+
+			$('#divCities').droppable({
+				accept: 'li[data-value="city"]',
+				drop: function(event, ui){
+					$('#cities').append(ui.draggable)
+				}
+			})
+		})
+	</script>
+	<style type="text/css">
+		.divClass {
+            border: 3px solid black;
+            font-size: 25px;
+            background-color: lightgray;
+            width: 250px;
+            padding: 5px;
+            display: inline-table;
+        }
+	</style>
+</head>
+<body>
+	<div class="divClass">
+            Countries & Cities
+                <ul id="source">
+                    <li data-value="country">USA</li>
+                    <li data-value="country">India</li>
+                    <li data-value="country">UK</li>
+                    <li data-value="city">New York</li>
+                    <li data-value="city">Chennai</li>
+                    <li data-value="city">London</li>
+                </ul>
+        </div>
+
+        <div class="divClass" id="divCountries">
+            Countries
+            <ul id="countries"></ul>
+        </div>
+
+        <div class="divClass" id="divCities">
+            Cities
+            <ul id="cities"></ul>
+        </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+slide
+
+	a.)slideDown(speed, callbackFunction):-used to slide down an element.
+
+	b.)slideUp(speed, callbackFunction):-used to slide up an element.
+
+	c.)slideToggle(speed, callbackFunction):-
+		If the elements have been slid down, slideToggle() will slide them up.
+		If the elements have been slid up, slideToggle() will slide them down.
+

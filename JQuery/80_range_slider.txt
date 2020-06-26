@@ -1,0 +1,42 @@
+We want to implement a range slider.
+
+For a range slider, all you need to do is set range option to true.
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+	<link href="jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet"/>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#slider').slider({
+				range: true,
+				min: 18,
+				max: 100,
+				values: [18, 30],
+				slide: function(event, ui){
+					$('#spanAge').html(ui.values[0] + " - " + ui.values[1] + " Years");
+					$('#minAge').val(ui.values[0]);
+					$('#maxAge').val(ui.values[1]);
+				},
+			})
+
+			$('#spanAge').html($('#slider').slider('values', 0) + " - " + $('#slider').slider('values', 1) + " Years");
+			$('#minAge').val($('#slider').slider('values', 0));
+			$('#maxAge').val($('#slider').slider('values', 1));
+		})
+	</script>
+</head>
+<body>
+	Age: <span id="spanAge"></span>
+	<br/><br/>
+	<div id="slider"></div>
+	<br/>
+	<label for="minAge">Minimum Age</label>
+	<input type="text" name="" id="minAge"/>
+	<br/><br>
+	<label for="maxAge">Maximum Age</label>
+	<input type="text" name="" id="maxAge"/>
+</body>
+</html>

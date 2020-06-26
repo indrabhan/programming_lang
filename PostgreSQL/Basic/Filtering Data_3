@@ -101,7 +101,7 @@ You can use the list of customer id as the input for the IN operator as follows:
 **Introduction to PostgreSQL LIKE operator
 
 Note :- like operator is case-sensitive.
-	ilike operator is case-insensitively.
+	ilike operator is case-insensitive.
 
 Suppose the store manager asks you find a customer that he does not remember the name exactly. He just remembers that customer’s first name begins with something like Jen. How do you find the exact customer that the store manager is asking? You may find the customer in the  customer table by looking at the first name column to see if there is any value that begins with Jen. It is kind of tedious because there many rows in the customer table.
 --syntax:-select column_1, colmn_2 from table_name where column_1 like 'pattern%'

@@ -70,7 +70,7 @@ git merge subBranchName (in terminal you should be in main branch)
 	not again merge it in main branch than that changes will not be reflected in main branch.
 	Inshort any changes you made and add/commit in subbranch and not merge it in main branch than that changes will not take effect in main
 	branch.
-	For merging the subBranch you have to be in main barnch, In terminal go in main branch "git checkout master" and than trigger the 		command to merger subbranch in main barnch "git merger subBranchName"
+	For merging the subBranch you have to be in main barnch, In terminal go in main branch "git checkout master" and than trigger the 		command to merger subbranch in main barnch "git merge subBranchName"
 
 
 

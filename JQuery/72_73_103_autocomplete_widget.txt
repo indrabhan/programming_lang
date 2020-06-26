@@ -1,0 +1,88 @@
+Autocomplete textbox using jquery.
+Along the way, we also discuss the jquery autocomplete source option and minLength option.
+
+jquery autocomplete source option can be set to
+1. Array : An array of strings: [ "Choice1", "Choice2" ] 
+    OR
+    An array of objects with label and value properties: 
+    [ { label: "Choice1", value: "value1" }, ... ]
+    The label property is displayed in the suggestion menu. The value will be inserted 
+    into the input element when a user selects an item.
+
+2. String : When a string is used, the Autocomplete plugin expects that string to point to a URL resource that will return JSON data. Discussed in Part 71.
+
+3. Callback function : This  function has two parameters. request object and a response callback function. The term property of the request object contains the value the user typed in the autocomplete textbox and to the response callback function you will have to pass the data to suggest to the user.
+
+jquery autocomplete minLength option : The minimum number of characters a user must type before a search is performed.
+
+
+
+ <script type="text/javascript">
+        $(document).ready(function () {
+            $('#txtName').autocomplete({
+                minLength: 2,
+                source: function (request, response) {
+                    $.ajax({
+                        url: 'StudentService.asmx/GetStudentNames',
+                        method: 'post',
+                        contentType: 'application/json;charset=utf-8',
+                        data: JSON.stringify({ term: request.term }),
+                        dataType: 'json',
+                        success: function (data) {
+                            response(data.d);
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+Note:-  source: function (request, response):- the request object has term property and it will give you the value you have passed in textbox.
+					       to the respone function we should pass data so that data will be visible as a dropdown selection
+
+
+
+_renderItem() :- when your data returns multiple value (key: value)and which value should be shown in suggestion dropdown, so the _renderItem 			 method helps to bring that value so that it will be displayed as a suggestion when you type any letters in textbox.
+
+
+ <script type="text/javascript">
+        $(document).ready(function () {
+            $('#txtName').autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    $.ajax({
+                        url: 'CountryService.asmx/GetCountries',
+                        method: 'post',
+                        data: { term: request.term },
+                        dataType: 'json',
+                        success: function (data) {
+                            response(data); 		// here respone is the method of above source parameter.
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    });
+                },
+                focus: updateTextBox,
+                select: updateTextBox		// events trigger when you select from suggestion dropdown
+            })
+
+		/*item will have the values/object which you recieved in data parameter of success function.*/
+
+            .autocomplete('instance')._renderItem = function (ul, item) {
+                return $('<li>')
+                    .append("<img class='imageClass' src=" + item.FlagPath + " alt=" + item.Name + "/>")
+                    .append('<a>' + item.Name + '</a>')		// here Name is the key it can be any, so you will get that value.
+                    .appendTo(ul);
+            };
+
+            function updateTextBox(event, ui) {
+                $(this).val(ui.item.Name);
+                return false;
+            }
+        });
+    </script>

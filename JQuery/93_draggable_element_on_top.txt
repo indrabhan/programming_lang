@@ -1,0 +1,81 @@
+Draggable element on top
+
+
+1. How to keep draggable element always on top of other draggable elements on the page.
+2. How to bring the element on top of other draggable elements on the page as soon as the mouse down event is triggered
+
+Consider the following code
+
+HTML
+
+	<div id="redDiv" class="divClass" style="background-color: red">
+	    Red Div
+	</div>
+
+	<div id="greeDiv" class="divClass" style="background-color: green">
+	    Green Div
+	</div>
+
+	<div id="blueDiv" class="divClass" style="background-color: blue">
+	    Blue Div
+	</div>
+
+	<div id="brownDiv" class="divClass" style="background-color: brown">
+	    Brown Div
+	</div>
+
+CSS
+	.divClass {
+	    font-family: Arial;
+	    height: 200px;
+	    width: 200px;
+	    color: white;
+	    display: table-cell;
+	    vertical-align: middle;
+	    text-align: center;
+	    z-index: 0;
+	}
+
+jQuery
+	$(document).ready(function () {
+	    $('.divClass').draggable();
+	});
+
+All the div elements on this page are draggable. The problem here is that, when you drag Red Div it does not stay on top of other draggable div elements on the page. Green Div on the other hand stays on top of Red Div but stays below Blue and Red Div elements. red div always on top as it is last div.This is the default behaviour.
+
+To bring a Div Element that is being dragged on top of other draggable div's on the page, use stack option. The way this works is jQuery sets the z-index of the element that is being dragged to higher than the z-index of any other draggable div element on the page. You can see the value of the z-index in browser developer tools.
+
+	$(document).ready(function () {
+	    $('.divClass').draggable({
+		stack: '.divClass'
+	    });
+	});
+
+
+
+However, if you simply click on a Div element without dragging then the element is not brought on to the top. Here is the code to bring the element on top as soon as mousedown event is triggered. All this function does is change the z-index of the div element to a value greater than the z-index of any other div element.
+
+	$(document).ready(function () {
+	    $('.divClass').draggable();
+
+	    $('.divClass').mousedown(function () {
+		var maxZindex = 0;
+		$(this).siblings('.divClass').each(function () {
+		    var currentZindex = Number($(this).css('z-index'));
+		    maxZindex = currentZindex > maxZindex ? currentZindex : maxZindex;
+		});
+		$(this).css('z-index', maxZindex + 1);
+	    });
+	});
+
+
+.siblings( [selector ] )
+Description: Get the siblings of each element in the set of matched elements, optionally filtered by a selector.
+
+Given a jQuery object that represents a set of DOM elements, the .siblings() method allows us to search through the siblings of these elements in the DOM tree and construct a new jQuery object from the matching elements.
+
+The method optionally accepts a selector expression of the same type that we can pass to the $() function. If the selector is supplied, the elements will be filtered by testing whether they match it.
+
+
+jQuery siblings() Method
+The siblings() method returns all sibling elements of the selected element. Sibling elements are elements that share the same parent. The DOM tree: This method traverse forward and backwards along siblings of DOM elements.

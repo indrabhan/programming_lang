@@ -1,0 +1,41 @@
+map function
+
+map() function returns a map object(which is an iterator) of the results after applying 
+the given function to each item of a given iterable (list, tuple etc.)
+
+Syntax:- map(fun, iter)
+NOTE : You can pass one or more iterable to the map() function.
+
+Note:- The return type of map is Object, so to get the output convert it into list or set.
+
+Example1:-
+	def addition(n): 
+	    return n + n
+
+	numbers = (1, 1,2, 3, 4, 4)
+	result = map(addition,numbers)
+	print ('________result___________',result, list(result))
+
+
+Example2:-Using Lambda function
+	result = map(lambda a: a*a, numbers)
+	print ('________result___________',result, list(result))
+
+
+Example3:- Add two lists using map and lambda
+	numbers1 = [1, 2, 3] 
+	numbers2 = [4, 5, 6]
+
+	result = map(lambda x,y: x+y, numbers1, numbers2)
+	print ('________result___________',result, list(result))
+
+
+Example4:
+	# List of strings 
+	l = ['sat', 'bat', 'cat', 'mat'] 
+	  
+	# map() can listify the list of strings individually 
+	test = list(map(list, l)) 
+	print(test) 
+
+	o/p:- [['s', 'a', 't'], ['b', 'a', 't'], ['c', 'a', 't'], ['m', 'a', 't']]

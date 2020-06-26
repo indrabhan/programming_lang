@@ -1,4 +1,4 @@
-vjQuery append elements
+jQuery append elements
 
 
 To append elements we have

@@ -1,0 +1,18 @@
+fade
+
+	a.)fadeIn(speed, callbackFunction):- will make the element visible.
+					both parameter are optionals.
+
+	b.)fadeOut(speed, callbackFunction):- will make the element Invisible.
+					both parameter are optionals.
+
+	c.)fadeToggle(speed, callbackFunction):- will make the element visible if it is invisible and vice versa.
+					both parameter are optionals.
+
+	d.)fadeTo(speed,opacity,callback):- The jQuery fadeTo() method allows fading to a given opacity (value between 0 and 1).
+		     			opacity 1 means full visible, 0.5 means little fade, 0.2 bit more fade and 0 means fully invisible.
+		    			you can use value between 0 ...... 1.
+					speed and opacity are the required parameter.
+					is use to make the visible element to little fade.
+
+

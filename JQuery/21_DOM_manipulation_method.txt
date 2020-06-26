@@ -128,7 +128,7 @@ Instead of creating a separate JSON object (config) and then passing it to attr(
 	    .attr('name', 'My Div');
 
 
-How to remove an attribute using jQuery removeAttr() method : The following line of code removes title attribute of all the div elements that have a title attribute.
+How to remove an attribute, using jQuery removeAttr() method : The following line of code removes title attribute of all the div elements that have a title attribute.
 $('div[title]').removeAttr('title');
 
 Example : 

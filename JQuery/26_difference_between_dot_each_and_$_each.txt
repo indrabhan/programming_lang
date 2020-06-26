@@ -52,7 +52,7 @@ Instead of using element parameter, you can also use this keyword, which also re
 
 
 2.)
-$.each() or jQuery.each() is used for iterating over javascript objects and arrays.
+$.each() or jQuery.each() is used for iterating over javascript objects or arrays.
 
 Example : 
 In the example below intArray is a JavaScript array. So to loop thru the elements in the array we are using $.each() function. Notice this function has 2 parameters
@@ -90,7 +90,7 @@ If you want to use .each() instead of $.each() function on the intArray object, 
 	</html>
 
 
-Using $.each() to iterate over a JavaScript object : In this example, jsObject is a JavaScript object. In this example, $.each()  is used to iterate over the JavaScript object properties.
+Using $.each() to iterate over a JavaScript object : In this example, jsObject is a JavaScript object. In this example, $.each() is used to iterate over the JavaScript object properties.
 
 	<html>
 	<head>

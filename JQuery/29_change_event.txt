@@ -7,53 +7,6 @@ change event is fired when an element value changes. All the following elements 
 
 select, radio buttons and checkboxes fire the change event as soon as a selection is made, where as the other element types (textboxes & textarea) wait until they loose focus.
 
-As soon as the selection in the dropdownlist changes, we want to handle the change event and display the selected value in the div element with id="divResult". In the example below, we are using the id selector, so only the select element change event is handled.
-
-	$(document).ready(function () {
-	    $('#ddlCity').change(function () {
-		var selectedValue = $(this).val();
-		if (selectedValue == "Select")
-		    selectedValue = "Please select city";
-		$('#divResult').html(selectedValue);
-	    });
-	});
-
-
-The following code handles the change event of all the input elements (textbox, radio button, checkbox). Notice that in this example we are using the jquery element selector. Change event of select and textarea is not handled.
-Note:- for input text the change event is trigger when its leaves the focus event.
-
-	$(document).ready(function () {
-	    var result = '';
-	    $('input').change(function () {
-		if (result == '') {
-		    result += $(this).val();
-		}
-		else {
-		    result += ', ' + $(this).val();
-		}
-
-		$('#divResult').html(result);
-	    });
-	});
-
-
-The following code handles the change event of all the elements on the page. Notice that in this example we are using the jquery class selector.
-
-	$(document).ready(function () {
-	    var result = '';
-	    $('.inputRequired').change(function () {
-		if (result == '') {
-		    result += $(this).val();
-		}
-		else {
-		    result += ', ' + $(this).val();
-		}
-
-		$('#divResult').html(result);
-	    });
-	});
-
-
 Consider the html
 <table>
     <tr>
@@ -119,6 +72,55 @@ Consider the html
         </td>
     </tr>
 </table>
+
+
+As soon as the selection in the dropdownlist changes, we want to handle the change event and display the selected value in the div element with id="divResult". In the example below, we are using the id selector, so only the select element change event is handled.
+
+	$(document).ready(function () {
+	    $('#ddlCity').change(function () {
+		var selectedValue = $(this).val();
+		if (selectedValue == "Select")
+		    selectedValue = "Please select city";
+		$('#divResult').html(selectedValue);
+	    });
+	});
+
+
+The following code handles the change event of all the input elements (textbox, radio button, checkbox). Notice that in this example we are using the jquery element selector. Change event of select and textarea is not handled.
+Note:- for input text the change event is trigger when its leaves the focus event.
+
+	$(document).ready(function () {
+	    var result = '';
+	    $('input').change(function () {
+		if (result == '') {
+		    result += $(this).val();
+		}
+		else {
+		    result += ', ' + $(this).val();
+		}
+
+		$('#divResult').html(result);
+	    });
+	});
+
+
+The following code handles the change event of all the elements on the page. Notice that in this example we are using the jquery class selector.
+
+	$(document).ready(function () {
+	    var result = '';
+	    $('.inputRequired').change(function () {
+		if (result == '') {
+		    result += $(this).val();
+		}
+		else {
+		    result += ', ' + $(this).val();
+		}
+
+		$('#divResult').html(result);
+	    });
+	});
+
+
 
 
 

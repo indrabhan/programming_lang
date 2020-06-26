@@ -1,0 +1,58 @@
+jquery background color animate
+
+we will discuss animating colors using jquery. With the basic jQuery functionality, animate() method cannot animate non-numeric style properties like color, background-color, and border-color.
+
+
+jQuery UI file adds the ability to animate color properties. In the example below a reference to jQuery UI is included, hence the color animations work. If we remove the reference, color animations will not work, but other numeric style properties (font-size, border-width) continue to work.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var toggleColor = false;
+
+			    $('#btnAnimate').click(function () {
+				var divElement = $('#myDiv');
+				if (toggleColor) {
+				    divElement.animate({
+				        'font-size': '15',
+				        'border-width': '1',
+				        'background-color': 'red',
+				        'color': 'white',
+				        'border-color':'green'
+				    },2000);
+				}
+				else {
+				    divElement.animate({
+				        'font-size': '20',
+				        'border-width': '5',
+				        'background-color': 'green',
+				        'color': 'white',
+				        'border-color': 'red'
+				    }, 2000);
+				}
+
+				toggleColor = !toggleColor; // here if value is true then it will make it false and vice-versa.
+			    });
+			});
+			
+		})
+	</script>
+</head>
+<body>
+	<div id="myDiv" style="width: 500px; border: 1px solid black;padding: 5px; font-size: 15px">
+	    At Pragim Technologies, training is delivered by real time software experts
+	    having more than 10 years of experience. Interview questions and real time
+	    scenarios discussion on topics covered for the day. Realtime projects
+	    discussion relating to the possible interview questions. Trainees can attend
+	    training and use lab untill you get a job. Resume preperation and mock up
+	    interviews. 100% placement assistance. 24 hours lab facility.
+	</div>
+    <br />
+    <input type="button" id="btnAnimate" value="Animate" />
+</body>
+</html>

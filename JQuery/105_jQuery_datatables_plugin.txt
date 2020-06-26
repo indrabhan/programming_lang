@@ -1,0 +1,170 @@
+jQuery datatables plugin
+
+Datatables is a powerful jQuery plugin. It provides searching, sorting and pagination. Let us understand the power and use of this plugin with a simple example.
+
+Consider the following HTML table
+
+<table id="datatable">
+    <thead>
+        <tr>
+            <th>ID
+            </th>
+            <th>City
+            </th>
+            <th>Country
+            </th>
+            <th>Continent
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Montería</td>
+            <td>Colombia</td>
+            <td>South America</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Birmingham</td>
+            <td>United Kingdom</td>
+            <td>Europe</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Bangalore</td>
+            <td>India</td>
+            <td>Asia</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Tokyo</td>
+            <td>Japan</td>
+            <td>Asia</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Kuala Lumpur</td>
+            <td>Malaysia</td>
+            <td>Asia</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Rio de Janeiro</td>
+            <td>Brazil</td>
+            <td>South America</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Ipoh</td>
+            <td>Malaysia</td>
+            <td>Asia</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Tawau</td>
+            <td>Malaysia</td>
+            <td>Asia</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Hiroshima</td>
+            <td>Japan</td>
+            <td>Asia</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Cannes</td>
+            <td>France</td>
+            <td>Europe</td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>London</td>
+            <td>United Kingdom</td>
+            <td>Europe</td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td>Saku</td>
+            <td>Japan</td>
+            <td>Asia</td>
+        </tr>
+        <tr>
+            <td>13</td>
+            <td>Nice</td>
+            <td>France</td>
+            <td>Europe</td>
+        </tr>
+
+        <tr>
+            <td>14</td>
+            <td>Manchester</td>
+            <td>United Kingdom</td>
+            <td>Europe</td>
+        </tr>
+        <tr>
+            <td>15</td>
+            <td>Salvador</td>
+            <td>Brazil</td>
+            <td>South America</td>
+        </tr>
+
+        <tr>
+            <td>16</td>
+            <td>Cali</td>
+            <td>Colombia</td>
+            <td>South America</td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>Chennai</td>
+            <td>India</td>
+            <td>Asia</td>
+        </tr>
+        <tr>
+            <td>18</td>
+            <td>Brasília</td>
+            <td>Brazil</td>
+            <td>South America</td>
+        </tr>
+        <tr>
+            <td>19</td>
+            <td>Mumbai</td>
+            <td>India</td>
+            <td>Asia</td>
+        </tr>
+        <tr>
+            <td>20</td>
+            <td>Paris</td>
+            <td>France</td>
+            <td>Europe</td>
+        </tr>
+        <tr>
+            <td>21</td>
+            <td>Bello</td>
+            <td>Colombia</td>
+            <td>South America</td>
+        </tr>
+    </tbody>
+</table>
+
+Here is what we want the table to be capable of doing
+	Bi-directional sorting on all the columns
+	Pagination
+	Search
+	Changing the number of items displayed on the page
+
+Imagine the amount of code and time it takes to implement all the above features. With Datatables plugin all you need is one line of jQuery code. 
+
+Step 1 : Datatables is a jQuery plugin, so you need a reference to core jQuery file on your page
+
+Step 2 : Reference Datatables CSS and JaavaScript files. Here are the CDN links
+CSS - //cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css
+JavaScript - //cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js
+
+Step 3 : Include the following one line of jQuery code
+	$('#datatable').dataTable();
+
+By default the table occupies the entire width of the page and does not have a border. To control the width and to include a border there are sevral ways. One of the easiest ways is to wrap the HTML table inside a div element, and set the required style properties on the div element. Here is the complete example.
+	<div style="width: 500px; border: 1px solid black; padding: 5px"></div>

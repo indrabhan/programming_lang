@@ -1,0 +1,66 @@
+jQuery datatables get data from database table
+
+will discuss how to use database data with jQuery datatables plugin. There are many ways to get data into DataTables. If the data is small you can retrieve all the data at once and the processing (i.e paging, searching, ordering) is  done on the client-side. 
+
+On the other hand if the database data is large, server-side processing can be enabled. With server-side processing enabled, all paging, searching, ordering actions that DataTables performs are handed off to the server.
+
+In this video we will discuss retrieving all the data at once. The datatables plugin performs all the processing (i.e paging, searching, ordering etc) on the client-side.
+
+
+ <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: 'EmployeeService.asmx/GetEmployees',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    $('#datatable').dataTable({
+                        paging: true,
+                        sort: true,
+                        searching: true,
+                        scrollY: 200,		// this will fixed the size even though we have less data in other page.
+                        data: data,		// here 1st data is the property and 2nd data is the values from sucess function of ajax.
+                        columns: [
+                            { 'data': 'Id' },
+                            { 'data': 'FirstName' },
+                            { 'data': 'LastName' },
+                            { 'data': 'Gender' },
+                            { 'data': 'JobTitle' },
+                            {
+                                'data': 'WebSite',
+                                'sortable': false,
+                                'searchable': false,
+                                'render': function (webSite) {
+                                    if (!webSite) {
+                                        return 'N/A';
+                                    }
+                                    else {
+                                        return '<a href=' + webSite + '>'
+                                            + webSite.substr(0, 10) + '...' + '</a>';
+						// here webSite is the js object so we can use the substring method.
+                                    }
+                                }
+                            },
+                            {
+                                'data': 'Salary',
+                                'render': function (salary) {
+                                    return "$" + salary;
+                                }
+                            },
+                            {	// This whole brackets are js object, so we can specify multiple options.
+                                'data': 'HireDate',
+                                'render': function (jsonDate) { 
+					// here jsonDate is any name which will get the value of 'HireDate'.
+					// render function is use to render the data.
+
+                                    var date = new Date(parseInt(jsonDate.substr(6)));
+                                    var month = date.getMonth() + 1;
+                                    return month + "/" + date.getDate() + "/" + date.getFullYear();
+                                }
+                            }
+                        ]
+                    });
+                }
+            });
+        });
+    </script>

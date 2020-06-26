@@ -1,0 +1,34 @@
+jQuery datatable show hide columns
+
+we will discuss how to show or hide columns of a jQuery datatable. This is continuation to Part 107
+
+When we click on a column names, the respective column visibility should be toggleds
+
+The following are the changes required for the example we worked with in Part 107.
+
+Include the following HTML just above the datatable markup
+<div style="padding: 5px; padding-left: 0px">
+    <b>Show/Hide Column : </b>
+    <a class="showHideColumn" data-columnindex="0">Id</a> -
+    <a class="showHideColumn" data-columnindex="1">First Name</a> -
+    <a class="showHideColumn" data-columnindex="2">Last Name</a> -
+    <a class="showHideColumn" data-columnindex="3">Gender</a> -
+    <a class="showHideColumn" data-columnindex="4">Job Title</a> -
+    <a class="showHideColumn" data-columnindex="5">Web Site</a> -
+    <a class="showHideColumn" data-columnindex="6">Salary</a> -
+    <a class="showHideColumn" data-columnindex="7">Hire Date</a>
+</div>
+
+
+<style>
+    .showHideColumn {
+        cursor: pointer;
+        color: blue;
+    }
+</style>
+
+Finally, include the following code block in the success callback function
+	$('.showHideColumn').on('click', function () {
+	    var tableColumn = datatableInstance.column($(this).attr('data-columnindex')); // when we pass value to column then it column 													present at that position
+	    tableColumn.visible(!tableColumn.visible());
+	});

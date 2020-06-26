@@ -1,0 +1,25 @@
+filter() in python
+
+The filter() method filters the given sequence/data with the help of a function that tests each element in the sequence to be true or not.
+
+syntax:
+
+filter(function, sequence)
+
+Parameters:
+	function: function that tests if each element of a sequence true or not.
+	sequence: sequence/data which needs to be filtered, it can be sets, lists, tuples, or containers of any 
+				iterators.
+
+Returns:
+Note:- The return type of filter is Object, so to get the output convert it into list or set or tuple or any iterable
+
+
+
+Example1:
+	# a list contains both even and odd numbers.  
+	seq = [0, 1, 2, 3, 5, 8, 13] 
+	  
+	# result contains odd numbers of the list 
+	result = filter(lambda x: x % 2 != 0, seq) 
+	print(tuple(result))

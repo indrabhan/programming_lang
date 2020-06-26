@@ -1,0 +1,171 @@
+Cascading dropdownlist using jquery
+
+We want all the data for the cascading dropdownlists to be coming from the database.
+
+When the webform first loads, only the continents dropdownlist should be populated. Countries and Cities dropdownlist should be disabled and should not allow the user to select anything from these 2 dropdownlists. Once, the user makes a selection in the continents dropdownlist, then Countries dropdownlist should be enabled and populated with the countries that belong to the selected continent. The same logic applies for the cities dropdownlist.
+
+prop() :- 
+	The prop() method sets or returns properties and values of the selected elements.
+	When this method is used to return the property value, it returns the value of the FIRST matched element.
+	When this method is used to set property values, it sets one or more property/value pairs for the set of matched elements.
+
+	Note: The prop() method should be used to retrieve property values, e.g. DOM properties (like tagName, nodeName, defaultChecked) or 			your own custom made properties.
+
+	Tip: To retrieve HTML attributes, use the attr() method instead.
+	Tip: To remove a property use the removeProp() method.
+
+Syntax:-
+	Return the value of a property:
+		$(selector).prop(property)
+
+	Set the property and value:
+		$(selector).prop(property,value)
+
+	Set property and value using a function:
+		$(selector).prop(property,function(index,currentvalue))
+
+	Set multiple properties and values:
+		$(selector).prop({property:value, property:value,...})
+
+Parameter	Description
+
+property	Specifies the name of the property
+
+value		Specifies the value of the property
+		function(index,currentvalue)	Specifies a function that returns the property value to set
+		index - Receives the index position of the element in the set
+
+currentvalue - 	Receives the current property value of selected elements
+
+
+
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            var continentsDDL = $('#continents');
+            var countriesDDL = $('#countries');
+            var citiesDDL = $('#cities');
+
+            $.ajax({
+                url: 'DataService.asmx/GetContinents',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    continentsDDL.append($('<option/>', { value: -1, text: 'Select Continent' }));	// Note this line
+                    countriesDDL.append($('<option/>', { value: -1, text: 'Select Country' }));
+
+ 
+                    citiesDDL.append($('<option/>', { value: -1, text: 'Select City' }));
+                    countriesDDL.prop('disabled', true);
+                    citiesDDL.prop('disabled', true);		// Note prop() method.
+
+                    $(data).each(function (index, item) {
+                        continentsDDL.append($('<option/>', { value: item.Id, text: item.Name }));
+                    });
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+
+            continentsDDL.change(function () {
+                if ($(this).val() == "-1") {
+                    countriesDDL.empty();
+                    citiesDDL.empty();
+                    countriesDDL.append($('<option/>', { value: -1, text: 'Select Country' }));
+                    citiesDDL.append($('<option/>', { value: -1, text: 'Select City' }));
+                    countriesDDL.val('-1');
+                    citiesDDL.val('-1');
+                    countriesDDL.prop('disabled', true);
+                    citiesDDL.prop('disabled', true);
+                }
+                else {
+                    citiesDDL.val('-1');
+                    citiesDDL.prop('disabled', true);
+                    $.ajax({
+                        url: 'DataService.asmx/GetCountriesByContinentId',
+                        method: 'post',
+                        dataType: 'json',
+                        data: { ContinentId: $(this).val() },
+                        success: function (data) {
+                            countriesDDL.empty();
+                            countriesDDL.append($('<option/>', { value: -1, text: 'Select Country' }));
+                            $(data).each(function (index, item) {
+                                countriesDDL.append($('<option/>', { value: item.Id, text: item.Name }));
+                            });
+                            countriesDDL.val('-1');
+                            countriesDDL.prop('disabled', false);
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    });
+                }
+            });
+
+            countriesDDL.change(function () {
+                if ($(this).val() == "-1") {
+                    citiesDDL.empty();
+                    citiesDDL.append($('<option/>', { value: -1, text: 'Select City' }));
+                    citiesDDL.val('-1');
+                    citiesDDL.prop('disabled', true);
+                }
+                else {
+                    $.ajax({
+                        url: 'DataService.asmx/GetCitiesByCountryId',
+                        method: 'post',
+                        dataType: 'json',
+                        data: { CountryId: $(this).val() },
+                        success: function (data) {
+                            citiesDDL.empty();
+                            citiesDDL.append($('<option/>', { value: -1, text: 'Select City' }));
+                            $(data).each(function (index, item) {
+                                citiesDDL.append($('<option/>', { value: item.Id, text: item.Name }));
+                            });
+                            citiesDDL.val('-1');
+                            citiesDDL.prop('disabled', false);
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <style>
+        select {
+            width: 150px;
+        }
+    </style>
+</head>
+<body style="font-family: Arial">
+    <form id="form1" runat="server">
+        <table>
+            <tr>
+                <td>Continent
+                </td>
+                <td>
+                    <select id="continents">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Country</td>
+                <td>
+                    <select id="countries">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>City</td>
+                <td>
+                    <select id="cities">
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+

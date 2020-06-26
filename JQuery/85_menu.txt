@@ -1,0 +1,98 @@
+we will discuss jquery menu widget with examples
+
+2 simple steps to get the jQuery menu widget on a page
+
+Step 1 : Create an HTML structure with parent/child relationship. The most commonly used element is the unordered list.
+To disable a menu item add ui-state-disabled class to that list item element.
+
+	<ul id="menu">
+	    <li>USA
+		<ul>
+		    <li>Virginia</li>
+		    <li>Maryland</li>
+		</ul>
+	    </li>
+	    <li>India
+		<ul>
+		    <li>AP</li>
+		    <li class="ui-state-disabled">MP</li>
+		    <li>Karnataka
+		    <ul>
+		        <li>Bangalore</li>
+		        <li>Mangalore</li>
+		        <li>Mysore</li>
+		    </ul>
+		    </li>
+		</ul>
+	    </li>
+	    <li>UK</li>
+	    <li>Australia</li>
+	</ul>
+
+Step 2 : Find the unordered list element in the DOM and call menu() function 
+	$('#menu').menu();
+
+To control the width, set the preferred with in the .ui-menu class. This class is applied to the unordered list by jquery ui. You can see this using the browser developer tools.
+	<style>
+	    .ui-menu {
+		width: 150px;
+	    }
+	</style>
+
+
+Please note : Another way you can control the width of the menu widget is by placing it as a child element in another element and setting the width of the parent element.
+	<div style="width: 150px">
+	    Menu HTML here
+	</div>
+
+
+You can add an icon to a menu item, by applying class names. For the list of icons provided by jQuery
+http://api.jqueryui.com/theming/icons/
+
+	<ul id="menu">
+	    <li><span class="ui-icon ui-icon-flag"></span>USA
+		<ul>
+		    <li>Virginia</li>
+		    <li>Maryland</li>
+		</ul>
+	    </li>
+	    <li>India
+		<ul>
+		    <li>AP</li>
+		    <li class="ui-state-disabled">MP</li>
+		    <li>Karnataka
+		    <ul>
+		        <li>Bangalore</li>
+		        <li>Mangalore</li>
+		        <li>Mysore</li>
+		    </ul>
+		    </li>
+		</ul>
+	    </li>
+	    <li>UK</li>
+	    <li>Australia</li>
+	</ul>
+
+
+
+To associate a different icon to a submenu, use icons option
+	$('#menu').menu({
+	    icons: { submenu: 'ui-icon-circle-arrow-e' }
+	});
+
+
+To disable the menu, set disabled option to true
+	$(document).ready(function () {
+	    $('#menu').menu({
+		disabled: true
+	    });
+	});
+
+
+How to retrieve the selected item text  : Use the select event of the menu. This event is raised when an item is selected.
+
+$('#menu').menu({
+    select: function (event, ui) {
+        alert('Value = ' + ui.item.text());
+    }
+});

@@ -1,0 +1,196 @@
+jQuery datatables individual column search
+
+
+eq function:-
+	The eq() method returns an element with a specific index number of the selected elements.
+	The index numbers start at 0, so the first element will have the index number 0 (not 1).
+	Syntax:-
+		$(selector).eq(index)
+
+find method:
+	The find() method returns descendant elements of the selected element.
+	A descendant is a child, grandchild, great-grandchild, and so on.
+	The DOM tree: This method traverse downwards along descendants of DOM elements, all the way down to the last descendant. To only 	traverse a single level down the DOM tree (to return direct children), use the children() method.
+
+	Note: The filter parameter is required for the find() method, unlike the rest of the tree traversal methods.
+
+	Tip: To return all of the descendant elements, use the "*" selector.
+
+	syntax:
+		$(selector).find(filter)
+
+	Parameter	Description
+	filter		Required. A selector expression, element or jQuery object to filter the search for descendants
+
+	Note: To return multiple descendants, separate each expression with a comma.
+
+
+we will discuss how to implement search functionality on every jQuery datatable column. This is continuation to Part 106.
+
+1. Store the reference of the jQuery datatable in a variable for later use.
+var datatableInstance = $('#datatable').DataTable()
+
+2. Use DataTable() instead of dataTable() function. Otherwise you will get an error stating datatableInstance.columns is not a function, when you use columns() function on datatableInstance.
+var datatableInstance = $('#datatable').DataTable()
+
+What is the difference between dataTable() and DataTable()
+dataTable() is the old dataTables constructur where as DataTable() is the newer version. If you use the old dataTable() constructor, please use api() function to access the new API.
+
+var datatableInstance = $('#datatable').DataTable()
+datatableInstance.api().columns().every(function () {
+
+3. To include the Web Site column in search, set searchable option of this column to true
+{
+    'data': 'WebSite',
+    'sortable': false,
+    'searchable': true,
+    'render': function (webSite) {
+        if (!webSite) {
+            return 'N/A';
+        }
+        else {
+            return '<a href=' + webSite + '>'
+                + webSite.substr(0, 10) + '...' + '</a>';
+        }
+    }
+}
+
+4. Please remove scrollY option from the dataTable, so we can see the search textboxes without having to scroll down.
+
+5. Increase the width of the div element to 1700px so the border surrounds the datatable correctly.
+
+6. Include the following 2 blocks of code in the success callback function
+$('#datatable tfoot th').each(function () {
+    var title = $('#datatable thead th').eq($(this).index()).text();
+    $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+});
+
+datatableInstance.columns().every(function () {
+    var dataTableColumn = this;
+
+    $(this.footer()).find('input').on('keyup change', function () {
+        dataTableColumn.search(this.value).draw();
+    });
+});
+
+7. To include the search textboxes in the header instead, instead of footer
+$('#datatable thead th').each(function () {
+    var title = $('#datatable tfoot th').eq($(this).index()).text();
+    $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+});
+
+datatableInstance.columns().every(function () {
+    var dataTableColumn = this;
+    var searchTextBoxes = $(this.header()).find('input');
+
+    searchTextBoxes.on('keyup change', function () {
+        dataTableColumn.search(this.value).draw();
+    });
+
+    searchTextBoxes.on('click', function (e) {
+        e.stopPropagation();
+    });
+});
+
+
+Complete Example Code
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: 'EmployeeService.asmx/GetEmployees',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    var datatableInstance = $('#datatable').DataTable({
+                        paging: true,
+                        sort: true,
+                        searching: true,
+                        data: data,
+                        columns: [
+                            { 'data': 'Id' },
+                            { 'data': 'FirstName' },
+                            { 'data': 'LastName' },
+                            { 'data': 'Gender' },
+                            { 'data': 'JobTitle' },
+                            {
+                                'data': 'WebSite',
+                                'sortable': false,
+                                'searchable': true,
+                                'render': function (webSite) {
+                                    if (!webSite) {
+                                        return 'N/A';
+                                    }
+                                    else {
+                                        return '<a href=' + webSite + '>'
+                                            + webSite.substr(0, 10) + '...' + '</a>';
+                                    }
+                                }
+                            },
+                            {
+                                'data': 'Salary',
+                                'render': function (salary) {
+                                    return "$" + salary;
+                                }
+                            },
+                            {
+                                'data': 'HireDate',
+                                'render': function (jsonDate) {
+                                    var date = new Date(parseInt(jsonDate.substr(6)));
+                                    var month = date.getMonth() + 1;
+                                    return month + "/" + date.getDate() + "/" + date.getFullYear();
+                                }
+                            }
+                        ]
+                    });
+
+
+                    $('#datatable tfoot th').each(function () {
+                        var title = $('#datatable thead th').eq($(this).index()).text();
+                        $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+                    });
+
+                    datatableInstance.columns().every(function () {
+                        var dataTableColumn = this;
+
+                        $(this.footer()).find('input').on('keyup change', function () {
+                            dataTableColumn.search(this.value).draw();
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body style="font-family: Arial">
+    <form id="form1" runat="server">
+        <div style="width: 1700px; border: 1px solid black; padding: 3px">
+            <table id="datatable">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Job Title</th>
+                        <th>Web Site</th>
+                        <th>Salary</th>
+                        <th>Hire Date</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Job Title</th>
+                        <th>Web Site</th>
+                        <th>Salary</th>
+                        <th>Hire Date</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </form>
+</body>

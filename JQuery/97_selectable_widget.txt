@@ -1,0 +1,58 @@
+jQuery selectable widget allows us to select elements, individually or in a group using the mouse. Let us understand this with an example. 
+
+The user should be able to select the days he or she is available.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="jquery-3.4.1.js"></script>
+	<script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+	<link href="jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet"/>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#selectable').selectable({
+				stop: function(){
+					var result = ''
+					$('.ui-selected').each(function(){
+						result += $(this).text() + '<br/>';
+					})
+					$('#result').html(result)
+				}
+			})
+		})
+
+	</script>
+	<style type="text/css">
+		li{
+			display: inline-block;
+			border: 1px solid black;
+			padding: 20px;
+			cursor: pointer;
+		}
+
+		.ui-selected{				// this class is applied when you selected the elements.
+			background-color: green;
+			color: white;
+		}
+		.ui-selecting{				// this class is applied when you have selected the element but cusrsor is not release
+			background-color: grey;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<ul id="selectable">
+        <li>Mon</li>
+        <li>Tue</li>
+        <li>Wed</li>
+        <li>Thu</li>
+        <li>Fri</li>
+        <li>Sat</li>
+        <li>Sun</li>
+     </ul>
+        You selected : <div id="result"></div>
+</body>
+</html>
+
+Note:-  stop event is called when you leave the cursor after selecting.

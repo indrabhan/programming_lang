@@ -1,0 +1,52 @@
+For the complete list of slider options and events
+http://api.jqueryui.com/slider
+
+
+We want display the slider
+
+	HTML
+		<div id="slider"></div>
+
+	jQuery code
+		$(document).ready(function () {
+		    $('#slider').slider()
+		});
+
+
+We want to increase and decrease the font-size using the slider
+
+	HTML
+		<div id="slider"></div>
+		<br />
+		<div id="myDiv" style="font-size: 20px">
+		    Slider Example
+		</div>
+
+	jQuery code
+		$(document).ready(function () {
+		    var divElement = $('#myDiv');
+		    $('#slider').slider({
+			min: 20,
+			max: 120,
+			orientation: 'horizontal',
+			slide: function (event, ui) {		// ui property will give the position of slider in number
+			    divElement.css('font-size', ui.value + 'px');	//value is the property to get the  position of slider in 											//number
+			}
+		    });
+		});
+
+
+Options
+Option		Description
+
+min		The minimum value of the slider. The default is 0
+max		The maximum value of the slider. The default is 100
+orientation	Horizontal or vertical orientation of the slider
+
+Events
+Event		Description
+
+start		Triggered when the user starts sliding
+stop		Triggered when the user stops sliding
+slide		Triggered on every mouse move during slide
+

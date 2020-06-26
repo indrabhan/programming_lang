@@ -1,0 +1,73 @@
+jquery button widget
+
+1.)jQuery button widget enhances standard form elements like buttons, inputs and anchors to buttons.
+
+In the HTML below we have a 
+	1. Button 
+	2. Submit 
+	3. Anchor
+
+	<input type="button" value="Button Element" />
+	<input type="submit" value="Submit Button" />
+	<a href="#">Anchor Element</a>
+
+
+jQuery code to enhance the above elements to buttons
+	$('input[type="button"], input[type="submit"], a').button();
+
+To associate icons with the buttons, use icons option of the button widget. A button can have primary and secondary icons. By default, the primary icon is displayed on the left and the secondary is displayed on the right.
+
+	$('input[type="button"], input[type="submit"], a').button({
+	    icons: {
+		primary: 'ui-icon-circle-triangle-w',		// left side of button
+		secondary: 'ui-icon-circle-triangle-e'		// right side of button
+	    }
+	});
+	
+	Please note : Icons are not supported with input elements of type button, submit or reset
+
+jQuery UI icons
+http://api.jqueryui.com/theming/icons
+
+
+
+2.)jQuery button widget can also enhance checkboxes to buttons
+
+	<input type="checkbox" id="Bold" /><label for="Bold">B</label>
+	<input type="checkbox" id="Underline" /><label for="Underline">U</label>
+	<input type="checkbox" id="Italic" /><label for="Italic">I</label>
+
+
+	jQuery code to enhance above checkboxes to buttons with click event.
+
+		$('input[type="checkbox"]').button().click(function () {
+		    var isChecked = $(this).is(':checked') ? 'Checked' : 'Unchecked'
+		    alert($(this).attr('id') + ' Checkbox ' + isChecked)
+		});
+
+
+3.)jQuery button widget can also encahnce radiobuttons to buttons
+
+	<input type="radio" id="Male" name="Gender" /><label for="Male">Male</label>
+	<input type="radio" id="Female" name="Gender" /><label for="Female">Female</label>
+
+	jQuery code to enhance above radiobuttons to buttons
+
+		$('input[type="radio"]').button().click(function () {
+		    alert($(this).attr('id') + ' radio button selected')
+		});
+
+
+4.)buttonset() widget is useful to enhance a group of radio buttons or checkboxes to buttons
+
+	<div id="radioButtons">
+	    <input type="radio" id="Male" name="Gender" /><label for="Male">Male</label>
+	    <input type="radio" id="Female" name="Gender" /><label for="Female">Female</label>
+	</div>
+
+	jQuery code to enhance a group of radio buttons to buttons
+
+		$('#radioButtons').buttonset();
+		$('#radioButtons input[type="radio"]').click(function () {
+		    alert($(this).attr('id') + ' radio button selected')
+		});

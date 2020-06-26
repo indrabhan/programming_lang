@@ -1,0 +1,74 @@
+jquery tooltip widget
+
+To get a tooltip without using jQuery all you do is set the title attribute. At this point when we hover over the element the content that is specified as the value for the title attribute will be displayed as the tooltip.
+
+
+jQuery Tooltip widget replaces native tooltip and allows lot of customization
+
+1. Display other content than just the title, like inline footnotes or extra content retrieved via Ajax.
+2. Customize the positioning, e.g., to center the tooltip above elements.
+3. Add extra styling to customize the appearance, for warning or error fields
+
+
+1.)In the following example label element display the native tooltip where as the textbox displays jQuery tooltip
+	HTML
+		<label id="lblName" for="txtName" title="Full Name">Name</label>
+		<input id="txtName" type="text" title="Your full name as it appears in paasport" />
+	jQuery
+		$('#txtName').tooltip();
+
+
+2.)In the following example we are calling tooltip() function on the document object, so this will display jQuery tooltip for all the elements that have title attribute
+	$(document).tooltip();
+
+
+3.)You can also use the content option, to specify the content for tooltip. When both title attribute and content options are specified, the content specified by the content option will override the content specified by the title attribute.
+	HTML
+		<input id="txtName" type="text" title="Your full name as it appears in paasport" />
+	jQuery
+		$('#txtName').tooltip({
+		    content : '<u>content option</u> tooltip overriding title attribute tooltip'
+		});
+
+
+4.)content option supports multiple types. string or a function.
+	HTML
+		<input id="txtName" type="text" title="Your full name as it appears in paasport" />
+	jQuery
+		$(document).ready(function () {
+		    $('#txtName').tooltip({
+			content: toolTipFunction
+		    });
+
+		    function toolTipFunction() {
+			return 'Tooltip from a function';
+		    }
+		});
+
+
+5.)Set track option to true to make the tooltip follow the mouse
+
+	HTML
+		<input id="txtName" type="text" title="Your full name as it appears in paasport" />
+
+	jQuery
+		$('#txtName').tooltip({
+		    track: true
+		});
+
+6.)show and hide options can be used to animate the showing and hiding of the tooltip. Both of these options support multiple types. For the detailed description please check the following jquery documentation page 
+http://api.jqueryui.com/tooltip
+
+In the following example we are using a JavaScript object, to specify the animation duration, effect and delay while the tooltip is being shown and hidden
+
+	HTML
+		<input id="txtName" type="text" title="Your full name as it appears in paasport" />
+
+	jQuery
+		$('#txtName').tooltip({
+		    show : {delay:10, duration:500, effect: 'slideDown'},
+		    hide: { delay: 10, duration: 500, effect: 'slideUp' }
+		});
+
+
+

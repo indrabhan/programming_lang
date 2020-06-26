@@ -1,0 +1,59 @@
+jQuery Resizable Widget
+
+Query Resizable Widget allows you to change the size of an element.
+
+Consider the following HTML and CSS
+
+	<div id="redDiv" class="divClass" style="background-color: red">
+	    Red Div
+	</div>
+
+	<style>
+	    .divClass {
+		font-family: Arial;
+		height: 150px;
+		width: 150px;
+		text-align: center;
+		color: white;
+	    }
+	</style>
+
+To make the div element resizable
+	$(document).ready(function () {
+	    $('#redDiv').resizable();
+	});
+
+
+jQuery Resizable Widget Options
+
+Option		Description
+
+alsoResize	Allows to resize one or more elements synchronously with the resizable element
+
+animate		Animates to the final size after resizing. Include .ui-resizable-helper class to display outline while resizing
+		animate: true
+
+aspectRatio	Specifies whether the element should preserve aspect ratio.
+		means when you increase the width the height should also get increased and vice versa
+		aspectRatio:true
+
+autoHide	Specifies whether the resize handles should hide when the user is not hovering over the element.
+		autoHide: true
+
+containment	Constrains resizing to within the bounds of the specified element or region.
+
+ghost		specifies whether a semi-transparent helper element should be shown for resizing.
+
+maxHeight	The maximum height you can resize to
+minHeight	The minimum height you can resize to
+maxWidth	The maximum width you can resize to
+minWidth	The minimum width you can resize to
+
+
+jQuery Resizable Widget Events
+
+Event		Description
+
+start		Triggered at the start of a resize operation
+stop		Triggered at the end of a resize operation
+resize		Triggered during the resize operation

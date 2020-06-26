@@ -1,0 +1,55 @@
+when search on openweathermap site by city name='London' than it form the below url which returns json data.
+api are url when type on web browser that return some data.
+
+url = api.openweathermap.org/data/2.5/weather?q=London,uk
+
+
+<html>
+<head>
+    <script src="jquery-1.11.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnGetWeather').click(function () {
+                var resultElement = $('#resultDiv');
+
+                var requestData = $('#txtCity').val() + ',' + $('#txtCountry').val();
+                $.ajax({
+                    url: 'http://api.openweathermap.org/data/2.5/weather',
+                    method: 'get',
+                    data: { q: requestData }, // q parameter you can see in url(above)
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.message != null) {
+                            resultElement.html(response.message);
+                        }
+                        else {
+                            resultElement.html('Weather: ' + response.weather[0].main + '<br/>'
+                                + 'Description: ' + response.weather[0].description);
+                        }
+                    },
+                    error: function (err) {
+                        alert(err);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body style="font-family:Arial">
+    <table>
+        <tr>
+            <td>City</td>
+            <td><input type="text" id="txtCity" /></td>
+        </tr>
+        <tr>
+            <td>Country</td>
+            <td><input type="text" id="txtCountry" /></td>
+        </tr>
+    </table>
+    <input type="button" id="btnGetWeather" value="Get Weather Data">
+    <br /><br />
+    <div id="resultDiv">
+    </div>
+</body>
+</html>
+

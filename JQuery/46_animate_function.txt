@@ -92,4 +92,4 @@ In the following example, several calls to animate() method are chained together
 	</html>
 
 
-Please note: By default, all HTML elements have a static position, and cannot be moved. To modify the position , set the CSS position property of the element to fixed, absolute or relative.
+Please note: By default, all HTML elements have a static position, and cannot be moved. To modify the position , set the CSS "position" property of the element to fixed, absolute or relative.
