@@ -1,0 +1,26 @@
+Quotation Template:-
+	In Sale Order when you select the value in "Quotation Template" field, the SOL will be auto fill with the products define in Quotation 		Template.
+	To enable this feature, go to Sales ‣ Configuration ‣ Settings and activate Quotation Templates.
+
+	You can even assign the default template when activating the above feature.
+	Means that template will be auto selected when creating sale order.
+
+	Sale/Setting/Quotation Template:-
+		when create Quotation Template you will find Confirmation Tab/Page
+			1.)Online Signature:- when the customer will do online sign then the quotation will be automatically confirmed.
+			2.)Online Payment:- when the customer will do online payment then the quotation will be automatically confirmed.
+			3.)Confirmation Email:- This template will be send when Confirming the Order. 
+
+
+Customer Address:
+	This feature will allow you to have different address for an order
+	like different invoice address and different shipping address
+
+
+Add terms & conditions:
+	You can have your default terms and condition on every quotation/Invoice.
+
+	Configuration
+		Go to Accounting ‣ Configuration ‣ Settings and activate Default Terms & Conditions.
+
+

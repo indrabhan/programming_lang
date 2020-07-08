@@ -1,0 +1,208 @@
+1.Project:-
+	create a project, click on project and now you will be asked to create the stages for project.
+	Note:- For every new project you can create new stages.
+	       If you want to use same stages that you created for earlier project then
+		Project App -- Configuration -- Stages
+		click on it, you will find Project field(Many2many) add particular project.
+	
+2.How to share projects with other resources?
+	In project kanban view, In particular project you will find 3 dots at the right top side click on it and you will find share option.
+	when you click on share option, wizard will popup their you will find receipt field(Many2many) mentioned the email address so an 		invitation mail is trigger to the receipts.
+	
+	Choose who can access a project
+		To create a project for specific teams, under Visibility, choose who can have access to the project:
+
+		Invited employees: the ones who are followers.
+		All employees.
+		Portal users and all employees: it enables the option Share. Recipients receive an email with an invitation to access the 							document (project).
+
+
+3.Task:-
+	when the project and its stages are created you can see Create button, click on it , it will create the task for that project.
+	To share the task with other resources, open the task and on Middle top you will find Action button, In that dropdown you will find 		share option.
+
+4.)Sub-task:-
+	You can divide the task into many subtask
+	To enable this feature go to Project App --> Configuration -- setting -- tick mark the substask field.
+
+5.Timesheet:-
+	Timesheet will allow you yo enter the number of working hours on task and subtask.
+	To have timesheet option on task and Sub-task, You have to tick Mark Timesheet Boolean field On Project.
+	On parent task at the bottom you will see the hours for parent task and its sub-task.
+	To enable this feature go to Project App --> Configuration -- setting -- tick mark the timesheet field.
+
+	2.)Timer:
+		to have timer on task and sub-task(start, pause, stop)
+		you have to tick mark the boolean field "Timesheet Timer" on Project.
+		It will allow you to record the time by using timer(start/stop/pause button)
+		Once you have stop/pause that task you have to enter what have you done in description in task-lines.
+
+6.)Collaborate on Tasks:- work jointly on an activity or project.
+	
+	Being able to collaborate virtually but with the same effect as if people were in the same room increases your productivity. 		It results in faster execution of processes, brainstorming and decision made easier while also allowing the support of outside 		contributions.
+
+	This writting pad will allow all the user to view/write all conversation.You can get the link of this pad and give it to user 		so that he can open in any browser and view/write all conversation.
+	Each task and sub-task has different pad means conversation of sub-task is not visible in parent task.
+
+	To activate this feature go to setting and tick mark Collaborative Pads.
+	Go to particular project(kanban view) click on right dots and then click on Edit.
+	In settings tab, You will see boolean field "Use collaborative pads",tick mark it.
+	Now in task and and subtask you will see description tab, that is Collaborate pad.
+
+	Note:-
+		In Collaborate pad Click on the "</>" icon to get the direct URL of the task description: useful if you want to share it 			without adding this person as a follower, or to someone outside of the company.
+
+	Add followers to a Project:
+		In the chatter you will see at right hand side a small symboll of human body.Click on it and you will see the option of
+		Add Followers and Add Channels.
+		A follower added on project can see all the task and sub-task.
+		Followers are notified of any changes: tasks sliding from one stage to another, conversations taking place, etc.
+
+	Add followers to a Task and Sub-task:
+		Each task has individual followers.
+		Follower added on Sub-task is not added to its Parent task.
+
+	Select which notifications to get to followers:
+		In the chatter you will see at right hand side a small symboll of human body.Click over it and you will the list of followers.
+		Hover the cursor on particular follower you will see pencil symbol(Edit Subscription) click on it and the follwing options 			will appear:-	Discussions
+				Activities
+				Note
+				Task Blocked
+				Task Ready
+				Stage Changed
+				Task Rating
+		selects the boolean fields and that follower will get those selected notifications.
+
+	The Chatter:
+	
+		Send message:- If you want to send a message/email to all the followers in the task, use Send a message
+
+		Log Note:- To interact with followers, whether there are internal or external,
+			   click on Log a note and ping them using the at symbol (@):- you can select followers.
+		           You can also ping a channel using the hashtag sign (#).:- you can select channel.
+
+		Schedule Activity :- you can scheduled activity like make a call, send email, arrange meeting.
+
+		Attachment:- You will see the attachment symbol(pin) click on it and add attachment.
+
+
+7.)How to Use my Mail Server to Send and Receive Emails in Odoo:
+	If you are using Odoo Online or Odoo.sh then you have to do nothing Odoo will do for you.
+	
+	1.)Set up an incoming email server:-
+		Odoo relies on generic email aliases to fetch incoming messages.
+
+			1.)Reply messages:- of messages sent from Odoo are routed to their original discussion thread (and to the inbox of all 					its followers) by the catchall alias (catchall@).
+			2.)Bounced messages:- are routed to bounce@ in order to track them in Odoo. This is especially used in Odoo Email 					Marketing to opt-out invalid recipients.
+			3.)Original messages:- Several business objects have their own alias to create new records in Odoo from incoming 					emails:
+					Sales Channel (to create Leads or Opportunities in Odoo CRM),
+					Support Channel (to create Tickets in Odoo Helpdesk),
+					Projects (to create new Tasks in Odoo Project),
+					Job Positions (to create Applicants in Odoo Recruitment),
+					etc.
+
+			Depending on your mail server, there might be several methods to fetch emails. The easiest and most recommended method 				is to manage one email address per Odoo alias in your mail server.
+
+			Create the corresponding email addresses in your mail server (catchall@, bounce@, sales@, etc.).
+			Set your domain name in the General Settings.
+		
+			If you use Odoo on-premise, create an Incoming Mail Server in Odoo for each alias.
+
+	2.)Configure the email alias in your project:-
+		Now that you have the incoming email server set up, go to Project ‣ Configuration ‣ Projects ‣ Edit. Under the Emails tab, 			define the wanted email alias and choose the policy to receive a message.
+		In addition, you can now directly set it when creating a new project.
+		The email can be seen under the name of your project on the dashboard.
+
+		When you already have an email address that customers know from the top of their heads, changing it is the last thing you want 			to do. Instead, link that address to your project and transform those conversations into structured work. It automatically 			creates a task in the first stage of a project.
+
+
+8.)Compare forecast hours with the effective ones:-
+	under All Tasks, conveniently see the Planned Hours compared to the Remaining Hours, and a calculation of the Progress.
+	Task appears in red color when it has cross deadline.
+
+9.)Invoice the task hours:
+	In project when the timesheet field is enable you will see "Create Sale Order" button.
+	Click on it:- you can invoice hours employees wise as employee can be junior or senior
+		      OR enteir hours timesheet.
+		      means billing type:- 1.)At project rate
+					   2.)At Employee rate
+
+10.)Invoice only approved timesheets:
+	Go to Timesheets App ‣ Configuration ‣ Settings ‣ Invoicing Policy, and choose Approved timesheets only.
+		1.)All recorded timesheet.
+		2.)Approved timesheets only.
+
+11.)Gather Feedback from Customers:
+
+	Choosing the projects I want feedback from:
+		Go to Project ‣ Configuration ‣ Settings and enable Use Rating on Project.
+		Go to Project ‣ Configuration ‣ Projects ‣ Edit and you will see selection field named as Customer(s) Rating
+		Options of those rating.
+			1.)Rating when changing stage
+			2.)Periodical Rating
+			3.)No rating
+
+			Set Email Template to Stages in order to define the template to be sent at a specific stage(s).
+			You can event set on last stage.
+			Choose an existing template or create one on the fly.
+
+		Note:- See the customer rating email sent under the Log notes of your task.
+	
+	Customer Rating Report:-
+		Under Project ‣ Reporting ‣ Customer Ratings see ratings by task.
+
+
+12.)Create Projects and Tasks from Sales Orders:
+	1.)When you sell your services, you can choose to automatically have a project/task, so that you can invoice the actual hours of that 			service.
+	2.)To track the cost/Revenue of that project activate the analytic account.In analytic account you will know the project and the cost 			(amount of working hours of employee/expense like you book hotel/purchase like you purchase some material for this project.)
+	3.)To activate the analytic account, Account App -- settings -- Analytic account.
+	4.)For expense install the expense app.
+	5.)When you will confrim the SO, the analytic account will be created with SO name, In config menu for Alanytic Account.
+		and the project and task will be created.
+	6.)Set the Employee rate/per hour from Employee App -- select employee in HR tab you will find field to enter the rate/per hour.
+		when you enter the time in timesheet, In analytic account in Cost/Revenue Button you will find the amount of employee worked 			in minus as this is the cost required for project.
+
+	Product set up:-
+		1.)Create service type product.
+		2.) Under the Sales tab select the Service Invoicing Policy and Service Tracking.
+			Service Invoicing Policy:- 
+					Timesheet on tasks.
+			Serivce Tracking:
+				1.)Create a task in an existing project:- a task is added in the first column of the selected project.	
+				2.)Create a task in sales order’s project:- a new project for each sales order of that service is created 										    based on the template you have chosen.
+				3.)Create a new project but no task:-only creates a new project, for each time that service is sold, based on 									     the skeleton of the project template chosen.
+
+		Now, once a Quotation is confirmed and transformed into a Sales Order, a project, task and analytic account is automatically 			created.
+
+		For example:
+			In task you palnned it for 10 hours and you enter 3 hours and from sale order you create invoice, so for the 3 hours 				the invoice will be created.and on SO the Create Invoice button will disappear.
+			Now again you enter 5 hours in same task then in SO you will see the Create Invoice button and invoice for 5 hours 				will be created and you will have 2 invoices now.
+
+13.)Track Projects’ Profitability:
+	A project runs smoother if you can have an overview of its costs, revenues, profitability, tasks, time and people, all in the same 		place. It allows you to make smarter business decisions as you know where you are standing and can course-correct if needed.
+
+	1.)Track costs and revenue:
+		If you have the Timesheets application installed
+		Go to Project ‣ Configuration ‣ Projects, choose the respective project, Edit and enable Timesheets. A menu "Overview" becomes 			available in the Kanban view.
+
+		The overview shows the hours recorded split by the different billable options, profitability, time by people according to the 			billable hours recorded, and even a timesheet table.
+
+	2.)If you do not have the Timesheets application installed
+		Activate the Developer mode. Then go to Manager Users and enable Analytic Accounting. Now, go to Project ‣ Configuration ‣ 			Projects and specify an Analytic Account under the needed project.
+		A "Profitability" menu to the costs and revenues of this analytic account is directly available in the Kanban view.
+
+14.)Add timesheet on fly:
+	Go to Timesheet App, you will see the timesheet and in top left hand you will see the "Add A Line" button click on it 
+	you can select the project task and deadline and enetry the hours you took to complete the task.
+	In the date column of task row you can add the hours.
+
+15.)Validate the timesheet:
+	Being a manager you have to validate the timesheet
+	In Timesheet App , you will find the menu "To Validate", click on it.you will find 2 options Last week and Last Month.
+	Click on any 1 option and you will find "Validate" button on the left top side, click on it and a wizard will popup and the wizard 		lines will have employees names and validate boolean field, uncheck if you dont want to valiadte timesheet of some of employees.
+
+16.)where you will define cost/per hour of employees working on Projects.
+	Go to employee App, select the employee and in HR Settings Tab you will find a field "Timesheet cost ____ per hour".
+
+17.)From Project Overview You have the button of Create Invoice.
+	Make sure if you have mark the invoice policy in Timesheet App -- Invoiced Approved timesheet then Create Invoice Button will not be 		visible untill you validate the timesheet.
