@@ -1,0 +1,132 @@
+PostgreSQL CASE
+
+In this tutorial, we will show you how to use the PostgreSQL CASE conditional expression to form conditional queries.
+
+1.)General PostgreSQL CASE expression:-
+The PostgreSQL CASE expression is the same as IF/ELSE statement in other programming languages. PostgreSQL provides two forms of the CASE expressions.
+
+The following illustrates the general form of the CASE statement:
+
+	CASE 
+	      WHEN condition_1  THEN result_1
+	      WHEN condition_2  THEN result_2
+	      [WHEN ...]
+	      [ELSE result_n]
+	END
+
+In this general form, each condition is an expression that returns a boolean value, either true or false.
+
+If the condition evaluates to true, the CASE expression returns the result corresponding to the condition and all other CASE branches do not process at all.
+
+If all conditions evaluate to false, the CASE expression will return the result in the ELSE part. If you omit the ELSE clause, the CASE expression will return null.
+
+Notice that all result expressions must have data types that can be convertible to a single data type e.g., string, numeric, and temporal.
+
+Example 1:-
+	SELECT
+	CASE WHEN date('2020-03-22') > date('2020-06-25') THEN date('2020-03-22')
+	     ELSE date('2020-06-25')
+        END AS MostRecentDate
+
+Example 2:-
+	
+	Suppose you want to assign a price segment to a film with the following logic:
+
+	Mass if the rental rate is 0.99
+	Economic if the rental rate is 1.99
+	Luxury if the rental rate is 4.99
+
+	And you want to know the number of films that belong to the Mass, Economic, and Luxury price segments. In this case, you can use the 		CASE expression to construct the query as follows:
+
+
+		SELECT
+			SUM (
+				CASE
+				WHEN rental_rate = 0.99 THEN
+					1
+				ELSE
+					0
+				END
+			) AS "Mass",
+			SUM (
+				CASE
+				WHEN rental_rate = 2.99 THEN
+					1
+				ELSE
+					0
+				END
+			) AS "Economic",
+			SUM (
+				CASE
+				WHEN rental_rate = 4.99 THEN
+					1
+				ELSE
+					0
+				END
+			) AS "Luxury"
+		FROM
+			film;
+
+	Output:-
+		The result of the query is as follows:-
+			Mass	Economic	Luxury
+			341	323		336
+
+	In this query, we used the CASE expression to return 1 or 0 if the rental rate falls into each price ranges. And we applied the SUM 		function to calculate the total of films for each price segment.
+
+
+2.)Simple PostgreSQL CASE expression
+PostgreSQL provides another form of the CASE expression called simple form as follows:
+
+	CASE expression
+	WHEN value_1 THEN
+		result_1
+	WHEN value_2 THEN
+		result_2 
+	[WHEN ...]
+	ELSE
+		result_n
+	END;
+
+The CASE first evaluates the expression and then compares the result with each value( value_1, value_2, …) in the WHEN clauses sequentially until it finds the match. Once the result of the expression equal to a value in a WHEN clause, the CASE returns the corresponding result in the THEN clause.
+
+If CASE does not find any matches, it returns the result_n in the ELSE part, or NULL value if the ELSE part is IS not available. This is similar to the switch statement in other programming languages such as C/C++ and Java.
+
+We can rewrite the general CASE expression using the simple CASE as follows:
+
+	SELECT
+		SUM (
+			CASE rental_rate	//Note this line
+			WHEN 0.99 THEN
+				1
+			ELSE
+				0
+			END
+		) AS "Mass",
+		SUM (
+			CASE rental_rate	//Note this line
+			WHEN 2.99 THEN
+				1
+			ELSE
+				0
+			END
+		) AS "Economic",
+		SUM (
+			CASE rental_rate	//Note this line
+			WHEN 4.99 THEN
+				1
+			ELSE
+				0
+			END
+		) AS "Luxury"
+	FROM
+		film;
+
+The query returns the same result as the general CASE example:
+	Output:-
+		The result of the query is as follows:-
+			Mass	Economic	Luxury
+			341	323		336
+
+
+

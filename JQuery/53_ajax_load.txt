@@ -20,7 +20,7 @@ load( url [, data ] [, complete ] )
 
 Parameter	Description
 url		Required. URL to which the request is sent
-data		Optional. A JSON object or string that is sent to the server along with the request
+data		Optional. A JSON object or string that is sent to the server along with the request.
 complete	A callback function that is called when the request completes
 	
 

@@ -1,0 +1,116 @@
+1.)Refund the Invoice.
+	Customer:- Anand
+	SO Amount:-10,500(including tax)
+	Create Invoice and Post the invoice:
+		The state of invoice is changed to Posted
+		when you post the invoice, In Aged Receivable Report the entery created with amount 10,500/-
+		The Amount which is receivable from customer is shown in Aged Receivable Report.
+		When you post the invocie, In Partner Ledger Report the entery is created with below details
+				Initial Balance 	Debit 	Credit 	Balance
+				0.00			10,500	null	10,500
+	Register the Payment:
+		As soon as you register the payment., The entery is created is created for that payment, Accounting App-- Customer--Payments.
+		suppose you pay 1000 and 2000, so 2 payments entery will be created.
+
+		Aged Receivable:
+			amount = 7500
+
+		Partner ledger:
+				Initial Balance 	Debit 	Credit 	Balance
+				0.00			10,500	null	10,500
+				10,500			null	1000	9,500
+				9,500			null	2000	7,500
+
+	Refund the Invoice:
+		The invoice is in posted state, Click on ADD CREDIT NOTE button
+		You will have 3 options:
+				1.)Partial Refund
+				2.)Full Refund
+				3.)Full refund and new draft invoice
+
+
+2.)Payment Terms:
+	Payment Terms are the conditions that are used for invoices payments,
+	like suppose you give 2% discount If paid with 10 days else need to pay full invoice within 30 days.
+	For 2% discount
+		In Payment Terms select discount option and value=98 and days=10
+		Select the balance entry and days=30
+	
+		Note:- The balance entry should always be last. 
+
+	How does customer know what are Payment Term for his invoice?
+		When creating the payment term, entry the description about payment terms in the "Description on the Invoice" field.
+		This description will be visible or the Name of payment term when you will click on Customer Preview button on sale order.
+		
+	Note:- On customer form you will have "Invoice" and "Due Date" smart button.
+
+
+3.)SEPA QR Code:
+	Pay the invoice with the QR Code(This works only for European Customer)
+	From accounting Setting Tick mark the "SEPA QR Code".You will see the QR Code whe click on Customer Preview button.
+	For Wire Transfer:- To activate QR code, go to payment Acquire and select the wire transfer, click on configuration tab and 					tick mark the QR Code.
+			    So now when you select the wire transfer as you payment option will get the QR code to pay the payment.
+
+
+4.)Sepa Direct Debit(SDD):
+	This feature will allow you to directly debit the amount from customer account.
+	How it works:
+		Bank provide you with the Creditor Identifier Code.
+		Required the document with the signature of your and your customer's.
+		Odoo generate the XML file and you need to send it to you bank in order to debit the payment.
+		
+	Process:
+		1.)Activate the Sepa Direct Debit(SDD) feature from accounting setting and saving the setting the Creditor Identifier field 				will be visible assign the Creditor Identifier number given by your bank.
+		2.)Go to Accounting App -- Customers -- Direct Debit Mandates and create the record for it.
+		3.)Customer:- In the accounting tab of customer form, must have all details of bank.
+		4.)Journal:- Bank journal must have bank number and all details regarding bank.
+		5.)Click on Print Button:-You will get one document, you and your customer must sign that document.
+					  To get electronic signature of your customer you can make use of Signature App.
+		6.)Enter the start date and validate it.
+		7.)Once you get the signed document uplaod it on the same record as their is the option of upload.
+		8.)Now where ever you create the invoice for that customer the invoice will be automatically in paid state.
+		9.)Create the batch payments of payments made by that customer and vaidate it, now you will get and xml file, upload at your 			   bank so that the money will be transfer from customer accounto to your bank account.
+	
+		Note:- On Direct Debit Mandates record after validating you will see 2 button "Revoke" and "Close".
+			Close:- The SDD functionality will work for the invocies before the start date.
+			Revoke:-This will completely stop the SDD functionality.
+	
+		
+5.)Taxes:-
+	You can set the default taxes from Accounting Setting, In SOL and POL this taxes get auto apply.
+	If you want to set tax specific to product then on product template you can set it on field Customer Taxes.
+	In SOL when selecting the specific product you will see that tax.
+
+	Note:-
+		You have to pay amount collected from tax to Goverment
+		Amount to Goverment = Paid taxes to vendor(PO) - Receive taxes from customer(SO)
+		On every tax account is configured so we know in which account the tax amount will go.
+
+	Example1:- SO amout 1000, tax applied as GST 5%, tax amount=50, Total amount=1050
+		   When you make the paymet using bank journal, so 
+		   In General Ledger Report:- the account liked with bank journal will get the amount.
+					      the tax account link with the tax will get the tax amount.
+
+General Ledger:
+	Here you will get the transactions of all the accounts that gets affected during transactions.
+	A general ledger is a bookkeeping ledger that serves as a central repository for accounting data transferred from all subledgers like 		accounts payable, accounts receivable, cash management, fixed assets, purchasing and projects
+
+
+6.)Bank Account:-
+	when you create the bank account , journal and Account(COA) is created.
+	you will find this bank acount option to select when paying the Payment.
+	In account overview this bank account is also seen.
+
+
+7.)Fiscal Position:-
+	Suppose In you country the deafult tas applied on product is 5% and if you sell same product to different country then the tax applied 		is 0%, So with the help of Fiscal Position you can manage this.
+	You even have the option of Account Mapping:
+		Account on product and Account to be used.
+
+	In Accounting App you will get the fiscal position menu.
+	You have the option of auto detect the fiscal position in fiscal position record.
+	You can applied to Country Group or to single country.
+	On Order base on partner country the fiscal position get auto selected, even you can specify the fiscal position on partner or you can 		select fiscal position on Order
+
+	Country Group:- Group of countries like Asia has India, Pakistan, Bangladesh .....
+			You can create country group on the fly or you will get menu in Contact App.

@@ -1,0 +1,25 @@
+1.)Account Overview/dashboard:
+	here you will see every bank account you create.
+
+	How to create bank account?
+		In Accounting App
+			Configuration -- You will see the menu Add a Bank Account.
+					 For every bank account you create the journal for that bank will be automatically created.
+			Note:- From here you can also check that does you bank is support by odoo.
+				means for all online process like sync bank statement automatically.
+
+	From where you can see all the bank accounts?
+		In Accounting App
+			Configuration -- You will see the menu Bank Accounts.
+
+
+2.)Bank Synchronization: Automatic Import:
+	1.)Make sure the Automatic Import feature is activated by going to Accounting ‣ Configuration ‣ Settings in the Bank & Cash section.
+	2.)Every Bank account creates the journal, Go in that journal and tick mark the option of "Automated Bank Synchronization".
+	3.)In Accounting Overview for that bank if you see button "Online Synchronization". means everything is perfect.
+
+
+3.)Chart of Account:
+	1.)Default Taxes:-
+		Select a default tax that will be applied when this account is chosen for a product sale or purchase.
+		Means when you create particular account you can assign tax for it.And that tax will automatically used when you use this 			account in sale/ppurchase

@@ -161,6 +161,7 @@
 		and the project and task will be created.
 	6.)Set the Employee rate/per hour from Employee App -- select employee in HR tab you will find field to enter the rate/per hour.
 		when you enter the time in timesheet, In analytic account in Cost/Revenue Button you will find the amount of employee worked 			in minus as this is the cost required for project.
+	7.)If you purchase any product for project then create PO and in vendor bill lines you have to select the analytic account.
 
 	Product set up:-
 		1.)Create service type product.

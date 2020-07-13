@@ -1,7 +1,7 @@
 The jQuery UI Datepicker is a highly configurable plugin that adds datepicker functionality to your pages.
 
 Note:- you have to download the widget from jquery.com and ref it in you file
-	after download you will 2 file's of widget 1 is js and other is css.
+	after download you will have 2 file's of widget 1 is js and other is css.
 
 For the complete list of options that are available to customize the datepicker widget
 http://api.jqueryui.com/datepicker

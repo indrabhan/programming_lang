@@ -1,0 +1,25 @@
+PostgreSQL full outer join:- The full outer join or full join produces a result set that contains all rows from both the left and right 				tables, with the matching rows from both sides where available. 
+			     If there is no match, the missing side contains null values.
+
+
+The following statement illustrates the full outer join:
+
+	SELECT
+	    a.id id_a,
+	    a.fruit fruit_a,
+	    b.id id_b,
+	    b.fruit fruit_b
+	FROM
+	    basket_a a
+	FULL OUTER JOIN basket_b b ON a.fruit = b.fruit;
+
+	Note that the OUTER keyword is optional.
+
+	O/P:
+		id_a	fruit_a	   id_b	    fruit_b
+		1	Apple	    2	    Apple
+		2	Orange	    1	    Orange
+		3	Banana	    null    null
+		4	Cucumber    null    null
+		null	null	    3       Watermelon
+		null    null        4       Pear

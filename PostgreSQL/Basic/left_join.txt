@@ -1,0 +1,100 @@
+PostgreSQL left join :- The left join returns a complete set of rows from the left table with the matching rows if available from the right table. If there is no match, the right side will have null values
+
+Setting up sample tables:-
+Suppose we have two tables called basket_a and basket_b that stores fruits:
+
+basket_a					basket_b
+
+1, 'Apple'					1, 'Orange'
+2, 'Orange'					2. 'Apple'
+3, 'Banana'					3, 'Watermelon'
+4, 'Cucumber'					4, 'Pear'
+
+The tables have some common fruits such as apple and orange. 
+
+The following statement joins the backet_a table with the basket_b table using left join (or left outer join):
+
+	SELECT
+	    a.id id_a,
+	    a.fruit fruit_a,
+	    b.id id_b,
+	    b.fruit fruit_b
+	FROM
+	    basket_a a
+	LEFT JOIN basket_b b ON a.fruit = b.fruit;
+
+	O/P:-
+		id_a	fruit_a	   id_b	    fruit_b
+		1	Apple	    2	    Apple
+		2	Orange	    1	    Orange
+		3	Banana	    null    null
+		4	Cucumber    null    null
+
+The left join returns a complete set of rows from the left table with the matching rows if available from the right table. If there is no match, the right side will have null values.
+
+Note:- The table written before the left clause is left table.
+
+***************************************************************************************
+
+
+Table A: pka, c1 (fields)
+Table B: pkb, c2, fka (fields)
+
+The data in the B table relates to the data in the A table via the fka field.
+
+Each row in the A table may have zero or many corresponding rows in the B table. Each row in the B table has one and only one corresponding row in the A table.
+
+If you want to select rows from the A table that have corresponding rows in the B table, you use the INNER JOIN clause.
+
+If you want to select rows from the A table which may or may not have corresponding rows in the B table, you use the LEFT JOIN clause. In case, there is no matching row in the B table, the values of the columns in the B table are substituted by the NULL values.
+
+The following statement illustrates the LEFT JOIN syntax that join A table to B table:
+
+	SELECT
+		A.pka,
+		A.c1,
+		B.pkb,
+		B.c2
+	FROM
+		A
+	LEFT JOIN B ON A .pka = B.fka;
+
+To join the A table to the B table, you need to:
+
+	1.)Specify the columns from which you want to select data in the SELECT clause.
+	2.)Specify the left table i.e., A table where you want to get all rows, in the FROM clause.
+	3.)Specify the right table i.e., B table in the LEFT JOIN clause. In addition, specify the condition for joining two tables.
+
+
+Example:-
+	Each row in the filmtable may have zero or many rows in the inventorytable. Each row in the inventorytable has one and only one row in 		the filmtable.
+
+	You use the LEFT JOIN clause to join filmtable to the inventorytable as follows:
+
+	SELECT
+		film.film_id,
+		film.title,
+		inventory_id
+	FROM
+		film
+	LEFT JOIN inventory ON inventory.film_id = film.film_id;
+
+	Because some rows in the filmtable do not have corresponding rows in the inventory table, the values of the inventory id are NULL.
+
+Example2:-
+
+	You can add a WHERE clause to select only films that are not in the inventory as the following query:
+
+	SELECT
+		film.film_id,
+		film.title,
+		inventory_id
+	FROM
+		film
+	LEFT JOIN inventory ON inventory.film_id = film.film_id
+	WHERE
+		inventory.film_id IS NULL;		
+
+
+Note:-	Basically there is no difference in left join and left outer join. Left outer join also returns same results as left join. In some 	 	database, left join is known as left outer join.
+Note:- 	The OUTER keyword is optional.

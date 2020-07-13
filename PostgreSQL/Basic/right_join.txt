@@ -1,0 +1,32 @@
+PostgreSQL Right join:- The right join is a reversed version of the left join. It produces a result set that contains all rows from the right table with matching rows from the left table. If there is no match, the left side will contain null values.
+
+Setting up sample tables:-
+Suppose we have two tables called basket_a and basket_b that stores fruits:
+
+basket_a					basket_b
+
+1, 'Apple'					1, 'Orange'
+2, 'Orange'					2. 'Apple'
+3, 'Banana'					3, 'Watermelon'
+4, 'Cucumber'					4, 'Pear'
+
+The tables have some common fruits such as apple and orange. 
+
+The following statement performs the right join between the left and the right tables:
+
+	SELECT
+	    a.id id_a,
+	    a.fruit fruit_a,
+	    b.id id_b,
+	    b.fruit fruit_b
+	FROM
+	    basket_a a
+	RIGHT JOIN basket_b b ON a.fruit = b.fruit;
+
+	O/P:-
+		id_a	fruit_a	   id_b	    fruit_b
+		1	Apple	    2	    Apple
+		2	Orange	    1	    Orange
+		null	null	    3       Watermelon
+		null	null        4       Pear
+

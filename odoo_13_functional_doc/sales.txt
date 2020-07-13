@@ -23,4 +23,16 @@ Add terms & conditions:
 	Configuration
 		Go to Accounting ‣ Configuration ‣ Settings and activate Default Terms & Conditions.
 
+Invoice based on:
+	Order Quanity
+	Delivered Quantity
 
+	Above both options found in Sales setting and on Product form in Sales tab.
+	default is Order Quantity.
+
+	Note :
+		In order quantity only 1 invoice is created irrespective of how wuch quantity you delivered.
+		whereas in delivered quantity you can created invoice every time you deliver some of the quantity from total quantity.
+
+	When your setting is Delivered Quantity and you create invoice as regular invoice it will raise
+	a warning and will allow you to create invoice.You have to create invocie as downpayment. 

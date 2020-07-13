@@ -1,0 +1,145 @@
+PostgreSQL INNER JOIN clause
+
+Setting up sample tables:-
+Suppose we have two tables called basket_a and basket_b that stores fruits:
+
+basket_a					basket_b
+
+1, 'Apple'					1, 'Orange'
+2, 'Orange'					2. 'Apple'
+3, 'Banana'					3, 'Watermelon'
+4, 'Cucumber'					4, 'Pear'
+
+The tables have some common fruits such as apple and orange. 
+
+
+PostgreSQL inner join
+The following statement joins the left table with the right table using the values in the fruit column:
+
+	SELECT
+	    a.id id_a,
+	    a.fruit fruit_a,
+	    b.id id_b,
+	    b.fruit fruit_b
+	FROM
+	    basket_a a
+	INNER JOIN basket_b b ON a.fruit = b.fruit;
+
+	O/P:-
+		id_a	fruit_a	   id_b	    fruit_b
+		1	Apple	    2	    Apple
+		2	Orange	    1	    Orange
+
+As you can see clearly from the result, the inner join returns a result set that contains row in the left table that match with the row in the right table.
+
+
+***************************************************************************
+
+
+Suppose you want to get data from two tables named A and B. The B table has the fkafield that relates to the primary key of the Atable.
+To get data from both tables, you use the INNER JOIN clause in the SELECT statement as follows:
+
+Table A: pka, c1 (fields)
+Table B: pkb, c2, fka (fields)
+
+	SELECT
+		A.pka,
+		A.c1,
+		B.pkb,
+		B.c2
+	FROM
+		A
+	INNER JOIN B ON A .pka = B.fka;
+
+To join A table to B table:
+
+	1.)First, you specify the column in both tables from which you want to select data in the SELECT clause
+	2.)Second, you specify the main table i.e.,  A in the FROM clause.
+	3.)Third, you specify the table that the main table joins to i.e., B in the INNER JOIN clause. In addition, you put a join condition 			after the ON keyword i.e, A.pka = B.fka.
+
+For each row in the A table, PostgreSQL scans the B table to check if there is any row that matches the condition i.e., A.pka = B.fka. If it finds a match, it combines columns of both rows into one row and add the combined row to the returned result set.
+
+The primary key column ( pka) and foreign key column ( fka) are typically indexed; therefore, PostgreSQL only has to check for the match in the indexes, which is very fast.
+
+Sometimes, A and B tables have the same column name so we have to refer to the column as table_name.column_name to avoid ambiguity. In case the name of the table is long, you can use a table alias e.g., tbland refer to the column as tbl.column_name.
+
+
+Example 2:- PostgreSQL INNER JOIN to join 2 tables example
+	
+		Let’s take a look at the customerand paymenttables in the dvdrental database.
+		Each customer may have zero or many payments. Each payment belongs to one and only one customer. The customer_id field 			establishes the link between two tables.
+
+		1.)You can use the INNER JOIN clause to join the customer table to payment table as follows:
+
+			SELECT
+				customer.customer_id,
+				first_name,
+				last_name,
+				email,
+				amount,
+				payment_date
+			FROM
+				customer
+			INNER JOIN payment ON payment.customer_id = customer.customer_id;
+
+
+		2.)You can add the ORDER BY clause to sort the result set by customer id as follows:
+
+			SELECT
+				customer.customer_id,
+				first_name,
+				last_name,
+				email,
+				amount,
+				payment_date
+			FROM
+				customer
+			INNER JOIN payment ON payment.customer_id = customer.customer_id
+			ORDER BY
+				customer.customer_id;
+
+		3.)You can also use a WHERE clause to filter customer. The following query returns customer’s 
+			rental data for the customer id:2		
+
+			SELECT
+				customer.customer_id,
+				first_name,
+				last_name,
+				email,
+				amount,
+				payment_date
+			FROM
+				customer
+			INNER JOIN payment ON payment.customer_id = customer.customer_id
+			WHERE
+				customer.customer_id = 2;
+
+
+Example3:- PostgreSQL INNER JOIN to join 3 tables example
+
+	The following diagram illustrates the relationship between three tables: staff, payment, and customer.
+
+	Each staff relates to zero or many payments. Each payment is processed by one and only one staff.
+	Each customer has zero or many payments. Each payment belongs to one and only customer.
+
+	To join the three tables, you place the second INNER JOIN clause after the first INNER JOIN clause as the following query:
+
+		SELECT
+			customer.customer_id,
+			customer.first_name customer_first_name,
+			customer.last_name customer_last_name,
+			customer.email,
+			staff.first_name staff_first_name,
+			staff.last_name staff_last_name,
+			amount,
+			payment_date
+		FROM
+			customer
+		INNER JOIN payment ON payment.customer_id = customer.customer_id
+		INNER JOIN staff ON payment.staff_id = staff.staff_id;
+
+Note:- 1st it wll execute the 1st inner clause, after executing it will have row of payment table, that row will staff_id column, 
+       so now 2nd inner clause will execute, so it will have staff_id of paymet table to search in staff table for match.
+
+
+Note:- To join more than three tables, you apply the same technique
