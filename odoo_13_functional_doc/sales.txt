@@ -35,4 +35,47 @@ Invoice based on:
 		whereas in delivered quantity you can created invoice every time you deliver some of the quantity from total quantity.
 
 	When your setting is Delivered Quantity and you create invoice as regular invoice it will raise
-	a warning and will allow you to create invoice.You have to create invocie as downpayment. 
+	a warning and will allow you to create invoice.You have to create invocie as downpayment.
+
+Proforma Invoice:
+	In short you can say as estimated invoice.
+	It notes the kind and quantity of goods, their value, and other important information such as weight and transportation charges.
+	
+	To activate this feature go to sales App -- setting and tick mark the boolean Proforma Invoice.
+	In Quotation you will find the button "SEND PRO-FORMA INVOICE"
+
+Product variant:-
+	Impact of variants
+		1.)Barcode: the code and barcode is associated to a variant, not the template. Every variant may have its own barcode / SKU.
+		2.)Price: every product variant has its own public price that is computed based on the template price ($20) with an optional 				extra for every variant (+$3 for color red). However, you can define pricelist rules that apply on the template or the 				variant.
+		3.)Inventory: the inventory is managed by product variant. You don’t own t-shirts, you only own “T-shirts, S, Red”, or 
+			“T-Shirts, M, Blue”. For information purpose, on the product template form, you get the inventory that is the sum of 				every variant. (but the actual inventory is computed by variant)
+		4.)Picture: the picture is related to the variant, every variation of a product may have its own primary picture.
+		5.)Other fields: most of the other fields belongs to the product template. If you update them, it updates automatically all 				the variants. (example: Income Account, Taxes
+	Note:-
+		You have to activate this feature from settings of Sale App.
+		You will also find menu with product variant name.
+		In Product template you will find the button "Configure Variants" at the left top side.
+
+Default Taxes:
+	1.)You can assign taxes that will be default selected to every product when selected in SO/PO.To activate this feature Go to 			Accounting App-- setting their you will find the field "Sale Taxes" and "Purchase Taxes".
+	2.)Even on product form you can define sale tax.
+
+	Note:
+		1.)Fiscal Positions take the Default Tax into account. Therefore, if a Fiscal Position is applied to an invoice, Odoo applies 			   the related tax instead of the Default Taxes, as mapped in the Fiscal Position.
+		2.)Databases with multiple companies: the Default Taxes values are company-specific.
+
+Fiscal Position:
+	Default taxes and accounts are set on products and customers to create new transactions on the fly. However, you might have to use 		different taxes and record the transactions on different accounts, according to your customers’ and providers’ localizations and 		business types.
+
+	Fiscal Positions allow you to create sets of rules to automatically adapt the taxes and the accounts used for a transaction
+
+	Note:-
+		1.)To remove a tax, rather than replacing it with another, leave the field Tax to Apply empty.
+		2.)To replace a tax with multiple other taxes, add multiple lines with the same Tax on Product.
+		3.)The mapping only works with active taxes.
+		4.)Taxes on eCommerce orders are automatically updated once the visitor has logged in or filled out their billing details.
+		5.)The Fiscal Positions’ sequence - the order in which they are arranged - defines which Fiscal Position to apply if the 				conditions are met in multiple Fiscal Positions.
+
+			For example, if the first Fiscal Position targets country A, and the second Fiscal Position targets a Country Group 				that also comprises country A, only the first Fiscal Position will be applied to customers from country A.
+

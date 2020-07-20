@@ -1,6 +1,5 @@
 we will discuss jQuery progressbar widget.
 
-
 An element with position: absolute; is positioned relative to the nearest positioned ancestor.
 However if an absolute positioned element has no positioned ancestors, it uses the document body, and moves along with page scrolling.
 so give the position to ancestors as position: relative

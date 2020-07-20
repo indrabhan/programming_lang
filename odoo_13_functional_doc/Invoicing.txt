@@ -30,13 +30,16 @@
 
 
 2.)Payment Terms:
-	Payment Terms are the conditions that are used for invoices payments,
+	Payment Terms are the conditions that are used for invoices payments(installment payment),
 	like suppose you give 2% discount If paid with 10 days else need to pay full invoice within 30 days.
 	For 2% discount
 		In Payment Terms select discount option and value=98 and days=10
 		Select the balance entry and days=30
 	
-		Note:- The balance entry should always be last. 
+		Note:- The balance entry should always be last.
+			The 98% amount will get the due date of 10 days and remaining amount will get the due date of 30 days.
+
+	For Cash Discount create the Reconcile Model and keep the account type to expenses for the account used in Reconcile Model.
 
 	How does customer know what are Payment Term for his invoice?
 		When creating the payment term, entry the description about payment terms in the "Description on the Invoice" field.
@@ -69,7 +72,7 @@
 		6.)Enter the start date and validate it.
 		7.)Once you get the signed document uplaod it on the same record as their is the option of upload.
 		8.)Now where ever you create the invoice for that customer the invoice will be automatically in paid state.
-		9.)Create the batch payments of payments made by that customer and vaidate it, now you will get and xml file, upload at your 			   bank so that the money will be transfer from customer accounto to your bank account.
+		9.)Create the batch payments of payments made by that customer and vaidate it, now you will get and xml file, upload it at 				your bank interface so that the money will be transfer from customer account to to your bank account.
 	
 		Note:- On Direct Debit Mandates record after validating you will see 2 button "Revoke" and "Close".
 			Close:- The SDD functionality will work for the invocies before the start date.
@@ -93,6 +96,7 @@
 
 General Ledger:
 	Here you will get the transactions of all the accounts that gets affected during transactions.
+	Like 
 	A general ledger is a bookkeeping ledger that serves as a central repository for accounting data transferred from all subledgers like 		accounts payable, accounts receivable, cash management, fixed assets, purchasing and projects
 
 
@@ -114,3 +118,38 @@ General Ledger:
 
 	Country Group:- Group of countries like Asia has India, Pakistan, Bangladesh .....
 			You can create country group on the fly or you will get menu in Contact App.
+
+8.)Invoice project milestones:
+	Create milestone products
+		In Odoo, each milestone of your project is considered as a product. To configure products to work this way, go to any product 			form.
+
+		You have to set the product type as Service under general information and select Milestones in the sales tab.
+
+	Invoice milestones
+		From the sales order, you can manually edit the quantity delivered as you complete a milestone.
+
+	Note:-
+		You can create Milestone1, Milestone2, Milestone3 and select it in SOL and edit the deilvery quantity and create invoice.
+
+
+9.)Reconciliation process
+	A.)Reconciliation:
+		when you issued the invoice to customer of 1000rs it affect the "Customer Invoice" Journal and 
+		When the customer pays you of 1000rs via bank the "Bank" Journal get affected.
+		so it does'nt mean that this 2 enteries are related.
+		Reconcile is the process of linking two enteries and specify they balance with each other and not other enteries.
+
+	Two options of the reconciliation process exist in Odoo.
+
+	1.)We can directly specify the payment on the invoice :- 
+		1.)Create invoice and register the payment.It has done the reconcialiation process for you and the invoice is paid as you can 				see the amount due as zero.
+		2.)Or you can create the payment and in that invocie you see the "Add" button near the amount due.when you click on it you 				reconcile that payment with that invoice.
+		3.)Now in Odoo you have shown that you have receive money via Bank.
+		4.)In Bank Journal card(Kanban) of Accounting Overview you will see the paid amount in difference.
+		5.)It means that your actual bank account has received that amount.So in odoo you have to show that you have received that 			   money in account so you have to import the bank statement or create it and reconcile/validate it.
+		Note:- In bank statement make the ending balance equal to the computed balance.
+
+	2.)We can reconcile open invoices with bank statements:
+		1.)Suppose invoice is in posted state and you receive the money in you bank account, so you need to link the bank entery with 				this invoice. 
+		2.)Create the bank statement or import and reconcile/validate it with the invoice. 
+		3.)That invoice will be mark as paid.

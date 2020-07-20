@@ -49,4 +49,8 @@ Re-Invoice policy on expense product:
 	At Sale:- Cost and Sale Price field appears on product form.
 		  here the price on sale order line will have the price define on expense product form irrespective of price define in expense 			  form.
 
+Note:-
+	for purchase product mention value for Re-Invoice policy option on product form.
+	after paying the bill of vendor the product will be in SOL. 
+
 

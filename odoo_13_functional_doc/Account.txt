@@ -1,5 +1,27 @@
+Account:
+				Debit		Credit		Balance
+	Account Receivable	100(1st entry)	100(2nd entry)	0
+	Bank			100(1st entry)			100
+
+	Note:-
+		when you validate the customer invoice of Rs 100 then the entry goes in Debit column of Account Receivable.
+		When you actually recieve the money from customer then the enteries are created in Credit column of Account Receivable and 			Debit column of Bank account(received through bank).
+
+		For Vendor bill 1st entry will be in credit(means the amount you have to give)
+
+Journals:-
+	Journals are the book keeping where you will record similar type of transactions
+	For example to record invoice we have "Customer Invoice" journal.
+		    to record vendor bills we have "vendor bill" journal.
+		    to record money received/given online we have "Bank" journal.
+		    to record money received/given in cash we have "Cash" journal.
+
+Note:-
+	when you create the db, you select the country so according to country the taxes and chart of account are created.
+
+
 1.)Account Overview/dashboard:
-	here you will see every bank account you create.
+	here you will see all the Journals.
 
 	How to create bank account?
 		In Accounting App
@@ -23,3 +45,136 @@
 	1.)Default Taxes:-
 		Select a default tax that will be applied when this account is chosen for a product sale or purchase.
 		Means when you create particular account you can assign tax for it.And that tax will automatically used when you use this 			account in sale/ppurchase
+
+
+4.)Follow up:- 
+	Follow up is the process of sending reminder to customer for their unpaid invoices before or after the due dates via emails or sending 		the letters
+	Every time you do the follow up make sure you reconcile the bank statement or payment, so you don't send the reminder mail to the 		customer who already paid the invoice.
+	Follow up is made on Due dates.Due dates are auto calculated based on Payment Terms.
+
+	Example:-
+		Create the customer invoice with the payment terms and validate the invoice.
+		Now go the customer form, you will find smart button "Due".Click on in and you can send the mail from their for reminder.
+
+	How will you send the follow mail to all the customers to whom we need to send the mail?
+		In Accounting App -- Customer -- Follow up Reports
+		Click on it and you will find the customer to whom we need to send the mail with the "In need of action" filter applied default
+		when clicking on Follow up Reports menu.
+		Select the customers and in Action button click on Process follow ups.
+		A pdf document containing all of the follow-up letters for you to print will also be automatically generated..		
+
+	Follow up levels:
+		This feature allows you to config the number of days before/after the reminder mail should trigger.
+		Activate this feature from setting of Accounting App.
+		
+		Note:- If you would like to get a reminder before the actual due date, set a negative number of due days.
+
+
+5.)Payment by Checks to Vendor:
+	This feature is use to pay the vendor bills by check.
+	Activate this feature from Accounting App -- under vendor Payment you will find the "Check" Options.
+
+	In Vendor Bill Journal(kanban) of Accounting App -- Overview, You will find button of Bills to pay or
+	select the vendor bills from tree view that need to be pay and in Action click on Register Payment now you will find the payment 		method as Check.
+	
+	In Bank Journal(kanban) of Accounting App -- Overview, You will find button Checks to print.click on it and select the reocrds and in
+	action you will find the option of Check Print.
+	OR
+	In Accounting -- Vendor -- Payment select the payment made by check (tree view).In Action you will find the option of Check Print.
+
+6.)Sefa Credit Transfer:
+	This feature is use to pay the vendor bills.
+	Activate this feature from Accounting App -- under vendor Payment you will find the "SEPA Credit Transfer (SCT)" Options.
+	
+	In Vendor Bill Journal(kanban) of Accounting App -- Overview, You will find button of Bills to pay or
+	select the vendor bills from tree view that need to be pay and in Action click on Register Payment now you will find the payment 		method as SEPA Credit Transfer.
+
+	In Bank Journal(kanban) of Accounting App -- Overview, You will find button "Payments to send via by SEPA".
+	Click on it, select the record and in Action click on Creat Batch Payment.
+	The xml file will be generated and you can upload it in your banking interface.
+
+	Note:-In Vendor form entery all details of bank.
+
+
+7.)Batch Payment:- Customers paying through checks.
+	Suppose 10 customers pay you by check, so you will collect all the checks and deposit it in bank all at once.After that you have to 		reconcile that 1 bank entery for 10 checks.
+
+	Steps to follow:
+		1.)Activate the setting Batch Payments under Customer Payment section of Accounting App.
+		2.)when you register the payment select the payment method as Batch Deposit.Then invoice will be paid.
+		3.)Accounting -- Customer -- Batch Payment create the record and click on line you will get the record paid by Batch Deposit.
+		4.)Validate the record
+		5.)Now create the bank statement for the total amount paid by checks.Do not enter partner and Reconcile.		
+		6.)when you will reconcile you will find the page of Batch Deposit, select that and validate.
+
+
+8.)Multi Currencies:-
+	Activate this feature from Accounting App.
+	Now you can activate other curriencies from Curriencies Menu.
+	From setting only you will get the options from which Api/3rd paty you want to update your curriency rates like Daily/Weekly/Monthly.
+	From currency menu select the currency and click Rates(smart button).You will get history of currency rate.
+	
+	Example:-
+		1.)Select the customer in SO the currencies get auto selected(according to customer country or 	settings).now in line select 				the product and check the prices.
+		2.)Now change the currency value of that SO, and select same product in line and check price,the price has been converted 				from main currency to client currency.
+
+		You have invoice the customer and when customer actually payes you, If at they time the curriency rate was gain/loss then 			those gain/loss will be register in Exchange Difference Journals.
+		After you post the invoice you can see in Journal Enteries.
+
+Reports:-
+	In reports you have option of comparision where you can also check of previous years.Like in Profit and Loss Report
+	
+	1.)Profit and Loss:-
+		Profit and Loss report is also know as Income report
+		Income - Expenses = Net Profit.
+
+	2.)Balance Sheet:-
+		Balance sheet is the summary of all the reports and give the snapshot at a specific dates, showing what company owns and what 			company owes on that date.
+		It also shows that all its financial records are correctly balance according to the formaula
+		Assets = Liabilities + Equity
+
+	3.)Cash Flow:-
+		This report is useful to understand what exchange has happend in and out of company over the period of time.
+		where the company has invested the money and where the company requires money in operations.
+
+Analytic Report:-
+	In Accounting we have options of Analytic Reports.
+	Analytic accounts are used to track like say you have to calculate the profitablility of project.
+	Project Profit = minus(expenses+material used+ hours work of employees).
+
+	
+
+Closing Fiscal Year:-
+	make sure all the Invoice, Bills and Expenses are Validated
+	Reconciliation.
+	deprecaition like deffered revenue are all ok.
+
+	Follow the below steps:-
+	1.)In Accounting Setting set the last date of fiscal year.
+	2.)Set the lock date from the Lock Date Menu as the end date of fiscal year for Non Adviser.
+		so only the user with Adviser access right can only work on it,so the accountant is quite sure than no one 			is editing the previous year enteries while he is auditing.
+	3.)Go to Balance sheet report and make sure you select the end date of fiscal year for print the report.	
+		Scroll down you can see the Unallocated Earnings, see for Current Year total unallocated earnings and Retained Earning.
+
+	(allocate the current year earnings in order to have total current year unallocated earning reporting balance zero.
+	allocate all the current year earing to retained earning.(Journal entry step will perform it automatically))
+
+	Account1:-
+		name:- undistributed profit/losse, type:-Current Year earning, odoo create its default, If you create your own than type must 			be same.
+		
+	Account2:- Create another account with type as Equity or ask your accountant.
+
+	Create Journal Entry:-
+		Journal:- Misc
+		item 1:- 
+			name:-undistributed profit/losse(Account2)
+			debit:- Current Year total unallocated earnings(from balance sheet report)
+		item2:-
+			name:-Account2(select the account which you created just now)
+			credit:- Current Year total unallocated earnings
+		post this entry
+
+	Print Balance Sheet:- Check Total Current Year Unallocated Earnings is zero.
+			      Total Unallocated Earnings == Retained Earnings.
+
+	Print General Ledger:- unfold all account from Options menu and check balance should be zero of last Total line.
