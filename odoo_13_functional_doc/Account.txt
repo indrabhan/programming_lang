@@ -96,16 +96,74 @@ Note:-
 	Note:-In Vendor form entery all details of bank.
 
 
-7.)Batch Payment:- Customers paying through checks.
+7.1)Batch Payment:- By Checks or Cash
+
+	A Batch Deposit groups multiple payments in a single batch. This allows you to deposit several payments into your bank account with a 		single transaction. This is particularly useful to deposit cash and checks.
+
+	Customers paying through checks.
 	Suppose 10 customers pay you by check, so you will collect all the checks and deposit it in bank all at once.After that you have to 		reconcile that 1 bank entery for 10 checks.
 
 	Steps to follow:
 		1.)Activate the setting Batch Payments under Customer Payment section of Accounting App.
 		2.)when you register the payment select the payment method as Batch Deposit.Then invoice will be paid.
 		3.)Accounting -- Customer -- Batch Payment create the record and click on line you will get the record paid by Batch Deposit.
-		4.)Validate the record
+		4.)Validate the record and print the pdf.
+			Once the bank statements are on your database, you can reconcile the bank statement line with the Batch Payment 			reference(the pdf you print).
 		5.)Now create the bank statement for the total amount paid by checks.Do not enter partner and Reconcile.		
-		6.)when you will reconcile you will find the page of Batch Deposit, select that and validate.
+		6.)when you will reconcile you will find the page of Batch Deposit if partner is not selected, select that and validate.
+
+	Payment Method Types
+		1.)To record new payments as part of a Batch Deposit, you have to configure first the Journal on which you record them.
+		2.)For Journal Type =Bank, Cash. The Advance setting page appear. 		
+		3.)To do so, go to Accounting ‣ Configuration ‣ Journals, open the Journal you want to edit, click on Edit, and open the 		   Advanced Settings tab. In the Payment Method Types section, enable Batch Deposit, and click on Save.
+	Note:-
+		Your main bank accounts(Bank Journal) are automatically configured to process batch payments when you activate the feature.
+
+
+7.2.)Batch Payment:- By SEPA Direct Debit(SDD):
+	1.)SEPA stands for Single Euro Payments Area.
+	2.)With SEPA Direct Debit, your customers can sign a mandate that authorizes you to collect future payments from their bank accounts. 		3.)This is particularly useful for recurring payments based on a subscription.
+
+	How it works:
+		Bank provide you with the Creditor Identifier Code.
+		Required the document with the signature of your and your customer's.
+		Odoo generate the XML file and you need to send it to you bank in order to debit the payment.
+		
+	Process:
+		1.)Activate the Sepa Direct Debit(SDD) feature from accounting setting and saving the setting the Creditor Identifier field 				will be visible assign the Creditor Identifier number given by your bank.
+		2.)Go to Accounting App -- Customers -- Direct Debit Mandates and create the record for it.
+		3.)Customer:- In the accounting tab of customer form, must have all details of bank.
+		4.)Journal:- Bank journal must have bank number and all details regarding bank.
+		5.)Click on Print Button:-You will get one document, you and your customer must sign that document.
+					  To get electronic signature of your customer you can make use of Signature App.
+		6.)Enter the start date and validate it.
+		7.)Once you get the signed document uplaod it on the same record as their is the option of upload.
+		8.)In the invoice, when you Register Payment you can see "SEPA Direct Debit" as Payment Payment when the Bank Journal is 				selected.
+			In Advanced Settings of Bank Journal you can see the option "SEPA Direct Debit" default tick.
+			"SEPA Direct Debit" this option is available for Journal type as Bank, Cash.
+		9.)Create the batch payments of payments made by that customer and vaidate it, now you will get and xml file, upload it at 				your bank interface so that the money will be transfer from customer account to your bank account.
+	
+		Note:- On Direct Debit Mandates record after validating you will see 2 button "Revoke" and "Close".
+			Close:- The SDD functionality will still work for the invocies before the start date on Mandates.
+			Revoke:-This will completely stop the SDD functionality.
+	
+	Configuration:-
+		Go to Accounting ‣ Configuration ‣ Settings, activate SEPA Direct Debit (SDD) and click on Save. Enter your company’s Creditor 			Identifier. This number is provided by your bank institution, or the authority responsible for delivering them.
+
+	SEPA Direct Debit Mandates
+	Create a mandate
+		1.)The SEPA Direct Debit Mandate is the document that your customers sign to authorize you to collect money directly from 				their bank accounts.
+		2.)To create a new mandate, go to Accounting ‣ Customers ‣ Direct Debit Mandates, click on Create, and fill out the form.
+		3.)Export the PDF file by clicking on Print. It is then up to your customer to sign this document. Once done, upload the 				signed file in the Original Document field, and click on Validate to start running the mandate.
+		4.)Important
+			Make sure that the IBAN bank accounts details are correctly recorded on the debtor’s contact form, under the 				Accounting tab, and in your own Bank Account settings.
+	
+	SEPA Direct Debit as a Payment Method
+		1.)SEPA Direct Debit can be used as a payment method both on your eCommerce or on the Customer Portal by activating SDD as a 				Payment Acquirer. With this method, your customers can create and sign their mandates themselves.
+		2.)To do so, go to Accounting ‣ Configuration ‣ Payment Acquirers, click on SEPA Direct Debit, and set it up according to your 				needs.
+		3.)Customers using SDD as payment method get prompted to add their IBAN, email address, and to sign their SEPA Direct Debit 				mandate.
+		4.)Important
+			Make sure to change the State field to Enabled, and to check Online Signature, as this is necessary to let your 			customers sign their mandates.
 
 
 8.)Multi Currencies:-
@@ -121,7 +179,7 @@ Note:-
 		You have invoice the customer and when customer actually payes you, If at they time the curriency rate was gain/loss then 			those gain/loss will be register in Exchange Difference Journals.
 		After you post the invoice you can see in Journal Enteries.
 
-Reports:-
+10.)Reports:-
 	In reports you have option of comparision where you can also check of previous years.Like in Profit and Loss Report
 	
 	1.)Profit and Loss:-
@@ -137,14 +195,14 @@ Reports:-
 		This report is useful to understand what exchange has happend in and out of company over the period of time.
 		where the company has invested the money and where the company requires money in operations.
 
-Analytic Report:-
+11.)Analytic Report:-
 	In Accounting we have options of Analytic Reports.
 	Analytic accounts are used to track like say you have to calculate the profitablility of project.
 	Project Profit = minus(expenses+material used+ hours work of employees).
 
 	
 
-Closing Fiscal Year:-
+12.)Closing Fiscal Year:-
 	make sure all the Invoice, Bills and Expenses are Validated
 	Reconciliation.
 	depreciation(Assets Management)/ Deffered Revenue enteries invoice are posted.
@@ -180,12 +238,12 @@ Closing Fiscal Year:-
 	Print General Ledger:- unfold all account from Options menu and check balance should be zero of last Total line.
 
 
-Inventory Valuation:-
+13.)Inventory Valuation:-
 	when you make the inventory valuation as Automate in product then you need to set accounts in that form.
 	when you receieve the product the journal entry of that accounts is created.
 
 
-Asset management:- In Accounting config click on Asset Models menu.
+14.)Asset management:- In Accounting config click on Asset Models menu.
 
 	Asset:- Assets are the pyhsical thing that you purcahse for ur company(computer, AC, etc)
 		In asset management we record the price of asset(in account) and its deprication cost(in account), use of asset for 			particular year.
@@ -209,13 +267,12 @@ Asset management:- In Accounting config click on Asset Models menu.
 	In Accounting App -- Accounting you will find Assets menu.
 	
 
-Deffered Revenue and Deferred Expenses:-
+15.)Deffered Revenue and Deferred Expenses:-
+	Deferred revenues, or unearned revenue, are payments made in advance by customers for products yet to deliver or services yet to 		render.
 	In Accounting Config you wil find 2 menus
 		1.)Deferred Revenue Models
 		2.)Deferred Expense Models
  
-	Deferred revenue are the Pre payment from the customer.
-
 	Deferred Revenues
 		Are used to recognize revenues for sales of services that are provided over a long period of time. If you sell a 3 year 		maintenance contract, you can use the deferred revenue mechanism to recognize 1/36 of the revenue every month until the 		contract expires, rather than taking it all initially or at the end.
 		Even If your client paid it all, but still you want to record it period by period.
@@ -227,7 +284,17 @@ Deffered Revenue and Deferred Expenses:-
 	
 	Note:- After creating 2nd account go their and select Create and Validate and Select the Revenue Model you created just now.
 
-	Create the service product(Warranty for 10 years) and in accounting tab assign the 2nd account as income or you may select that 	account when you select that product for customer invoice.
-	when you post the record you will find record for Deferred Revenue.
+	Create the service product(Warranty for 10 years) and in accounting tab assign the 2nd account to income field or you may select that 		account when you select that product for customer invoice.
+	when you post the record you will find record for Deferred Revenue in Accounting App -- Accounting -- Deferred Revenue.
+	The invoice enteries will be created in draft mode.
 
 	Subscription module :- create template and in Deferred Revenue Type field select the Deferred Revenue Type create from 				accounting module.
+
+
+	Example2:- If you don't have sale module.
+
+		 You can create record for Deferred Revenue in Accounting App -- Accounting -- Deferred Revenue.
+		 when you confirm it the invoice enteries are created in draft mode.
+
+	Note:-Invoice enteries will be posted automtically, Cron job runs every day.
+	

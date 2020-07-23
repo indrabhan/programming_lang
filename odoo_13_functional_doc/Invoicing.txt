@@ -1,4 +1,4 @@
-1.)Refund the Invoice.
+1.)Credit Notes and Refunds.
 	Customer:- Anand
 	SO Amount:-10,500(including tax)
 	Create Invoice and Post the invoice:
@@ -9,7 +9,7 @@
 				Initial Balance 	Debit 	Credit 	Balance
 				0.00			10,500	null	10,500
 	Register the Payment:
-		As soon as you register the payment., The entery is created is created for that payment, Accounting App-- Customer--Payments.
+		As soon as you register the payment., The entery is created for that payment, Accounting App-- Customer--Payments.
 		suppose you pay 1000 and 2000, so 2 payments entery will be created.
 
 		Aged Receivable:
@@ -26,7 +26,36 @@
 		You will have 3 options:
 				1.)Partial Refund
 				2.)Full Refund
-				3.)Full refund and new draft invoice
+				3.)Full refund and new draft invoice.
+		
+		Note:- when click on ADD CREDIT NOTE button above 3 options will appear only when the invoice is not paid even if you pay some 			       amount then also all 3 options will not appear.You will only see "Partial Refund" Option.
+
+
+	Full Refund:-
+		you have validate the invoice but not paid even a single rupee for that invoice.
+		Click on Add Credit Note and now you will see all 3 options.
+		when you select Full Refund Odoo create a credit note, automatically validates it, and reconciles the original invoice with it.
+		In short the new invoice and the original invoice will be paid.
+
+	Partial Refund:-
+		when the invoice is paid and you want to refund it.
+		Click on ADD CREDIT NOTE button.
+		The Partial Refund option will be auto selected and it will be in readonly Mode.
+		It will create a Invoice in Draft mode.Pay the invoice fully.
+		It means you have refund full payment to customer.You can check the P&L Report's Net profit has been reduce.
+
+	Note :-This is the only option available for invoices that are already marked as Paid.
+
+		Case 2:- You want to return half payment and keep half with you(Outstanding) so next time you can adjust that amount with 				other invoices.
+			
+			SO1 the invoice will be halfy return.The invoice will be in posted state.
+
+			SO2 when you post the invoice you will find the option to reconcile the outstanding amount of SO1.
+			when you reconcile the amount of SO1 in SO2.
+			The half return invoice of SO1 will be in paid state.
+			  
+	Note:-
+		Credit Notes’ numbers start with “R” and are followed by the number of the document they are related to (e.g., RINV/2019/0004).
 
 
 2.)Payment Terms:
@@ -55,31 +84,9 @@
 			    So now when you select the wire transfer as you payment option will get the QR code to pay the payment.
 
 
-4.)Sepa Direct Debit(SDD):
-	This feature will allow you to directly debit the amount from customer account.
-	How it works:
-		Bank provide you with the Creditor Identifier Code.
-		Required the document with the signature of your and your customer's.
-		Odoo generate the XML file and you need to send it to you bank in order to debit the payment.
+
 		
-	Process:
-		1.)Activate the Sepa Direct Debit(SDD) feature from accounting setting and saving the setting the Creditor Identifier field 				will be visible assign the Creditor Identifier number given by your bank.
-		2.)Go to Accounting App -- Customers -- Direct Debit Mandates and create the record for it.
-		3.)Customer:- In the accounting tab of customer form, must have all details of bank.
-		4.)Journal:- Bank journal must have bank number and all details regarding bank.
-		5.)Click on Print Button:-You will get one document, you and your customer must sign that document.
-					  To get electronic signature of your customer you can make use of Signature App.
-		6.)Enter the start date and validate it.
-		7.)Once you get the signed document uplaod it on the same record as their is the option of upload.
-		8.)Now where ever you create the invoice for that customer the invoice will be automatically in paid state.
-		9.)Create the batch payments of payments made by that customer and vaidate it, now you will get and xml file, upload it at 				your bank interface so that the money will be transfer from customer account to to your bank account.
-	
-		Note:- On Direct Debit Mandates record after validating you will see 2 button "Revoke" and "Close".
-			Close:- The SDD functionality will work for the invocies before the start date.
-			Revoke:-This will completely stop the SDD functionality.
-	
-		
-5.)Taxes:-
+4.)Taxes:-
 	You can set the default taxes from Accounting Setting, In SOL and POL this taxes get auto apply.
 	If you want to set tax specific to product then on product template you can set it on field Customer Taxes.
 	In SOL when selecting the specific product you will see that tax.
@@ -94,7 +101,7 @@
 		   In General Ledger Report:- the account liked with bank journal will get the amount.
 					      the tax account link with the tax will get the tax amount.
 
-General Ledger:
+5.)General Ledger:
 	Here you will get the transactions of all the accounts that gets affected during transactions.
 	Like 
 	A general ledger is a bookkeeping ledger that serves as a central repository for accounting data transferred from all subledgers like 		accounts payable, accounts receivable, cash management, fixed assets, purchasing and projects
@@ -153,3 +160,28 @@ General Ledger:
 		1.)Suppose invoice is in posted state and you receive the money in you bank account, so you need to link the bank entery with 				this invoice. 
 		2.)Create the bank statement or import and reconcile/validate it with the invoice. 
 		3.)That invoice will be mark as paid.
+
+
+
+10.)Different ways to record a payment:-
+	In Odoo, a payment can either be linked directly to an invoice or be a stand alone record for use on a later date:
+
+	1.)If a payment is linked to an invoice, it reduces the amount due of the invoice. You can have multiple payments linked to the same 			invoice.
+	2.)If a payment is not linked to an invoice, the customer has an outstanding credit with your company, or your company as an 			outstanding balance with a vendor. You can use this outstanding credit/debit to pay future invoices or bills.
+
+	Paying an invoice:-
+		If you register a payment on a customer invoice or a vendor bill, the payment is automatically reconciled with the invoice 			reducing the amount due.
+
+	Payments not tied to an invoice:-
+		1.)In the Accounting application, you can create a new payment from the Sales menu (register a customer payment) or the 			Purchases menu (pay a vendor).
+		2.)If you use these menus, the payment is not linked to an invoice, but can easily be reconciled on an invoice later on.
+
+	Reconciling invoice payments:-
+		When validating a new invoice, Odoo will warn you that an outstanding payment for this customer or vendor is available. 
+
+	Reconciling all your outstanding payments and invoices:-
+		1.)In the Dashboard of Accounting App -- Tax Invoice(Sales) and Vendor Bills(Purchase) Journals.
+			Click on the 3 dots at right hand and select the Payments Matching.
+		2.)The payments matching tool will open all unreconciled customers or vendors and will give you the opportunity to process 				them all one by one, doing the matching of all their payments and invoices at once.
+		3.)Select the payments and the invoice
+		3.)when the total matches then you will see the Reconcile/Validate button.
