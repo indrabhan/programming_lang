@@ -1,0 +1,75 @@
+I have make use of pandas for creating xlsx and csv file.
+
+1.)DataFrame:- can consider as table.
+
+DataFrame:
+	a = list(zip(temp, name, size))
+
+	1.)DataFrame using list
+		Both will same output
+
+		df = pd.DataFrame(data=a, columns=['temp', 'n', size])	# Note here columns name can be any, it will mapped values from zip.
+
+
+
+	2.)DataFrame using dict
+		Both will same output
+
+		df = pd.DataFrame({'key1': temp, 'key2': name, 'key3': size})
+	
+	Output:
+			temp	n	size
+		0	74	sanjay	14
+		1	74	ganesh	10
+		2	77	dhananjay	10
+		3	95	manish	14
+		4	54	mayur	14
+		5	66	dhananjay	17
+		6	52	ganesh	15
+
+
+Example2:
+
+	df2 = pd.DataFrame({'city': ["Jaipur", "Delhi", "Lucknow"],
+                    'humidity': [75, 50, 68]})
+
+		city	humidity
+
+	0	Jaipur	75
+	1	Delhi	50
+	2	Lucknow	68
+
+
+
+
+Python Project:
+	In this project xlsx file was provide with the n number of cloumns containing the image urls.
+	First check in xlsx whether all the image cloumns has url or not.If not then ask user to enter the url for the image name and save it 		in existing file. After that start downloading the images and check if image height and width are in between 2000px. If not then 	 resize. Create the folder and store the downloaded imaged there. Now create new xlsx and csv file containing the systems path as url 		of image. Also manage the parent and child image url.
+
+	Library used:
+		pandas: for reading and creating xlsx and csv file.
+		wget: for downloading the images.
+		PIL: for resize the image. 
+		os : for making directory
+
+
+
+	import pandas as pd
+
+	// pd.Dataframe(data, columns = list of column names seperated by commas)
+
+	data = pd.read_excel(xlsx_file_path)
+	df = pd.Dataframe(data, columns = ['SKU', 'ProductName', 'Price'])
+	
+	Then loop through every columns and created new list for every columns having their values.
+	and mapped it with dict.
+	
+	dic = {'SKU': sku, 'Parent Sku': parent_sku, 'Name': name }
+
+	df = pd.DataFrame(dic)
+
+	df.to_excel(directory+csv_file_name, index=False, header=True, encoding='utf-8-sig')
+	# df.to_csv(directory+csv_file_name, index=False)
+
+	
+

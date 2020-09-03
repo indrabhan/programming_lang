@@ -17,7 +17,7 @@
 		 By polymorphism, we understand that one task can be performed in different ways.
 
 		Example:- Deposite
-			  we can have Cash deposite, Demand Darft deposite, Check deposite
+			  we can have Cash deposite, Demand Draft deposite, Check deposite
 
 
 *Encapsulation:-  restricting the access to some of the object's components. In encapsulation, code and data are wrapped together within a 			 single unit from being modified by accident.

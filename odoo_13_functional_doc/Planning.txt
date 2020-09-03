@@ -1,5 +1,5 @@
 Planning is used to create shifts for employee.
-	Each shift has 1 employe has employee is many2one field.
+	Each shift has 1 employee, as employee is many2one field.
 
 Openshift means employee is not assign to shift.
 
@@ -15,10 +15,11 @@ Openshift means employee is not assign to shift.
 		Waiter 2PM - 12AM
 
 In scheduling menu select any option and click on Add button to create shift, even you can create shift template here.
+	On that form in below you see 2 buttons
 
-Publish: the shift will be visible to employee.
+		1.)Publish: the shift will be visible to employee.
 
-Publish & Send:-the shift will be visible to employee and notification will be send to employee.
+		2.)Publish & Send:-the shift will be visible to employee and notification will be send to employee.
 
 
 Planning App--> Configuratio -- Setting

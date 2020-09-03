@@ -1,0 +1,161 @@
+search for ans of difference between binary and image field in odoo.
+
+Fields:
+	1.)simple/basic:- Char, Integer, Float, Boolean.
+
+	2.)Advance:- Binary, Html, Image, Monetary, Selection, Text, Date, Datetime.
+
+			Monetary:-
+				Adding a monetary field to a Model Odoo has special support for monetary values related to a currency. usually 					while creating a fields that unit of measure have linked with currency ( Like 					amount_total,price_subtotal,payment_difference.) we user Monetary for that field.
+	
+  				Example:-
+					balance_start = fields.Monetary(string='Starting Balance', states={'confirm': [('readonly', True)]}, 										default=_default_opening_balance)
+
+			to_date() will convert to a datetime.date
+			to_datetime() will convert to a datetime.datetime.
+
+			Example
+				To parse date/datetimes coming from external sources:
+
+				fields.Date.to_date(self._context.get('date_from'))
+
+	3.)Relational:- Many2one, One2many, Many2many
+		1.)Many2one:-
+			Parameters	
+				1.)comodel_name (str) – name of the target model Mandatory except for related or extended fields.
+				2.)domain – an optional domain to set on candidate values on the client side (domain or string)
+				3.)context (dict) – an optional context to use on the client side when handling that field
+				4.)ondelete (str) – what to do when the referred record is deleted; possible values are: 'set null', 								'restrict', 'cascade'.
+				5.)auto_join (bool) – whether JOINs are generated upon search through that field (default: False)
+				6.)delegate (bool) – set it to True to make fields of the target model accessible from the current model 								(corresponds to _inherits)
+				7.)check_company (bool) – Mark the field to be verified in _check_company(). Add a default company domain 								depending on the field attributes.
+
+		2.)One2many:-
+			Parameters	
+				1.)comodel_name (str) – name of the target model
+				2.)inverse_name (str) – name of the inverse Many2one field in comodel_name
+				3.)domain – an optional domain to set on candidate values on the client side (domain or string)
+				4.)context (dict) – an optional context to use on the client side when handling that field
+				5.)auto_join (bool) – whether JOINs are generated upon search through that field (default: False)
+				6.)limit (int) – optional limit to use upon read.
+
+
+		3.)Many2many:-
+			Parameters	
+				1.)comodel_name – name of the target model (string) mandatory except in the case of related or extended fields.
+				2.)relation (str) – optional name of the table that stores the relation in the database.
+				3.)column1 (str) – optional name of the column referring to “these” records in the table relation.
+				4.)column2 (str) – optional name of the column referring to “those” records in the table relation.
+				5.)domain – an optional domain to set on candidate values on the client side (domain or string)
+				6.)context (dict) – an optional context to use on the client side when handling that field
+				7.)check_company (bool) – Mark the field to be verified in _check_company(). Add a default company domain 						depending on the field attributes.
+				8.)limit (int) – optional limit to use upon read.
+
+	4.)Reference field:-
+		1.)A reference field will help to create a dynamic relationship in a model.
+		
+		2.)Which means we can select the model dynamically to create the relation. In Many2one, One2many and Many2many fields we can 			   pre-define the target model in which the relationship needs to be created. 
+			For example, in a Sale Order, if we create a Many2one field to Customers, it will only create a relation between these 				two models, here we pre-define the target model that is customers.
+
+		3.)In the case of the reference field first, we can select the target model and then select the record. 
+			For example, In Customer model I need to add a field ‘Document Source’, In this, for some customers, I need to add a 				Purchase Order as document source,  for some other customers need to add Sale Order as source,  and also sometimes I 				may need to add an Invoice as the source. In this case, I can define a reference field, so I can first choose the 				model (Purchase, Sale, or Invoice) and then select the record.
+
+		4.)Example in Odoo:-
+			We can see a simple example of a reference field from Settings >> Technical >> Menu Items.	
+			If we try to create a Menu Item from here, we have to choose an Action for this menu. This Action field is a Reference 				Field. Because first, we have to select the action model, ie have to select whether it is an ir.actions.the report, 				ir.actions.server, ir.actions.act_window, etc.
+			After selecting that, we have to selecte the model i.e sale, purchase etc.
+
+		5.)one way of writting:
+			source_document = fields.Reference(selection=[('sale.order', 'Sale Order'), 
+                                                                      ('purchase.order', 'Purchase Order'),
+                                                                      ('account.move', 'Invoice')],string=”Source Document”)
+
+		6.)second way of writting:-
+			source_document = fields.Reference(selection='_select_target_model’, string=”Source Document”)
+			@api.model
+			def _select_target_model(self):   
+			       models = self.env['ir.model'].search([])
+			       return [(model.model, model.name) for model in models]
+
+
+
+			Example 2:
+
+				record_ref = fields.Reference(string="Source Reference", \
+		                            selection=[('purchase.order', 'Purchase Order')], \
+		                            compute='_record_ref')
+
+				@api.dep ends('name')
+				def _record_ref(self):
+				    if self.name != 'New':
+					self.record_ref =  'purchase.order,' + str(self.id)
+
+
+
+		7.)A reference field will store in the database as <model_name>, id.
+
+			Eg: sale.order,10
+			    purchase.order,3
+
+		Note:-  We can access the reference fields like we access a Many2one filed.	
+			Create dynamic relationship, takes list of tuple so when writing method return list of tuple.
+			
+
+	5.)computed field:-
+		1.)The value of a computed field usually depends on the values of other fields on the computed record. 
+		2.)The ORM expects the developer to specify those dependencies on the compute method with the decorator depends().
+		3.)In depends we can use dot notated fields like "partner_id.name"
+		4.)The given dependencies are used by the ORM to trigger the recomputation of the field whenever some of its dependencies have 				been modified.
+
+		4.)Example:
+			name = fields.Char(compute='_compute_name')
+
+		5.)Computed fields are not stored by default, they are computed and returned when requested. Setting "store=True" will store 				them in the database and automatically enable searching.
+			
+		6.)searching on a computed field can also be enabled by setting the search parameter. The value is a method name returning a 				Search domains.
+			Example:-
+				upper_name = field.Char(compute='_compute_upper', search='_search_upper')
+				def _search_upper(self, operator, value):
+				    if operator == 'like':
+					operator = 'ilike'
+				    return [('name', operator, value)]
+
+		7.)Computed fields are readonly by default. To allow writting values on a computed field, use the inverse parameter.
+		   It is the name of a function.
+
+	
+	6.)Related fields:-
+		1.)Provide the value of a sub-field on the current record.
+		2.)They are defined by setting the related parameter and like regular computed fields they are note stored, we need to use 			   'store' parameter equal to true.
+
+		3.)nickname = fields.Char(related='user_id.partner_id.name', store=True)
+		
+		4.)Related fields are automatically recomputed when their dependencies are modified.
+
+
+	7.)Automatic/magic fields:-
+			id, create_date, create_uid, write_date, write_uid
+
+
+	8.)Reserved fields:-
+			name, _rec_name, active, state, 
+
+	3.)Attributes of fileds:- string, require, readonly, help, index.
+
+	5.)default field:-
+		Any field can be given a default value. 
+		In the field definition, add the option default=X where X is either a Python literal value (boolean, integer, float, string), 			or a function taking a recordset and returning a value.
+		Example:
+			name = fields.Char(default="Unknown")
+			user_id = fields.Many2one('res.users', default=lambda self: self.env.user)
+
+		The object self.env gives access to request parameters and other useful things:
+
+			1.)self.env.cr or self._cr is the database cursor object; it is used for querying the database
+			2.)self.env.uid or self._uid is the current user’s database id
+			3.)self.env.user is the current user’s record
+			4.)self.env.context or self._context is the context dictionary
+			5.)self.env.ref(xml_id) returns the record corresponding to an XML id
+			6.)self.env[model_name] returns an instance of the given model
+
+

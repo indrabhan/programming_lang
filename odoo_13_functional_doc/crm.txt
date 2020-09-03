@@ -1,0 +1,46 @@
+1.)Generate leads/opportunities from emails:
+	Each sales teams can have its own email alias, to generate leads/opportunities automatically assigned to it. It is useful if you 		manage several sales teams with specific business processes.
+	2.)Assign mail alias to sales teams and mail send on that mail alias will generate leads/opportunities in odoo.
+
+ 
+If you want to receive lead to one common email and then later you will assign it salesperson to each leader.
+Then in setting you have to tick mark a boolean field named as "Incoming Email".  
+
+
+2.)Generate leads/opportunities from your website contact page:
+	Automating the lead/opportunity generation will considerably improve your efficiency. Any visitor using the contact form on your 		website will create a lead/opportunity in the pipeline.
+	1.)Install Contact Form App for contact form to be displayed in wesbite.
+	2.)when you have several sales team so to which sales team the lead/opportunities will be genrated.so from website setting you have to 			assign that sales team so when some fill the contact form the lead/opportunities will be generated for that sales team.
+	3.)To change to a specific sales team, go to Website ‣ Configuration ‣ Settings under Communication you will find the Contact Form 			info and where to change the Sales Team or Salesperson.
+	4.)By default, any new contact form will send an email. You can switch to lead/opportunity generation in Change Form Parameters.
+
+		Note
+
+		If the same visitor uses the contact form twice, the second entry will be added to the first lead/opportunity in the chatter.
+
+
+3.)Lead mining:-(Enterprise feature need to buy Credits)
+
+	Lead mining allows you to generate leads from scratch directly from your database. Target your leads based on a set of criteria such 		as the country, the size of the company, the industry your leads are coming from to make them relevant to your business.
+
+	Configuration
+		For this feature to work, go to CRM ‣ Configuration ‣ Settings and activate the Lead Mining feature.
+
+	Start generating leads
+		You will now have a new button Generate Leads available in your pipeline.
+		From there, click on the Generate Leads button, a window where you will be able to pick your criteria will pop up.
+
+	Example:
+		Suppose you want to target the manufacturing industries base in USA country and based on xyz number of employes so fill Lead 			mining requests form and submit it,menu availabe in configuration as Lead Mining Requests and button available in tree view of 			lead with name as "Generate Leads". Both things open same form.
+
+
+
+4.)Visits to Leads: (Enterprise feature need to buy Credits)
+
+	1.)Convert visitors of your website into leads and perform data enrichment based on their IP address.
+	2.)Create rules to generate B2B leads/opportunities from your website visitors.
+	3.)Activate the feature from settings.
+	4.)After activation you will see the menu named as "Visits to Leads Rules" in Configuration.
+
+	Fill the form with what ever your search criteria is and when the vistors visits your website and fulfill your visiting cretria then a 		lead will be generated.	
+	 

@@ -1,0 +1,17 @@
+Timesheet:- Install timesheet module.
+
+1.)Add timesheet on fly:
+	Go to Timesheet App, you will see the timesheet and in top left hand you will see the "Add A Line" button click on it 
+	you can select the project task and deadline and enetry the hours you took to complete the task.
+	In the date column of task row you can add the hours.
+
+2.)Validate the timesheet:
+	Being a manager you have to validate the timesheet
+	In Timesheet App , you will find the menu "To Validate", click on it.you will find 2 options Last week and Last Month.
+	Click on any 1 option and you will find "Validate" button on the left top side, click on it and a wizard will popup and the wizard 		lines will have employees names and validate boolean field, uncheck if you dont want to valiadte timesheet of some of employees.
+
+3.)where you will define cost/per hour of employees working on Projects.
+	Go to employee App, select the employee and in HR Settings Tab you will find a field "Timesheet cost ____ per hour".
+
+4.)From Project Overview You have the button of Create Invoice.
+	Make sure if you have mark the invoice policy in Timesheet App -- Invoiced Approved timesheet then Create Invoice Button will not be 		visible untill you validate the timesheet.

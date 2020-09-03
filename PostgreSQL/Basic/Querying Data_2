@@ -44,7 +44,7 @@ It is good practice to follow SQL Standard to make your code portable and adapt 
 		    The DISTINCT clause keeps one row from each group of duplicates. 
 		    The DISTINCTclause can be used on one or more columns of a table.
 
-syntax:- select distinct column_1 form table_name
+syntax:- select distinct column_1 from table_name
 
 If you specify multiple columns, the DISTINCT clause will evaluate the duplicate based on the combination of values of these columns.
 syntax:- select distinct column_1, column_2 from table_name;

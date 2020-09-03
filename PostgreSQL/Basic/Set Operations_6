@@ -109,3 +109,5 @@ The EXCEPT operator returns distinct rows from the first (left) query that are n
 
 a)The number of columns and their orders must be the same in the two queries.
 b)The data types of the respective columns must be compatible.
+
+

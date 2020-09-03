@@ -1,4 +1,4 @@
-********** SubQuery **********
+        ********** SubQuery **********
 
 1)Subquery – writes a query nested inside another query.
 2)ANY  – retrieves data by comparing a value with a set of values returned by a subquery.

@@ -33,7 +33,7 @@
 
 
 Reinvoice Customer:
-	In expense form after selecting product will you find the field of "Reinvoice Customer" selecting the customer 
+	In expense form after selecting product, you will find the field of "Reinvoice Customer" selecting the customer 
 	example: SO00075 - Bittu
 	will create the sale order line on that sale order.
 

@@ -127,7 +127,7 @@ Convert date to different format
 	**strftime('format')
 
 		datetime.datetime can be convert to any format using strftime
-		no need to remember foramt look into python doc.
+		no need to remember format look into python doc.
 		
 		Eg:
 		    my_timezone = datetime.datetime.now(tz=pytz.timezone('Asia/Calcutta'))

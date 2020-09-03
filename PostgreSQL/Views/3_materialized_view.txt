@@ -1,0 +1,3 @@
+The results of a view query are not stored anywhere on disk and the view is recreated every time the query is executed. Materialized views are actual structures stored within the database and written to disk. They are updated based on the parameters defined when they are created.
+
+View: View is just a named query.

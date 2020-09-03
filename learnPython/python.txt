@@ -160,7 +160,7 @@ dumps:- when data in string format is send to db.
 variable are define inside the class and outside the function.
 memory is allocated only once.
 static variable can be access with calssname or refernece variable containing the object.
-value of static vairable can be modify by other function, than remaining function will get modified value.
+value of static vairable can be modify by other function, then remaining function will get modified value.
 
 **non static variable(separate data for every object)
 variable declare with "self.variablename" are non static variable.

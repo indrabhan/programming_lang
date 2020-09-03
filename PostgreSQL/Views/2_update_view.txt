@@ -1,0 +1,54 @@
+1.)Changing/Update the view.
+
+	1.)PostgreSQL does not support removing an existing column in the view, at least up to version 9.4. If you try to do it, you will get 			an error message.
+	
+	2.) The query must generate the same columns that were generated when the view was created. To be more specific, the new columns must 			have the same names, same data types, and in the same order as they were created.
+		In short take existing query as it is.
+
+	3.)However, PostgreSQL allows you to append additional columns at the end of the column list.
+
+	
+	Example1:- Trying to name the column first_name as First and last_name as last
+
+		CREATE or replace view customer_data as select cust.first_name as First, cust.last_name as last, ad.address , 	ci.city, 			co.country from customer cust
+		inner join address ad on cust.address_id = ad.address_id 
+		inner join city ci on ad.city_id = ci.city_id
+		inner join country co on co.country_id = ci.country_id
+		limit 5
+
+		O/p:- ERROR:  cannot change name of view column "first_name" to "first"
+
+
+	Example2:-Trying to change the limit and add the column cust.email at the end.
+
+		CREATE or replace view customer_data as select cust.first_name , cust.last_name , ad.address , ci.city, 			co.country ,cust.email from customer cust
+		inner join address ad on cust.address_id = ad.address_id 
+		inner join city ci on ad.city_id = ci.city_id
+		inner join country co on co.country_id = ci.country_id
+		limit 10
+
+		O/P:- successfully
+
+		Note:- If you try to add column in between and not at the end then it will raise error.
+
+
+
+2.)A PostgreSQL view is updatable when it meets the following conditions:
+
+	1.)The defining query of the view must have exactly one entry in the FROM clause, which can be a table or another updatable view.
+
+	2.)The defining query must not contain one of the following clauses at the top level: 
+		GROUP BY, HAVING, LIMIT, OFFSET, DISTINCT, WITH, UNION, INTERSECT, and EXCEPT.
+
+	3.)The selection list must not contain any window function , any set-returning function, or any aggregate function such as SUM, COUNT, 			AVG, MIN, and MAX.
+
+
+	To insert/update/delete the view must be created from 1 one table.
+
+	You can insert the data into view table and the data will be inserted into main table.
+	i.e view created from the table written after the from clause.
+	
+	when you delete the data from view table the data will be deleted from main table.
+
+
+

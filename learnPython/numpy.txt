@@ -1,0 +1,37 @@
+NumPy is a python library used for working with arrays.
+arrays are nothing but list
+you can eve say has extension of list.
+Numpy is must faster.
+
+
+import numpy as np
+
+a = np.array([[1,2,3],[4,5,6]]) # np should have homogenous array(means data of same type in array)
+
+
+Example1:- used numpy to get multiple values from array/list
+
+
+	1.)get multiple value from list
+		a = np.array([0,10,20,30,40,50])
+	        a[[0,3,5]]		
+		
+		o/p:- array([0, 30, 50])
+
+
+	2.)
+		a = np.array([[10,20,30],[40,50,60]])
+
+		a[0][[1,2]]	
+	
+		o/p:- array([20, 30])
+
+
+Example2:- operators in array and get the values.
+
+	1.)
+		a = [0,1,2,3,4,5,6,7]
+		a[(a>2)&(a<5)]
+
+		o/p:-array([3, 4])
+

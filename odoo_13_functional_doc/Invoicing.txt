@@ -79,7 +79,7 @@
 
 3.)SEPA QR Code:
 	Pay the invoice with the QR Code(This works only for European Customer)
-	From accounting Setting Tick mark the "SEPA QR Code".You will see the QR Code whe click on Customer Preview button.
+	From accounting Setting Tick mark the "SEPA QR Code".You will see the QR Code when click on Customer Preview button.
 	For Wire Transfer:- To activate QR code, go to payment Acquire and select the wire transfer, click on configuration tab and 					tick mark the QR Code.
 			    So now when you select the wire transfer as you payment option will get the QR code to pay the payment.
 
@@ -185,3 +185,17 @@
 		2.)The payments matching tool will open all unreconciled customers or vendors and will give you the opportunity to process 				them all one by one, doing the matching of all their payments and invoices at once.
 		3.)Select the payments and the invoice
 		3.)when the total matches then you will see the Reconcile/Validate button.
+
+
+
+11.)Types of journals:
+	1.)sales
+	2.)Purchase
+	3.)Bank
+	4.)Cash
+	5.)Miscellaneous
+
+12.)Scopes of Taxes:
+	1.)Sales
+	2.)Purchase
+	3.)None

@@ -1,6 +1,7 @@
+Decorators are functions that add functionality to an existing function in Python without changing the structure of the function itself.
+
 Decorators:- A decorator is a function that receives another function as argument. 
-	     The behaviour of the argument function is extended by the
-	     decorator without actually modifying it.
+	     
 
 A decorator takes in a function, adds some functionality and returns it.
 Decorators in Python make an extensive use of closures as well.

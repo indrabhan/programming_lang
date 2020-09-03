@@ -80,7 +80,7 @@ a = b
 print (a,b) o/p:- both list will have same element
 
 b.append(4)
-print (a.b) o/p:- both list will have same element
+print (a,b) o/p:- both list will have same element
 
 Note:- here a and b refer to same memory address.
 

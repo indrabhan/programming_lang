@@ -1,0 +1,85 @@
+Function:
+
+	Introduction to Create Function statement:
+
+		The create function statement allows you to define a new user-defined function.
+
+		The following illustrates the syntax of the create function statement:
+
+			create [or replace] function function_name(param_list[param_with_data_type])
+			returns return_data_type 
+			language plpgsql
+			as
+			$$
+			declare 
+			-- variable declaration
+			begin
+			 -- logic
+			end;
+			$$
+
+		In this syntax:
+
+			1.)First, specify the name of the function after the create function keywords. If you want to replace the existing 					function, you can use the or replace keywords.
+
+			2.)Then, specify the function parameter list surrounded by parentheses after the function name. A function can have 					zero or many parameters. parameters with data type.
+
+			3.)Next, specify the datatype of the returned value after the "returns" keyword.
+
+			4.)After that, use the language plpgsql to specify the procedural language of the function. Note that PostgreSQL 					supports many procedural languages, not just plpgsql.
+
+			5.)Finally, place a block in the dollar-quoted string constant.
+
+
+
+The following statement creates a function that counts the films whose length between the len_from and len_to parameters:
+
+	create or replace function get_film_count(len_from int, len_to int)
+	returns int
+	language plpgsql
+	as
+	$$
+	declare
+		film_count integer;
+	begin
+		select count(*) into film_count from film where length between len_from and  len_to;
+		return film_count;
+	end;
+	$$
+
+
+In the function body:
+
+	1.)Use the dollar-quoted string constant syntax that starts with $$ and ends with $$. Between these $$, you can place a block that 			contains the declaration and logic of the function.
+
+	2.)In the declaration section, declare a variable called film_count that stores the number of films selected from the film table.
+
+	3.)In the body of the block, use the "select into" statement to select the number of films whose length are between len_from and 			len_to and assign the result to the film_count variable. At the end of the block, use the return statement to return the 			film_count.
+
+
+Calling a user-defined function
+
+	PostgreSQL provides you with three ways to call a user-defined function:
+
+	1.)Using positional notation:
+			select get_film_count(100, 150);
+
+	2.)Using named notation:
+			select get_film_count(
+			    len_from => 40, 
+			     len_to => 90
+			);
+	
+	3.)Using mixed notation:
+			The mixed notation is the combination of positional and named notations. For example:
+
+				select get_film_count(40, len_to => 90);
+
+			Note that you cannot use the named arguments before positional arguments like this:
+
+				select get_film_count(len_from => 40, 90);
+				
+				Error:
+					ERROR:  positional argument cannot follow named argument
+					LINE 1: select get_film_count(len_from => 40, 90);
+	

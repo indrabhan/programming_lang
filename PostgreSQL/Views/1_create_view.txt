@@ -1,0 +1,61 @@
+Views:
+	way of representing data of one or more tables in the database.
+	When you create a view, you basically create a query and assign it a name.
+	A view can be accessed as a virtual table in PostgreSQL.
+	It represents data through SELECT Statement.
+
+
+	Notice:-  view does not store data physically except for a materialized view.
+	
+		  1.)Means when you create a view, it creates a table for temp use, you can even use that view table in other querys.
+		  	when you close the connection and come again then you can not directly access data from that view table.
+			you have to again execute that view query in order to access data.
+
+		  2.)If you want view table to store data physically/permanent then you have to use materialized view.
+
+	
+A view can be very useful in some cases such as:
+
+	1.)A view helps simplify the complexity of a query because you can query a view, which is based on a complex query, using a simple 			SELECT statement.
+
+	2.)Like a table, you can grant permission to users through a view that contains specific data that the users are authorized to see.
+
+	3.)A view provides a consistent layer even the columns of underlying table changes.
+
+
+Syntax:-
+	CREATE VIEW view_name AS query;
+	
+	First, you specify the name of the view after the CREATE VIEW clause, then you put a query after the AS keyword. A query can be a 		simple SELECT statement or a complex SELECT statement with joins.
+
+
+
+Create:-	Create the query to view full details of customer from below tables
+
+		select * from customer order by customer_id
+		select * from address
+		select * from city
+		select * from country
+
+	
+		2.)Below query is creating the view.
+
+			create view customer_data as select cust.first_name, cust.last_name, ad.address , ci.city, co.country from customer 				cust
+			inner join address ad on cust.address_id = ad.address_id 
+			inner join city ci on ad.city_id = ci.city_id
+			inner join country co on co.country_id = ci.country_id
+			limit 5
+
+		3.)Accessing the query like a table
+
+			select * from customer_data
+
+		Note:- If you try to execute the create view query 2nd time it will give error saying 
+			ERROR: relation "customer_data" already exists.
+
+			Suppose now you want to make the limit to 10 of create view query then you have to use of
+			CREATE OR REPLACE VIEW view_name 
+			AS 
+			query
+
+

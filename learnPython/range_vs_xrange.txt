@@ -1,0 +1,28 @@
+Difference between range and xrange
+
+
+xrange() and range() are quite similar in terms of functionality. 
+They both generate a sequence of integers, with the only difference that range() returns a Python list, whereas, xrange() returns an xrange object.
+
+xrange doesn't actually generate a static list at run-time like range does. It creates the values as you need them with a special technique called yielding. This technique is used with a type of object known as generators.
+
+
+Yielding is crucial in applications where memory is a constraint. Creating a static list as in range() can lead to a Memory Error in such conditions, while, xrange() can handle it optimally by using just enough memory for the generator (significantly less in comparison).
+
+
+if you'd like to iterate over the list multiple times, it's probably better to use range. This is because xrange has to generate an integer object every time you access an index, whereas range is a static list and the integers are already "there" to use.
+
+
+Note: xrange has been deprecated as of Python 3.x. Now range does exactly the same what xrange used to do in Python 2.x, since it was way better to use xrange() than the original range() function in Python 2.x.
+
+
+for i in xrange(10):    # numbers from o to 9
+    print i       # output => 0 1 2 3 4 5 6 7 8 9
+
+
+for i in xrange(1,10):    # numbers from 1 to 9
+    print i       # output => 1 2 3 4 5 6 7 8 9
+
+
+for i in xrange(1, 10, 2):    # jump to directly on 2nd element.
+    print i       # output => 1 3 5 7 9

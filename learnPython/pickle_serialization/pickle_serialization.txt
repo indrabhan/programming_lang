@@ -1,0 +1,50 @@
+Pickle:-
+
+	Python library offers a feature - serialization out of the box. 
+	Serializing a object refers to transforming it into a format that can be stored, so as to be able to deserialize it later on, to 		obtain the original object. Here, the pickle module comes into play.
+
+
+Pickling:-
+
+	Pickling is the name of the serialization process in Python. Any object in Python can be serialized into a byte stream and dumped as a 		file in the memory.
+
+	The function used for the above process is pickle.dump()
+
+
+Unpickling:-
+
+
+	Unpickling is the complete inverse of pickling. It deserializes the byte stream to recreate the objects stored in the file, and loads 		the object to memory.
+
+	The function used for the above process is pickle.load().
+
+
+Pickle:-“Pickling” is the process whereby a Python object is converted into a byte stream, and “unpickling” is the inverse 			operation, whereby a byte stream is converted back into an object.
+
+	Example :- create the python object and store it in file.Python object can be any list, set, tuple, dict, user define class
+
+	Note:- Bydefault the python object is not recognized by the file.
+	       so convert python object in file supported format,this process is technically called as pickling or serialization.
+	       for this purpose we have a pickle module.
+
+		import pickle
+		data = [['indra', 28, 'dhule'], ['sagar',27, 'pune'], ['prashant', 30, 'solapur']]     ---list python object
+
+		x = open('myfile.txt', 'wb')     ---- we have to write the data so 'w' mode and the python object in not in text format 
+						      so we have to open it in 'b' mode.
+						
+						---After opening the file in binary format and store the binary format data into file,
+						  so we have a function called dump() present inside the pickle
+		pickle.dump(data, x)            ---binary data will store into the file.here x refers the file.
+		x.close()
+
+						---As binary data is not readable by human so we have to again convert it by using load() 								method.
+						   provided by pickle.Inshort we have to convert the binary format into python supported 								format.
+
+
+		import pickle
+		x = open('myfile.txt', 'rb')    --- rb mode because we will read binary format data
+		s = pickle.load(x)
+		x.close
+
+

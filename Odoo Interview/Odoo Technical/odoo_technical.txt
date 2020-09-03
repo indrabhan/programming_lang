@@ -1,0 +1,182 @@
+Shopify:-
+	1.)To connect with shopify you nedd API_key(user name in Magento) and API_password (user password in magento).
+	2.)From shopify App menu you can create the Credentials.For the credentials you created you need to give access like Read and 			Read&Write.
+	3.)Make use of requests lib to connect using get method.
+		For magento 1st you need to generate access token using user name and user password.
+		then pass the access token to any api like customer api, product api.
+
+		For shopify no need to get access token, within the API you can pass the api_key and api_pass.
+	
+	4.)requests.get(url):-
+		get method is use to get the data.
+
+	5.requests.post(url, data={pass the data in dictionary format}):
+		post method is use to pass the data.
+		In shopify we need to pass some product data from odoo, so in product form we kept button "Export product" and on that button 			we have call the post method along with data using the data parameter of post method.
+
+	6.)resquest.put(url, data={pass the data in dictionary format}):
+		put method is use to update the data.Need to pass required data given by api.
+		suppose we want to update the product from odoo to shopify se we keep update product and make use of put method.
+
+	7.)First create instance menu and record where you will store shopify url, shopify api_key and shopify api_pass.
+	8.)get the stores and then work for other api's.
+			
+
+
+1.)Odoo Architecture
+
+	MVC(module,viwe controller)
+	module:-db(postgres)
+	view:-request from browser
+	controller:-takes request from browser send it to postgres db and fetch data
+			its an orm framework which is api
+
+
+
+2.)Models:- Odoo has 3 types of models.
+	1.)Model: These types of model have permanent database persistence: database tables are created for them and their records are stored 				until explicitly deleted.
+
+		class MinimalModel(models.Model):
+    			_name = 'test.model'		: Table of this name will be created in postgres.
+	
+			
+	2.)Transient: Transient models are based on the models.TransientModel class and are used for wizard-style user interaction.
+			Their data is still stored in the database, but it is expected to be temporary.
+			A vacuum job periodically clears old data from these tables.
+
+	3.)AbstractModel: They don't have a database representation. no actual tables are created for them.
+			  We can think of them as templates with ready-to-use features.
+			  For Qweb Report we make use of them.
+			  They are expected to be used as mixin classes 
+			  The mail.thread is an abstract model.
+
+
+3.)Fields:
+	1.)simple/basic:- Char, Integer, Float, Boolean.
+
+	2.)Advance:- Binary, Html, Image, Monetary, Selection, Text, Date, Datetime.
+
+			to_date() will convert to a datetime.date
+			to_datetime() will convert to a datetime.datetime.
+
+			Example
+				To parse date/datetimes coming from external sources:
+
+				fields.Date.to_date(self._context.get('date_from'))
+
+	2.)Relational:- Many2one, One2many, Many2many
+
+	3.)Attributes of fileds:- string, require, readonly, help, index.
+
+	4.)computed field:-
+		The value of a computed field usually depends on the values of other fields on the computed record. 
+		The ORM expects the developer to specify those dependencies on the compute method with the decorator depends(). 
+		The given dependencies are used by the ORM to trigger the recomputation of the field whenever some of its dependencies have 			been modified.
+		Example:
+			name = fields.Char(compute='_compute_name')
+
+	5.)default field:-
+		Any field can be given a default value. 
+		In the field definition, add the option default=X where X is either a Python literal value (boolean, integer, float, string), 			or a function taking a recordset and returning a value.
+		Example:
+			name = fields.Char(default="Unknown")
+			user_id = fields.Many2one('res.users', default=lambda self: self.env.user)
+
+		The object self.env gives access to request parameters and other useful things:
+
+			1.)self.env.cr or self._cr is the database cursor object; it is used for querying the database
+			2.)self.env.uid or self._uid is the current user’s database id
+			3.)self.env.user is the current user’s record
+			4.)self.env.context or self._context is the context dictionary
+			5.)self.env.ref(xml_id) returns the record corresponding to an XML id
+			6.)self.env[model_name] returns an instance of the given model
+
+
+4.)inherit and inherits: 
+
+	1.)inherit:- 
+		add fields to a model,
+		override the definition of fields on a model,
+		add constraints to a model,
+		add methods to a model,
+		override existing methods on a model.
+
+		1.)_name and _inherit have same model name.
+
+			- stored in same table.
+			- new class compatible with existing views.
+			- Example:-
+				_name='obj1' and inherit='obj1'
+
+		2.)_name and _inherit have different model.
+			
+			- Store in different table.		
+			- Used to copy feature.
+			- New class ignore with existing views.
+
+	2.)inherits:- This is used if you want to sink another model in your current model without affecting the views. 
+			So the database tables contain fields in your model and also a field representing the inherited object.	
+	
+			Example:- product.product inherits product.template or res.users inherits res.partner.
+
+				class ProductTemplate(models.Model): 
+				    _name = "product.template" 
+				 
+				class ProductProduct(models.Model): 
+				    _name = "product.product"
+				    _inherits = {'product.template': 'product_tmpl_id'} 
+
+				product_tmpl_id =  fields.Many2one('product.template', 'Product Template', required=True, ondelete="cascade")
+
+				
+			- The Product model can use the fields from the Product template but the fields in the product template are only 					stored in the product template table.
+			- Multiple inheritance is possible.
+			- Stored in different tables.
+			- New class ignore with existing views
+			
+						
+						
+
+		
+				
+		
+		
+
+
+1.)@api.onchange(fieldName)
+	In the form views where the field appears, the method will be called
+    	when one of the given fields is modified
+
+	return {
+		    'domain': {'other_id': [('partner_id', '=', partner_id)]},
+		    'warning': {'title': "Warning", 'message': "What is this?", 'type': 'notification'},
+        	}
+
+	If the type is set to notification, the warning will be displayed in a notification.
+	Otherwise it will be displayed in a dialog as default.
+
+	
+        ``@onchange`` only supports simple field names, dotted names
+        (fields of relational fields e.g. ``partner_id.tz``) are not
+        supported and will be ignored
+
+	It is not possible for a ``one2many`` or ``many2many`` field to modify
+        itself via onchange. This is a webclient limitation - see `#2693 <https://github.com/odoo/odoo/issues/2693>`_.
+
+    """
+
+2.)@api.depends('fieldName, fieldName.fieldName)
+	Each argument must be a string that consists in a dot-separated sequence of field names::
+
+            pname = fields.Char(compute='_compute_pname')
+
+            @api.depends('partner_id.name', 'partner_id.is_company')
+            def _compute_pname(self):
+                for record in self:
+                    if record.partner_id.is_company:
+                        record.pname = (record.partner_id.name or "").upper()
+                    else:
+                        record.pname = record.partner_id.name
+
+        One may also pass a single function as argument. In that case, the
+        dependencies are given by calling the function with the field's model.

@@ -10,7 +10,7 @@ Distributed :- here you have all the file on local machine also.so net connectio
 
 Central:- here all you data is store on central, you dont have copy of it on local
 	  so it require net connection all the time.
-	  If central server crashes thanyou dont have backup on local machine.
+	  If central server crashes than you dont have backup on local machine.
 	  Eg:- SVN (subversion)
 
 
@@ -27,9 +27,13 @@ why to use:-
 4.)now we want to make the remote folder as origin.
 	so on same terminal where we were before enter below command
 	**comand:- git remote add origin "<link of remote folder>"
-	go to remote folder on github and click on dropwdown of "Clone or Downlaod" button and copy paste the http link.
+	To get the link of  folder
+		go to remote folder on github and click on dropwdown of "Clone or Downlaod" button and copy paste the http link.
  
-5.)git pull origin master  
+5.)git pull origin master.
+
+
+Note:- If we create different folder name other then repo created on GitHub and follow  all the step till step 5.and later when we will take of GitHub repo in our local the folder name will be of repo name.
 
 
 **********************************************************
@@ -41,13 +45,13 @@ means if you have made changes in file are have not added it, so this command wi
 After adding the files it will help that which are the files remaining to commit.
 
 
-git add file1, file2, file3 (will add only given file)
+git add file1 file2 file3 (will add only given file)
 git commit -m "message for the given file added"
 
 git add -A (will add all the files)
 git commit -a -m "add message" (will commit all files)
 
-git log (log of commented files)
+git log (log of commented files with the commit number)
 
 ***********************************branch************************
 branch is mostly used when you are developing other functionality and now you dont want it to be included in main branch,you will merge it later.
@@ -108,5 +112,5 @@ cmd:-git push origin master
 
 1.)git log :- from this command you will get the commit number of all the commits you made, so just copy 1st 8 letter of the commit which you 		      want to revert back. 
 
-2.)git checkout commitNO/revisionNo fileName:- this command you revert you changes to previous.
+2.)git checkout commitNO/revisionNo fileName:- this command will revert your changes to previous.
 

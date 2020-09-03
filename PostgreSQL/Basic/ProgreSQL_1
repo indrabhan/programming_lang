@@ -33,7 +33,7 @@ cmd:- 1) select version();
 If from pgAdmin III database is not restore then follow below steps
 	1.)sudo su postgres
 	2.)psql
-	3.)create database dvdrental;		// Note db name should be same as specified in query
+	3.)create database dvdrental;		// Note db name should be same as specified in query and specify semi-colon at end of query.
 	4.)extract the zip, Now you will get tar file, now extract the tar file, now you will get dvdrental folder.
 	5.)In dvdrental folder you will find restore.sql file
 	6.)Now come fully back in terminal.

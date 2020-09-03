@@ -1,3 +1,9 @@
+The urllib module in Python 3 allows you access websites via your program. ... urllib in Python 3 is slightly different than urllib2 in Python 2, but they are mostly the same. Through urllib, you can access websites, download data, parse data, modify your headers, and do any GET and POST requests you might need to do.
+
+For web scrapping we make use of urllib, We make use of urllib to fetch data from website and to cleanUp the xml data we make use of "BeautifulSoup" library.
+
+
+
 url = "https://en.wikipedia.org/wiki/url?key=value&life=24#history"
 	
 	Protocol: 	http, https, ftp, ...
@@ -37,7 +43,7 @@ url = "https://en.wikipedia.org/wiki/url?key=value&life=24#history"
 		403: Forbidden
 		404: Not Found
 
-urllib:- by this module it allows you to access internet, means any work related with net you can do with the help of this module.
+
 
 Python 2
 	import urllib/urllib2

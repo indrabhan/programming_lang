@@ -1,0 +1,270 @@
+1.)Filter on website for product:
+        On website we have default option of search where we type the product name.You can even have options like search by Attribute or 		ecommerece category.
+
+	Webiste App --> Go To Website --> Shop Page --> Customise menu
+	Here you will have options 
+		1.)Product Attributes Filter (like legs,color, size)
+		2.)eCommmerece Category.
+
+	website category:-
+		On product form in sale tab, their is a field website category.
+		you can even create the category from website admin in Configuration menu.
+		Category:-Spare part(parent)
+			      --wheel(sequence 1)
+			      --handler(sequence 2)
+
+	For color attribute you can specify your customise like by giving Hexa color code or you can select color picker.
+	For this go in website Configuration menu and select Attributes menu.
+
+	Suppose we are having product variants with legs = steel and aluminium. and color having white, black and blue.
+	Now for this variants we do not variant with legs = aluminium and color=black.
+	So on Product template you will have 'Configure Variants' button. Click on it and select the variant with aluminium and
+	there you will see 'Exculde for' one2many field there select the color value=black.
+	Now in website when you will select the product and select the attribute legs=aluminium then for black color option you will see
+	cross or you wont be able to select black color.
+		
+	
+2.)Ecommerece Optional/Alternative/Accessory product(Module):-
+	In product template in Sales tab you will have field 'Optional product.
+	In product template in Ecommerece tab you will have fields 'Alternate' and 'Accessory' Products.
+
+	Alternative product appears with the main product on website.
+	Optional Products appears when you click on Add to Cart. (like Warranty)
+	Accessory Products appears when you click Process to CheckOut. (suggested products)
+
+
+
+
+3.)Pricelist and Discount:-
+	Website Admin:-	setting--Pricing --select below option
+			1.)Pricelist:
+				This opion will enable the pricelist menu option in website --> Product menu.
+			2.)Discount:
+				It will make discount option available on pricelist.
+				In particular pricelis in configuration tab:
+					Discount Policy:
+							1.)Discount included in the price.
+							2.)Show public price & discount to the customer.
+
+				Example:-
+					In pricelist:
+						Apply on: product variant and select the product.
+						Price Computation: percentage.
+						Discount Policy: Show public price & discount to the customer.
+
+						In website when you will see above product you will difference in prices.
+	
+			Note:- From webiste when you will select the pricelist and discount option, then when you install the sale module 					you will find that this options are auto tick.
+
+4.)Fiscial Position:-
+		In Invoicing/Accounting App in Configuration you can see fiscal position.
+		You have set fiscal position for european country.
+		Suppose you have website of country United States and customer is from europe.
+		when the customer enter the address then the fiscal postion gets applied.
+
+
+
+
+	Website Admin:-	setting--sale price--select below option
+			Advanced pricing based on formulas (discounts, margins, rounding)
+			Now in pricelist you will have a Priclist Items enable you can create pricelist as your requirement.
+
+	Visitor user:-When the visitor user will log,he will be the public user which is inactive (see user)
+		      open the customer menu and filter for inactive you will find the inactive user(public user).
+		      public user will have public pricelist and that visitor user log in will see the price of public price list.
+		
+			When you click proced to checkout for 1time also an entery will be in sale app in quotations.
+
+	If you assign some code to a field E-commerce promotional code in pricelist and for that pricelist you have config a discount
+	than if a visitor know that code than he will also be able to get the benifite of that code.
+	you can see in sale app the quotation of that visiter(public)user will have the pricelist of that E-commerce promotional code
+	instead of public pricelist.
+	Note:- whenever you assign the E-commerce promotional code than have the start date and end date in pricelist other the user will
+		get the benfit of that code whole year.
+
+	Automatic pricelist selected:-
+		Create the pricelist and select the country groups
+		when user from specified country than that pricelist will be auto selected
+		This works only in online scenario.
+		Have multi currency activated.
+
+	Pricelist of Customer choice:-
+		have two pricelist mostly of same country, otherwise the country group pricelist will be default selected.
+		Select the Selectable option on Pricelist, to see the change select minimum 2 pricelist.
+		in the web user will have option to select the pricelist of hia choice
+		
+
+Taxes:- on website always include price included taxes(recommened)
+	on prodocut config the tax as tax included price.
+
+several image per product:- Go to website admin Setting, Multi Images, click Several images per product.
+	In the product product you will have "Image" tab select the multi image.
+	selected images will appear below the main product in the web.
+	Note:-Such extra image are common to all the product variants (if any).
+
+Delivery methods:-
+	Go to inventory app to see the delivery methods, click published on  website, Whose who are not published will not be visible on web.
+	In delivery method their is a destination method, if you select the country
+	The shipping address has the same country than that option will be enable.
+	Else for other shpping addres you will see the methods in which the country is not specified.
+
+payment method:-
+	From the Customize the menu enable the payment option.
+	From the Customize the menu enable the option terms and condition(for this option you should be connected by user)
+	In Accounting--Config--Payment Acquirers
+	Select the payment and publised it than on web it will be visble you can even add the message on payment
+	If you select the country than that payment method will be visible for that country only
+	country is seen in shipping address.
+	On payment method we can set no automatic confirmation.(in last tab you will have this option) 
+
+
+
+Note:-Website layout depends upon the theme module.
+
+
+
+Note:- Odoo13 :- odoo uses bootstrap4
+	you can get most of the widget from bootstrap like accordion(I have study it in JQuery), you will get code of accordion.
+	1.)accordion
+	2.)card style
+	3.)carousel slider. (in web at the top you see images, you can change by clicking next or even back)  
+
+
+
+Technical:-
+
+<input type="number">
+
+<a href=/route_name/>Add new car</a> 
+	when you will click on Add new car the cursor will go to the route in controller.
+
+return request.redirect('/route_name')
+
+
+<form action='/route_name' method="POST">
+
+the form fields name should be technical name of module fields, so you can get the dict {'technical_field_name: Value given by user on form}
+so you can call the create method and pass the dict.
+model.create(kw) 	kw is the dict specified in route.
+
+<button type='submit>SAVE</button>
+
+when you will click on save button the cursor will go to action and action is calling the route, so it will go to route.
+
+
+Update:
+	In table head
+		<th>
+			<a t-attf-href='/route_name?id=#(car.id)' 		#in car we are getting car object
+		</th>
+	
+	Difference between t-attf and t-att
+
+		t-attf : you can use object, here we have use the car object.
+		t-att : you can not use the object.
+
+
+	To send parameter we use "?" and parameter name and assign value to parameter using "=".
+
+
+	@http.route('/route_name', auth='public', type='http')
+	def abc(self, **kw):
+		print ('car id=', kw.get('id'))
+
+
+Image icons:
+	go to fontawesome website
+		<a href="route_name"<i class="fa fa-pencil"/> </a>
+
+
+
+Inheritance Controller
+
+	we want to inherite the controller class "CustomerPortal" available in portal.py file of portal module
+
+	addons
+		portal (module name)
+			 controllers (folder)
+				portal.py (file)
+					class CustomerPortal
+
+
+	from odoo.addons.portal.controllers.portal import CustomerPortal
+
+	class MyClass(CustomerPortal):
+	
+		@route  (if you want to write only @route then "from odoo.http import route")
+		
+			request.env  (if you want to write only @route then "from odoo.http import request")
+
+
+In template(xml file)
+
+	you can write below code directly
+
+	<t t-set='partners' t-value="request.env['res.partner'].search([])">
+
+
+	Fields:
+
+		1.)Many2one:
+			
+			<select name="">
+				<t t-foreach='partners' t-as='partner'>
+					<option t-att-value='partner.id'>
+						<t t-esc='partner.name>
+					</option>
+
+
+		2.)Boolean:
+			<input type='radio' name='' value='unique name'/>
+			<input type='radio' name='' value=''/>
+
+			If you specify same name value for both records then, if you click one record the other will be unselected
+			and vice-versa.
+					
+			value='unique name' in backend you will receive this name and will come to know which record is selected.
+
+
+
+		3.Date:-
+			<input type='date' name='technical_name'/>
+
+
+		4.)Binary:
+			In py file:
+				file = fields.Binary(string='File')
+
+			In view part you will see button 'upload file'.
+
+			
+			In website form:
+				<input type='file' accept='image/*, application/pdf*'
+
+
+				image/* :- /* means any extension of image.
+
+				applicatio/pdf*:- any pdf files.
+
+
+			In controller file:
+				import base64
+				
+				if kw[file]:
+					file = kw.get('file').stream.read()		// read the file.
+
+
+				in dictionary:
+					'file': base64.encodestring(file),
+
+
+
+dynamic image src:
+	
+	<img class='' alt='car1' t-attf-src="data:image/*; base64,{(car.file)}"
+
+
+	t-attf-href="/car/full_description?id=#(car.id)"
+
+
+	<t t-set="cars" t-value="request.env['car.car'].search([], limit=4, order='create_date desc')"

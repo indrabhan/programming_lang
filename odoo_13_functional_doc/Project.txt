@@ -7,7 +7,7 @@
 	
 2.How to share projects with other resources?
 	In project kanban view, In particular project you will find 3 dots at the right top side click on it and you will find share option.
-	when you click on share option, wizard will popup their you will find receipt field(Many2many) mentioned the email address so an 		invitation mail is trigger to the receipts.
+	when you click on share option, wizard will popup there you will find receipt field(Many2many) mentioned the email address so an 		invitation mail is trigger to the receipts.
 	
 	Choose who can access a project
 		To create a project for specific teams, under Visibility, choose who can have access to the project:
@@ -20,6 +20,10 @@
 3.Task:-
 	when the project and its stages are created you can see Create button, click on it , it will create the task for that project.
 	To share the task with other resources, open the task and on Middle top you will find Action button, In that dropdown you will find 		share option.
+
+	In task we are having start stop button to calculate the auto time(clock runs)
+	In task we have field of Planning hours, like this task take 10 hours to complete, same planning hours is available in subtask also
+	On Parent task you can see the consume time of parent and its subtask.  
 
 4.)Sub-task:-
 	You can divide the task into many subtask
@@ -59,6 +63,7 @@
 		Followers are notified of any changes: tasks sliding from one stage to another, conversations taking place, etc.
 
 	Add followers to a Task and Sub-task:
+		Followers added on prject get automatically added to task and subtask.
 		Each task has individual followers.
 		Follower added on Sub-task is not added to its Parent task.
 
@@ -145,6 +150,7 @@
 			Set Email Template to Stages in order to define the template to be sent at a specific stage(s).
 			You can event set on last stage.
 			Choose an existing template or create one on the fly.
+			In stage setting you have field to define email template.
 
 		Note:- See the customer rating email sent under the Log notes of your task.
 	
@@ -192,18 +198,4 @@
 		Activate the Developer mode. Then go to Manager Users and enable Analytic Accounting. Now, go to Project ‣ Configuration ‣ 			Projects and specify an Analytic Account under the needed project.
 		A "Profitability" menu to the costs and revenues of this analytic account is directly available in the Kanban view.
 
-14.)Add timesheet on fly:
-	Go to Timesheet App, you will see the timesheet and in top left hand you will see the "Add A Line" button click on it 
-	you can select the project task and deadline and enetry the hours you took to complete the task.
-	In the date column of task row you can add the hours.
 
-15.)Validate the timesheet:
-	Being a manager you have to validate the timesheet
-	In Timesheet App , you will find the menu "To Validate", click on it.you will find 2 options Last week and Last Month.
-	Click on any 1 option and you will find "Validate" button on the left top side, click on it and a wizard will popup and the wizard 		lines will have employees names and validate boolean field, uncheck if you dont want to valiadte timesheet of some of employees.
-
-16.)where you will define cost/per hour of employees working on Projects.
-	Go to employee App, select the employee and in HR Settings Tab you will find a field "Timesheet cost ____ per hour".
-
-17.)From Project Overview You have the button of Create Invoice.
-	Make sure if you have mark the invoice policy in Timesheet App -- Invoiced Approved timesheet then Create Invoice Button will not be 		visible untill you validate the timesheet.

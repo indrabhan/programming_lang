@@ -81,7 +81,7 @@
 
 
 8.)By default last workcenter is used
-	Example:-
+		Example:-
 		suppose BOM has 1 component/raw material and has 1 routing and that routing has 2 workcenter.
 		In component line of BOM you have not specified that in which workcenter the component will be used.
 		So when you confirm the MO, 2 Workorder will be created as you have 2 workcenter.

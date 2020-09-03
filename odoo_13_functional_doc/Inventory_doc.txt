@@ -2,6 +2,11 @@ stock moves are created equal to the number of lines(sol/pol), does not matter w
 
 In Inventory adjustment the stock moves are created equal to the number of lines.
 
+stock picking:
+	if your setting is warehouse --> customer then only 1 picking will be created.
+
+	Note:- creation of picking is depended on warehouse settings.
+
 
 1.)Different Units of Measure:
 	This feature allow you to have different units for sale and purchase.
@@ -12,9 +17,9 @@ In Inventory adjustment the stock moves are created equal to the number of lines
 	Example:-
 		purchase unit for Eggs product: Eggs box (it contain 6 eggs)
 		sale unit for Eggs product: Units.
-		Suppose you buy 1 Eggs, so in receipt(picking) you will receive 6 units of eggs.
+		Suppose you buy 1 Eggs box, so in receipt(picking) you will receive 6 units of eggs.
 	
-	Note: Both purchase and sale units of measure the category of measure should be same.
+	Note: Both purchase and sale units of measure, the category of measure should be same.
 	      Even when in sale order line if you change the UOM then the price will be auto calculated according to that unit.
 
 
@@ -28,7 +33,7 @@ In Inventory adjustment the stock moves are created equal to the number of lines
 		Once the delivery order is validated, you can retrieve which products have been included in the package.
 
 
-3.)Product Packagings
+3.)Product Packagings:- (SO feature)
 	Manage product packagings (e.g. pack of 6 bottles, box of 10 pieces).
 	To activate this feature go to Inventory App and tick mark the Product Packagings.
 	In the Product form in Inventory tab you will see Packaging.where you will create pack and entery the quantity how many products 		contain in that pack.
@@ -94,6 +99,8 @@ In Inventory adjustment the stock moves are created equal to the number of lines
 8.)Shipping Costs/Delivery Methods:
 	This feature allows you to add shipping cost/delievry cost to your delivery order.
 	To activate this feature go to Inventory App and tick mark the Shipping Costs.
+	This feature can also be activated from Sales App and tick mark the Shipping Costs.
+
 	In the Inventory App -- Configuration you will see the Shipping Methods.
 	Shipping methods can be based on fixed price or based on rule or even free if exceed a particular amount.
 	Assign the service type product to shipping method.
@@ -154,8 +161,14 @@ In Inventory adjustment the stock moves are created equal to the number of lines
 
 
 13.)Costing method for inventory Valuation:
+	Costig method and Inventory Valuation options you will get in product category.
 	Costing Method:- Standard, Average and FIFO
 	Inventory Valuation:- Manual and Automate.	Note:- Keep Automate to claculate real inventory valuation
+				when we make the Inventory Valuation as Automate then in that form the below 4 fields becomes required.
+					1.)stock input account.
+					2.)stock output account.
+					3.)stock valuation account.
+					4.)stock Journal.
 
 	Note:-  Costing methods are on product category
 		
@@ -164,9 +177,41 @@ In Inventory adjustment the stock moves are created equal to the number of lines
 
 	2.)Average:-
 		In AVCO (Average Cost), each product has the same value and this value is the average purchase cost of the product. With this 			costing method, the cost of the product is recomputed as each receipt.
-		The average cost does not change when products leave the warehouse.
+		The cost of the product does not change when products leave the warehouse.
 
-	3.)FIFO:- Please take a look it is not working as expected.
+	3.)FIFO:-
+		 Now let's keep the Costing Method as ‘FIFO’ of a Product category, also we can set the force removal strategy as ‘FIFO’. Now 			 we shall make a purchase, in different price and quantity, of the newly created product with product category of ‘FIFO’ 			 Costing method. After that we shall sell the product, then the cost will be changed automatically.
+		 The cost price will be the price of last removed product.
+
+		 Here the product that was purchased first will be sold first. And the cost of the last moved product will be the cost of the 			 product here. 
+
+
+
+        * Account properties
+
+	1.)Price difference account: 
+		This account will be used to measure the difference in price between the purchase price and the accounting 		costs. 			The price differential account is for Anglo-Saxon accounting only. If the price for a commodity is different in the purchase 			order and the price in the purchase invoice, then the price difference account is used to keep the difference between these 			two values.
+
+	2.)Income account: 
+		This account is used while validating a customer invoice which ensures that the specifics of the sum invoiced (without 		tax) will be kept. When you manage a sales order that includes various products in different categories, then you can use different 		accounts for different categories of goods. So you can easily understand the accounting specifics of different products.
+
+	3.)Expense account: 
+		We use this account when we validate a vendor bill. When we process a purchase order that includes various products in 		different categories, then we shall use different accounts for different categories of goods. So that we can easily understand the 		accounting specifics of different product categories. 
+
+
+	 * Account stock properties
+
+	1.)Stock input account: 
+		while we do an inventory in real-time, all incoming stock movements will be listed in this account unless a different 			valuation account is set at the source location
+
+	2.)Stock output account:
+		 while we are doing a  real-time inventory valuation, all outgoing stock movements will be posted in this account, unless a 			 different valuation account is set on the location of the destination.
+
+	3.)Stock valuation account: This account is for holding the current value of the product during the real-time valuation.
+
+	4.)Stock journal: when we enable the real-time valuation all the stock moves will be automatically posted here.
+
+
 		
 
 14.)Landed Cost:-
@@ -237,3 +282,9 @@ In Inventory adjustment the stock moves are created equal to the number of lines
 		when clicked on Cancel button the respective pickings will be in cancel state.
 
 Note:- for lots and serial number,odoo only tracks storable products.
+
+
+Products that are set as Stockable or Consumable will allow you to keep track of their inventory levels. These options imply stock management and will allow for receiving these kinds of products.
+Means Delivery/Receipt will be created for both Stockable and Consumable.
+You will not have option of Update On Hand Quantity for Consumable products.
+Even In Inventory Adjustment only stockable products are selectable.

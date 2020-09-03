@@ -1,0 +1,66 @@
+PostgreSQL indexes are effective tools to enhance database performance. Indexes help the database server find specific rows much faster than it could do without indexes. 
+
+Syntax:- CREATE INDEX index_name ON table_name(column_name)
+
+
+1.)Create Index
+
+	PostgreSQL CREATE INDEX overview
+		A simple version of CREATE INDEX statement is as follows:
+
+			CREATE INDEX index_name ON table_name [USING method]
+			(
+			    column_name [ASC | DESC] [NULLS {FIRST | LAST }],
+			    ...
+			);
+
+		In this syntax:
+
+		1.)First, specify the index name after the CREATE INDEX clause. The index name should be meaningful and easy to remember.
+
+		2.)Second, specify the name of the table to which the index belongs.
+
+		3.)Third, specify the index method such as btree, hash, gist, spgist, gin, and brin. PostgreSQL uses btree by default.
+
+		4.)Fourth, list one or more columns that to be stored in the index. The ASC and DESC specify the sort order. 
+			ASC is the default. 
+			NULLS FIRST or NULLS LAST specifies nulls sort before or after non-nulls. 
+			The NULLS FIRST is the default when DESC is specified and NULLS LAST is the default when DESC is not specified.
+
+
+	To check if a query uses an index or not, you use the "EXPLAIN" statement.
+
+	The following query finds the address whose phone number is 223664661973:
+
+		SELECT * FROM address
+		WHERE phone = '223664661973';
+
+		It is obvious that the database engine had to scan the whole address table to look for the address because there is no index 			available for the phone column.
+
+		To show the query plan, you use the EXPLAIN statement as follows:
+
+			EXPLAIN SELECT *
+			FROM address
+			WHERE phone = '223664661973';
+
+			Here is the output:
+
+			"Index Scan using phonex on address  (cost=0.28..8.29 rows=1 width=61)"
+			"Filter: ((phone)::text = '223664661973'::text)"
+
+
+		To create an index for the values in the phone column of the address table, you use the following statement:
+
+			CREATE INDEX idx_address_phone 
+			ON address(phone);
+
+		Now, if you execute the query again, you will find that the database engine uses the index for lookup:
+
+			EXPLAIN SELECT *
+			FROM address
+			WHERE phone = '223664661973';
+
+			Here is the output:
+
+			"Index Scan using phonex on address  (cost=0.28..8.29 rows=1 width=61)"
+			"Index Cond: ((phone)::text = '223664661973'::text)"
