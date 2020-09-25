@@ -1,0 +1,147 @@
+1.)How do I make a Python script executable on Unix?
+ans:	
+	You need to do two things: the script file’s mode must be executable and the first line must begin with #! followed by the path of the 		Python interpreter.
+
+	For python 2
+		Script file must begin with #!/usr/bin/env python
+
+	For python 3
+		Script file must begin with #!/usr/bin/env python3
+
+	
+	2.)make the file executable by running following command
+
+		Syntax:-	chmod +x file_name
+
+		$ chmod +x myscript.py
+
+	3.)Execute:-
+		Execute the script from command line, eg. by providing ./my_script.py when in the same directory.
+		
+		Syntax- ./file_name
+
+		./myscript.py
+
+
+	Note:-
+		you can see odoo-bin file, we run the it by ./odoo-bin
+
+
+*******************************************************************************************************************************
+
+2.)slicing
+
+	1.)As the name suggests, ‘slicing’ is taking parts of.
+
+	2.)Syntax for slicing is [start : stop : step]
+
+	3.)start is the starting index from where to slice a list or tuple.
+
+	4.)stop is the ending index or where to stop.
+
+	5.)step is the number of steps to jump.
+
+	6.)Default value for start is 0.
+
+	7.)Slicing can be done on strings, arrays, lists, and tuples.
+
+	Example:
+		numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+		print(numbers[1 : : 2])  #output : [2, 4, 6, 8, 10]
+
+
+*********************************************************************************************************************************
+
+3.)Explain how to delete a file in Python?
+
+	Use command os.remove(file_name)
+
+	import os
+	os.remove("ChangedFile.csv")
+	print("File Removed!")
+
+
+***********************************************************************************************************************************
+
+4.)split() and join()
+
+	split():-	function to split a string based on a delimiter to a list of strings.
+		  	return type:- list of string
+
+		Example:
+			string = "This is a string."
+			string_list = string.split(' ') 	#delimiter is ‘space’ character.
+			print(string_list) 			#output: ['This', 'is', 'a', 'string.']
+
+
+	
+	join():-	The join() method takes all items in an iterable and joins them into one string.
+			A string must be specified as the separator.
+			return type:- return string join with separator.
+
+			Syntax:-	string.join(iterable)
+
+			Example:-
+				myTuple = ("John", "Peter", "Vicky")
+				x = "#".join(myTuple)		#output: John#Peter#Vicky
+
+
+				str1 = 'indra'
+				x = '-'.join(str1)		#output: i-n-d-r-a
+
+
+*********************************************************************************************************************************
+
+
+5.)Difference between Array and List.
+	to use array you can make use of numpy.
+
+	Array:-
+		Arrays in python can only contain elements of same data types i.e., data type of array should be homogeneous.
+		consumes far less memory than lists.
+
+	List:-
+		Lists in python can contain elements of different data types i.e., data type of lists can be heterogeneous.
+		It has the disadvantage of consuming large memory.
+
+
+	Array in Python can be created by importing array module.
+	module.array(data_type, value_list) is used to create an array with data type and value ispecified in list.
+
+	Example:-
+		import array 
+  
+		# creating an array with integer type 
+		a = array.array('i', [1, 2, 3])
+		print (a[0])				#output: 0
+
+		i for interger
+		f or d for float.
+
+
+*************************************************************************************************************************************
+
+6.)type conversion in Python
+	
+	1.)dict() – This function is used to convert a tuple of order (key,value) into a dictionary.
+
+		Example:-
+			a = [("akash", 10), ("gaurav", 12), ("anand", 14), ("suraj", 20), ("akhil", 25), ("ashish", 30)]
+
+			dict(a)
+
+			output : {'akash': [10], 'gaurav': [12], 'anand': [14], 'ashish': [30], 'akhil': [25], 'suraj': [20]}
+
+
+	2.)ord() – converts characters into integer
+
+	3.)hex() – converts integers to hexadecimal
+	
+	4.)oct() – converts integer to octal
+	
+	5.)int(), float(), str(), list(), set(), tuple()
+
+
+7.)What does [::-1} do?
+
+	[::-1] is used to reverse the order

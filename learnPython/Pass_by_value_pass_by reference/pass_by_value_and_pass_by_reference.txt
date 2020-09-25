@@ -1,0 +1,23 @@
+1.)Pass by value: 
+		Copy of the actual object is passed. 
+		Changing the value of the copy of the object will not change the value of the original object.
+
+
+2.)Pass by reference: 
+		Reference to the actual object is passed. Changing the value of the new object will change the value of the original 			object.
+
+		1.)Pass means to provide an argument to a function.
+
+		2.)By reference means that the argument you’re passing to the function is a reference to a variable that already exists in 			memory rather than an independent copy of that variable.
+
+		Example:-
+			In Python, arguments are passed by reference, i.e., reference to the actual object is passed.
+
+			def appendNumber(arr):
+			    arr.append(4)
+
+			arr = [1, 2, 3]
+
+			print(arr)  #Output: => [1, 2, 3]
+			appendNumber(arr)
+			print(arr)  #Output: => [1, 2, 3, 4]

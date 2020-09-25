@@ -1,6 +1,4 @@
 NumPy is a python library used for working with arrays.
-arrays are nothing but list
-you can eve say has extension of list.
 Numpy is must faster.
 
 
@@ -30,7 +28,7 @@ Example1:- used numpy to get multiple values from array/list
 Example2:- operators in array and get the values.
 
 	1.)
-		a = [0,1,2,3,4,5,6,7]
+		a = np.array([0,1,2,3,4,5,6,7])
 		a[(a>2)&(a<5)]
 
 		o/p:-array([3, 4])
