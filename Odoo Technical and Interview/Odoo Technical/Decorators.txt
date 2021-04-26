@@ -1,4 +1,4 @@
-1.)api.depends:
+1.)@api.depends('fieldName, fieldName.fieldName)
 	Return a decorator that specifies the field dependencies of a “compute” method.
 	We can use simple field and  dot notated fields also.
 	Example:-

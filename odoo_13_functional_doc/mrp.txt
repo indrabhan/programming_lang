@@ -18,7 +18,7 @@
 	4.)In setting tick mark the Quality boolean, It will install Quality App.
 	5.)In Quality App create the Quality Control Point:- 
 			select the BOM product and workcenter
-			select the type = Register Consumed Materials
+			select the type = Register Consumed Materials 
 			select Product To Register :- This product can be used in more quantity then specified in BOM.
 	6.)In the Work Order of selected workcenter you will see the button 'Continue Consumption' when you click it the 
 		quantity of consumed extra maerial/product will increase by 1 very time you click it.
@@ -55,8 +55,8 @@
 	finished/manufactured product to you.
 
 	1.)In Mrp App -- Configuration --> setting -- tick mark the Subcontracting boolean field.
-		This will make the option subcontracting available on BOM and route "Resupply Subcontract on Order" on Product Form.
-		The route "Resupply Subcontract on Order" on product form is use when you need to delivery materials to Subcontract vendor.For 			this you can see the Delivery Order created when confirming the Purchase order of Subcontract vendor.
+		This will make the option subcontracting available on BOM and route "Resupply Subcontractor on Order" on Product Form.
+		The route "Resupply Subcontractor on Order" on product form is use when you need to delivery materials to Subcontract 			vendor.For this you can see the Delivery Order created when confirming the Purchase order of Subcontract vendor.
 
 	2.)Create the BOM and select BOM type as subcontract and select the Subcontractor Vendor.
 		As the BOM product will be manufacture at subcontractor location, so don't select the route manufacture on product.
@@ -78,6 +78,30 @@
 	Note:- Product must have tick mark for Lot/serial number in product form.
 
 	Note:- In receipt line you will see the subcontract icon where you will come to know which raw materials has been used to build this 			finished product.
+
+
+	case 1 :- You have to create BOM of only subcontarcting product.
+			Here we will subcontarct Product C and for that we will use product A and B from our warehouese.
+			As product C will be subcontracted so will be mark the route only buy and not the manufacture as we will buy this 				product.
+			Craete a BOM with substractor as BOM type and with the substractor as vendor name
+		Product A and B must have route "Resupply subcontractor on order" as we will send this product to subcontractor vendor.
+		Create Purchase Order of product C for substarctor vendor, when you will confirm the purchase order a delivery order of 		product A and B will be created.
+
+	Note:- we have internal subcontractor location where the subcontracted product is stored for inventory valuation.
+
+	
+	case 2:- Want to manufatcure a product as some of its component will be subcontracted and some we will use from warehouse.
+
+		BOM product:- (product X) with mrp as route
+		Bom component:- (product A and B)
+		
+
+		Another BOM
+		 	BOM product:- Product C (subcontract) (route:- buy, MTO)
+			Bom component:-product A (route : Resupply subcontractor on order)
+			Bom component:-product B (route : Resupply subcontractor on order)
+
+		when confirm the MRP, PO will be created and when confirm the PO, delivery order will be created.
 
 
 8.)By default last workcenter is used

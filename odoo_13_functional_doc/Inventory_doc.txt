@@ -156,7 +156,7 @@ stock picking:
 	1st you need to activate the lot and serial number option then the Expiration dates become visible.
 	Once you enable this option you will see 4 Dates fields in product form in Inventory tab, but after clicking on Tracking option(By 		unique serial number or by lot)
 	fill the number of days in those 4 fields.
-	When you validate the receipt the date are auto calculated from the date of validate receipt base on number od days you entered in 		product form.
+	When you validate the receipt the date are auto calculated from the date of validate receipt base on number of days you entered in 		product form.
 	In inventory App -- Master data -- Lots/Serial Number in particular record of serial number you will find the caluclated dates In Date 		page.
 
 

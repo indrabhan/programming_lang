@@ -111,7 +111,7 @@
 	
 	3.)Make Parent Directories:
 		Building a structure with multiple subdirectories using mkdir requires adding the -p option.
-		Create directort test1 inside test1 we will test2, inside test2 we will have test3.
+		Create directort test1 inside test1 we will have test2, inside test2 we will have test3.
 
 		command: mkdir -p test1/test2/test3
 

@@ -22,34 +22,3 @@ Shopify:-
 	8.)get the stores and then work for other api's.
 			
 
-
-1.)Odoo Architecture
-
-	MVC(module,viwe controller)
-	module:-db(postgres)
-	view:-request from browser
-	controller:-takes request from browser send it to postgres db and fetch data
-			its an orm framework which is api
-
-
-
-2.)Models:- Odoo has 3 types of models.
-	1.)Model: These types of model have permanent database persistence: database tables are created for them and their records are stored 				until explicitly deleted.
-
-		class MinimalModel(models.Model):
-    			_name = 'test.model'		: Table of this name will be created in postgres.
-	
-			
-	2.)Transient: Transient models are based on the models.TransientModel class and are used for wizard-style user interaction.
-			Their data is still stored in the database, but it is expected to be temporary.
-			A vacuum job periodically clears old data from these tables.
-
-	3.)AbstractModel: They don't have a database representation. no actual tables are created for them.
-			  We can think of them as templates with ready-to-use features.
-			  For Qweb Report we make use of them.
-			  They are expected to be used as mixin classes 
-			  The mail.thread is an abstract model.
-
-
-
-

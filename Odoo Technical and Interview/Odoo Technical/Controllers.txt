@@ -178,7 +178,7 @@ URLs and Routing
 			
 		 	return '<h1>{}</h1>'.format(name)
 
-		Note :- here url keyword and keyword in method must be same(means words should exact macth)
+		Note :- here url keyword and keyword in method must be same(means <name>words should exact macth)
 		 	here name word exact matches in url and in method also.
 
 

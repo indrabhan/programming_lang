@@ -28,7 +28,8 @@ Fields:
 				4.)ondelete (str) – what to do when the referred record is deleted; possible values are: 'set null', 								'restrict', 'cascade'.
 				5.)auto_join (bool) – whether JOINs are generated upon search through that field (default: False)
 				6.)delegate (bool) – set it to True to make fields of the target model accessible from the current model 								(corresponds to _inherits)
-				7.)check_company (bool) – Mark the field to be verified in _check_company(). Add a default company domain 								depending on the field attributes.
+				7.)check_
+ (bool) – Mark the field to be verified in _check_company(). Add a default company domain 								depending on the field attributes.
 
 		2.)One2many:-
 			Parameters	
@@ -44,7 +45,7 @@ Fields:
 			Parameters	
 				1.)comodel_name – name of the target model (string) mandatory except in the case of related or extended fields.
 				2.)relation (str) – optional name of the table that stores the relation in the database.
-				3.)column1 (str) – optional name of the column referring to “these” records in the table relation.
+				3.)column1 (str) – optional name of the column referring to “these / current” records in the table relation.
 				4.)column2 (str) – optional name of the column referring to “those” records in the table relation.
 				5.)domain – an optional domain to set on candidate values on the client side (domain or string)
 				6.)context (dict) – an optional context to use on the client side when handling that field
@@ -140,9 +141,8 @@ Fields:
 	8.)Reserved fields:-
 			name, _rec_name, active, state, 
 
-	3.)Attributes of fileds:- string, require, readonly, help, index.
 
-	5.)default field:-
+	9.)default field:-
 		Any field can be given a default value. 
 		In the field definition, add the option default=X where X is either a Python literal value (boolean, integer, float, string), 			or a function taking a recordset and returning a value.
 		Example:
@@ -158,4 +158,29 @@ Fields:
 			5.)self.env.ref(xml_id) returns the record corresponding to an XML id
 			6.)self.env[model_name] returns an instance of the given model
 
+
+	10.)Attributes of fileds:- string, require, readonly, help, index, ondelete='cascade', ondelete='null', ondelete='restrict'
+
+
+		All the things related to Ondelete is the database functionality and not of odoo.
+
+		ON DELETE CASCADE : SQL Server deletes the rows in the child table that is corresponding to the row deleted from the parent 			table. 
+		ON DELETE SET NULL : SQL Server sets the rows in the child table to NULL if the corresponding rows in the parent table are 			deleted.
+
+		Example:- sale order (parent) and sale order line (child table)
+
+			class sale_order(models.Model):
+    				_name = 'sale.order'
+
+				'order_line': fields.one2many('sale.order.line', 'order_id', 'Order Lines', readonly=True, states={'draft': 					[('readonly', False)], 'sent': [('readonly', False)]})
+
+
+			class sale_order_line(models.Model):
+    				_name = 'sale.order.line'
+
+				'order_id': fields.many2one('sale.order', 'Order Reference', required=True, ondelete='cascade', select=True, 					readonly=True, states={'draft':[('readonly',False)]})
+
+			
+
+property field:- http://ninetynine-plus.com/2017/06/20/odoo-different-of-functional-field-vs-property-field/#:~:text=Property%20Fields%3A,field%20in%20respective%20object%20table.
 

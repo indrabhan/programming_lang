@@ -1,3 +1,14 @@
+General Terms:
+	
+	I.)Accrual and Cash Basis Methods:
+		1.)Odoo supports both accrual and cash basis reporting.
+		2.)The difference between cash and accrual accounting lies in the timing of when sales and purchases are recorded in your 				accounts. 
+		3.)Cash accounting recognizes revenue and expenses only when money changes hands, but accrual accounting recognizes revenue 				when it's earned, and expenses when they're billed (but not paid).
+
+	II.)consolidation reports:
+		Consolidated financial statements are financial statements of an entity with multiple divisions or subsidiaries. ... However, the Financial Accounting Standards Board defines consolidated financial statement reporting as reporting of an entity structured with a parent company and subsidiaries.
+		
+
 1.)Credit Notes and Refunds.
 	Customer:- Anand
 	SO Amount:-10,500(including tax)
